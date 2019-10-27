@@ -1,0 +1,41 @@
+{
+  "name": "mrnoplay",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "electron:start": "electron ./",
+    "e": "yarn run electron:start",
+    "electron:mac": "electron-builder build --mac --x64",
+    "m": "yarn run electron:mac"
+  },
+  "dependencies": {
+    "@capacitor/electron": "^1.1.0",
+    "electron-is-dev": "^1.1.0"
+  },
+  "devDependencies": {
+    "electron": "4.2.6",
+    "electron-builder": "^21.0.15"
+  },
+  "keywords": [
+    "capacitor",
+    "electron"
+  ],
+  "author": "",
+  "license": "MPL-2.0",
+  "build": {
+    "appId": "com.scrisstudio.switchasble",
+    "productName": "Scris Switchable",
+    "copyright": "Copyright © 2019 Tianze Ds Qiu from Scris Studio.",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": ["dmg"],
+      "icon": "favicon.icns",
+      "type": "distribution"
+    },
+    "win": {
+      "target": ["zip"],
+      "icon": "favicon.ico"
+    }
+  }
+}

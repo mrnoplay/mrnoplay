@@ -1,0 +1,7 @@
+{
+  "appId": "com.scrisstudio.switchable",
+  "appName": "switchable-cp",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}

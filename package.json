@@ -1,31 +1,41 @@
 {
   "name": "mrnoplay",
   "version": "0.1.0",
-  "private": true,
+  "author": "Tianze Ds Qiu (slaaker@126.com)",
+  "description": "",
+  "license": "MPL-2.0",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "vue-cli-service serve",
+    "electron-mac": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run m && cd ../",
+    "electron-dev": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
+    "capacitor-android": "vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
+    "web": "rm -r docs && vue-cli-service build --mode web && cp -r -f www/ docs",
+    "d": "yarn run dev",
+    "e": "yarn run electron-mac",
+    "ed": "yarn run electron-dev",
+    "c": "yarn run capacitor-android",
+    "w": "yarn run web"
   },
   "dependencies": {
+    "@capacitor/android": "^1.1.0",
+    "@capacitor/cli": "^1.1.0",
+    "@capacitor/core": "^1.1.0",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.26",
     "core-js": "^2.6.5",
-    "register-service-worker": "^1.6.2",
+    "leancloud-storage": "^3.10.0",
+    "uglifyjs-webpack-plugin": "^2.1.3",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vue-ctk-date-time-picker": "^2.1.1",
+    "vue-i18n": "^8.12.0",
+    "vue-loading-overlay": "^3.2.0",
+    "vue-router": "^3.0.3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-pwa": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "deepmerge": "^4.0.0",
     "vue-template-compiler": "^2.6.10"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+  }
 }

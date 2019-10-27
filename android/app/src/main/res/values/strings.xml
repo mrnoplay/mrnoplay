@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">switchable-cp</string>
+    <string name="title_activity_main">switchable-cp</string>
+    <string name="package_name">com.scrisstudio.switchable</string>
+    <string name="fileprovider_authority">com.scrisstudio.switchable.fileprovider</string>
+    <string name="custom_url_scheme">com.scrisstudio.switchable</string>
+</resources>

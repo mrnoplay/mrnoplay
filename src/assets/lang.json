@@ -1,0 +1,36 @@
+{
+  "cn": {
+    "submit": "确认",
+    "cancel": "取消",
+    "close": "关闭",
+    "stitle": "设置",
+    "slogout": "登出",
+    "sabout": "Mr Noplay",
+    "confirm": "请确认",
+    "proud": "自豪的使用 Capacitor",
+    "saccount": "账户",
+    "slocale": "语言",
+    "saboutbar": "关于",
+    "sauthor": "作者：Tianze Ds Qiu",
+    "sothercontributor": "和其他贡献者",
+    "scontribute": "贡献：",
+    "lpermission": "现在我们会请求您同意我们发送通知，不然您将无法收到任务开始的提示。"
+  },
+  "en": {
+    "submit": "OK",
+    "cancel": "Cancel",
+    "close": "Close",
+    "stitle": "Settings",
+    "slogout": "Log Out",
+    "sabout": "Mr Noplay",
+    "confirm": "Please Confirm",
+    "proud": "Proudly Using Capacitor",
+    "saccount": "Account",
+    "slocale": "Locale",
+    "saboutbar": "About",
+    "sauthor": "Author: Tianze Ds Qiu",
+    "sothercontributor": "and other contributors",
+    "scontribute": "Contribute:",
+    "lpermission": "Now we will ask for permission to send you notifications. Please allow this, or we won't be able to notice you that it's time to start working on your tasks."
+  }
+}
