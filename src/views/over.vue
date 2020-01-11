@@ -13,7 +13,7 @@
     -->
     <div class="container">
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart></titlepart>
+      <titlepart :canabout="true"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
         Time is Up,<br>
         stop in 3 minutes, or you'll be punished.
@@ -80,7 +80,7 @@
       _this = this;
       this.loading = false;
       this.timing = true;
-      setTimeout(this.interval, 3000);
+      setTimeout(this.interval, 180000);
     },
     beforeDestroy: function() {
 

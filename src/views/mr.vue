@@ -13,7 +13,7 @@
     -->
     <div class="container">
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart></titlepart>
+      <titlepart :canabout="true"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
         I'll play for <br>
         <b-form-input
@@ -83,6 +83,7 @@
         iffetch: 0,
         playtime: 5,
         timeNAN: false,
+        version: '',
       };
     },
     watch: {

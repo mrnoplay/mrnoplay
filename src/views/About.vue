@@ -13,7 +13,7 @@
     -->
     <div class="container">
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart></titlepart>
+      <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
         Mr Noplay, an app. <br>
         <b-btn variant="light" class="bfa" @click="goback">Back</b-btn>
