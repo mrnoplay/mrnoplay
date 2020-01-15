@@ -24,7 +24,13 @@ module.exports = {
             }
             let node = {
                 __filename: true,
-                __dirname: true
+                __dirname: true,
+                setImmediate: false,
+                dgram: 'empty',
+                fs: 'empty',
+                net: 'empty',
+                tls: 'empty',
+                child_process: 'empty'
             };  
             Object.assign(config, {
               optimization, node

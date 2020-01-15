@@ -24,9 +24,9 @@
   "author": "",
   "license": "MPL-2.0",
   "build": {
-    "appId": "com.scrisstudio.switchasble",
-    "productName": "Scris Switchable",
-    "copyright": "Copyright © 2019 Tianze Ds Qiu from Scris Studio.",
+    "appId": "com.scrisstudio.mrnoplay",
+    "productName": "Mr Noplay",
+    "copyright": "Copyright © 2019-2020 Tianze Ds Qiu from Scris Studio.",
     "mac": {
       "category": "public.app-category.productivity",
       "target": ["dmg"],

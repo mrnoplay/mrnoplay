@@ -13,7 +13,7 @@
     -->
     <div class="container">
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart :canabout="true"></titlepart>
+      <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
         Time is Up,<br>
         stop in 3 minutes, or you'll be punished.
@@ -39,10 +39,10 @@
   const { Storage } = Plugins;
   import timepicker from 'vue-ctk-date-time-picker';
   import '@/assets/vue-ctk-date-time-picker.css';
-  import titlepart from '@/components/titlepart'
+  import titlepart from '@/components/titlepart';
+  import notify from '@/components/linxf/notify';
   var alarm = new Audio();
   var _this = null;
-  alarm.src = require("@/assets/alarm.mp3");
   export default {
     name: 'over',
     components: {
@@ -62,6 +62,10 @@
         displaytime: "0:00",
         lefttime: 0,
         punishstart: false,
+        notifymessage: [
+          'Study Now!',
+          'Now Study',
+        ],
       };
     },
     watch: {
@@ -80,7 +84,8 @@
       _this = this;
       this.loading = false;
       this.timing = true;
-      setTimeout(this.interval, 180000);
+      alarm.src = require("@/assets/scarymusic/"+this.rand(1,17)+".mp3");
+      setTimeout(this.timeout, 1000);//180000
     },
     beforeDestroy: function() {
 
@@ -129,8 +134,20 @@
       interval() {
         if(this.timing == true) {
           this.punishstart = true;
+          notify.methods.send({
+            title: "Stop right now",
+            id: 1,
+            message: this.notifymessage[this.rand(0,this.notifymessage.length)]
+          });
+          alarm.play();
         }
-      }
+      },
+      timeout() {
+        setInterval(this.interval, 2000);
+      },
+      rand(min,max) {
+        return (min + Math.round((max - min) * Math.random()));
+      },
     }
   }
 </script>
