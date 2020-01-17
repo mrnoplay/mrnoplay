@@ -15,11 +15,11 @@
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        {{ displaytime }} left
+        剩余 {{ displaytime }}
         <br>
-        <b-btn variant="light" class="bfa" @click="cancel">Cancel</b-btn>
+        <b-btn variant="light" class="bfa" @click="cancel">取消</b-btn>
         <br>
-        <b-btn variant="light" class="bfa" @click="cancel">Finish</b-btn>
+        <b-btn variant="light" class="bfa" @click="cancel">结束</b-btn>
       </div>
     </div>
   </div>
@@ -36,6 +36,10 @@
   var alarm = new Audio();
   var _this = null;
   alarm.src = require("@/assets/alarm.mp3");
+  var ipc = null;
+  if (process.env.VUE_APP_LINXF == "electron") {
+    ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  }
   export default {
     name: 'timing',
     components: {
@@ -49,7 +53,7 @@
         loading: true,
         iselectron: false,
         isonios: false,
-        lang: 'en',
+        lang: 'cn',
         timing: false,
         playtime: 0,
         displaytime: "0:00",
@@ -126,6 +130,10 @@
       },
       cancel() {
         this.timing = false;
+        this.storagesetjson('concentrated', true);
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send('full-screen');
+        }
         this.$router.push('/');
       },
       interval() {

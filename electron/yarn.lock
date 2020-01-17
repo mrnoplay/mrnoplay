@@ -661,6 +661,11 @@ electron-publish@21.0.16:
     lazy-val "^1.0.4"
     mime "^2.4.4"
 
+electron-shutdown-command@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.npm.taobao.org/electron-shutdown-command/download/electron-shutdown-command-0.0.8.tgz#c39d5af91cb88e8785199eace0cd270eacfe57e2"
+  integrity sha1-w51a+Ry4joeFGZ6s4M0nDqz+V+I=
+
 electron@4.2.6:
   version "4.2.6"
   resolved "https://registry.npm.taobao.org/electron/download/electron-4.2.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron%2Fdownload%2Felectron-4.2.6.tgz#533763a7970136011fd36e4a5f2b3715b2015994"
@@ -1879,6 +1884,11 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/strip-json-comments/download/strip-json-comments-2.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fstrip-json-comments%2Fdownload%2Fstrip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+
+sudo-prompt@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.npm.taobao.org/sudo-prompt/download/sudo-prompt-9.1.1.tgz#73853d729770392caec029e2470db9c221754db0"
+  integrity sha1-c4U9cpdwOSyuwCniRw25wiF1TbA=
 
 sumchecker@^2.0.2:
   version "2.0.2"

@@ -15,6 +15,7 @@
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <titlepart :canabout="true"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
+        
         I'll play for <br>
         <b-form-input
           id="playtime"
@@ -65,7 +66,10 @@
   import titlepart from '@/components/titlepart'
   var alarm = new Audio();
   var _this = null;
-  alarm.src = require("@/assets/alarm.mp3");
+  var ipc = null;
+  if (process.env.VUE_APP_LINXF == "electron") {
+    ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  }
   export default {
     name: 'mr',
     components: {
@@ -101,6 +105,12 @@
       this.isonios = this.isiOS(navigator.userAgent);
       _this = this;
       this.loading = false;
+      this.storagesetjson('concentrated', true);
+      if (process.env.VUE_APP_LINXF == "electron") {
+        ipc.send('full-screen');
+      }
+      alarm.src = require("@/assets/scarymusic/"+this.rand(1,17)+".mp3");
+      setTimeout(this.timeout, 1000);//180000
     },
     beforeDestroy: function() {
 
@@ -145,6 +155,10 @@
       start() {
         if((/(^[1-9]\d*$)/.test(this.playtime))) {
           this.storagesetjson('playtime', Number(this.playtime)).then(() => {
+            this.storagesetjson('concentrated', false);
+            if (process.env.VUE_APP_LINXF == "electron") {
+              ipc.send('normal-screen');
+            }
             this.$router.push('timing');
           });
         } else {

@@ -15,8 +15,9 @@
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        Time is Up,<br>
-        stop in 3 minutes, or you'll be punished.
+        时间结束。<br>
+        3分钟内停止，否则将被惩罚。
+        （停止后，电脑将在1分钟内关闭，请先保存好自己的资料）
         <br>
         <b-alert
           v-model="punishstart"
@@ -24,9 +25,9 @@
           style="z-index: 2000;"
           variant="danger"
           dismissible>
-          Punishment now starts
+          惩罚现在开始。
         </b-alert>
-        <b-btn variant="light" class="bfa" @click="cancel">Cancel</b-btn>
+        <b-btn variant="light" class="bfa" @click="cancel">结束</b-btn>
       </div>
     </div>
   </div>
@@ -43,6 +44,13 @@
   import notify from '@/components/linxf/notify';
   var alarm = new Audio();
   var _this = null;
+  var ipc = null;
+  if (process.env.VUE_APP_LINXF == "electron") {
+    ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  }
+  ipc.on('timingdone', function (event, arg) {
+   this.timing = false;
+  })
   export default {
     name: 'over',
     components: {
@@ -56,15 +64,15 @@
         loading: true,
         iselectron: false,
         isonios: false,
-        lang: 'en',
+        lang: 'cn',
         timing: false,
         playtime: 0,
         displaytime: "0:00",
         lefttime: 0,
         punishstart: false,
         notifymessage: [
-          'Study Now!',
-          'Now Study',
+          '开始工作啦',
+          '工作时间开始',
         ],
       };
     },
@@ -128,14 +136,20 @@
         this.lang = 'en';
       },
       cancel() {
-        this.timing = false;
+        this.storagesetjson('concentrated', true);
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send('full-screen');
+          ipc.send('shutdown');
+        } else {
+          this.timing = false;
+        }
         this.$router.push('/');
       },
       interval() {
         if(this.timing == true) {
           this.punishstart = true;
           notify.methods.send({
-            title: "Stop right now",
+            title: "现在停止",
             id: 1,
             message: this.notifymessage[this.rand(0,this.notifymessage.length)]
           });

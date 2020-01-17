@@ -1,8 +1,10 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut } = require('electron');
 const isDevMode = require('electron-is-dev');
 const { CapacitorSplashScreen } = require('@capacitor/electron');
-
 const path = require('path');
+const { exec } = require('child_process');
+var sudo = require('sudo-prompt');
+let canQuit = false;
 
 // Place holders for our windows so they don't get garbage collected.
 let mainWindow = null;
@@ -13,13 +15,17 @@ let splashScreen = null;
 //Change this if you do not wish to have a splash screen
 let useSplashScreen = false;
 
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')// 允许自动播放音频
+
+powerSaveBlocker.start('prevent-app-suspension')//防止app被挂起，停止计时
+
 // Create simple menu for easy devtools access, and for demo
 const menuTemplateDev = [
   {
-    label: 'Options',
+    label: '选项',
     submenu: [
       {
-        label: 'Open Dev Tools',
+        label: '开发者工具',
         click() {
           mainWindow.openDevTools();
         },
@@ -32,16 +38,16 @@ async function createWindow () {
   if (process.platform === 'darwin') {
     const template = [
       {
-        label: "Application",
+        label: "程序",
         submenu: [
-          { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+          { label: "退出", accelerator: "Command+Q", click: function() { app.quit(); }}
         ]
       }, 
       {
-        label: "Edit",
+        label: "编辑",
         submenu: [
-          { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-          { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+          { label: "复制", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+          { label: "粘贴", accelerator: "CmdOrCtrl+V", selector: "paste:" },
         ]
       }
     ];
@@ -52,8 +58,8 @@ async function createWindow () {
 
   // Define our main window size
   mainWindow = new BrowserWindow({
-    height: 700,
-    width: 480,
+    height: 240,
+    width: 240,
     show: false,
     webPreferences: {
       nodeIntegration: true,
@@ -67,7 +73,7 @@ async function createWindow () {
     // Set our above template to the Menu Object if we are in development mode, dont want users having the devtools.
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
     // If we are developers we might as well open the devtools by default.
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
   }
 
   if(useSplashScreen) {
@@ -80,19 +86,25 @@ async function createWindow () {
     });
   }
 
-  // Emitted when the window is closed.
-  mainWindow.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
+  mainWindow.on('close', (event) => {
+    if (!canQuit) {
+      event.preventDefault();
+      event.sender.send('closenotification', true);
+    } else {
+      mainWindow = null;
+    }
   });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some Electron APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  if (process.platform === 'win32') {
+    app.setAppUserModelId("com.scrisstudio.mrnoplay");
+  }
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -112,3 +124,49 @@ app.on('activate', function () {
 });
 
 // Define any IPC or other custom functionality below here
+
+ipcMain.on('full-screen', function () {
+  if (mainWindow) {
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.center();
+    mainWindow.setAlwaysOnTop(true);
+    setTimeout(function () { mainWindow.setFullScreen(true) }, 500);
+  }
+});
+
+ipcMain.on('normal-screen', function () {
+  if (mainWindow) {
+    mainWindow.setAlwaysOnTop(false);
+    mainWindow.setFullScreen(false);
+  }
+});
+
+ipcMain.on('exit', () => {
+  canQuit = true;
+  app.quit();
+});
+
+ipcMain.on('shutdown', (event, arg) => {
+  if (process.platform === 'win32')
+  {
+    var options = {
+      name: 'Mr Noplay / 不玩家',
+    };
+    sudo.exec('shutdown -s -t 60', options, () => {
+      event.sender.send('timingdone', true);
+    })
+  } else {
+    var options = {
+      name: 'Mr Noplay / 不玩家',
+    };
+    sudo.exec('shutdown -h +1', options, () => {
+      event.sender.send('timingdone', true);
+    })
+  }
+})
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll()
+})
+

@@ -15,8 +15,8 @@
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        Mr Noplay, an app. <br>
-        <b-btn variant="light" class="bfa" @click="goback">Back</b-btn>
+        Give an end to no-end rests and play times. <br>
+        <b-btn variant="light" class="bfa" @click="goback">返回</b-btn>
       </div>
     </div>
   </div>
@@ -31,6 +31,10 @@
   var alarm = new Audio();
   var _this = null;
   alarm.src = require("@/assets/alarm.mp3");
+  var ipc = null;
+  if (process.env.VUE_APP_LINXF == "electron") {
+    ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  }
   export default {
     name: 'about',
     components: {

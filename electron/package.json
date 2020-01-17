@@ -7,11 +7,14 @@
     "electron:start": "electron ./",
     "e": "yarn run electron:start",
     "electron:mac": "electron-builder build --mac --x64",
-    "m": "yarn run electron:mac"
+    "m": "yarn run electron:mac",
+    "electron:win": "electron-builder build --win --x64"
   },
   "dependencies": {
     "@capacitor/electron": "^1.1.0",
-    "electron-is-dev": "^1.1.0"
+    "electron-is-dev": "^1.1.0",
+    "electron-shutdown-command": "^0.0.8",
+    "sudo-prompt": "^9.1.1"
   },
   "devDependencies": {
     "electron": "4.2.6",
@@ -29,12 +32,16 @@
     "copyright": "Copyright © 2019-2020 Tianze Ds Qiu from Scris Studio.",
     "mac": {
       "category": "public.app-category.productivity",
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": "favicon.icns",
       "type": "distribution"
     },
     "win": {
-      "target": ["zip"],
+      "target": [
+        "zip"
+      ],
       "icon": "favicon.ico"
     }
   }
