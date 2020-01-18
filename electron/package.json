@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@capacitor/electron": "^1.1.0",
+    "applescript": "^1.0.0",
     "electron-is-dev": "^1.1.0",
-    "electron-shutdown-command": "^0.0.8",
-    "sudo-prompt": "^9.1.1"
+    "electron-shutdown-command": "^0.0.8"
   },
   "devDependencies": {
     "electron": "4.2.6",

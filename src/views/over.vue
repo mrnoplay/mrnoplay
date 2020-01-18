@@ -16,8 +16,8 @@
       <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
         时间结束。
-        <br />3分钟内停止，否则将被惩罚。
-        （停止后，电脑将在1分钟内关闭，请先保存好自己的资料）
+        <br />请在3分钟内停止，否则将被惩罚。
+        （停止后，电脑将关闭，请先保存好自己的资料）
         <br />
         <b-alert
           v-model="punishstart"
@@ -89,7 +89,7 @@ export default {
     this.loading = false;
     this.timing = true;
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
-    setTimeout(this.timeout, 1000); //180000
+    setTimeout(this.timeout, 180000);
   },
   beforeDestroy: function() {},
   methods: {
