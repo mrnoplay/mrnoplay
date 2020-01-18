@@ -4,6 +4,7 @@ const { CapacitorSplashScreen } = require('@capacitor/electron');
 const path = require('path');
 const { exec } = require('child_process');
 var sudo = require('sudo-prompt');
+const shutdown = require('electron-shutdown-command');
 let canQuit = false;
 
 // Place holders for our windows so they don't get garbage collected.
@@ -34,15 +35,15 @@ const menuTemplateDev = [
   },
 ];
 
-async function createWindow () {
+async function createWindow() {
   if (process.platform === 'darwin') {
     const template = [
       {
         label: "程序",
         submenu: [
-          { label: "退出", accelerator: "Command+Q", click: function() { app.quit(); }}
+          { label: "退出", accelerator: "Command+Q", click: function () { app.quit(); } }
         ]
-      }, 
+      },
       {
         label: "编辑",
         submenu: [
@@ -53,7 +54,7 @@ async function createWindow () {
     ];
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
   } else {
-      Menu.setApplicationMenu(null)
+    Menu.setApplicationMenu(null)
   }
 
   // Define our main window size
@@ -76,7 +77,7 @@ async function createWindow () {
     //mainWindow.webContents.openDevTools();
   }
 
-  if(useSplashScreen) {
+  if (useSplashScreen) {
     splashScreen = new CapacitorSplashScreen(mainWindow);
     splashScreen.init(false);
   } else {
@@ -94,6 +95,12 @@ async function createWindow () {
       mainWindow = null;
     }
   });
+
+  mainWindow.webContents.send('tooManyInstances');
+  const gotTheLock = app.requestSingleInstanceLock();
+  if (!gotTheLock && mainWindow != null) {
+    event.sender.send('toomanyapps', true);
+  }//tip for not recommend more than 1 mrnoplay running
 }
 
 // This method will be called when Electron has finished
@@ -148,14 +155,12 @@ ipcMain.on('exit', () => {
 });
 
 ipcMain.on('shutdown', (event, arg) => {
-  if (process.platform === 'win32')
-  {
+  if (process.platform === 'win32') {
     var options = {
       name: 'Mr Noplay / 不玩家',
     };
-    sudo.exec('shutdown -s -t 60', options, () => {
-      event.sender.send('timingdone', true);
-    })
+    shutdown.shutdown();
+    event.sender.send('timingdone', true);
   } else {
     var options = {
       name: 'Mr Noplay / 不玩家',
@@ -169,4 +174,3 @@ ipcMain.on('shutdown', (event, arg) => {
 app.on('will-quit', () => {
   globalShortcut.unregisterAll()
 })
-

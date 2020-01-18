@@ -15,7 +15,7 @@
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <titlepart :canabout="true"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        I'll play for
+        我将休息/玩
         <br />
         <b-form-input
           id="playtime"
@@ -30,7 +30,7 @@
           triggers
           variant="danger"
           placement="bottom"
-        >Please Enter an Integer</b-popover>Minutes
+        >请输入整数</b-popover>分钟
         <br />
         <b-btn variant="light" class="bfa" @click="start">Go</b-btn>
       </div>

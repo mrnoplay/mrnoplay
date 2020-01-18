@@ -7,11 +7,13 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "electron-mac": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run m && cd ../",
+    "electron-win": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run electron:win && cd ../",
     "electron-dev": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
     "capacitor-android": "vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
     "web": "rm -r docs && vue-cli-service build --mode web && cp -r -f www/ docs",
     "d": "yarn run dev",
     "e": "yarn run electron-mac",
+    "ew": "yarn run electron-win",
     "ed": "yarn run electron-dev",
     "c": "yarn run capacitor-android",
     "w": "yarn run web"
