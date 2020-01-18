@@ -164,6 +164,8 @@ ipcMain.on('shutdown', (event, arg) => {
     event.sender.send('timingdone', true);
     var script = 'tell application "Finder" to shut down';
     applescript.execString(script, function(err) {});
+    canQuit = true;
+    app.quit();
   }
 })
 
