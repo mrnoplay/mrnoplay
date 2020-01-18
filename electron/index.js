@@ -2,9 +2,8 @@ const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut } = 
 const isDevMode = require('electron-is-dev');
 const { CapacitorSplashScreen } = require('@capacitor/electron');
 const path = require('path');
-const { exec } = require('child_process');
-var sudo = require('sudo-prompt');
-const shutdown = require('electron-shutdown-command');
+const shutdown = require('electron-shutdown-command');//shutdown windows
+var applescript = require('applescript');//use applescript to shutdown mac
 let canQuit = false;
 
 // Place holders for our windows so they don't get garbage collected.
@@ -162,12 +161,9 @@ ipcMain.on('shutdown', (event, arg) => {
     shutdown.shutdown();
     event.sender.send('timingdone', true);
   } else {
-    var options = {
-      name: 'Mr Noplay / 不玩家',
-    };
-    sudo.exec('shutdown -h +1', options, () => {
-      event.sender.send('timingdone', true);
-    })
+    event.sender.send('timingdone', true);
+    var script = 'tell application "Finder" to shut down';
+    applescript.execString(script, function(err) {});
   }
 })
 
