@@ -88,3 +88,5 @@ typings/
 .dynamodb/
 
 .DS_Store
+
+www/
