@@ -99,6 +99,8 @@ async function createWindow() {
   const gotTheLock = app.requestSingleInstanceLock();
   if (!gotTheLock && mainWindow != null) {
     event.sender.send('toomanyapps', true);
+    canQuit = true;
+    app.quit();
   }//tip for not recommend more than 1 mrnoplay running
 }
 
@@ -167,6 +169,18 @@ ipcMain.on('shutdown', (event, arg) => {
     canQuit = true;
     app.quit();
   }
+})
+
+ipcMain.on('startonlogin', () => {
+  app.setLoginItemSettings({
+    openAtLogin: true,
+  })
+})
+
+ipcMain.on('notstartonlogin', () => {
+  app.setLoginItemSettings({
+    openAtLogin: false,
+  })
 })
 
 app.on('will-quit', () => {
