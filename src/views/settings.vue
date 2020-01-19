@@ -18,6 +18,9 @@
         <div v-if="iselectron">
           开机自启 <b-btn variant="light" class="bfa" @click="startonlogin">开启</b-btn><b-btn variant="light" class="bfa" @click="notstartonlogin">关闭</b-btn><br>
         </div>
+        <div v-if="iselectron">
+          语言/Language (暂未启用英文) <b-btn variant="light" class="bfa" @click="cn">简体中文</b-btn><b-btn variant="light" class="bfa" @click="en">English</b-btn><br>
+        </div>
         <b-btn variant="light" class="bfa" @click="goback">返回</b-btn>
       </div>
     </div>
@@ -131,11 +134,27 @@
           ipc.send("notstartonlogin");
           notify.methods.send({
             title: "成功",
-            id: 4,
+            id: 5,
             message: "已经取消开机自启。"
           });
         }
-      }
+      },
+      cn() {
+        i18nchinese();
+        notify.methods.send({
+          title: "成功",
+          id: 6,
+          message: "已经切换到中文。"
+        });
+      },
+      en() {
+        i18nenglish();
+        notify.methods.send({
+          title: "Success",
+          id: 7,
+          message: "Language is set to English."
+        });
+      },
     }
   }
 </script>
