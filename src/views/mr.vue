@@ -13,27 +13,35 @@
     -->
     <div class="container">
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart :canabout="true"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        我将休息/玩
         <br />
-        <b-form-input
-          id="playtime"
-          v-model="playtime"
-          type="number"
-          required
-          @keyup.enter.native="start"
-        ></b-form-input>
+        <div class="digitalboard border">
+          <div class="juniordigitalboard on">
+            <div class="digitaltop">我将休息/玩&nbsp;&nbsp;</div>
+            <div>
+              <b-form-input
+                id="playtime"
+                class="digital"
+                v-model="playtime"
+                type="number"
+                required
+                @keyup.enter.native="start"
+              ></b-form-input>
+              <span class="digital">:00</span>
+            </div>
+          </div>
+        </div>
         <b-popover
           target="playtime"
           :show.sync="timeNAN"
           triggers
           variant="danger"
           placement="bottom"
-        >请输入整数</b-popover>分钟
+        >请输入整数</b-popover>
         <br />
-        <b-btn variant="light" class="new on" @click="start">Go</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="start">Go</b-btn>
       </div>
+      <titlepart :canabout="true"></titlepart>
       <b-modal
         id="settingspanel"
         ok-only

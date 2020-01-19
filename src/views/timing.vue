@@ -15,7 +15,12 @@
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <titlepart :canabout="false"></titlepart>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        剩余 {{ displaytime }}
+        剩余 
+        <div class="digitalboard">
+          <span class="digital">
+            {{ displaytime }}
+          </span>
+        </div>
         <br>
         <b-btn variant="light" class="new on" @click="cancel">取消</b-btn>
         <br>
