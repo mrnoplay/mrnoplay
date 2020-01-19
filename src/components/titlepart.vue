@@ -3,9 +3,9 @@
     Mr.Noplay / 不玩家
     <br />
     <div v-if="canabout">
-      <b-btn variant="light" class="bfa titleicon" @click="about">关于</b-btn>
-      <b-btn variant="light" class="bfa titleicon" @click="settings">设置</b-btn>
-      <b-btn variant="light" class="bfa titleicon" @click="exit" v-if="iselectron">退出</b-btn>
+      <b-btn variant="light" class="new on titleicon" @click="about">关于</b-btn>
+      <b-btn variant="light" class="new on titleicon" @click="settings">设置</b-btn>
+      <b-btn variant="light" class="new on titleicon" @click="exit" v-if="iselectron">退出</b-btn>
     </div>
   </div>
 </template>
