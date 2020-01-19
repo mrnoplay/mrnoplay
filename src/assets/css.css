@@ -7,6 +7,12 @@ body {
   height: 100vh;
 }
 
+@media screen and (min-width: 241px) {
+  #nbsppart {
+    padding-top: 20vh;
+  }
+}
+
 input{  
   background:none;  
   outline:none;  
@@ -60,6 +66,19 @@ input[type="number"] {
   box-shadow: 6px 6px 16px rgba(184, 182, 179, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.9);
 }
 
+.on:hover {
+  background-color: #efeeee;
+  border: 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
+}
+
+.on:active {
+  color: #efeeee;
+  background-color: #e05e5eef;
+  border: 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 6px 6px 16px rgba(105, 103, 100, 0.5), -6px -6px 16px rgba(255, 255, 255, 1);
+}
+
 .off {
   background-color: #e7e7e7;
   border: 5px rgba(255, 255, 255, 0.2);
@@ -70,13 +89,6 @@ input[type="number"] {
   background-color: #efeeee;
   border: 15px rgba(255, 255, 255, 0.2);
   box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
-}
-
-.click {
-  color: #efeeee;
-  background-color: #e05e5eef;
-  border: 15px rgba(255, 255, 255, 0.2);
-  box-shadow: 6px 6px 16px rgba(105, 103, 100, 0.5), -6px -6px 16px rgba(255, 255, 255, 1);
 }
 
 .digital {
@@ -114,4 +126,29 @@ input[type="number"] {
 
 .largebtn {
   padding: 0.8em 7em;
+}
+
+.titlepart {
+  padding-top: 0.8em;
+  width: 10.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 0.7em;
+  width: 6em;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  font-weight: 450; 
+}
+
+.titlebtns {
+  display: flex;
+  flex-direction: row;
+}
+
+.titlebtn {
+  margin-left: 0.5em;
 }
