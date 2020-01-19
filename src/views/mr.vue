@@ -13,8 +13,8 @@
     -->
     <div class="container">
       <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
+      <div id="nbsppart"></div>
       <div id="notifies" style="-webkit-app-region: no-drag">
-        <br />
         <div class="digitalboard border">
           <div class="juniordigitalboard on">
             <div class="digitaltop">我将休息/玩&nbsp;&nbsp;</div>
