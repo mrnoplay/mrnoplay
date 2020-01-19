@@ -1,21 +1,36 @@
 html {
   background-color: #efeeee;
-  font-family: 'Alibaba Sans';
+  font-family: sans-serif;
 }
 
 body {
   height: 100vh;
 }
 
+input{  
+  background:none;  
+  outline:none;  
+  border:none;
+}
+
+input:focus{   
+  border:none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 @font-face {
-  font-family: 'webfont';
-  font-display: swap;
-  src: url('//at.alicdn.com/t/webfont_6ka5o2ksb3x.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/webfont_6ka5o2ksb3x.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/webfont_6ka5o2ksb3x.woff2') format('woff2'),
-  url('//at.alicdn.com/t/webfont_6ka5o2ksb3x.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/webfont_6ka5o2ksb3x.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/webfont_6ka5o2ksb3x.svg#AlibabaPuHuiTiM') format('svg'); /* iOS 4.1- */
+  font-family: "digital";
+  src: url("digital.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .container {
@@ -42,7 +57,7 @@ body {
 .on {
   background-color: #efeeee;
   border: 5px rgba(255, 255, 255, 0.2);
-  box-shadow: 6px 6px 16px rgba(209, 205, 199, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.5);
+  box-shadow: 6px 6px 16px rgba(184, 182, 179, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.9);
 }
 
 .off {
@@ -62,4 +77,41 @@ body {
   background-color: #e05e5eef;
   border: 15px rgba(255, 255, 255, 0.2);
   box-shadow: 6px 6px 16px rgba(105, 103, 100, 0.5), -6px -6px 16px rgba(255, 255, 255, 1);
+}
+
+.digital {
+  font-family: 'digital';
+  width: 3em;
+  font-size: 2em;
+  text-align: right;
+  text-shadow: 0 0 2px rgba(65, 64, 63, 0.5);
+}
+
+.digitaltop {
+  width: 100%;
+  font-size: 0.4em;
+  text-align: right;
+  text-shadow: 0 0 2px rgba(65, 64, 63, 0.5);
+}
+
+.digitalboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+  border-radius: 10px;
+}
+
+.juniordigitalboard {
+  border-radius: 10px;
+  padding: 0.5em 0.5em 0.2em 1em;
+  margin: 0.1em 0.1em;
+  width: 100%;
+  height: 50%;
+  box-shadow: inset 0 0 3px rgba(65, 64, 63, 0.5);
+  background-image: linear-gradient(to right, rgba(205,210,196,1) , rgba(170,181,155,1));
+}
+
+.largebtn {
+  padding: 0.8em 7em;
 }
