@@ -18,7 +18,7 @@
         <div class="digitalboard border">
           <div class="juniordigitalboard on">
             <div class="digitaltop">我将休息/玩&nbsp;&nbsp;</div>
-            <div>
+            <div class="digitalfather">
               <b-form-input
                 id="playtime"
                 class="digital"

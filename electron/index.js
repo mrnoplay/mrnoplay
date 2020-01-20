@@ -58,8 +58,8 @@ async function createWindow() {
 
   // Define our main window size
   mainWindow = new BrowserWindow({
-    height: 240,
-    width: 240,
+    height: 270,
+    width: 270,
     show: false,
     webPreferences: {
       nodeIntegration: true,
