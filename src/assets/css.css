@@ -7,7 +7,14 @@ body {
   height: 100vh;
 }
 
-@media screen and (min-width: 241px) {
+#nbsppart {
+  padding-top: 8vh;
+}
+
+@media screen and (min-width: 271px) {
+  body {
+    font-size: 24px;
+  }
   #nbsppart {
     padding-top: 20vh;
   }
@@ -58,6 +65,7 @@ input[type="number"] {
   padding: 0.5em;
   margin-top: 0.5em;
   border-radius: 10px;
+  font-size: 1em;
 }
 
 .on {
@@ -94,7 +102,7 @@ input[type="number"] {
 .digital {
   font-family: 'digital';
   width: 3em;
-  font-size: 2em;
+  font-size: 2.1em;
   text-align: right;
   text-shadow: 0 0 2px rgba(65, 64, 63, 0.5);
 }
@@ -114,6 +122,10 @@ input[type="number"] {
   border-radius: 10px;
 }
 
+.digitalfather {
+  text-align: right;
+}
+
 .juniordigitalboard {
   border-radius: 10px;
   padding: 0.5em 0.5em 0.2em 1em;
@@ -130,15 +142,15 @@ input[type="number"] {
 
 .titlepart {
   padding-top: 0.8em;
-  width: 10.5em;
+  width: 15.2em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .title {
-  font-size: 0.7em;
-  width: 6em;
+  font-size: 1em;
+  width: 8em;
   padding: 0.5em;
   margin-top: 0.5em;
   font-weight: 450; 
@@ -151,4 +163,5 @@ input[type="number"] {
 
 .titlebtn {
   margin-left: 0.5em;
+  font-size: 0.8em;
 }
