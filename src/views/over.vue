@@ -42,8 +42,6 @@ import loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
-import timepicker from "vue-ctk-date-time-picker";
-import "@/assets/vue-ctk-date-time-picker.css";
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 var alarm = new Audio();
