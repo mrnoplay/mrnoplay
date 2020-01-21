@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut, screen } = require('electron');
+const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut } = require('electron');
 const isDevMode = require('electron-is-dev');
 const { CapacitorSplashScreen } = require('@capacitor/electron');
 const path = require('path');
@@ -133,7 +133,7 @@ app.on('activate', function () {
 });
 
 // Define any IPC or other custom functionality below here
-
+const { screen } = require('electron');
 ipcMain.on('full-screen', function () {
   if (mainWindow) {
     mainWindow.show();
