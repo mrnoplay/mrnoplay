@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut } = require('electron');
+const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut, screen } = require('electron');
 const isDevMode = require('electron-is-dev');
 const { CapacitorSplashScreen } = require('@capacitor/electron');
 const path = require('path');
@@ -55,6 +55,7 @@ async function createWindow() {
   } else {
     Menu.setApplicationMenu(null)
   }
+
 
   // Define our main window size
   mainWindow = new BrowserWindow({
@@ -139,14 +140,17 @@ ipcMain.on('full-screen', function () {
     mainWindow.focus();
     mainWindow.center();
     mainWindow.setAlwaysOnTop(true);
-    setTimeout(function () { mainWindow.setFullScreen(true) }, 500);
+    const { fullwidth, fullheight } = screen.getPrimaryDisplay().workAreaSize;
+    mainWindow.setSize(fullwidth, fullheight);
+    //setTimeout(function () { mainWindow.setFullScreen(true) }, 500);
   }
 });
 
 ipcMain.on('normal-screen', function () {
   if (mainWindow) {
     mainWindow.setAlwaysOnTop(false);
-    mainWindow.setFullScreen(false);
+    mainWindow.setSize(270,270);
+    //mainWindow.setFullScreen(false);
   }
 });
 
