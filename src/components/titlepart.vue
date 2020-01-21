@@ -1,6 +1,6 @@
 <template>
   <div class="titlepart">
-    <div class="title new off">不玩家</div>
+    <div class="title new left">不玩家 Mr Noplay</div>
     <div class="titlebtns" v-if="canabout">
       <b-btn variant="light" class="new on titlebtn" @click="about">关于</b-btn>
       <b-btn variant="light" class="new on titlebtn" @click="settings">设置</b-btn>

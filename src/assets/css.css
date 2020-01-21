@@ -124,6 +124,10 @@ input[type="number"] {
   text-shadow: 0 0 2px rgba(65, 64, 63, 0.5);
 }
 
+.digitalnote {
+  color: rgba(0, 0, 0, 0.233);
+}
+
 .digitaltop {
   width: 100%;
   font-size: 0.6em;
@@ -286,4 +290,10 @@ input[type="number"] {
   align-items: center;
   flex-direction: row;
   font-size: 0.8em;
+}
+
+.left {
+  text-align: left;
+  justify-content: left;
+  padding-left: 0.1em;
 }

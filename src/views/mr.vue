@@ -22,11 +22,12 @@
                 id="playtime"
                 class="digital"
                 v-model="playtime"
-                type="number"
+                type="tel"
+                maxLength="4"
                 required
                 @keyup.enter.native="start"
               ></b-form-input>
-              <span class="digital">:00</span>
+              <span class="digital digitalnote">:00</span>
             </div>
           </div>
         </div>
@@ -34,9 +35,8 @@
           target="playtime"
           :show.sync="timeNAN"
           triggers
-          variant="danger"
           placement="bottom"
-        >请输入整数</b-popover>
+        ><div class="warnfather warn">请输入整数</div></b-popover>
         <br />
         <b-btn variant="light" class="new on largebtn" @click="start">开始</b-btn>
         <titlepart :canabout="true"></titlepart>
@@ -207,7 +207,7 @@ export default {
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
-    }
+    },
   }
 };
 </script>

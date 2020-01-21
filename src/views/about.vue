@@ -16,7 +16,7 @@
       <div id="main">
         <div class="notifyboard border">
             <div class="juniornotifyboard on-notbtn">
-              <div class="digitaltop notifytop">关于 不玩家</div>
+              <div class="digitaltop notifytop">关于 不玩家 Mr Noplay</div>
               <div class="notifyfather"  style="-webkit-app-region: no-drag">
                 不再为休息/玩电脑的时间难以控制而烦恼。
               </div>
@@ -27,6 +27,7 @@
         <div class="authorinfo">Copyright &copy; 2020 Tianze Ds Qiu.</div>
         <div class="authorinfo">Github @scris</div>
         <div class="authorinfo">An Scris Studio Product.</div>
+        <div class="authorinfo">Version 0.1.0 (20200121)</div>
       </div>
     </div>
   </div>
