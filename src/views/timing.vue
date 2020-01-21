@@ -12,19 +12,26 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart :canabout="false"></titlepart>
-      <div id="notifies" style="-webkit-app-region: no-drag">
-        剩余 
-        <div class="digitalboard">
-          <span class="digital">
-            {{ displaytime }}
-          </span>
+      <div id="timingnbsppart"></div>
+      <div id="main" style="-webkit-app-region: no-drag">
+        <div class="digitalboard border">
+          <div class="juniordigitalboard on-notbtn">
+            <div class="digitaltop">剩余</div>
+            <div class="digitalfather">
+              <span class="digital">
+                {{ displaytime }}
+              </span>
+            </div>
+          </div>
         </div>
-        <br>
-        <b-btn variant="light" class="new on" @click="cancel">取消</b-btn>
-        <br>
-        <b-btn variant="light" class="new on" @click="cancel">结束</b-btn>
+        <div class="warnfather">
+          <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
+        </div>
+        <b-btn variant="light" class="new on largebtn" @click="stop">停止</b-btn>
+        <div v-if="cancancel">
+          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel">取消</b-btn>
+          <small class="new largebtn transparent small">15秒内可取消，取消不会关机</small>
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +70,7 @@
         playtime: 0,
         displaytime: "0:00",
         lefttime: 0,
+        cancancel: true,
       };
     },
     watch: {
@@ -82,6 +90,9 @@
       this.loading = false;
       this.timing = true;
       setInterval(this.interval,1000);
+      setInterval(() => {
+        this.cancancel = false;
+      }, 15000);
     },
     beforeDestroy: function() {
         clearInterval(this.interval);
@@ -133,16 +144,23 @@
       i18nenglish() {
         this.lang = 'en';
       },
+      stop() {
+        this.cancel();
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send("shutdown");
+        }
+      },
       cancel() {
         this.timing = false;
         this.storagesetjson('concentrated', true);
         if (process.env.VUE_APP_LINXF == "electron") {
           ipc.send('full-screen');
         }
+        clearInterval(this.interval);
         this.$router.push('/');
       },
       interval() {
-        if(this.timing == true) {
+        if(this.timing == true && this.$router.currentRoute.path == '/timing') {
             this.lefttime --;
             this.displaytime = ((this.lefttime - this.lefttime % 60) / 60).toString() + ":" + (this.tow(this.lefttime % 60)).toString();
             if(this.lefttime <= 0) {

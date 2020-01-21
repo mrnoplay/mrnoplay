@@ -12,16 +12,17 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart :canabout="false"></titlepart>
-      <div id="notifies" style="-webkit-app-region: no-drag">
+      <div id="nbsppart"></div>
+      <div id="main" style="-webkit-app-region: no-drag">
         <div v-if="iselectron">
-          开机自启 <b-btn variant="light" class="new on" @click="startonlogin">开启</b-btn><b-btn variant="light" class="new on" @click="notstartonlogin">关闭</b-btn><br>
+          <b class="label">开机自启</b><br>
+          <div class="select">关闭<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>开启</div>
         </div>
         <div>
-          语言/Language (暂未启用英文) <b-btn variant="light" class="new on" @click="cn">简体中文</b-btn><b-btn variant="light" class="new on" @click="en">English</b-btn><br>
+          <b class="label">语言/Language (暂未启用英文) </b>
+          <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
         </div>
-        <b-btn variant="light" class="new on" @click="goback">返回</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="goback">返回</b-btn>
       </div>
     </div>
   </div>
@@ -55,6 +56,8 @@
         isonios: false,
         lang: 'en',
         version: '1.0.0',
+        switchstartonlogin: 'switch-on',
+        switchlang: 'switch-on',
       };
     },
     watch: {
@@ -66,6 +69,7 @@
     mounted: function() {
       this.version = process.env.VUE_APP_VER;
       this.i18nsetlang();
+      this.setstartonloginselect();
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
       }
@@ -104,10 +108,23 @@
         const keys = await Storage.keys();
         if(keys.keys.indexOf('lang') != -1) {
           const retlang = await Storage.get({ key:'lang' });
-          if(retlang.value != null) _this.lang = retlang.value;
-          else _this.lang = 'en', _this.storagesetlang('en');
-        } else _this.lang = 'en', _this.storagesetlang('en');
-        _this.$i18n.locale = _this.lang;
+          if(retlang.value != null) this.lang = retlang.value;
+          else this.lang = 'en', this.storagesetlang('en');
+        } else this.lang = 'en', this.storagesetlang('en');
+        this.$i18n.locale = this.lang;
+        if (this.lang == 'en') this.switchlang = 'switch-on';
+        else this.switchlang = 'switch-off';
+      },
+      async setstartonloginselect() {
+        const keys = await Storage.keys();
+        if(keys.keys.indexOf('startonlogin') != -1) {
+          const retlang = await Storage.get({ key:'startonlogin' });
+          if(retlang.value != null) {
+            if (retlang.value == false || retlang.value == "false") this.switchstartonlogin = 'switch-off';
+            else this.switchstartonlogin = 'switch-on';
+          }
+          else this.switchstartonlogin = 'switch-off', this.storagesetjson('startonlogin',false);
+        } else this.switchstartonlogin = 'switch-off', this.storagesetjson('startonlogin',false);
       },
       i18nchinese() {
         this.lang = 'cn';
@@ -139,8 +156,28 @@
           });
         }
       },
+      selectstartonlogin() {
+        if(this.switchstartonlogin == 'switch-on') {
+          this.switchstartonlogin = 'switch-off';
+          this.storagesetjson('startonlogin',false);
+          this.notstartonlogin();
+        } else {
+          this.switchstartonlogin = 'switch-on';
+          this.storagesetjson('startonlogin',true);
+          this.startonlogin();
+        }
+      },
+      selectlang() {
+        if (this.lang == 'en') {
+          this.cn();
+          this.switchlang = 'switch-off';
+        } else {
+          this.en();
+          this.switchlang = 'switch-on';
+        }
+      },
       cn() {
-        i18nchinese();
+        this.i18nchinese();
         notify.methods.send({
           title: "成功",
           id: 6,
@@ -148,7 +185,7 @@
         });
       },
       en() {
-        i18nenglish();
+        this.i18nenglish();
         notify.methods.send({
           title: "Success",
           id: 7,
