@@ -133,24 +133,17 @@ app.on('activate', function () {
 });
 
 // Define any IPC or other custom functionality below here
-const { screen } = require('electron');
 ipcMain.on('full-screen', function () {
   if (mainWindow) {
     mainWindow.show();
-    mainWindow.focus();
-    mainWindow.center();
-    mainWindow.setAlwaysOnTop(true);
-    const { fullwidth, fullheight } = screen.getPrimaryDisplay().workAreaSize;
-    mainWindow.setSize(fullwidth, fullheight);
-    //setTimeout(function () { mainWindow.setFullScreen(true) }, 500);
+    mainWindow.setKiosk(true);
   }
 });
 
 ipcMain.on('normal-screen', function () {
   if (mainWindow) {
-    mainWindow.setAlwaysOnTop(false);
     mainWindow.setSize(270,270);
-    //mainWindow.setFullScreen(false);
+    mainWindow.setKiosk(false);
   }
 });
 
