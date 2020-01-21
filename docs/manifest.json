@@ -1,0 +1,15 @@
+{
+  "name": "Mr Noplay",
+  "short_name": "mrnoplay",
+  "icons": [
+    {
+      "src": "iosandroid.ico",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#fdfdfd",
+  "display": "standalone",
+  "categories": ["productivity"],
+  "theme_color": "#0575e6"
+}

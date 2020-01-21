@@ -117,7 +117,6 @@ export default {
   name: "mr",
   components: {
     loading,
-    timepicker,
     titlepart
   },
   data() {
