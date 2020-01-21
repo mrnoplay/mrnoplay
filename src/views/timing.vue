@@ -24,13 +24,14 @@
             </div>
           </div>
         </div>
-        <div class="warnfather">
+        <div class="warnfather" v-if="iselectron">
           <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
         </div>
         <b-btn variant="light" class="new on largebtn" @click="stop">停止</b-btn>
         <div v-if="cancancel">
           <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel">取消</b-btn>
-          <small class="new largebtn transparent small">15秒内可取消，取消不会关机</small>
+          <small v-if="iselectron" class="new largebtn transparent small">15秒内可取消，取消不会关机</small>
+          <small v-if="!iselectron" class="new largebtn transparent small">非电脑版不会进行关机操作</small>
         </div>
       </div>
     </div>
@@ -54,7 +55,6 @@
     name: 'timing',
     components: {
       loading,
-      timepicker,
       titlepart,
     },
     data() {

@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <div class="warnfather">
+          <div class="warnfather" v-if="iselectron">
             <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
           </div>
           <b-alert
@@ -57,7 +57,6 @@ export default {
   name: "over",
   components: {
     loading,
-    timepicker,
     titlepart
   },
   data() {
