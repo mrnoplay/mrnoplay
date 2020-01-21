@@ -13,9 +13,9 @@
     -->
     <div class="container">
       <div id="timingnbsppart"></div>
-      <div id="main" style="-webkit-app-region: no-drag">
+      <div id="main">
         <div class="digitalboard border">
-          <div class="juniordigitalboard on-notbtn">
+          <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">
             <div class="digitaltop">剩余</div>
             <div class="digitalfather">
               <span class="digital">
@@ -24,12 +24,12 @@
             </div>
           </div>
         </div>
-        <div class="warnfather" v-if="iselectron">
+        <div class="warnfather" v-if="iselectron" style="-webkit-app-region: no-drag">
           <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
         </div>
-        <b-btn variant="light" class="new on largebtn" @click="stop">停止</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="stop" style="-webkit-app-region: no-drag">停止</b-btn>
         <div v-if="cancancel">
-          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel">取消</b-btn>
+          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel" style="-webkit-app-region: no-drag">取消</b-btn>
           <small v-if="iselectron" class="new largebtn transparent small">15秒内可取消，取消不会关机</small>
           <small v-if="!iselectron" class="new largebtn transparent small">非电脑版不会进行关机操作</small>
         </div>
