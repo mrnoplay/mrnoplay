@@ -12,11 +12,21 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart :canabout="false"></titlepart>
-      <div id="notifies" style="-webkit-app-region: no-drag">
-        Give an end to no-end rests and play times. <br>
-        <b-btn variant="light" class="new on" @click="goback">返回</b-btn>
+      <div id="nbsppart"></div>
+      <div id="main">
+        <div class="notifyboard border">
+            <div class="juniornotifyboard on-notbtn">
+              <div class="digitaltop notifytop">关于 不玩家</div>
+              <div class="notifyfather"  style="-webkit-app-region: no-drag">
+                不再为休息/玩电脑的时间难以控制而烦恼。
+              </div>
+            </div>
+          </div>
+        <b-btn variant="light" class="new on largebtn" @click="goback">返回</b-btn>
+        <br>
+        <div class="authorinfo">Copyright &copy; 2020 Tianze Ds Qiu.</div>
+        <div class="authorinfo">Github @scris</div>
+        <div class="authorinfo">An Scris Studio Product.</div>
       </div>
     </div>
   </div>

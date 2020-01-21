@@ -12,12 +12,11 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
       <div id="nbsppart"></div>
-      <div id="notifies" style="-webkit-app-region: no-drag">
-        <div class="digitalboard border">
+      <div id="main">
+        <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
-            <div class="digitaltop">我将休息/玩&nbsp;&nbsp;</div>
+            <div class="digitaltop">我将休息/玩</div>
             <div class="digitalfather">
               <b-form-input
                 id="playtime"
@@ -39,9 +38,9 @@
           placement="bottom"
         >请输入整数</b-popover>
         <br />
-        <b-btn variant="light" class="new on largebtn" @click="start">Go</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="start">开始</b-btn>
+        <titlepart :canabout="true"></titlepart>
       </div>
-      <titlepart :canabout="true"></titlepart>
       <b-modal
         id="settingspanel"
         ok-only

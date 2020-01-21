@@ -12,22 +12,27 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <loading :active.sync="loading" :can-cancel="false" :is-full-page="true" loader="bars"></loading>
-      <titlepart :canabout="false"></titlepart>
-      <div id="notifies" style="-webkit-app-region: no-drag">
-        时间结束。
-        <br />请在3分钟内停止，否则将被惩罚。
-        （停止后，电脑将关闭，请先保存好自己的资料）
-        <br />
-        <b-alert
-          v-model="punishstart"
-          class="position-fixed fixed-bottom m-0 rounded-0"
-          style="z-index: 2000;"
-          variant="danger"
-          dismissible
-        >惩罚现在开始。</b-alert>
-        <b-btn variant="light" class="new on" @click="cancel">结束</b-btn>
-      </div>
+      <div id="nbsppart"></div>
+      <div id="main">
+          <div class="notifyboard border">
+            <div class="juniornotifyboard on-notbtn">
+              <div class="digitaltop notifytop">提示</div>
+              <div class="notifyfather">
+                时间已经结束，请于3分钟内停止，否则将被惩罚。
+              </div>
+            </div>
+          </div>
+          <div class="warnfather">
+            <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
+          </div>
+          <b-alert
+            v-model="punishstart"
+            class="warnfather"
+            style="z-index: 2000;"
+            variant="danger"
+          > <div class="warn">惩罚现在开始。</div></b-alert>
+          <b-btn variant="light" class="new on largebtn" @click="cancel" style="-webkit-app-region: no-drag">结束</b-btn>
+        </div>
     </div>
   </div>
 </template>
@@ -134,13 +139,16 @@ export default {
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("full-screen");
         ipc.send("shutdown");
+        this.timing = false;
+        clearInterval(this.interval);
       } else {
         this.timing = false;
+        clearInterval(this.interval);
       }
       this.$router.push("/");
     },
     interval() {
-      if (this.timing == true) {
+      if (this.timing == true && this.$router.currentRoute.path == '/over') {
         this.punishstart = true;
         notify.methods.send({
           title: "现在停止",
@@ -148,6 +156,8 @@ export default {
           message: this.notifymessage[this.rand(0, this.notifymessage.length)]
         });
         alarm.play();
+      } else {
+        clearInterval(this.interval);
       }
     },
     timeout() {
