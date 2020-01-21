@@ -268,12 +268,14 @@ input[type="number"] {
 }
 
 .switch-on {
+  background-color: #efeeee;
   background-image: url('on.png');
   width: 81px;
   height: 62px;
 }
 
 .switch-off {
+  background-color: #efeeee;
   background-image: url('off.png');
   width: 81px;
   height: 62px;
