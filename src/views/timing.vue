@@ -25,6 +25,7 @@
           </div>
         </div>
         <div class="warnfather" v-if="iselectron" style="-webkit-app-region: no-drag">
+          <div class="breathe-div"></div>
           <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
         </div>
         <b-btn variant="light" class="new on largebtn" @click="stop" style="-webkit-app-region: no-drag">停止</b-btn>

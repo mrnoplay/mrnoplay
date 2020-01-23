@@ -1,5 +1,6 @@
 html {
   background-color: #efeeee;
+  background-size: contain;
   font-family: sans-serif;
 }
 
@@ -15,19 +16,25 @@ body {
   padding-top: 2vh;
 }
 
-@media screen and (min-width: 271px) {
+@media screen and (min-width: 321px) {
   html {
-    font-size: 24px;
+    background-image: url('background.png');
   }
   #nbsppart, #timingnbsppart {
     padding-top: 20vh;
   }
   #main {
     padding: 2em 1.2em;
-    background-color: #efeeee;
-    border-radius: 10px;
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255) , rgb(228, 228, 228));
+    border-radius: 20px;
     border: 5px rgba(255, 255, 255, 0.2);
-    box-shadow: 3px 3px 16px rgba(184, 184, 184, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.96);
+    box-shadow: 10px 10px 50px rgba(112, 110, 110, 0.7), -10px -10px 32px rgba(255, 255, 255, 1), inset 4px 4px 0px rgba(255, 255, 255, 0.6), inset 6px 6px 4px rgba(255, 255, 255, 0.4), inset -4px -4px 2px rgba(102, 99, 99, 0.3), inset -6px -6px 12px rgba(102, 99, 99, 0.2);
+  }
+}
+
+@media screen and (min-width: 501px) {
+  html {
+    font-size: 24px;
   }
 }
 
@@ -86,9 +93,10 @@ input[type="number"] {
 }
 
 .on {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) , rgb(228, 228, 228, 0.4));
   background-color: #efeeee;
   border: 5px rgba(255, 255, 255, 0.2);
-  box-shadow: 6px 6px 16px rgba(184, 182, 179, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.9);
+  box-shadow: 6px 6px 16px rgba(184, 182, 179, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.9),inset 3px 3px 3px rgba(209, 205, 199, 0.2), inset -3px -3px 3px rgba(255, 255, 255, 0.2);
 }
 
 .on:hover {
@@ -189,19 +197,26 @@ input[type="number"] {
 
 .warnfather {
   padding: 0.5em 0.5em 0.5em 1em;
-  margin: 0.2em 0.1em;
-  background-color: rgb(228, 61, 61);
-  border-radius: 10px;
+  margin: 0.4em 0.1em;
   width: 14em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .warn {
-  font-size: 0.9em;
-  color: rgb(247, 235, 235);
+  font-size: 0.8em;
+  color: rgb(54, 54, 54);
+  font-weight: 800;
 }
 
 .largebtn {
-  padding: 0.8em 6.8em;
+  padding: 0.8em 5.8em;
+}
+
+.largebtn-innertext {
+  width: 4em;
 }
 
 .titlepart {
@@ -272,14 +287,14 @@ input[type="number"] {
 }
 
 .switch-on {
-  background-color: #efeeee;
+  background-color: transparent;
   background-image: url('on.png');
   width: 81px;
   height: 62px;
 }
 
 .switch-off {
-  background-color: #efeeee;
+  background-color: transparent;
   background-image: url('off.png');
   width: 81px;
   height: 62px;
@@ -296,4 +311,68 @@ input[type="number"] {
   text-align: left;
   justify-content: left;
   padding-left: 0.1em;
+}
+
+.about {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1em;
+  margin-left: 0.2em;
+  background-image: url('about.svg');
+}
+
+.settings {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1.02em;
+  margin-left: 0.2em;
+  background-image: url('settings.svg');
+}
+
+.exit {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1.06em;
+  margin-left: 0.2em;
+  background-image: url('exit.svg');
+}
+
+.breathe-div {
+  width: 5px;
+  height: 5px;
+  border: 1px solid #d42b2b;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin-right: 1em;
+  flex-shrink: 0;
+  animation-timing-function: ease-in-out;
+  animation-name: breathe;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes breathe {
+  0% {
+      opacity: .4;
+      box-shadow: 0 1px 2px rgba(223, 0, 0, 0.4), 0 1px 1px rgba(223, 0, 0, 0.1) inset;
+  }
+
+  100% {
+      opacity: 1;
+      border: 1px solid rgba(235, 59, 59, 0.7);
+      box-shadow: 0 1px 30px #df0000, 0 1px 20px #df0000 inset;
+  }
 }

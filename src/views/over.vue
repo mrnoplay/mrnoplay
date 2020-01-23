@@ -31,7 +31,7 @@
             style="z-index: 2000;"
             variant="danger"
           > <div class="warn">惩罚现在开始。</div></b-alert>
-          <b-btn variant="light" class="new on largebtn" @click="cancel" style="-webkit-app-region: no-drag">结束</b-btn>
+          <b-btn variant="light" class="new on largebtn" @click="cancel" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">结束</div></b-btn>
         </div>
     </div>
   </div>
@@ -92,6 +92,11 @@ export default {
     this.timing = true;
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
     setTimeout(this.timeout, 180000);
+    notify.methods.send({
+      title: "时间到了",
+      id: 8,
+      message: '请在3分钟内停止哦！否则将被惩罚。',
+    });
   },
   beforeDestroy: function() {},
   methods: {

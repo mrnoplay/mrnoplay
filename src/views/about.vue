@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-        <b-btn variant="light" class="new on largebtn" @click="goback">返回</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="goback"><div class="largebtn-innertext">返回</div></b-btn>
         <br>
         <div class="authorinfo">Copyright &copy; 2020 Tianze Ds Qiu.</div>
         <div class="authorinfo">Github @scris</div>

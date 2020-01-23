@@ -1,10 +1,10 @@
 <template>
   <div class="titlepart">
-    <div class="title new left">不玩家 Mr Noplay</div>
+    <div class="title new left">不玩家</div>
     <div class="titlebtns" v-if="canabout">
-      <b-btn variant="light" class="new on titlebtn" @click="about">关于</b-btn>
-      <b-btn variant="light" class="new on titlebtn" @click="settings">设置</b-btn>
-      <b-btn variant="light" class="new on titlebtn" @click="exit" v-if="iselectron">退出</b-btn>
+      <b-btn variant="light" class="new about" @click="about"></b-btn>
+      <b-btn variant="light" class="new settings" @click="settings"></b-btn>
+      <b-btn variant="light" class="new exit" @click="exit" v-if="iselectron"></b-btn>
     </div>
   </div>
 </template>
