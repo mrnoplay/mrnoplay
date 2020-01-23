@@ -38,7 +38,7 @@
           placement="bottom"
         ><div class="warnfather warn">请输入整数</div></b-popover>
         <br />
-        <b-btn variant="light" class="new on largebtn" @click="start">开始</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">开始</div></b-btn>
         <titlepart :canabout="true"></titlepart>
       </div>
       <b-modal
