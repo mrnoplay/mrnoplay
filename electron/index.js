@@ -95,14 +95,19 @@ async function createWindow() {
       mainWindow = null;
     }
   });
-
-  mainWindow.webContents.send('tooManyInstances');
-  const gotTheLock = app.requestSingleInstanceLock();
-  if (!gotTheLock && mainWindow != null) {
-    event.sender.send('toomanyapps', true);
-    canQuit = true;
-    app.quit();
-  }//tip for not recommend more than 1 mrnoplay running
+ 
+  const gotTheLock = app.requestSingleInstanceLock()
+  if (!gotTheLock) {
+    app.quit()
+  } else {
+    app.on('second-instance', (event, commandLine, workingDirectory) => {
+      if (mainWindow) {
+        if (mainWindow.isMinimized()) mainWindow.restore()
+        mainWindow.focus()
+        mainWindow.show()
+      }
+    })
+  }
 }
 
 // This method will be called when Electron has finished
@@ -178,6 +183,15 @@ ipcMain.on('notstartonlogin', () => {
   app.setLoginItemSettings({
     openAtLogin: false,
   })
+})
+
+ipcMain.on('focus', () => {
+  if(mainWindow) {
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.moveTop();
+    mainWindow.center();
+  }
 })
 
 app.on('will-quit', () => {

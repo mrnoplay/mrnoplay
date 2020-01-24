@@ -14,25 +14,31 @@
     <div class="container">
       <div id="nbsppart"></div>
       <div id="main">
-          <div class="notifyboard border">
-            <div class="juniornotifyboard on-notbtn">
-              <div class="digitaltop notifytop">提示</div>
-              <div class="notifyfather">
-                时间已经结束，请于3分钟内停止，否则将被惩罚。
-              </div>
-            </div>
+        <div class="notifyboard border">
+          <div class="juniornotifyboard on-notbtn">
+            <div class="digitaltop notifytop">提示</div>
+            <div class="notifyfather">时间已经结束，请于3分钟内停止，否则将被惩罚。</div>
           </div>
+        </div>
+        <div class="warnfathers">
           <div class="warnfather" v-if="iselectron">
+            <div class="breathe-div"></div>
             <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
           </div>
-          <b-alert
-            v-model="punishstart"
-            class="warnfather"
-            style="z-index: 2000;"
-            variant="danger"
-          > <div class="warn">惩罚现在开始。</div></b-alert>
-          <b-btn variant="light" class="new on largebtn" @click="cancel" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">结束</div></b-btn>
+          <b-alert v-model="punishstart" class="warnfather" style="z-index: 2000;" variant="danger">
+            <div class="breathe-div"></div>
+            <div class="warn">惩罚现在开始。</div>
+          </b-alert>
         </div>
+        <b-btn
+          variant="light"
+          class="new on largebtn"
+          @click="cancel"
+          style="-webkit-app-region: no-drag"
+        >
+          <div class="largebtn-innertext">结束</div>
+        </b-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +47,7 @@
 import loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { Plugins } from "@capacitor/core";
-const { Storage } = Plugins;
+const { Storage, Modals } = Plugins;
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 var alarm = new Audio();
@@ -95,7 +101,7 @@ export default {
     notify.methods.send({
       title: "时间到了",
       id: 8,
-      message: '请在3分钟内停止哦！否则将被惩罚。',
+      message: "请在3分钟内停止哦！否则将被惩罚。"
     });
   },
   beforeDestroy: function() {},
@@ -143,14 +149,17 @@ export default {
         ipc.send("shutdown");
         this.timing = false;
         clearInterval(this.interval);
+        clearInterval(this.longinterval);
+        clearInterval(this.shutdowninterval);
       } else {
         this.timing = false;
         clearInterval(this.interval);
+        clearInterval(this.shutdowninterval);
       }
       this.$router.push("/");
     },
     interval() {
-      if (this.timing == true && this.$router.currentRoute.path == '/over') {
+      if (this.timing == true && this.$router.currentRoute.path == "/over") {
         this.punishstart = true;
         notify.methods.send({
           title: "现在停止",
@@ -162,12 +171,33 @@ export default {
         clearInterval(this.interval);
       }
     },
+    longinterval() {
+      this.popup('已经超时超过3分钟了','超时10分钟后会强制结束！');
+    },
+    shutdowninterval() {
+      if (process.env.VUE_APP_LINXF == "electron") {
+        this.popup('即将强制关机','即将强制关机！');
+        ipc.send("shutdown");
+      }
+    },
     timeout() {
       setInterval(this.interval, 2000);
+      setInterval(this.longinterval, 140000);
+      setInterval(this.shutdowninterval, 420000);
+      this.popup('已经超时3分钟了','请快速结束，超时10分钟后会强制结束！');
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
-    }
+    },
+    async popup(title, message) {
+      if (process.env.VUE_APP_LINXF == "electron") {
+        ipc.send('focus');
+        let alertRet = await Modals.alert({
+          title: title,
+          message: message,
+        });
+      }
+    },
   }
 };
 </script>

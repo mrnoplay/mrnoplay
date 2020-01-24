@@ -28,9 +28,9 @@
           <div class="breathe-div"></div>
           <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
         </div>
-        <b-btn variant="light" class="new on largebtn" @click="stop" style="-webkit-app-region: no-drag">停止</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="stop" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">停止</div></b-btn>
         <div v-if="cancancel">
-          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel" style="-webkit-app-region: no-drag">取消</b-btn>
+          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">取消</div></b-btn>
           <small v-if="iselectron" class="new largebtn transparent small">15秒内可取消，取消不会关机</small>
           <small v-if="!iselectron" class="new largebtn transparent small">非电脑版不会进行关机操作</small>
         </div>
@@ -43,7 +43,7 @@
   import loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
   import { Plugins } from '@capacitor/core';
-  const { Storage } = Plugins;
+  const { Storage, Modals } = Plugins;
   import titlepart from '@/components/titlepart'
   var alarm = new Audio();
   var _this = null;
@@ -89,7 +89,7 @@
       this.loading = false;
       this.timing = true;
       setInterval(this.interval,1000);
-      setInterval(() => {
+      setTimeout(() => {
         this.cancancel = false;
       }, 15000);
     },
@@ -168,7 +168,16 @@
                 this.$router.push("/over");
             }
         }
-      }
+      },
+      async popup(title, message) {
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send('focus');
+          let alertRet = await Modals.alert({
+            title: title,
+            message: message,
+          });
+        }
+      },
     }
   }
 </script>
