@@ -6,6 +6,7 @@ html {
 
 body {
   height: 100vh;
+  overflow-y: hidden;
 }
 
 #nbsppart {
@@ -200,9 +201,14 @@ input[type="number"] {
   margin: 0.4em 0.1em;
   width: 14em;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   flex-direction: row;
+}
+
+.warnfathers div:nth-child(2) {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .warn {
