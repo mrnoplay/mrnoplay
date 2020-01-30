@@ -125,12 +125,19 @@ async function createWindow() {
   });
 
   mainWindow.setSkipTaskbar(true);
+  app.dock.hide();
 
   if(process.platform == 'win32') {
-    tray = new Tray('tray.win.png');
+    tray = new Tray(path.join(__dirname, 'tray.win.png'));
   } else {
-    tray = new Tray('tray.mac.png');
+    tray = new Tray(path.join(__dirname, 'tray.mac.Template.png'));
   }
+  tray.on('click', () => {
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.moveTop();
+    mainWindow.center();
+  })
 }
 
 // This method will be called when Electron has finished
