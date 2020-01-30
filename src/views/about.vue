@@ -16,18 +16,19 @@
       <div id="main">
         <div class="notifyboard border">
             <div class="juniornotifyboard on-notbtn">
-              <div class="digitaltop notifytop">关于 不玩家 Mr Noplay</div>
+              <div class="digitaltop notifytop">{{ $t("about") }}</div>
               <div class="notifyfather"  style="-webkit-app-region: no-drag">
-                不再为休息/玩电脑的时间难以控制而烦恼。
+                {{ $t("abouttext") }}
               </div>
             </div>
           </div>
-        <b-btn variant="light" class="new on largebtn" @click="goback"><div class="largebtn-innertext">返回</div></b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="goback"><div class="largebtn-innertext">{{ $t("back") }}</div></b-btn>
         <br>
         <div class="authorinfo">Copyright &copy; 2020 Tianze Ds Qiu.</div>
         <div class="authorinfo">Github @scris</div>
         <div class="authorinfo">An Scris Studio Product.</div>
         <div class="authorinfo">Version 0.1.0 (20200121)</div>
+        <div class="authorinfo"><a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a></div>
       </div>
     </div>
   </div>
@@ -123,6 +124,9 @@
       goback() {
         this.timing = false;
         this.$router.push('/');
+      },
+      tutorial() {
+        this.$router.push("tutorial");
       },
     }
   }

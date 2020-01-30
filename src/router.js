@@ -5,6 +5,7 @@ import timing from './views/timing'
 import over from './views/over'
 import about from './views/about'
 import settings from './views/settings'
+import tutorial from './views/tutorial'
 Vue.use(Router);
 
 export default new Router({
@@ -33,6 +34,11 @@ export default new Router({
       path: '/settings',
       name: 'settings',
       component: settings,
+    },
+    {
+      path: '/tutorial',
+      name: 'tutorial',
+      component: tutorial,
     },
   ]
 })

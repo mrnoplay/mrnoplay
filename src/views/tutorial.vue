@@ -12,38 +12,28 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <div id="timingnbsppart"></div>
+      <div id="nbsppart"></div>
       <div id="main">
-        <div class="digitalboard border">
-          <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">
-            <div class="digitaltop">{{ $t("left") }}</div>
-            <div class="digitalfather">
-              <span class="digital">
-                {{ displaytime }}
-              </span>
+        <div class="notifyboard border">
+            <div class="on-notbtn">
+              Tutorial Picture
             </div>
           </div>
+        <b-btn variant="light" class="new on largebtn" @click="next" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ $t("next") }}</div></b-btn>
+        <div>
+          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="goback" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ $t("skip") }}</div></b-btn>
+          <small class="new largebtn transparent small">{{ $t("canopenlater") }}</small>
         </div>
-        <div class="warnfather" v-if="iselectron" style="-webkit-app-region: no-drag">
-          <div class="breathe-div"></div>
-          <div class="warn">{{ $t("firstsavefiles") }}</div>
-        </div>
-        <b-btn variant="light" class="new on largebtn" @click="stop" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ $t("stop") }}</div></b-btn>
-        <div v-if="cancancel">
-          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="cancel" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ $t("cancel") }}</div></b-btn>
-          <small v-if="iselectron" class="new largebtn transparent small">{{ $t("cancel15s") }}</small>
-          <small v-if="!iselectron" class="new largebtn transparent small">{{ $t("cancelweb") }}</small>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
   import loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
   import { Plugins } from '@capacitor/core';
-  const { Storage, Modals } = Plugins;
+  const { Storage } = Plugins;
   import titlepart from '@/components/titlepart'
   var alarm = new Audio();
   var _this = null;
@@ -53,7 +43,7 @@
     ipc = window.require("electron").ipcRenderer; //use window.require instead of require
   }
   export default {
-    name: 'timing',
+    name: 'tutorial',
     components: {
       loading,
       titlepart,
@@ -64,12 +54,8 @@
         loading: true,
         iselectron: false,
         isonios: false,
-        lang: 'cn',
-        timing: false,
-        playtime: 0,
-        displaytime: "0:00",
-        lefttime: 0,
-        cancancel: true,
+        lang: 'en',
+        version: '1.0.0',
       };
     },
     watch: {
@@ -88,13 +74,10 @@
       _this = this;
       this.loading = false;
       this.timing = true;
-      setInterval(this.interval,1000);
-      setTimeout(() => {
-        this.cancancel = false;
-      }, 15000);
+      setTimeout(this.interval, 3000);
     },
     beforeDestroy: function() {
-        clearInterval(this.interval);
+
     },
     methods: {
       isiPad (userAgent) {
@@ -105,9 +88,6 @@
       },
       isiOS (userAgent) {
         return this.isiPad(userAgent) || this.isiPhone(userAgent);
-      },
-      tow (n) {
-          return n >= 0 && n < 10 ? '0' + n : '' + n;
       },
       async storagesetlang(val) {
         await Storage.set({
@@ -129,13 +109,6 @@
           else _this.lang = 'en', _this.storagesetlang('en');
         } else _this.lang = 'en', _this.storagesetlang('en');
         _this.$i18n.locale = _this.lang;
-        if(keys.keys.indexOf('playtime') != -1) {
-          const rettime = await Storage.get({ key:'playtime' });
-          if(rettime.value != null) _this.playtime = rettime.value;
-          else _this.playtime = 5, _this.storagesetjsom('playtime', 5);
-          _this.lefttime = 60 * _this.playtime;
-          _this.displaytime = _this.playtime.toString() + ":00";
-        }
       },
       i18nchinese() {
         this.lang = 'cn';
@@ -143,40 +116,12 @@
       i18nenglish() {
         this.lang = 'en';
       },
-      stop() {
-        this.cancel();
-        if (process.env.VUE_APP_LINXF == "electron") {
-          ipc.send("shutdown");
-        }
-      },
-      cancel() {
+      goback() {
         this.timing = false;
-        this.storagesetjson('concentrated', true);
-        if (process.env.VUE_APP_LINXF == "electron") {
-          ipc.send('full-screen');
-        }
-        clearInterval(this.interval);
         this.$router.push('/');
       },
-      interval() {
-        if(this.timing == true && this.$router.currentRoute.path == '/timing') {
-            this.lefttime --;
-            this.displaytime = ((this.lefttime - this.lefttime % 60) / 60).toString() + ":" + (this.tow(this.lefttime % 60)).toString();
-            if(this.lefttime <= 0) {
-                this.timing = false;
-                clearInterval(this.interval);
-                this.$router.push("/over");
-            }
-        }
-      },
-      async popup(title, message) {
-        if (process.env.VUE_APP_LINXF == "electron") {
-          ipc.send('focus');
-          let alertRet = await Modals.alert({
-            title: title,
-            message: message,
-          });
-        }
+      next() {
+
       },
     }
   }

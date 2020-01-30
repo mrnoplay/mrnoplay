@@ -15,14 +15,14 @@
       <div id="nbsppart"></div>
       <div id="main" style="-webkit-app-region: no-drag">
         <div v-if="iselectron">
-          <b class="label">开机自启</b><br>
-          <div class="select">关闭<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>开启</div>
+          <b class="label">{{ $t("startonlogin") }}</b><br>
+          <div class="select">{{ $t("turnoff") }}<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>{{ $t("turnon") }}</div>
         </div>
         <div>
-          <b class="label">语言/Language (暂未启用英文) </b>
+          <b class="label">语言/Language</b>
           <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
         </div>
-        <b-btn variant="light" class="new on largebtn" @click="goback">返回</b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="goback">{{ $t("back") }}</b-btn>
       </div>
     </div>
   </div>
@@ -140,9 +140,9 @@
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send("startonlogin");
           notify.methods.send({
-            title: "成功",
+            title: this.$t("success"),
             id: 4,
-            message: "已经设置为开机自启。"
+            message: this.$t("on-startonlogin")
           });
         }
       },
@@ -150,9 +150,9 @@
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send("notstartonlogin");
           notify.methods.send({
-            title: "成功",
+            title: this.$t("success"),
             id: 5,
-            message: "已经取消开机自启。"
+            message: this.$t("off-startonlogin")
           });
         }
       },

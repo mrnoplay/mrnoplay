@@ -1,6 +1,7 @@
+<i18n src="@/assets/lang.json"></i18n>
 <template>
   <div class="titlepart">
-    <div class="title new left">不玩家</div>
+    <div class="title new left">{{ $t("mrnoplay") }}</div>
     <div class="titlebtns" v-if="canabout">
       <b-btn variant="light" class="new about" @click="about"></b-btn>
       <b-btn variant="light" class="new settings" @click="settings"></b-btn>
@@ -10,22 +11,24 @@
 </template>
 
 <script>
+import { Plugins } from "@capacitor/core";
+const { Storage } = Plugins;
 import notify from "@/components/linxf/notify";
 var ipc = null;
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
   ipc.on("closenotification", function(event, arg) {
     notify.methods.send({
-      title: "不支持的操作",
+      title: this.$t("unsupported"),
       id: 2,
-      message: "请在允许的时候，通过应用内的关闭按钮退出应用。"
+      message: this.$t("properwaytoexit"),
     });
   });
   ipc.on("toomanyapps", function(event, arg) {
     notify.methods.send({
-      title: "不支持的操作",
+      title: this.$t("unsupported"),
       id: 3,
-      message: "当前只允许运行一个Mr Noplay程序。"
+      message: this.$t("1apprunning"),
     });
   });
 }
@@ -34,10 +37,18 @@ export default {
   props: ["canabout"],
   data() {
     return {
-      iselectron: false
+      iselectron: false,
+      lang: "en",
     };
   },
+  watch: {
+    async lang(val) {
+      this.storagesetlang(val);
+      this.$i18n.locale = val;
+    }
+  },
   mounted: function() {
+    this.i18nsetlang();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
     }
@@ -51,7 +62,28 @@ export default {
     },
     exit() {
       ipc.send("exit");
-    }
+    },
+        async storagesetlang(val) {
+      await Storage.set({
+        key: "lang",
+        value: val
+      });
+    },
+    async storagesetjson(key, val) {
+      await Storage.set({
+        key: key,
+        value: JSON.stringify(val)
+      });
+    },
+    async i18nsetlang() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("lang") != -1) {
+        const retlang = await Storage.get({ key: "lang" });
+        if (retlang.value != null) this.lang = retlang.value;
+        else (this.lang = "en"), this.storagesetlang("en");
+      } else (this.lang = "en"), this.storagesetlang("en");
+      this.$i18n.locale = this.lang;
+    },
   }
 };
 </script>

@@ -16,7 +16,7 @@
       <div id="main">
         <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
-            <div class="digitaltop">我将休息/玩</div>
+            <div class="digitaltop">{{ $t("iwillplay") }}</div>
             <div class="digitalfather">
               <b-form-input
                 id="playtime"
@@ -36,9 +36,9 @@
           :show.sync="timeNAN"
           triggers
           placement="bottom"
-        ><div class="warnfather warn">请输入整数</div></b-popover>
+        ><div class="warnfather warn">{{ $t("enterinteger") }}</div></b-popover>
         <br />
-        <b-btn variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">开始</div></b-btn>
+        <b-btn variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">{{ $t("start") }}</div></b-btn>
         <titlepart :canabout="true"></titlepart>
       </div>
       <b-modal
@@ -141,6 +141,7 @@ export default {
   mounted: function() {
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
+    this.tutorial();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
     }
@@ -184,6 +185,14 @@ export default {
         if (retlang.value != null) _this.lang = retlang.value;
         else (_this.lang = "en"), _this.storagesetlang("en");
       } else (_this.lang = "en"), _this.storagesetlang("en");
+      _this.$i18n.locale = _this.lang;
+    },
+    async tutorial() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("tutorial") == -1) {
+        this.storagesetjson('tutorial', 'ed');
+        this.$router.push("tutorial");
+      }
       _this.$i18n.locale = _this.lang;
     },
     i18nchinese() {
