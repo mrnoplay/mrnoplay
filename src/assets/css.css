@@ -382,3 +382,18 @@ input[type="number"] {
       box-shadow: 0 1px 30px #df0000, 0 1px 20px #df0000 inset;
   }
 }
+
+.tutorial-a {
+  color: grey;
+  text-decoration: none;
+}
+
+.tutorial-a:active {
+  color: grey;
+  text-decoration: none;
+}
+
+.tutorial-a:hover {
+  color: grey;
+  text-decoration: none;
+}

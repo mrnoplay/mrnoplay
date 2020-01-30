@@ -16,18 +16,18 @@
       <div id="main">
         <div class="notifyboard border">
           <div class="juniornotifyboard on-notbtn">
-            <div class="digitaltop notifytop">提示</div>
-            <div class="notifyfather">时间已经结束，请于3分钟内停止，否则将被惩罚。</div>
+            <div class="digitaltop notifytop">{{ $t("notify") }}</div>
+            <div class="notifyfather">{{ $t("willpunish") }}</div>
           </div>
         </div>
         <div class="warnfathers">
           <div class="warnfather" v-if="iselectron">
             <div class="breathe-div"></div>
-            <div class="warn">点击“停止”后电脑将关闭，请务必先保存好自己的资料。</div>
+            <div class="warn">{{ $t("firstsavefiles") }}</div>
           </div>
           <b-alert v-model="punishstart" class="warnfather" style="z-index: 2000;" variant="danger">
             <div class="breathe-div"></div>
-            <div class="warn">惩罚现在开始。</div>
+            <div class="warn">{{ $t("punishstart") }}</div>
           </b-alert>
         </div>
         <b-btn
@@ -36,7 +36,7 @@
           @click="cancel"
           style="-webkit-app-region: no-drag"
         >
-          <div class="largebtn-innertext">结束</div>
+          <div class="largebtn-innertext">{{ $t("over") }}</div>
         </b-btn>
       </div>
     </div>
@@ -77,7 +77,6 @@ export default {
       displaytime: "0:00",
       lefttime: 0,
       punishstart: false,
-      notifymessage: ["开始工作啦", "工作时间开始"]
     };
   },
   watch: {
@@ -97,11 +96,11 @@ export default {
     this.loading = false;
     this.timing = true;
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
-    setTimeout(this.timeout, 180000);
+    setTimeout(this.timeout, 100);
     notify.methods.send({
-      title: "时间到了",
+      title: this.$t("timeisup"),
       id: 8,
-      message: "请在3分钟内停止哦！否则将被惩罚。"
+      message: this.$t("willpunish")
     });
   },
   beforeDestroy: function() {},
@@ -162,9 +161,9 @@ export default {
       if (this.timing == true && this.$router.currentRoute.path == "/over") {
         this.punishstart = true;
         notify.methods.send({
-          title: "现在停止",
+          title: this.$t("stop"),
           id: 1,
-          message: this.notifymessage[this.rand(0, this.notifymessage.length)]
+          message: this.$t("notifymessage."+this.rand(1,2)),
         });
         alarm.play();
       } else {
@@ -172,19 +171,30 @@ export default {
       }
     },
     longinterval() {
-      this.popup('已经超时超过3分钟了','超时10分钟后会强制结束！');
+      this.popup(this.$t("morethan3"),this.$t("10willforce"));
     },
     shutdowninterval() {
       if (process.env.VUE_APP_LINXF == "electron") {
-        this.popup('即将强制关机','即将强制关机！');
-        ipc.send("shutdown");
+        notify.methods.send({
+          title: this.$t("willforce"),
+          id: 9,
+          message: this.$t("willforce"),
+        });
+        setTimeout(() => {
+          notify.methods.send({
+            title: this.$t("willforce"),
+            id: 9,
+            message: this.$t("willforce"),
+          });
+          ipc.send("shutdown");
+        }, 5000);
       }
     },
     timeout() {
       setInterval(this.interval, 2000);
       setInterval(this.longinterval, 140000);
       setInterval(this.shutdowninterval, 420000);
-      this.popup('已经超时3分钟了','请快速结束，超时10分钟后会强制结束！');
+      this.popup(this.$t("now3"), this.$t("10willforce"));
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());

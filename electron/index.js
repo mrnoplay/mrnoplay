@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut } = require('electron');
+const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut, Tray } = require('electron');
 const isDevMode = require('electron-is-dev');
 const { CapacitorSplashScreen } = require('@capacitor/electron');
 const path = require('path');
@@ -18,6 +18,8 @@ let useSplashScreen = false;
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')// 允许自动播放音频
 
 powerSaveBlocker.start('prevent-app-suspension')//防止app被挂起，停止计时
+
+let tray = null;
 
 // Create simple menu for easy devtools access, and for demo
 const menuTemplateDev = [
@@ -107,6 +109,27 @@ async function createWindow() {
         mainWindow.show()
       }
     })
+  }
+
+  mainWindow.webContents.on('crashed', (event) => {
+    if (mainWindow.isDestroyed()) {
+      app.relaunch();
+      app.exit(0);
+    } else {
+      BrowserWindow.getAllWindows().forEach((w) => {
+        if (w.id !== mainWindow.id) w.destroy();
+      });
+      mainWindow.reload();
+    }
+    event.sender.send('crashback', true);
+  });
+
+  mainWindow.setSkipTaskbar(true);
+
+  if(process.platform == 'win32') {
+    tray = new Tray('tray.win.png');
+  } else {
+    tray = new Tray('tray.mac.png');
   }
 }
 
