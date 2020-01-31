@@ -17,12 +17,19 @@ body {
   padding-top: 2vh;
 }
 
+#tutorialnbsppart {
+  padding-top: 2vh;
+}
+
 @media screen and (min-width: 321px) {
   html {
     background-image: url('background.png');
   }
   #nbsppart, #timingnbsppart {
     padding-top: 20vh;
+  }
+  #tutorialnbsppart {
+    padding-top: 10vh;
   }
   #main {
     padding: 2em 1.2em;
@@ -396,4 +403,44 @@ input[type="number"] {
 .tutorial-a:hover {
   color: grey;
   text-decoration: none;
+}
+
+.tutorialboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+  border-radius: 10px;
+  width: 15.6em;
+}
+
+.tutorial {
+  border-radius: 10px;
+  padding: 0.5em 0.5em 0.2em 1em;
+  margin: 0.1em 0.1em;
+  width: 100%;
+  height: 14em;
+  box-shadow: inset 0 0 3px rgba(65, 64, 63, 0.5);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameicon {
+  width: 5em;
+}
+
+#gameiconfather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#wholemorning {
+  font-weight: 300;
+}
+
+#wholemorning-mrnoplay {
+  font-weight: 700;
 }

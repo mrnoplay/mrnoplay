@@ -15,7 +15,7 @@
     "sothercontributor": "和其他贡献者",
     "scontribute": "贡献：",
     "lpermission": "现在我们会请求您同意我们发送通知，不然您将无法收到任务开始的提示。",
-    "mrnoplay": "不玩家",
+    "mrnoplay": "不玩家 Mr Noplay",
     "unsupported": "不支持的操作",
     "1apprunning": "当前只允许运行一个Mr Noplay程序。",
     "properwaytoexit": "请在允许的时候，通过应用内的关闭按钮退出应用。",
@@ -70,7 +70,7 @@
     "sothercontributor": "and other contributors",
     "scontribute": "Contribute:",
     "lpermission": "Now we will ask for permission to send you notifications. Please allow this, or we won't be able to notice you that it's time to start working on your tasks.",
-    "mrnoplay": "不玩家 Mr Noplay",
+    "mrnoplay": "Mr Noplay 不玩家",
     "unsupported": "The app can have only 1 instance running.",
     "properwaytoexit": "You must close the app by buttons inside the app.",
     "iwillplay": "I'll Play/Rest for",
@@ -102,7 +102,7 @@
     "next": "Next",
     "skip": "Skip",
     "canopenlater": "Tutorial can be opened from about page.",
-    "tutorial": "tutorial",
+    "tutorial": "Tutorial",
     "notifymessage": {
       "1": "Now go back to work!",
       "2": "Rest time is over!"
