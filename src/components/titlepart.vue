@@ -1,6 +1,6 @@
 <i18n src="@/assets/lang.json"></i18n>
 <template>
-  <div class="titlepart">
+  <div class="titlepart" style="-webkit-app-region: no-drag">
     <div class="title new left">{{ $t("mrnoplay") }}</div>
     <div class="titlebtns" v-if="canabout">
       <b-btn variant="light" class="new about" @click="about"></b-btn>

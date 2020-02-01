@@ -104,9 +104,9 @@ async function createWindow() {
   } else {
     app.on('second-instance', (event, commandLine, workingDirectory) => {
       if (mainWindow) {
-        if (mainWindow.isMinimized()) mainWindow.restore()
-        mainWindow.focus()
-        mainWindow.show()
+        if (mainWindow.isMinimized()) mainWindow.restore();
+        mainWindow.focus();
+        mainWindow.show();
       }
     })
   }
@@ -116,16 +116,16 @@ async function createWindow() {
       app.relaunch();
       app.exit(0);
     } else {
-      BrowserWindow.getAllWindows().forEach((w) => {
-        if (w.id !== mainWindow.id) w.destroy();
-      });
+      mainWindow.destroy();
       mainWindow.reload();
     }
     event.sender.send('crashback', true);
   });
 
   mainWindow.setSkipTaskbar(true);
-  app.dock.hide();
+  if(process.platform == 'darwin') {
+    app.dock.hide();
+  }
 
   if(process.platform == 'win32') {
     tray = new Tray(path.join(__dirname, 'tray.win.png'));
@@ -177,7 +177,6 @@ ipcMain.on('full-screen', function () {
 
 ipcMain.on('normal-screen', function () {
   if (mainWindow) {
-    mainWindow.setSize(270,270);
     mainWindow.setKiosk(false);
   }
 });

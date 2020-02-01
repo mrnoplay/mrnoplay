@@ -37,8 +37,8 @@
           triggers
           placement="bottom"
         ><div class="warnfather warn">{{ $t("enterinteger") }}</div></b-popover>
-        <br />
-        <b-btn variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">{{ $t("start") }}</div></b-btn>
+        <br /> 
+        <b-btn style="-webkit-app-region: no-drag" variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">{{ $t("start") }}</div></b-btn>
         <titlepart :canabout="true"></titlepart>
       </div>
       <b-modal
