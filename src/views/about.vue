@@ -11,7 +11,7 @@
     </div>
     <div id="undergradient" class="linediv"></div>
     -->
-    <div class="container">
+    <div class="container" style="-webkit-app-region: no-drag">
       <div id="nbsppart"></div>
       <div id="main">
         <div class="notifyboard border">
