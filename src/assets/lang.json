@@ -49,6 +49,46 @@
     "skip": "跳过",
     "canopenlater": "以后可以在“关于”界面再次调出哦！",
     "tutorial": "教程",
+    "tut": {
+      "1": {
+        "1": "你曾说就玩5分钟",
+        "2": "结果一上午没了",
+        "3": "你需要掌控时间",
+        "4": "你需要",
+        "5": "不玩家"
+      },
+      "2": {
+        "1": "玩着玩着就会停不下来",
+        "2": "但最开始还是对时间有预算的",
+        "3": "设置好时间，点击开始按钮",
+        "4": "在旅途的最开始",
+        "5": "就给自己一个明确的时间限度"
+      },
+      "3": {
+        "1": "开始以后在电脑版",
+        "2": "点击'停止'就会自动关机",
+        "3": "防止时间不受控制",
+        "4": "当然，在15秒内",
+        "5": "允许点击“取消”改变计划"
+      },
+      "4": {
+        "1": "预定的时间结束后",
+        "2": "进入超时阶段",
+        "3": "3分钟还未主动停止的",
+        "4": "将接受恼人声音",
+        "5": "和弹窗、通知等惩罚"
+      },
+      "5": {
+        "1": "10分钟还未结束的",
+        "2": "将在提示以后强制关机",
+        "3": "请合理安排使用时间哦"
+      },
+      "6": {
+        "1": "1. 支持中英双语言",
+        "2": "2. 支持开机自启",
+        "3": "3. 通过状态栏查看应用"
+      }
+    },
     "notifymessage": {
       "1": "现在开始工作！",
       "2": "休息时间结束啦！"
@@ -79,7 +119,7 @@
     "left": "Time Left",
     "firstsavefiles": "After clicking on 'stop', your computer'll be shutdowned. Save your files first.",
     "stop": "Stop",
-    "cancel15s": "Can be canceled in 15s. Canceling doesn't shut your computer down.",
+    "cancel15s": "Can be canceled in 15s. Canceling doesn't shutdown.",
     "cancelweb": "Only win/mac version can shut the computer down.",
     "notify": "Notification",
     "willpunish": "Time is up. In 3 min you'll be punished if don't stop.",
@@ -103,6 +143,46 @@
     "skip": "Skip",
     "canopenlater": "Tutorial can be opened from about page.",
     "tutorial": "Tutorial",
+    "tut": {
+      "1": {
+        "1": "Wanna Play for 5min",
+        "2": "Result in Waste a Day",
+        "3": "You Need to Control Time",
+        "4": "You Need ",
+        "5": "Mr Noplay"
+      },
+      "2": {
+        "1": "Though Can't Stop Playing",
+        "2": "You Can Plan Time",
+        "3": "Set Time and Click Start",
+        "4": "Get Yourself a Limit",
+        "5": "On the Start of the Trip"
+      },
+      "3": {
+        "1": "On PC, After Start",
+        "2": "Click 'Stop' will Shutdown",
+        "3": "So Time is in Control",
+        "4": "But in the First 15s",
+        "5": "You Can Click 'Cancel'"
+      },
+      "4": {
+        "1": "After the Planned Time",
+        "2": "You Enter Overtime",
+        "3": "If don't Stop in 3min",
+        "4": "You'll be Annoyed",
+        "5": "By Sound, Popup etc."
+      },
+      "5": {
+        "1": "After 10min Overtime",
+        "2": "You Will be Forced to Shutdown",
+        "3": "Please Plan Time Carefully!"
+      },
+      "6": {
+        "1": "1. Chinese & English",
+        "2": "2. Start On Login",
+        "3": "3. See App on Topbar"
+      }
+    },
     "notifymessage": {
       "1": "Now go back to work!",
       "2": "Rest time is over!"

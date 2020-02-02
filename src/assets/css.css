@@ -1,7 +1,7 @@
 html {
   background-color: #efeeee;
   background-size: contain;
-  font-family: sans-serif;
+  font-family: "puhuiti", "puhuiti-online", sans-serif;
 }
 
 body {
@@ -72,6 +72,25 @@ input[type="number"] {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "puhuiti";
+  src: url("puhuiti.woff2") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'puhuiti-online';
+  font-display: swap;
+  src: url('//at.alicdn.com/t/webfont_whvoskd3vmb.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/webfont_whvoskd3vmb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/webfont_whvoskd3vmb.woff2') format('woff2'),
+  url('//at.alicdn.com/t/webfont_whvoskd3vmb.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/webfont_whvoskd3vmb.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/webfont_whvoskd3vmb.svg#Alibaba-PuHuiTi-Regular') format('svg'); /* iOS 4.1- */
+}
+
+
 .container {
   display: flex;
   justify-content: center;
@@ -92,6 +111,7 @@ input[type="number"] {
   margin-top: 0.5em;
   border-radius: 10px;
   font-size: 1em;
+  font-family: "puhuiti", "puhuiti-online", sans-serif;
 }
 
 .on-notbtn {
@@ -242,7 +262,7 @@ input[type="number"] {
 
 .title {
   font-size: 1em;
-  width: 8em;
+  width: 10em;
   padding: 0.5em 0.5em;
   margin-top: 0.5em;
   font-weight: 450; 
@@ -428,7 +448,7 @@ input[type="number"] {
 }
 
 #gameicon {
-  width: 5em;
+  height: 4.5em;
 }
 
 #gameiconfather {
@@ -438,7 +458,7 @@ input[type="number"] {
 }
 
 #wholemorning {
-  font-weight: 300;
+  font-weight: 100;
 }
 
 #wholemorning-mrnoplay {
