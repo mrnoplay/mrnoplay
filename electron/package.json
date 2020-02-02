@@ -40,7 +40,7 @@
     },
     "win": {
       "target": [
-        "zip"
+        "dir"
       ],
       "icon": "favicon.ico"
     }

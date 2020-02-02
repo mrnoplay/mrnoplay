@@ -153,7 +153,21 @@ export default {
       ipc.send("full-screen");
     }
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
-    setTimeout(this.timeout, 1000); //180000
+    if (process.env.VUE_APP_LINXF != "android" && process.env.VUE_APP_LINXF != "electron" && window.Notification) {
+      if(Notification.permission === 'granted'){
+        //granted
+      }else if(Notification.permission === 'denied'){
+        //denied
+      }else{
+        Notification.requestPermission().then(function(permission) {
+          if(permission === 'granted'){
+            //granted
+          }else if(permission === 'denied'){
+            //denied
+          }
+        });
+      }
+    }
   },
   beforeDestroy: function() {},
   methods: {
