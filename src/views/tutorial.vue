@@ -17,32 +17,32 @@
         <div class="tutorialboard border">
             <div class="on-notbtn tutorial">
               <div v-if="page == 1">
-                <img src="@/assets/tutorial.1.games.png" id="gameicon"/>
-                <div id="wholemorning">你曾说就玩5分钟</div>
-                <div id="wholemorning">结果一上午没了</div>
-                <div id="wholemorning">你需要掌控时间</div>
-                <div id="wholemorning">你需要<span id="wholemorning-mrnoplay">不玩家</span></div>
+                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <div id="wholemorning">{{ $t('tut.1.1') }}</div>
+                <div id="wholemorning">{{ $t('tut.1.2') }}</div>
+                <div id="wholemorning">{{ $t('tut.1.3') }}</div>
+                <div id="wholemorning">{{ $t('tut.1.4') }}<span id="wholemorning-mrnoplay">{{ $t('tut.1.5') }}</span></div>
               </div>
               <div v-if="page == 2">
-                <img src="@/assets/game.png" id="gameicon"/>
-                <div id="wholemorning">玩着玩着就会停不下来<br>但最开始还是对时间有预算的<br>设置好时间，点击开始按钮<br>在旅途的最开始<br>就给自己一个明确的时间限度</div>
+                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <div id="wholemorning">{{ $t('tut.2.1') }}<br>{{ $t('tut.2.2') }}<br>{{ $t('tut.2.3') }}<br>{{ $t('tut.2.4') }}<br>{{ $t('tut.2.5') }}</div>
               </div>
               <div v-if="page == 3">
-                <img src="@/assets/game.png" id="gameicon"/>
-                <div id="wholemorning">开始以后在电脑版<br>点击"停止"就会自动关机<br>防止时间不受控制<br>当然，在15秒内<br>允许点击“取消”改变计划</div>
+                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <div id="wholemorning">{{ $t('tut.3.1') }}<br>{{ $t('tut.3.2') }}<br>{{ $t('tut.3.3') }}<br>{{ $t('tut.3.4') }}<br>{{ $t('tut.3.5') }}</div>
               </div>
               <div v-if="page == 4">
-                <img src="@/assets/game.png" id="gameicon"/>
-                <div id="wholemorning">预定的时间结束后<br>进入超时阶段<br>3分钟还未主动停止的<br>将接受恼人声音<br>和弹窗、通知等惩罚</div>
+                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <div id="wholemorning">{{ $t('tut.4.1') }}<br>{{ $t('tut.4.2') }}<br>{{ $t('tut.4.3') }}<br>{{ $t('tut.4.4') }}<br>{{ $t('tut.4.5') }}</div>
               </div>
               <div v-if="page == 5">
-                <img src="@/assets/game.png" id="gameicon"/>
-                <div id="wholemorning">10分钟还未结束的<br>将在提示以后强制关机<br>请合理安排使用时间哦</div>
+                <img src="@/assets/tutorial-shutdown.png" id="gameicon"/>
+                <div id="wholemorning">{{ $t('tut.5.1') }}<br>{{ $t('tut.5.2') }}<br>{{ $t('tut.5.3') }}</div>
               </div>
               
               <div v-if="page == 6">
-                <img src="@/assets/game.png" id="gameicon"/>
-                <div id="wholemorning">1. 支持中英双语言<br>2. 支持开机自启<br>3.通过状态栏查看应用</div>
+                <img src="@/assets/tutorial-wintray.png" id="gameicon"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon"/>
+                <div id="wholemorning">{{ $t('tut.6.1') }}<br>{{ $t('tut.6.2') }}<br>{{ $t('tut.6.3') }}</div>
               </div>
             </div>
           </div>
