@@ -11,7 +11,6 @@ MPL v2.0
 
 ### Screenshots
 
-![Main Page](https://i.loli.net/2020/01/21/lwLJazVGIjDPQ7u.png)
-![Timing](https://i.loli.net/2020/01/21/fi8LlSZXHrYCngI.png)
-![About Page](https://i.loli.net/2020/01/21/kqWcedJQ2ZhAP9y.png)
-
+![Main Page](https://i.loli.net/2020/02/03/VyrLbZsWSB8EP32.png)
+![Timing](https://i.loli.net/2020/02/03/9aslVbM7UiFukL8.png)
+![About Page](https://i.loli.net/2020/02/03/QtWncw2TFoM4gvA.png)
