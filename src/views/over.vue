@@ -96,7 +96,7 @@ export default {
     this.loading = false;
     this.timing = true;
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
-    setTimeout(this.timeout, 100);
+    setTimeout(this.timeout, 180000);
     notify.methods.send({
       title: this.$t("timeisup"),
       id: 8,

@@ -24,15 +24,18 @@
                 <div id="wholemorning">{{ $t('tut.1.4') }}<span id="wholemorning-mrnoplay">{{ $t('tut.1.5') }}</span></div>
               </div>
               <div v-if="page == 2">
-                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <img src="@/assets/tutorial-start-en.png" id="gameicon" v-if="lang == 'en'"/>
+                <img src="@/assets/tutorial-start-cn.png" id="gameicon" v-if="lang == 'cn'"/>
                 <div id="wholemorning">{{ $t('tut.2.1') }}<br>{{ $t('tut.2.2') }}<br>{{ $t('tut.2.3') }}<br>{{ $t('tut.2.4') }}<br>{{ $t('tut.2.5') }}</div>
               </div>
               <div v-if="page == 3">
-                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <img src="@/assets/tutorial-stop-en.png" id="gameicon" v-if="lang == 'en'"/>
+                <img src="@/assets/tutorial-stop-cn.png" id="gameicon" v-if="lang == 'cn'"/>
                 <div id="wholemorning">{{ $t('tut.3.1') }}<br>{{ $t('tut.3.2') }}<br>{{ $t('tut.3.3') }}<br>{{ $t('tut.3.4') }}<br>{{ $t('tut.3.5') }}</div>
               </div>
               <div v-if="page == 4">
-                <img src="@/assets/tutorial-game.png" id="gameicon"/>
+                <img src="@/assets/tutorial-over-en.png" id="gameicon" v-if="lang == 'en'"/>
+                <img src="@/assets/tutorial-over-cn.png" id="gameicon" v-if="lang == 'cn'"/>
                 <div id="wholemorning">{{ $t('tut.4.1') }}<br>{{ $t('tut.4.2') }}<br>{{ $t('tut.4.3') }}<br>{{ $t('tut.4.4') }}<br>{{ $t('tut.4.5') }}</div>
               </div>
               <div v-if="page == 5">

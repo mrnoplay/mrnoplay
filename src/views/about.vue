@@ -24,10 +24,12 @@
           </div>
         <b-btn variant="light" class="new on largebtn" @click="goback"><div class="largebtn-innertext">{{ $t("back") }}</div></b-btn>
         <br>
-        <div class="authorinfo">Copyright &copy; 2020 Tianze Ds Qiu.</div>
-        <div class="authorinfo">Github @scris</div>
-        <div class="authorinfo">An Scris Studio Product.</div>
-        <div class="authorinfo">Version 0.1.0 (20200121)</div>
+        <div> <!-- Remove When in Competition -->
+          <div class="authorinfo">Copyright &copy; 2019-2020 {{ $t("tianze") }}.</div>
+          <div class="authorinfo">Github @scris</div>
+          <div class="authorinfo">{{ $t("scrisproduct") }}</div>
+        </div>
+        <div class="authorinfo">{{ $t("version") }} {{ version }}</div>
         <div class="authorinfo"><a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a></div>
       </div>
     </div>

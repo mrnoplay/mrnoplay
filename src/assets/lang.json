@@ -92,7 +92,10 @@
     "notifymessage": {
       "1": "现在开始工作！",
       "2": "休息时间结束啦！"
-    }
+    },
+    "scrisproduct": "一个Scris工作室的应用",
+    "version": "版本号",
+    "tianze": "邱天泽 (Tianze Ds Qiu)"
   },
   "en": {
     "submit": "OK",
@@ -186,6 +189,9 @@
     "notifymessage": {
       "1": "Now go back to work!",
       "2": "Rest time is over!"
-    }
+    },
+    "scrisproduct": "An Scris Studio Product.",
+    "version": "Version",
+    "tianze": "Tianze Ds Qiu"
   }
 }
