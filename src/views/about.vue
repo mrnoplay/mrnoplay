@@ -26,7 +26,7 @@
         <br>
         <div> <!-- Remove When in Competition -->
           <div class="authorinfo">Copyright &copy; 2019-2020 {{ $t("tianze") }}.</div>
-          <div class="authorinfo">Github @scris</div>
+          <div class="authorinfo"><a class="tutorial-a" @click="github">Github</a> @scris</div>
           <div class="authorinfo">{{ $t("scrisproduct") }}</div>
         </div>
         <div class="authorinfo">{{ $t("version") }} {{ version }}</div>
@@ -130,6 +130,11 @@
       tutorial() {
         this.$router.push("tutorial");
       },
+      github() {
+        if(this.iselectron) {
+          ipc.send('github');
+        }
+      }
     }
   }
 </script>

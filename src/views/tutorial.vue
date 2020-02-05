@@ -14,7 +14,7 @@
     <div class="container">
       <div id="tutorialnbsppart"></div>
       <div id="main">
-        <div class="select" style="-webkit-app-region: no-drag"><b-btn class="new refresh" @click="selectlang"></b-btn>Switch Lang / 改变语言</div>
+        <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
         <div class="tutorialboard border">
             <div class="on-notbtn tutorial">
               <div v-if="page == 1">
@@ -144,6 +144,8 @@
         } else _this.lang = 'en', _this.storagesetlang('en');
         _this.$i18n.locale = _this.lang;
         this.nexttext = this.$t("next");
+        if (this.lang == 'en') this.switchlang = 'switch-on';
+        else this.switchlang = 'switch-off';
       },
       i18nchinese() {
         this.lang = 'cn';
@@ -167,11 +169,13 @@
       },
       selectlang() {
         if (this.lang == 'en') {
-          this.cn();
           this.switchlang = 'switch-off';
+          this.refreshnexttext('cn');
+          this.cn();
         } else {
-          this.en();
           this.switchlang = 'switch-on';
+          this.refreshnexttext('en');
+          this.en();
         }
       },
       cn() {
@@ -189,6 +193,21 @@
           id: 7,
           message: "Language is set to English."
         });
+      },
+      refreshnexttext(rlang) {
+        if(rlang == 'cn') {
+          if (this.page < 5) {
+            this.nexttext = '下一页';
+          } else {
+            this.nexttext = '结束';
+          }
+        } else {
+          if (this.page < 5) {
+            this.nexttext = 'Next';
+          } else {
+            this.nexttext = 'Over';
+          }
+        }
       },
     }
   }
