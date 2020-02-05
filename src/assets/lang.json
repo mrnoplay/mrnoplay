@@ -95,7 +95,15 @@
     },
     "scrisproduct": "一个Scris工作室的应用",
     "version": "版本号",
-    "tianze": "邱天泽 (Tianze Ds Qiu)"
+    "tianze": "Tianze Ds Qiu",
+    "update": "更新",
+    "checkforupdate": "检查更新",
+    "updatefailed": "更新失败",
+    "updatefailedtext": "请检查您的互联网连接。",
+    "updateok": "发现更新！",
+    "updateoktext": "现在，我们将指引您前去更新。",
+    "noupdatetext": "目前没有更新，请稍后再试！",
+    "checking": "稍后会弹出窗口提示检查更新状态。"
   },
   "en": {
     "submit": "OK",
@@ -192,6 +200,14 @@
     },
     "scrisproduct": "An Scris Studio Product.",
     "version": "Version",
-    "tianze": "Tianze Ds Qiu"
+    "tianze": "Tianze Ds Qiu",
+    "update": "Update",
+    "checkforupdate": "Check for Update",
+    "updatefailed": "Update Failed",
+    "updatefailedtext": "Maybe your Web Connection is Down.",
+    "updateok": "Found an Update",
+    "updateoktext": "Let's Go to Website to See it.",
+    "noupdatetext": "Currently, We don't Have an Update.",
+    "checking": "A messagebox will be shown."
   }
 }

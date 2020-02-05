@@ -22,6 +22,13 @@
           <b class="label">语言/Language</b>
           <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
         </div>
+        <div v-if="iselectron">
+          <b class="label">{{ $t("update") }}</b><br>
+          <div>
+            <a class="tutorial-a" @click="check" v-if="!checking">{{ $t("checkforupdate") }}</a>
+            <span class="label" @click="check" v-if="checking">{{ $t("checking") }}</span>
+          </div>
+        </div>
         <b-btn variant="light" class="new on largebtn" @click="goback">{{ $t("back") }}</b-btn>
       </div>
     </div>
@@ -32,7 +39,7 @@
   import loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
   import { Plugins } from '@capacitor/core';
-  const { Storage } = Plugins;
+  const { Storage, Modals } = Plugins;
   import titlepart from '@/components/titlepart'
   var alarm = new Audio();
   var _this = null;
@@ -41,6 +48,24 @@
   var ipc = null;
   if (process.env.VUE_APP_LINXF == "electron") {
     ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+    ipc.on("updatefailed", function(event, arg) {
+      this.checking = false;
+      this.checked = true;
+      this.checkedtext = 'Failed';
+      //this.popup(this.$t("updatefailed"), this.$t("updatefailedtext"));
+    });
+    ipc.on("updateok", function(event, arg) {
+      this.checking = false;
+      this.checked = true;
+      this.checkedtext = 'Found';
+      //this.popup(this.$t("updateok"), this.$t("updateoktext"));
+    });
+    ipc.on("updateno", function(event, arg) {
+      this.checking = false;
+      this.checked = true;
+      this.checkedtext = 'No update';
+      //this.popup(this.$t("updatefailed"), this.$t("noupdatetext"));
+    });
   }
   export default {
     name: 'settings',
@@ -58,6 +83,9 @@
         version: '1.0.0',
         switchstartonlogin: 'switch-on',
         switchlang: 'switch-on',
+        checking: false,
+        checked: false,
+        checkedtext: '',
       };
     },
     watch: {
@@ -67,6 +95,7 @@
       },
     },
     mounted: function() {
+      this.checking = false;
       this.version = process.env.VUE_APP_VER;
       this.i18nsetlang();
       this.setstartonloginselect();
@@ -191,6 +220,21 @@
           id: 7,
           message: "Language is set to English."
         });
+      },
+      check() {
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send("checkupdate");
+          this.checking = true;
+        }
+      },
+      async popup(title, message) {
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send('focus');
+          let alertRet = await Modals.alert({
+            title: title,
+            message: message,
+          });
+        }
       },
     }
   }

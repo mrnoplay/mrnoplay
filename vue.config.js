@@ -25,6 +25,7 @@ module.exports = {
             let node = {
                 __filename: true,
                 __dirname: true,
+                console: true,
             };  
             Object.assign(config, {
               optimization, node
