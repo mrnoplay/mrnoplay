@@ -14,7 +14,7 @@
     <div class="container">
       <div id="tutorialnbsppart"></div>
       <div id="main">
-        <div class="select"><b-btn class="new refresh" @click="selectlang"></b-btn>Switch Lang / 改变语言</div>
+        <div class="select" style="-webkit-app-region: no-drag"><b-btn class="new refresh" @click="selectlang"></b-btn>Switch Lang / 改变语言</div>
         <div class="tutorialboard border">
             <div class="on-notbtn tutorial">
               <div v-if="page == 1">
