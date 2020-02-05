@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mr Noplay"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "Tianze Ds Qiu from Scris Studio."
 #define MyAppURL "http://mrnoplay.scris.top/"
 #define MyAppExeName "Mr Noplay.exe"
@@ -31,7 +31,7 @@ LicenseFile={#MyAppFolder}\LICENSE
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=Mr.Noplay.Setup.Win.{#MyAppVersion}
+OutputBaseFilename=mrnoplay.{#MyAppVersion}.win
 SetupIconFile={#MyAppFolder}\public\win.ico
 Compression=lzma2/max
 SolidCompression=yes
