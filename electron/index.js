@@ -228,6 +228,13 @@ app.on('will-quit', () => {
   globalShortcut.unregisterAll()
 })
 
+ipcMain.on('github', (event,arg) => {
+  shell.openExternal('https://github.com/scris/mrnoplay/');
+  if(mainWindow) {
+    mainWindow.hide();
+  }
+})
+
 ipcMain.on('checkupdate', (event, arg) => {
   var signal = 1;
   request('https://gitee.com/scris/mrnoplay-update/raw/master/package.json', function (error, response, body) {
