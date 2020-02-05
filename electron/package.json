@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,10 @@
   "dependencies": {
     "@capacitor/electron": "^1.1.0",
     "applescript": "^1.0.0",
+    "compare-version": "^0.1.2",
     "electron-is-dev": "^1.1.0",
-    "electron-shutdown-command": "^0.0.8"
+    "electron-shutdown-command": "^0.0.8",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "electron": "4.2.6",

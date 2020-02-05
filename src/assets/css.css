@@ -29,7 +29,7 @@ body {
     padding-top: 20vh;
   }
   #tutorialnbsppart {
-    padding-top: 10vh;
+    padding-top: 4vh;
   }
   #main {
     padding: 2em 1.2em;
@@ -379,6 +379,18 @@ input[type="number"] {
   background-image: url('exit.svg');
 }
 
+.refresh {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 0.01em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  background-image: url('refresh.svg');
+}
+
 .breathe-div {
   width: 5px;
   height: 5px;
@@ -411,17 +423,18 @@ input[type="number"] {
 }
 
 .tutorial-a {
+  color: black;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.tutorial-a:hover {
   color: grey;
   text-decoration: none;
 }
 
 .tutorial-a:active {
-  color: grey;
-  text-decoration: none;
-}
-
-.tutorial-a:hover {
-  color: grey;
+  color: lightgrey;
   text-decoration: none;
 }
 

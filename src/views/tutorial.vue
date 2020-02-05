@@ -14,6 +14,7 @@
     <div class="container">
       <div id="tutorialnbsppart"></div>
       <div id="main">
+        <div class="select"><b-btn class="new refresh" @click="selectlang"></b-btn>Switch Lang / 改变语言</div>
         <div class="tutorialboard border">
             <div class="on-notbtn tutorial">
               <div v-if="page == 1">
@@ -88,6 +89,7 @@
         version: '1.0.0',
         page: 1,
         nexttext: '下一页',
+        switchlang: 'switch-on',
       };
     },
     watch: {
@@ -162,6 +164,31 @@
         } else {
           this.goback();
         }
+      },
+      selectlang() {
+        if (this.lang == 'en') {
+          this.cn();
+          this.switchlang = 'switch-off';
+        } else {
+          this.en();
+          this.switchlang = 'switch-on';
+        }
+      },
+      cn() {
+        this.i18nchinese();
+        notify.methods.send({
+          title: "成功",
+          id: 6,
+          message: "已经切换到中文。"
+        });
+      },
+      en() {
+        this.i18nenglish();
+        notify.methods.send({
+          title: "Success",
+          id: 7,
+          message: "Language is set to English."
+        });
       },
     }
   }

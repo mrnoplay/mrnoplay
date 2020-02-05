@@ -1,9 +1,22 @@
-const { app, BrowserWindow, Menu, powerSaveBlocker, ipcMain, globalShortcut, Tray } = require('electron');
+const {
+  app,
+  BrowserWindow,
+  Menu,
+  powerSaveBlocker,
+  ipcMain,
+  globalShortcut,
+  Tray,
+  shell,
+  dialog,
+} = require('electron');
+const remote = require('electron').remote
 const isDevMode = require('electron-is-dev');
-const { CapacitorSplashScreen } = require('@capacitor/electron');
+const {
+  CapacitorSplashScreen
+} = require('@capacitor/electron');
 const path = require('path');
-const shutdown = require('electron-shutdown-command');//shutdown windows
-var applescript = require('applescript');//use applescript to shutdown mac
+const shutdown = require('electron-shutdown-command'); //shutdown windows
+var applescript = require('applescript'); //use applescript to shutdown mac
 let canQuit = false;
 
 // Place holders for our windows so they don't get garbage collected.
@@ -15,44 +28,32 @@ let splashScreen = null;
 //Change this if you do not wish to have a splash screen
 let useSplashScreen = false;
 
-app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')// 允许自动播放音频
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required') // 允许自动播放音频
 
-powerSaveBlocker.start('prevent-app-suspension')//防止app被挂起，停止计时
+powerSaveBlocker.start('prevent-app-suspension') //防止app被挂起，停止计时
 
 let tray = null;
 
+const request = require('request');
+const compareVersion = require('compare-version');
+const nowtime = new Date().getTime();
+
+var package = require("./package.json");
+
 // Create simple menu for easy devtools access, and for demo
-const menuTemplateDev = [
-  {
-    label: '选项',
-    submenu: [
-      {
-        label: '开发者工具',
-        click() {
-          mainWindow.openDevTools();
-        },
-      },
-    ],
-  },
-];
+const menuTemplateDev = [{
+  label: '选项',
+  submenu: [{
+    label: '开发者工具',
+    click() {
+      mainWindow.openDevTools();
+    },
+  }, ],
+}, ];
 
 async function createWindow() {
   if (process.platform === 'darwin') {
-    const template = [
-      {
-        label: "程序",
-        submenu: [
-          { label: "退出", accelerator: "Command+Q", click: function () { app.quit(); } }
-        ]
-      },
-      {
-        label: "编辑",
-        submenu: [
-          { label: "复制", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-          { label: "粘贴", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-        ]
-      }
-    ];
+    const template = [];
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
   } else {
     Menu.setApplicationMenu(null)
@@ -97,7 +98,7 @@ async function createWindow() {
       mainWindow = null;
     }
   });
- 
+
   const gotTheLock = app.requestSingleInstanceLock()
   if (!gotTheLock) {
     app.quit()
@@ -123,11 +124,11 @@ async function createWindow() {
   });
 
   mainWindow.setSkipTaskbar(true);
-  if(process.platform == 'darwin') {
+  if (process.platform == 'darwin') {
     app.dock.hide();
   }
 
-  if(process.platform == 'win32') {
+  if (process.platform == 'win32') {
     tray = new Tray(path.join(__dirname, 'tray.win.png'));
   } else {
     tray = new Tray(path.join(__dirname, 'tray.mac.Template.png'));
@@ -196,7 +197,7 @@ ipcMain.on('shutdown', (event, arg) => {
   } else {
     event.sender.send('timingdone', true);
     var script = 'tell application "Finder" to shut down';
-    applescript.execString(script, function(err) {});
+    applescript.execString(script, function (err) {});
     canQuit = true;
     app.quit();
   }
@@ -215,7 +216,7 @@ ipcMain.on('notstartonlogin', () => {
 })
 
 ipcMain.on('focus', () => {
-  if(mainWindow) {
+  if (mainWindow) {
     mainWindow.show();
     mainWindow.focus();
     mainWindow.moveTop();
@@ -226,3 +227,41 @@ ipcMain.on('focus', () => {
 app.on('will-quit', () => {
   globalShortcut.unregisterAll()
 })
+
+ipcMain.on('checkupdate', (event, arg) => {
+  var signal = 1;
+  request('https://gitee.com/scris/mrnoplay-update/raw/master/package.json', function (error, response, body) {
+    if (error || response.statusCode != 200) {
+      signal = 1;
+    } else {
+      try {
+        let data = JSON.parse(body);
+        if (compareVersion(data.version, package.version) == 1) {
+          signal = 2;
+        } else {
+          signal = 3;
+        }
+      } catch (jsonError) {
+        signal = 1;
+      }
+    }
+    if(signal == 1){
+      dialog.showMessageBox({
+        message: '更新失败，请检查网络设置。\nUpdate failed, please check your network settings.'
+      });
+    }
+    else if(signal == 2) {
+      dialog.showMessageBox({
+        message: '有更新可用。\nCan be updated.'
+      });
+      shell.openExternal('https://github.com/scris/mrnoplay/releases');
+      if(mainWindow) {
+        mainWindow.hide();
+      }
+    } else {
+      dialog.showMessageBox({
+        message: '没有更新，过一会再来哦！\nYou\'re up to date.'
+      });
+    }
+  });
+});
