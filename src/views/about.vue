@@ -133,6 +133,8 @@
       github() {
         if(this.iselectron) {
           ipc.send('github');
+        } else if(process.env.VUE_APP_LINXF == 'web') {
+          window.open("https://github.com/scris/mrnoplay/", "_blank"); 
         }
       }
     }
