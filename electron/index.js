@@ -149,6 +149,7 @@ app.on('ready', () => {
   if (process.platform === 'win32') {
     app.setAppUserModelId("com.scrisstudio.mrnoplay");
   }
+  update_onstart();
 });
 
 // Quit when all windows are closed.
@@ -272,3 +273,37 @@ ipcMain.on('checkupdate', (event, arg) => {
     }
   });
 });
+
+function update_onstart() {
+  var signal = 1;
+  request('https://gitee.com/scris/mrnoplay-update/raw/master/package.json', function (error, response, body) {
+    if (error || response.statusCode != 200) {
+      signal = 1;
+    } else {
+      try {
+        let data = JSON.parse(body);
+        if (compareVersion(data.version, package.version) == 1) {
+          signal = 2;
+        } else {
+          signal = 3;
+        }
+      } catch (jsonError) {
+        signal = 1;
+      }
+    }
+    if(signal == 2) {
+      dialog.showMessageBox({
+        message: '有更新可用。需要下载吗？\nFound an update. Would you like to download it?',
+        type: 'question',
+        buttons: ['确定 Yes', '取消 No'],
+      },(response) => {
+        if(response == 0) {
+          shell.openExternal('https://github.com/scris/mrnoplay/releases');
+          if(mainWindow) {
+            mainWindow.hide();
+          }
+        }
+      });
+    }
+  });
+}
