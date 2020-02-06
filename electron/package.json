@@ -26,7 +26,7 @@
     "capacitor",
     "electron"
   ],
-  "author": "",
+  "author": "Tianze Ds Qiu",
   "license": "MPL-2.0",
   "build": {
     "appId": "com.scrisstudio.mrnoplay",
@@ -42,18 +42,9 @@
     },
     "win": {
       "target": [
-        "nsis"
+        "msi"
       ],
       "icon": "favicon.ico"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "guid": "4C33A98D-2955-404C-96D1-56DC0E0F357C",
-      "installerLanguages": [
-        "en_US",
-        "zh_CN"
-      ]
     }
   }
 }
