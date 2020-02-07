@@ -90,3 +90,6 @@ typings/
 .DS_Store
 
 www/
+
+electron/advancedinstaller-SetupFiles
+electron/advancedinstaller-cache

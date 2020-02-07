@@ -1,7 +1,0 @@
-{
-  "appId": "com.scrisstudio.mrnoplay",
-  "appName": "mrnoplay",
-  "bundledWebRuntime": false,
-  "npmClient": "yarn",
-  "webDir": "www"
-}
