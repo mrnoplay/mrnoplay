@@ -42,7 +42,7 @@
     },
     "win": {
       "target": [
-        "msi"
+        "dir"
       ],
       "icon": "favicon.ico"
     }
