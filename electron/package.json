@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,8 +19,8 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "electron": "4.2.6",
-    "electron-builder": "^21.0.15"
+    "electron": "7.1.11",
+    "electron-builder": "22.3.2"
   },
   "keywords": [
     "capacitor",
