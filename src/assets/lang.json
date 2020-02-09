@@ -103,7 +103,8 @@
     "updateok": "发现更新！",
     "updateoktext": "现在，我们将指引您前去更新。",
     "noupdatetext": "目前没有更新，请稍后再试！",
-    "checking": "稍后会弹出窗口提示检查更新状态。"
+    "checking": "稍后会弹出窗口提示检查更新状态。",
+    "website": "官网"
   },
   "en": {
     "submit": "OK",
@@ -208,6 +209,7 @@
     "updateok": "Found an Update",
     "updateoktext": "Let's Go to Website to See it.",
     "noupdatetext": "Currently, We don't Have an Update.",
-    "checking": "A messagebox will be shown."
+    "checking": "A messagebox will be shown.",
+    "website": "Website"
   }
 }

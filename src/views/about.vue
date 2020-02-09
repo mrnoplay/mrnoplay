@@ -30,7 +30,7 @@
           <div class="authorinfo">{{ $t("scrisproduct") }}</div>
         </div>
         <div class="authorinfo">{{ $t("version") }} {{ version }}</div>
-        <div class="authorinfo"><a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a></div>
+        <div class="authorinfo"><a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;<a class="tutorial-a" @click="website">{{ $t("website") }}</a></div>
       </div>
     </div>
   </div>
@@ -135,6 +135,13 @@
           ipc.send('github');
         } else if(process.env.VUE_APP_LINXF == 'web') {
           window.open("https://github.com/scris/mrnoplay/", "_blank"); 
+        }
+      },
+      website() {
+        if(this.iselectron) {
+          ipc.send('website');
+        } else if(process.env.VUE_APP_LINXF == 'web') {
+          window.open("https://mrnoplay.scris.top/", "_blank"); 
         }
       }
     }

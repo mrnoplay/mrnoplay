@@ -39,13 +39,23 @@
         "dmg"
       ],
       "icon": "favicon.icns",
-      "type": "distribution"
+      "type": "distribution",
+      "files": [
+        "**/*",
+        "!advancedinstaller-cache",
+        "!advancedinstaller-SetupFiles"
+      ]
     },
     "win": {
       "target": [
         "dir"
       ],
-      "icon": "favicon.ico"
+      "icon": "favicon.ico",
+      "files": [
+        "**/*",
+        "!advancedinstaller-cache",
+        "!advancedinstaller-SetupFiles"
+      ]
     }
   }
 }

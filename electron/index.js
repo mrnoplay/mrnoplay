@@ -9,7 +9,7 @@ const {
   shell,
   dialog,
 } = require('electron');
-const AutoLaunch = require('auto-launch');
+const  AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
 const {
   CapacitorSplashScreen
@@ -85,10 +85,12 @@ async function createWindow() {
     splashScreen.init(false);
   } else {
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
-    mainWindow.webContents.on('dom-ready', () => {
-      mainWindow.show();
-    });
+    mainWindow.setKiosk(true);
   }
+
+  mainWindow.on('ready-to-show', function () {
+    mainWindow.show() // 初始化后再显示
+  })  
 
   mainWindow.on('close', (event) => {
     if (!canQuit) {
@@ -231,6 +233,13 @@ app.on('will-quit', () => {
 
 ipcMain.on('github', (event,arg) => {
   shell.openExternal('https://github.com/scris/mrnoplay/');
+  if(mainWindow) {
+    mainWindow.hide();
+  }
+})
+
+ipcMain.on('website', (event,arg) => {
+  shell.openExternal('https://mrnoplay.scris.top');
   if(mainWindow) {
     mainWindow.hide();
   }

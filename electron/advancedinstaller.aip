@@ -5,13 +5,19 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_EXTERNALUIUNINSTALLERNAME" MultiBuildValue="DefaultBuild:aiui"/>
     <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
-    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:"/>
+    <ROW Property="AI_PRODUCTNAME_ARP" Value="Mr Noplay"/>
+    <ROW Property="AI_ThemeStyle" Value="aero" MsiKey="AI_ThemeStyle"/>
+    <ROW Property="AI_UNINSTALLER" Value="msiexec.exe"/>
+    <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPCONTACT" Value="Tianze Ds Qiu"/>
     <ROW Property="ARPHELPLINK" Value="http://mrnoplay.scris.top/"/>
-    <ROW Property="ARPNOREPAIR" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="ARPNOREPAIR" Value="1" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPPRODUCTICON" Value="favicon.exe" Type="8"/>
+    <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="ARPURLINFOABOUT" Value="http://mrnoplay.scris.top/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="http://mrnoplay.scris.top/"/>
     <ROW Property="MSIFASTINSTALL" MultiBuildValue="DefaultBuild:1"/>
@@ -40,6 +46,8 @@
     <ROW Directory="swiftshader_Dir" Directory_Parent="APPDIR" DefaultDir="SWIFTS~1|swiftshader"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="AI_CustomARPName" ComponentId="{A0FD495C-F0C0-4DDB-BDF1-17490DA9D713}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_DisableModify" ComponentId="{D9C8F89C-31D4-4C8F-A1FA-0A29A45434CD}" Directory_="APPDIR" Attributes="4" KeyPath="NoModify" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{A733624E-E839-4198-96FC-FF621DAFA38B}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="MrNoplay.exe" ComponentId="{3C3E4F69-F22C-48BD-A765-73A7434F0762}" Directory_="APPDIR" Attributes="0" KeyPath="MrNoplay.exe"/>
     <ROW Component="ProductInformation" ComponentId="{92D4AF07-D149-46A8-BC18-F4A03A85F0F9}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
@@ -53,10 +61,9 @@
     <ROW Component="libEGL.dll_1" ComponentId="{17EF2AB4-4DD7-4214-B74D-FAEDAF5946B2}" Directory_="swiftshader_Dir" Attributes="256" KeyPath="libEGL.dll_1"/>
     <ROW Component="libGLESv2.dll" ComponentId="{C46A32C0-74E1-4FA3-A484-D6F6247AFB7D}" Directory_="APPDIR" Attributes="256" KeyPath="libGLESv2.dll"/>
     <ROW Component="libGLESv2.dll_1" ComponentId="{A7031475-A8A1-466B-A121-87B2AFFE2C64}" Directory_="swiftshader_Dir" Attributes="256" KeyPath="libGLESv2.dll_1"/>
-    <ROW Component="osmesa.dll" ComponentId="{D788D5D0-5326-4245-A036-80012E51D421}" Directory_="APPDIR" Attributes="256" KeyPath="osmesa.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_ExePath MrNoplay.exe ProductInformation SHORTCUTDIR am.pak app.asar chrome_100_percent.pak d3dcompiler_47.dll ffmpeg.dll libEGL.dll libEGL.dll_1 libGLESv2.dll libGLESv2.dll_1 osmesa.dll"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_CustomARPName AI_DisableModify AI_ExePath MrNoplay.exe ProductInformation SHORTCUTDIR am.pak app.asar chrome_100_percent.pak d3dcompiler_47.dll ffmpeg.dll libEGL.dll libEGL.dll_1 libGLESv2.dll libGLESv2.dll_1"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
@@ -64,7 +71,7 @@
     <ROW File="LICENSES.chromium.html" Component_="chrome_100_percent.pak" FileName="LICENS~1.HTM|LICENSES.chromium.html" Attributes="0" SourcePath="dist\win-unpacked\LICENSES.chromium.html" SelfReg="false" NextFile="am.pak"/>
     <ROW File="MrNoplay.exe" Component_="MrNoplay.exe" FileName="MRNOPL~1.EXE|Mr Noplay.exe" Attributes="0" SourcePath="dist\win-unpacked\Mr Noplay.exe" SelfReg="false" NextFile="chrome_100_percent.pak" DigSign="true"/>
     <ROW File="am.pak" Component_="am.pak" FileName="am.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\am.pak" SelfReg="false" NextFile="ar.pak"/>
-    <ROW File="app.asar" Component_="app.asar" FileName="APP~1.ASA|app.asar" Attributes="0" SourcePath="dist\win-unpacked\resources\app.asar" SelfReg="false" NextFile="electron.asar"/>
+    <ROW File="app.asar" Component_="app.asar" FileName="APP~1.ASA|app.asar" Attributes="0" SourcePath="dist\win-unpacked\resources\app.asar" SelfReg="false" NextFile="resources.pak"/>
     <ROW File="ar.pak" Component_="am.pak" FileName="ar.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\ar.pak" SelfReg="false" NextFile="bg.pak"/>
     <ROW File="bg.pak" Component_="am.pak" FileName="bg.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\bg.pak" SelfReg="false" NextFile="bn.pak"/>
     <ROW File="bn.pak" Component_="am.pak" FileName="bn.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\bn.pak" SelfReg="false" NextFile="ca.pak"/>
@@ -76,7 +83,6 @@
     <ROW File="da.pak" Component_="am.pak" FileName="da.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\da.pak" SelfReg="false" NextFile="de.pak"/>
     <ROW File="de.pak" Component_="am.pak" FileName="de.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\de.pak" SelfReg="false" NextFile="el.pak"/>
     <ROW File="el.pak" Component_="am.pak" FileName="el.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\el.pak" SelfReg="false" NextFile="enGB.pak"/>
-    <ROW File="electron.asar" Component_="app.asar" FileName="ELECTR~1.ASA|electron.asar" Attributes="0" SourcePath="dist\win-unpacked\resources\electron.asar" SelfReg="false" NextFile="resources.pak"/>
     <ROW File="enGB.pak" Component_="am.pak" FileName="en-GB.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\en-GB.pak" SelfReg="false" NextFile="enUS.pak"/>
     <ROW File="enUS.pak" Component_="am.pak" FileName="en-US.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\en-US.pak" SelfReg="false" NextFile="es419.pak"/>
     <ROW File="es.pak" Component_="am.pak" FileName="es.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\es.pak" SelfReg="false" NextFile="et.pak"/>
@@ -107,10 +113,9 @@
     <ROW File="ml.pak" Component_="am.pak" FileName="ml.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\ml.pak" SelfReg="false" NextFile="mr.pak"/>
     <ROW File="mr.pak" Component_="am.pak" FileName="mr.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\mr.pak" SelfReg="false" NextFile="ms.pak"/>
     <ROW File="ms.pak" Component_="am.pak" FileName="ms.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\ms.pak" SelfReg="false" NextFile="nb.pak"/>
-    <ROW File="natives_blob.bin" Component_="chrome_100_percent.pak" FileName="NATIVE~1.BIN|natives_blob.bin" Attributes="0" SourcePath="dist\win-unpacked\natives_blob.bin" SelfReg="false" NextFile="osmesa.dll"/>
+    <ROW File="natives_blob.bin" Component_="chrome_100_percent.pak" FileName="NATIVE~1.BIN|natives_blob.bin" Attributes="0" SourcePath="dist\win-unpacked\natives_blob.bin" SelfReg="false" NextFile="app.asar"/>
     <ROW File="nb.pak" Component_="am.pak" FileName="nb.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\nb.pak" SelfReg="false" NextFile="nl.pak"/>
     <ROW File="nl.pak" Component_="am.pak" FileName="nl.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\nl.pak" SelfReg="false" NextFile="pl.pak"/>
-    <ROW File="osmesa.dll" Component_="osmesa.dll" FileName="osmesa.dll" Attributes="0" SourcePath="dist\win-unpacked\osmesa.dll" SelfReg="false" NextFile="app.asar"/>
     <ROW File="pl.pak" Component_="am.pak" FileName="pl.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\pl.pak" SelfReg="false" NextFile="ptBR.pak"/>
     <ROW File="ptBR.pak" Component_="am.pak" FileName="pt-BR.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\pt-BR.pak" SelfReg="false" NextFile="ptPT.pak"/>
     <ROW File="ptPT.pak" Component_="am.pak" FileName="pt-PT.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\pt-PT.pak" SelfReg="false" NextFile="ro.pak"/>
@@ -171,6 +176,7 @@
     <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="ExternalUICleaner.dll" SourcePath="&lt;AI_CUSTACTS&gt;ExternalUICleaner.dll"/>
     <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
@@ -210,6 +216,7 @@
     <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
     <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
     <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DoRemoveExternalUIStub" Type="3585" Source="ExternalUICleaner.dll" Target="DoRemoveExternalUIStub" WithoutSeq="true"/>
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
     <ROW Action="AI_EstimateExtractFiles" Type="1" Source="Prereq.dll" Target="EstimateExtractFiles"/>
@@ -217,10 +224,12 @@
     <ROW Action="AI_ExtractFiles" Type="1025" Source="Prereq.dll" Target="ExtractSourceFiles" AdditionalSeq="AI_DATA_SETTER"/>
     <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
     <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
+    <ROW Action="AI_GetArpIconPath" Type="1" Source="aicustact.dll" Target="GetArpIconPath"/>
     <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_RemoveExternalUIStub" Type="1" Source="ExternalUICleaner.dll" Target="RemoveExternalUIStub"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
     <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
     <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
@@ -235,7 +244,7 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
-    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1502"/>
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
     <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
@@ -252,6 +261,8 @@
     <ROW Action="AI_ExtractFiles" Sequence="3998" Builds="DefaultBuild"/>
     <ROW Action="AI_DATA_SETTER" Sequence="3997"/>
     <ROW Action="AI_EstimateExtractFiles" Sequence="3999" Builds="DefaultBuild"/>
+    <ROW Action="AI_GetArpIconPath" Sequence="1401"/>
+    <ROW Action="AI_RemoveExternalUIStub" Condition="(REMOVE=&quot;ALL&quot;) AND ((VersionNT &gt; 500) OR((VersionNT = 500) AND (ServicePackLevel &gt;= 4)))" Sequence="1501"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
@@ -274,8 +285,28 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
+    <ROW Registry="Comments" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="Comments" Value="[ARPCOMMENTS]" Component_="AI_CustomARPName"/>
+    <ROW Registry="Contact" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="Contact" Value="[ARPCONTACT]" Component_="AI_CustomARPName"/>
+    <ROW Registry="DisplayIcon" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="DisplayIcon" Value="[ARP_ICON_PATH]" Component_="AI_CustomARPName"/>
+    <ROW Registry="DisplayName" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="DisplayName" Value="[AI_PRODUCTNAME_ARP]" Component_="AI_CustomARPName"/>
+    <ROW Registry="DisplayVersion" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="DisplayVersion" Value="[ProductVersion]" Component_="AI_CustomARPName"/>
+    <ROW Registry="EstimatedSize" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="EstimatedSize" Value="#[AI_ARP_SIZE]" Component_="AI_CustomARPName"/>
+    <ROW Registry="HelpLink" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="HelpLink" Value="[ARPHELPLINK]" Component_="AI_CustomARPName"/>
+    <ROW Registry="HelpTelephone" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="HelpTelephone" Value="[ARPHELPTELEPHONE]" Component_="AI_CustomARPName"/>
+    <ROW Registry="InstallLocation" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="InstallLocation" Value="[APPDIR]" Component_="AI_CustomARPName"/>
+    <ROW Registry="ModifyPath" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="ModifyPath" Value="[AI_UNINSTALLER] /i [ProductCode] AI_UNINSTALLER_CTP=1" Component_="AI_CustomARPName"/>
+    <ROW Registry="NoModify" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="NoModify" Value="#1" Component_="AI_DisableModify"/>
+    <ROW Registry="NoRepair" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="NoRepair" Value="#1" Component_="AI_CustomARPName"/>
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Publisher" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="Publisher" Value="[Manufacturer]" Component_="AI_CustomARPName"/>
+    <ROW Registry="Readme" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="Readme" Value="[ARPREADME]" Component_="AI_CustomARPName"/>
+    <ROW Registry="URLInfoAbout" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="URLInfoAbout" Value="[ARPURLINFOABOUT]" Component_="AI_CustomARPName"/>
+    <ROW Registry="URLUpdateInfo" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="URLUpdateInfo" Value="[ARPURLUPDATEINFO]" Component_="AI_CustomARPName"/>
+    <ROW Registry="UninstallPath" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="UninstallPath" Value="[AI_UNINSTALLER] /x [ProductCode] AI_UNINSTALLER_CTP=1" Component_="AI_CustomARPName"/>
+    <ROW Registry="UninstallString" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="UninstallString" Value="[AI_UNINSTALLER] /x [ProductCode] AI_UNINSTALLER_CTP=1" Component_="AI_CustomARPName"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+    <ROW Registry="VersionMajor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMajor" Value="#1" Component_="AI_CustomARPName"/>
+    <ROW Registry="VersionMinor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMinor" Value="#1" Component_="AI_CustomARPName"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="MrNoplay" Directory_="SHORTCUTDIR" Name="MRNOPL~1|Mr Noplay" Component_="MrNoplay.exe" Target="[#MrNoplay.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>

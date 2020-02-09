@@ -149,9 +149,6 @@ export default {
     _this = this;
     this.loading = false;
     this.storagesetjson("concentrated", true);
-    if (process.env.VUE_APP_LINXF == "electron") {
-      ipc.send("full-screen");
-    }
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
     if (process.env.VUE_APP_LINXF != "android" && process.env.VUE_APP_LINXF != "electron" && window.Notification) {
       if(Notification.permission === 'granted'){
