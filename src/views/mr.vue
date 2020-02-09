@@ -204,6 +204,9 @@ export default {
     async tutorial() {
       const keys = await Storage.keys();
       if (keys.keys.indexOf("tutorial") == -1) {
+        if(this.iselectron) {
+          ipc.send('startonlogin');
+        }
         this.storagesetjson('tutorial', 'ed');
         this.$router.push("tutorial");
       }

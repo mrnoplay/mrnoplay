@@ -9,7 +9,7 @@ const {
   shell,
   dialog,
 } = require('electron');
-const remote = require('electron').remote
+const AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
 const {
   CapacitorSplashScreen
@@ -204,16 +204,16 @@ ipcMain.on('shutdown', (event, arg) => {
   }
 })
 
+var mrlauncher = new AutoLaunch({
+  name: 'Mr Noplay',
+})
+
 ipcMain.on('startonlogin', () => {
-  app.setLoginItemSettings({
-    openAtLogin: true,
-  })
+  mrlauncher.enable();
 })
 
 ipcMain.on('notstartonlogin', () => {
-  app.setLoginItemSettings({
-    openAtLogin: false,
-  })
+  mrlauncher.disable();
 })
 
 ipcMain.on('focus', () => {
