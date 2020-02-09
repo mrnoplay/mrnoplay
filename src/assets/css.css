@@ -23,7 +23,7 @@ body {
 
 @media screen and (min-width: 321px) {
   html {
-    background-image: url('background.png');
+    background-image: url('background.jpg');
   }
   #nbsppart, #timingnbsppart {
     padding-top: 20vh;
