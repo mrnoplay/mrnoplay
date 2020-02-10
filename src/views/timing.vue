@@ -45,6 +45,7 @@
   import { Plugins } from '@capacitor/core';
   const { Storage, Modals } = Plugins;
   import titlepart from '@/components/titlepart'
+  import notify from "@/components/linxf/notify";
   var alarm = new Audio();
   var _this = null;
   alarm.src = require("@/assets/alarm.mp3");
@@ -70,6 +71,7 @@
         displaytime: "0:00",
         lefttime: 0,
         cancancel: true,
+        halflock: true,
       };
     },
     watch: {
@@ -88,6 +90,7 @@
       _this = this;
       this.loading = false;
       this.timing = true;
+      this.halflock = true;
       setInterval(this.interval,1000);
       setTimeout(() => {
         this.cancancel = false;
@@ -166,6 +169,14 @@
                 this.timing = false;
                 clearInterval(this.interval);
                 this.$router.push("/over");
+            }
+            if(this.lefttime <= (this.playtime * 30) && this.halflock) {
+              this.halflock = false;
+              notify.methods.send({
+                title: this.$t("half"),
+                id: 10,
+                message: this.$t("halftext"),
+              });
             }
         }
       },
