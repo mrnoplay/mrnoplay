@@ -12,11 +12,17 @@ export default {
             var title = obj.title;
             var message = obj.message;
             var id = obj.id;
-            LocalNotifications.schedule({notifications: [{
-                title: title,
-                body: message,
-                id: id,
-            }]})
+            if (process.env.VUE_APP_LINXF == "electron") {
+                var notification = new Notification(title, {
+                    body: message,
+                })
+            } else {
+                LocalNotifications.schedule({notifications: [{
+                    title: title,
+                    body: message,
+                    id: id,
+                }]})
+            }
         }
     }
 }

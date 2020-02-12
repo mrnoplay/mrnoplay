@@ -46,14 +46,16 @@
               
               <div v-if="page == 6">
                 <img src="@/assets/tutorial-wintray.png" id="gameicon"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon"/>
-                <div id="wholemorning">{{ $t('tut.6.1') }}<br>{{ $t('tut.6.2') }}<br>{{ $t('tut.6.3') }}</div>
+                <div id="wholemorning">{{ $t('tut.6.1') }}<br>{{ $t('tut.6.2') }}<br>{{ $t('tut.6.3') }}<br>{{ $t('tut.6.4') }}</div>
+                <br>
+                <small v-if="!startonlogin && iselectron" class="new largebtn-notbtn transparent small red tutorial-a" @click="settings">{{ $t("tostartonlogin") }}<br>{{ $t("tostartonlogin-2") }}</small>
               </div>
             </div>
           </div>
         <b-btn variant="light" class="new on largebtn" @click="next" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ nexttext }}</div></b-btn>
         <div>
-          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="goback" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ $t("skip") }}</div></b-btn>
-          <small class="new largebtn transparent small">{{ $t("canopenlater") }}</small>
+          <b-btn variant="light" class="new largebtn transparent cancelbtn" @click="goback" style="-webkit-app-region: no-drag"><div class="largebtn-innertext">{{ $t('skip') }}</div></b-btn>
+          <small class="new largebtn-notbtn transparent small">{{ $t("canopenlater") }}</small>
         </div>
         </div>
       </div>
@@ -62,6 +64,7 @@
 
 <script>
   import loading from 'vue-loading-overlay';
+  import notify from "@/components/linxf/notify";
   import 'vue-loading-overlay/dist/vue-loading.css';
   import { Plugins } from '@capacitor/core';
   const { Storage } = Plugins;
@@ -90,6 +93,8 @@
         page: 1,
         nexttext: '下一页',
         switchlang: 'switch-on',
+        firsttime: false,
+        startonlogin: true,
       };
     },
     watch: {
@@ -99,6 +104,7 @@
       },
     },
     mounted: function() {
+      this.checkiffirst();
       this.version = process.env.VUE_APP_VER;
       this.i18nsetlang();
       if(process.env.VUE_APP_LINXF == 'electron') {
@@ -114,6 +120,19 @@
 
     },
     methods: {
+      async checkiffirst() {
+        const keys = await Storage.keys();
+        if (keys.keys.indexOf("tutorial") == -1) {
+          this.firsttime = true;
+          this.storagesetjson('tutorial', 'ed');
+        }
+        if (keys.keys.indexOf("startonlogin") != -1) {
+          const ret = await Storage.get({ key:'startonlogin' });
+          if(ret.value == "false") this.startonlogin = false;
+        } else {
+          this.startonlogin = false;
+        }
+      },
       isiPad (userAgent) {
         return (userAgent.indexOf("iPad") > -1);
       },
@@ -156,6 +175,10 @@
       goback() {
         this.timing = false;
         this.$router.push('/');
+      },
+      settings() {
+        this.timing = false;
+        this.$router.push('settings');
       },
       next() {
         if (this.page < 5) {

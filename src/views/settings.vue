@@ -81,7 +81,7 @@
         isonios: false,
         lang: 'en',
         version: '1.0.0',
-        switchstartonlogin: 'switch-on',
+        switchstartonlogin: 'switch-off',
         switchlang: 'switch-on',
         checking: false,
         checked: false,

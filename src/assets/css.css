@@ -253,6 +253,10 @@ input[type="number"] {
   cursor: pointer;
 }
 
+.largebtn-notbtn {
+  padding: 0.8em 5.8em;
+}
+
 .largebtn-innertext {
   width: 4em;
 }
@@ -478,4 +482,8 @@ input[type="number"] {
 
 .pointer {
   cursor: pointer;
+}
+
+.red {
+  color: #e05e5eef;
 }

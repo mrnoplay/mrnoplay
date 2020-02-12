@@ -245,6 +245,18 @@ ipcMain.on('website', (event,arg) => {
   }
 })
 
+ipcMain.on('askforautolaunch', (event, arg) => {
+  dialog.showMessageBox({
+    message: '开机自启可以防止未计划的过度娱乐时间。需要开启开机自启吗？\nDo you want to start Mr Noplay on login?',
+    type: 'question',
+    buttons: ['确定 Yes', '取消 No'],
+  },(response) => {
+    if(response == 0) {
+      mrlauncher.enable();
+    }
+  });
+})
+
 ipcMain.on('checkupdate', (event, arg) => {
   var signal = 1;
   request('https://gitee.com/scris/mrnoplay-update/raw/master/package.json', function (error, response, body) {

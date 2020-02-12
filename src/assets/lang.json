@@ -49,6 +49,8 @@
     "skip": "跳过",
     "canopenlater": "以后可以在“关于”界面再次调出哦！",
     "tutorial": "教程",
+    "tostartonlogin": "现在打开设置，打开开机自启",
+    "tostartonlogin-2": "有助于防止无计划的过度娱乐",
     "tut": {
       "1": {
         "1": "你曾说就玩5分钟",
@@ -86,7 +88,8 @@
       "6": {
         "1": "1. 支持中英双语言",
         "2": "2. 支持开机自启",
-        "3": "3. 通过状态栏查看应用"
+        "3": "3. 关闭窗口后，通过如上",
+        "4": "状态栏图标重新打开应用"
       }
     },
     "notifymessage": {
@@ -157,6 +160,8 @@
     "skip": "Skip",
     "canopenlater": "Tutorial can be opened from about page.",
     "tutorial": "Tutorial",
+    "tostartonlogin": "Open Settings and Set Start-On-Login Now",
+    "tostartonlogin-2": "This is Benificial on Reducing Out-of-plan Playing!",
     "tut": {
       "1": {
         "1": "Wanna Play for 5min",
@@ -194,7 +199,8 @@
       "6": {
         "1": "1. Chinese & English",
         "2": "2. Start On Login",
-        "3": "3. See App on Topbar"
+        "3": "3. Find App on Topbar",
+        "4": "If the App was Closed"
       }
     },
     "notifymessage": {
