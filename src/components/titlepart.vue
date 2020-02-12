@@ -3,9 +3,9 @@
   <div class="titlepart" style="-webkit-app-region: no-drag">
     <div class="title new left">{{ $t("mrnoplay") }}</div>
     <div class="titlebtns" v-if="canabout">
-      <b-btn variant="light" class="new about" @click="about"></b-btn>
-      <b-btn variant="light" class="new settings" @click="settings"></b-btn>
-      <b-btn variant="light" class="new exit" @click="exit" v-if="iselectron"></b-btn>
+      <b-btn variant="light" class="new about pointer" @click="about"></b-btn>
+      <b-btn variant="light" class="new settings pointer" @click="settings"></b-btn>
+      <b-btn variant="light" class="new exit pointer" @click="exit" v-if="iselectron"></b-btn>
     </div>
   </div>
 </template>

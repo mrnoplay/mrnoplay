@@ -121,6 +121,7 @@ input[type="number"] {
 }
 
 .on {
+  cursor: pointer;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) , rgb(228, 228, 228, 0.4));
   background-color: #efeeee;
   border: 5px rgba(255, 255, 255, 0.2);
@@ -128,16 +129,19 @@ input[type="number"] {
 }
 
 .on:hover {
-  background-color: #efeeee;
-  border: 15px rgba(255, 255, 255, 0.2);
-  box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
-}
-
-.on:active {
+  cursor: pointer;
   color: #efeeee;
   background-color: #e05e5eef;
   border: 15px rgba(255, 255, 255, 0.2);
   box-shadow: 6px 6px 16px rgba(105, 103, 100, 0.5), -6px -6px 16px rgba(255, 255, 255, 1);
+}
+
+.on:active {
+  cursor: pointer;
+  color: black;
+  background-color: #efeeee;
+  border: 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
 }
 
 .off {
@@ -246,6 +250,7 @@ input[type="number"] {
 
 .largebtn {
   padding: 0.8em 5.8em;
+  cursor: pointer;
 }
 
 .largebtn-innertext {
@@ -324,6 +329,7 @@ input[type="number"] {
   background-image: url('on.png');
   width: 81px;
   height: 62px;
+  cursor: pointer;
 }
 
 .switch-off {
@@ -331,6 +337,7 @@ input[type="number"] {
   background-image: url('off.png');
   width: 81px;
   height: 62px;
+  cursor: pointer;
 }
 
 .select {
@@ -414,16 +421,19 @@ input[type="number"] {
   color: black;
   text-decoration: underline;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .tutorial-a:hover {
   color: grey;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .tutorial-a:active {
   color: lightgrey;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .tutorialboard {
@@ -464,4 +474,8 @@ input[type="number"] {
 
 #wholemorning-mrnoplay {
   font-weight: 700;
+}
+
+.pointer {
+  cursor: pointer;
 }
