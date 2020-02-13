@@ -12,22 +12,35 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container">
-      <div id="nbsppart"></div>
-      <div id="main" style="-webkit-app-region: no-drag">
-        <div v-if="iselectron">
+      <div id="settingsnbsppart"></div>
+      <div id="settings-main" style="-webkit-app-region: no-drag">
+        <div v-if="iselectron" class="settingfield">
           <b class="label">{{ $t("startonlogin") }}</b><br>
           <div class="select">{{ $t("turnoff") }}<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>{{ $t("turnon") }}</div>
         </div>
-        <div>
+        <div class="settingfield">
           <b class="label">语言/Language</b>
           <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
         </div>
-        <div v-if="iselectron">
+        <div v-if="iselectron" class="settingfield">
           <b class="label">{{ $t("update") }}</b><br>
           <div>
             <a class="tutorial-a" @click="check" v-if="!checking">{{ $t("checkforupdate") }}</a>
             <span class="label" @click="check" v-if="checking">{{ $t("checking") }}</span>
           </div>
+        </div>
+        <div class="settingfield">
+          <b class="label">{{ $t("defaulttime") }}</b>
+          <div class="input-btn">
+            <input type="tel" maxLength="4" required @keyup.enter.native="setdefaulttime" class="off settinginput" v-model="defaulttime"/>
+            <b-btn variant="light" class="new on submit settingbtn" @click="setdefaulttime"></b-btn>
+          </div>
+          <b-popover
+          target="playtime"
+          :show.sync="timeNAN"
+          triggers
+          placement="bottom"
+        ><div class="warnfather warn">{{ $t("enterinteger") }}</div></b-popover>
         </div>
         <b-btn variant="light" class="new on largebtn" @click="goback">{{ $t("back") }}</b-btn>
       </div>
@@ -86,6 +99,7 @@
         checking: false,
         checked: false,
         checkedtext: '',
+        defaulttime: 5,
       };
     },
     watch: {
@@ -236,6 +250,9 @@
           });
         }
       },
+      setdefaulttime() {
+        
+      }
     }
   }
 </script>

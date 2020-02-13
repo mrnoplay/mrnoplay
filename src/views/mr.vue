@@ -41,62 +41,6 @@
         <b-btn style="-webkit-app-region: no-drag" variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">{{ $t("start") }}</div></b-btn>
         <titlepart :canabout="true"></titlepart>
       </div>
-      <b-modal
-        id="settingspanel"
-        ok-only
-        :title="$t('stitle')"
-        ref="smodal"
-        :ok-title="$t('close')"
-      >
-        <b-row>
-          <b-col sm="2" class="settingsleftbar">
-            <small>{{ $t('slocale') }}</small>
-          </b-col>
-          <b-col>
-            <b-btn @click="i18nchinese">中文</b-btn>
-            <b-btn @click="i18nenglish">English</b-btn>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="2" class="settingsleftbar">
-            <small>{{ $t('saboutbar') }}</small>
-          </b-col>
-          <b-col>
-            <small class="form-text text-muted" id="abouttext">
-              {{ $t('sabout') }} {{ version }}
-              <br />
-              {{ $t('proud') }}
-              <br />
-              {{ $t('sauthor') }}
-              <a
-                class="text-muted-icon"
-                href="https://github.com/scris"
-                target="_blank"
-              >
-                <i class="fab fa-github"></i>
-              </a>&nbsp;
-              <a
-                class="text-muted-icon"
-                v-if="!isonios"
-                href="mailto:slaaker@126.com"
-                target="_blank"
-              >
-                <i class="fa fa-envelope"></i>
-              </a>
-              {{ $t('sothercontributor') }}
-              <br />
-              {{ $t('scontribute') }}
-              <a
-                class="text-muted-icon"
-                href="https://github.com/scris/mrnoplay/"
-                target="_blank"
-              >
-                <i class="fab fa-github"></i>
-              </a>
-            </small>
-          </b-col>
-        </b-row>
-      </b-modal>
     </div>
   </div>
 </template>

@@ -9,6 +9,12 @@ body {
   overflow-y: hidden;
 }
 
+@media screen and (max-height: 580px) {
+  body {
+    overflow-y: auto;
+  }
+}
+
 #nbsppart {
   padding-top: 8vh;
 }
@@ -19,6 +25,10 @@ body {
 
 #tutorialnbsppart {
   padding-top: 2vh;
+}
+
+#settingsnbsppart {
+  padding-top: 8vh;
 }
 
 @media screen and (min-width: 321px) {
@@ -368,6 +378,39 @@ input[type="number"] {
   background-image: url('about.svg');
 }
 
+.submit {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1em;
+  margin-left: 0.2em;
+  background-image: url('submit.svg');
+}
+
+.submit:hover {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1em;
+  margin-left: 0.2em;
+  background-image: url('submit-white.svg');
+}
+
+.submit:active {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1em;
+  margin-left: 0.2em;
+  background-image: url('submit.svg');
+}
+
 .settings {
   width: 1.417em;
   height: 1.417em;
@@ -486,4 +529,44 @@ input[type="number"] {
 
 .red {
   color: #e05e5eef;
+}
+
+.settingfield {
+  background-color: #efeeee;
+  border: 5px rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  margin-bottom: 0.8em;
+}
+
+.settinginput {
+  padding: 0.5em;
+  margin-top: 0.5em;
+  border-radius: 10px;
+  font-size: 0.8em;
+  width: 11.5em;
+  font-family: "puhuiti", "puhuiti-online", sans-serif;
+}
+
+.settingbtn, .settingbtn:hover {
+  width: 1.9em;
+  height: 1.9em;
+  margin-left: 0.2em;
+  margin-top: 0.4em;
+}
+
+.settingbtn:hover {
+  background-color: #e05e5eef;
+}
+
+.settingbtn:active {
+  background-color: #efeeef;
+}
+
+.input-btn {
+  display: flex;
+  flex-direction: row;
 }

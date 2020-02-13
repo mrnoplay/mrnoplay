@@ -109,7 +109,8 @@
     "checking": "稍后会弹出窗口提示检查更新状态。",
     "website": "官网",
     "half": "时间已过半",
-    "halftext": "请合理安排剩余时间！"
+    "halftext": "请合理安排剩余时间！",
+    "defaulttime": "默认时间 (分钟)"
   },
   "en": {
     "submit": "OK",
@@ -220,6 +221,7 @@
     "checking": "A messagebox will be shown.",
     "website": "Website",
     "half": "50% Time Left",
-    "halftext": "Be careful about your time!"
+    "halftext": "Be careful about your time!",
+    "defaulttime": "Default Time (min)"
   }
 }
