@@ -106,11 +106,12 @@
     "updateok": "发现更新！",
     "updateoktext": "现在，我们将指引您前去更新。",
     "noupdatetext": "目前没有更新，请稍后再试！",
-    "checking": "稍后会弹出窗口提示检查更新状态。",
+    "checking": "稍后会弹出窗口提示更新状态。",
     "website": "官网",
     "half": "时间已过半",
     "halftext": "请合理安排剩余时间！",
-    "defaulttime": "默认时间 (分钟)"
+    "defaulttime": "默认时间 (分钟)",
+    "defaulttimesuccess": "默认时间设置成功！"
   },
   "en": {
     "submit": "OK",
@@ -222,6 +223,7 @@
     "website": "Website",
     "half": "50% Time Left",
     "halftext": "Be careful about your time!",
-    "defaulttime": "Default Time (min)"
+    "defaulttime": "Default Time (min)",
+    "defaulttimesuccess": "The default time is set successfully."
   }
 }

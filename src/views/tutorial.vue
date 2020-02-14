@@ -59,6 +59,7 @@
         </div>
         </div>
       </div>
+      <notify ref="notify"></notify>
     </div>
 </template>
 
@@ -81,6 +82,7 @@
     components: {
       loading,
       titlepart,
+      notify
     },
     data() {
       return {
@@ -106,6 +108,7 @@
     mounted: function() {
       this.checkiffirst();
       this.version = process.env.VUE_APP_VER;
+      this.storagesetjson('cannotify', false);
       this.i18nsetlang();
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
@@ -203,7 +206,7 @@
       },
       cn() {
         this.i18nchinese();
-        notify.methods.send({
+        this.$refs.notify.send({
           title: "成功",
           id: 6,
           message: "已经切换到中文。"
@@ -211,7 +214,7 @@
       },
       en() {
         this.i18nenglish();
-        notify.methods.send({
+        this.$refs.notify.send({
           title: "Success",
           id: 7,
           message: "Language is set to English."

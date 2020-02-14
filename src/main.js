@@ -15,6 +15,10 @@ const i18n = new VueI18n({
   locale: 'en'
 })
 
+import { BreadstickBakery } from 'breadstick'
+// This exposes `this.$breadstick` in your Vue template.
+Vue.use(BreadstickBakery)
+
 Vue.config.productionTip = false
 
 new Vue({

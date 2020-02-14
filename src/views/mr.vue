@@ -23,7 +23,7 @@
                 class="digital"
                 v-model="playtime"
                 type="tel"
-                maxLength="4"
+                maxlength="4"
                 required
                 @keyup.enter.native="start"
               ></b-form-input>
@@ -31,17 +31,23 @@
             </div>
           </div>
         </div>
-        <b-popover
-          target="playtime"
-          :show.sync="timeNAN"
-          triggers
-          placement="bottom"
-        ><div class="warnfather warn">{{ $t("enterinteger") }}</div></b-popover>
-        <br /> 
-        <b-btn style="-webkit-app-region: no-drag" variant="light" class="new on largebtn" @click="start"><div class="largebtn-innertext">{{ $t("start") }}</div></b-btn>
+        <div class="centralnbsp"></div>
+        <div class="warnfather warn settingwarn" v-if="timeNAN">
+          <div class="breathe-div"></div>
+          <div class="warn">{{ $t("enterinteger") }}</div>
+        </div>
+        <b-btn
+          style="-webkit-app-region: no-drag"
+          variant="light"
+          class="new on largebtn"
+          @click="start"
+        >
+          <div class="largebtn-innertext">{{ $t("start") }}</div>
+        </b-btn>
         <titlepart :canabout="true"></titlepart>
       </div>
     </div>
+    <notify ref="notify"></notify>
   </div>
 </template>
 
@@ -49,6 +55,7 @@
 import loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { Plugins } from "@capacitor/core";
+import notify from "@/components/linxf/notify";
 const { Storage } = Plugins;
 import titlepart from "@/components/titlepart";
 var alarm = new Audio();
@@ -61,7 +68,8 @@ export default {
   name: "mr",
   components: {
     loading,
-    titlepart
+    titlepart,
+    notify
   },
   data() {
     return {
@@ -85,6 +93,8 @@ export default {
   mounted: function() {
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
+    this.getplaytime();
+    this.storagesetjson('cannotify', false);
     this.tutorial();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
@@ -94,16 +104,20 @@ export default {
     this.loading = false;
     this.storagesetjson("concentrated", true);
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
-    if (process.env.VUE_APP_LINXF != "android" && process.env.VUE_APP_LINXF != "electron" && window.Notification) {
-      if(Notification.permission === 'granted'){
+    if (
+      process.env.VUE_APP_LINXF != "android" &&
+      process.env.VUE_APP_LINXF != "electron" &&
+      window.Notification
+    ) {
+      if (Notification.permission === "granted") {
         //granted
-      }else if(Notification.permission === 'denied'){
+      } else if (Notification.permission === "denied") {
         //denied
-      }else{
+      } else {
         Notification.requestPermission().then(function(permission) {
-          if(permission === 'granted'){
+          if (permission === "granted") {
             //granted
-          }else if(permission === 'denied'){
+          } else if (permission === "denied") {
             //denied
           }
         });
@@ -137,10 +151,19 @@ export default {
       const keys = await Storage.keys();
       if (keys.keys.indexOf("lang") != -1) {
         const retlang = await Storage.get({ key: "lang" });
-        if (retlang.value != null) _this.lang = retlang.value;
-        else (_this.lang = "en"), _this.storagesetlang("en");
-      } else (_this.lang = "en"), _this.storagesetlang("en");
-      _this.$i18n.locale = _this.lang;
+        if (retlang.value != null) this.lang = retlang.value;
+        else (this.lang = "en"), this.storagesetlang("en");
+      } else (_this.lang = "en"), this.storagesetlang("en");
+      this.$i18n.locale = this.lang;
+    },
+    async getplaytime() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("defaulttime") != -1) {
+        const ret = await Storage.get({ key: "defaulttime" });
+        if (ret.value != null) {
+          this.playtime = Number(JSON.parse(ret.value));
+        } else (this.playtime = 5), this.storagesetjson("defaulttime", 5);
+      } else (this.playtime = 5), this.storagesetjson("defaulttime", 5);
     },
     async tutorial() {
       const keys = await Storage.keys();
@@ -170,7 +193,7 @@ export default {
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
-    },
+    }
   }
 };
 </script>

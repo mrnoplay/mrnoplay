@@ -36,6 +36,7 @@
         </div>
       </div>
     </div>
+    <notify ref="notify"></notify>
   </div>
 </template>
 
@@ -58,6 +59,7 @@
     components: {
       loading,
       titlepart,
+      notify,
     },
     data() {
       return {
@@ -83,6 +85,7 @@
     mounted: function() {
       this.version = process.env.VUE_APP_VER;
       this.i18nsetlang();
+      this.storagesetjson('cannotify', true);
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
       }
@@ -172,7 +175,7 @@
             }
             if(this.lefttime <= (this.playtime * 30) && this.halflock) {
               this.halflock = false;
-              notify.methods.send({
+              this.$refs.notify.send({
                 title: this.$t("half"),
                 id: 10,
                 message: this.$t("halftext"),

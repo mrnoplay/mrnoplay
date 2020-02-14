@@ -74,6 +74,7 @@
     mounted: function() {
       this.version = process.env.VUE_APP_VER;
       this.i18nsetlang();
+      this.storagesetjson('cannotify', false);
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
       }

@@ -40,6 +40,7 @@
         </b-btn>
       </div>
     </div>
+    <notify ref="notify"></notify>
   </div>
 </template>
 
@@ -63,7 +64,8 @@ export default {
   name: "over",
   components: {
     loading,
-    titlepart
+    titlepart,
+    notify
   },
   data() {
     return {
@@ -88,6 +90,7 @@ export default {
   mounted: function() {
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
+    this.storagesetjson('cannotify', true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
     }
@@ -97,7 +100,7 @@ export default {
     this.timing = true;
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
     setTimeout(this.timeout, 180000);
-    notify.methods.send({
+    this.$refs.notify.send({
       title: this.$t("timeisup"),
       id: 8,
       message: this.$t("willpunish")
@@ -160,7 +163,7 @@ export default {
     interval() {
       if (this.timing == true && this.$router.currentRoute.path == "/over") {
         this.punishstart = true;
-        notify.methods.send({
+        this.$refs.notify.send({
           title: this.$t("stop"),
           id: 1,
           message: this.$t("notifymessage."+this.rand(1,2)),
@@ -175,13 +178,13 @@ export default {
     },
     shutdowninterval() {
       if (process.env.VUE_APP_LINXF == "electron") {
-        notify.methods.send({
+        this.$refs.notify.send({
           title: this.$t("willforce"),
           id: 9,
           message: this.$t("willforce"),
         });
         setTimeout(() => {
-          notify.methods.send({
+          this.$refs.notify.send({
             title: this.$t("willforce"),
             id: 9,
             message: this.$t("willforce"),

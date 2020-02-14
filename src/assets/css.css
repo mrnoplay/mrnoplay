@@ -109,6 +109,14 @@ input[type="number"] {
   height: 100%;
 }
 
+.setting-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  height: 100%;
+}
+
 .hr {
   height: 1em;
 }
@@ -378,6 +386,23 @@ input[type="number"] {
   background-image: url('about.svg');
 }
 
+.back {
+  width: 1.417em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url('back.svg');
+}
+
+.back:hover, .settingleftbtn:hover .back {
+  background-image: url('back-white.svg');
+}
+
+.back:active, .settingleftbtn:active .back {
+  background-image: url('back.svg');
+}
+
 .submit {
   width: 1.417em;
   height: 1.417em;
@@ -390,24 +415,10 @@ input[type="number"] {
 }
 
 .submit:hover {
-  width: 1.417em;
-  height: 1.417em;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  margin-top: 1em;
-  margin-left: 0.2em;
   background-image: url('submit-white.svg');
 }
 
 .submit:active {
-  width: 1.417em;
-  height: 1.417em;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  margin-top: 1em;
-  margin-left: 0.2em;
   background-image: url('submit.svg');
 }
 
@@ -537,7 +548,7 @@ input[type="number"] {
   border-radius: 10px;
   box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
   padding-top: 0.4em;
-  padding-bottom: 0.4em;
+  padding-bottom: 0.7em;
   padding-left: 0.4em;
   margin-bottom: 0.8em;
 }
@@ -547,15 +558,16 @@ input[type="number"] {
   margin-top: 0.5em;
   border-radius: 10px;
   font-size: 0.8em;
-  width: 11.5em;
+  width: 11em;
   font-family: "puhuiti", "puhuiti-online", sans-serif;
 }
 
-.settingbtn, .settingbtn:hover {
+.settingbtn {
   width: 1.9em;
   height: 1.9em;
   margin-left: 0.2em;
   margin-top: 0.4em;
+  margin-right: 0.5em;
 }
 
 .settingbtn:hover {
@@ -569,4 +581,49 @@ input[type="number"] {
 .input-btn {
   display: flex;
   flex-direction: row;
+}
+
+.settingwarn {
+  margin-bottom: 0;
+  padding-bottom: 0.1em;
+}
+
+.centralnbsp {
+  padding-top: 0.7em;
+}
+
+.settingleftbtn {
+  margin-top: 0;
+}
+
+@media screen and (min-width: 321px) {
+  .main-like {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255) , rgb(228, 228, 228));
+    border: 5px rgba(255, 255, 255, 0.2);
+    box-shadow: 10px 10px 50px rgba(112, 110, 110, 0.7), -10px -10px 32px rgba(255, 255, 255, 1), inset 4px 4px 0px rgba(255, 255, 255, 0.6), inset 6px 6px 4px rgba(255, 255, 255, 0.4), inset -4px -4px 2px rgba(102, 99, 99, 0.3), inset -6px -6px 12px rgba(102, 99, 99, 0.2);
+  }
+
+  .main-like-btn {
+    border: 5px rgba(255, 255, 255, 0.2);
+    box-shadow: 10px 10px 50px rgba(112, 110, 110, 0.7), -10px -10px 32px rgba(255, 255, 255, 1), inset 4px 4px 0px rgba(255, 255, 255, 0.6), inset 6px 6px 4px rgba(255, 255, 255, 0.4), inset -4px -4px 2px rgba(102, 99, 99, 0.3), inset -6px -6px 12px rgba(102, 99, 99, 0.2);
+  }
+}
+
+.hover-red:hover {
+  background: #e05e5eef;
+}
+
+.hover-red:active {
+  background: #efeeee;
+}
+
+.Breadstick__alert {
+  font-family: 'puhuiti'!important;
+  font-size: 0.6em!important;
+  margin-top: 1em!important;
+  margin-right: 1em!important;
+  opacity: 0.8;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) , rgba(228, 228, 228, 0.8))!important;
+  border: 5px rgba(255, 255, 255, 0.2)!important;
+  box-shadow: 10px 10px 50px rgba(112, 110, 110, 0.7), -10px -10px 32px rgba(255, 255, 255, 1), inset 4px 4px 0px rgba(255, 255, 255, 0.6), inset 6px 6px 4px rgba(255, 255, 255, 0.4), inset -4px -4px 2px rgba(102, 99, 99, 0.3), inset -6px -6px 12px rgba(102, 99, 99, 0.2)!important;
 }

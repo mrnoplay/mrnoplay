@@ -1,6 +1,7 @@
 <i18n src="@/assets/lang.json"></i18n>
 <template>
   <div>
+    <notify ref="notify"></notify>
     <!--
     <div id="planselectorcontainer" class="linediv">
       <div class="toptext btn"><b-btn variant="light" class="new on topicon">Mr Noplay</b-btn></div>
@@ -11,38 +12,43 @@
     </div>
     <div id="undergradient" class="linediv"></div>
     -->
-    <div class="container">
-      <div id="settingsnbsppart"></div>
-      <div id="settings-main" style="-webkit-app-region: no-drag">
-        <div v-if="iselectron" class="settingfield">
-          <b class="label">{{ $t("startonlogin") }}</b><br>
-          <div class="select">{{ $t("turnoff") }}<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>{{ $t("turnon") }}</div>
-        </div>
-        <div class="settingfield">
-          <b class="label">语言/Language</b>
-          <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
-        </div>
-        <div v-if="iselectron" class="settingfield">
-          <b class="label">{{ $t("update") }}</b><br>
-          <div>
-            <a class="tutorial-a" @click="check" v-if="!checking">{{ $t("checkforupdate") }}</a>
-            <span class="label" @click="check" v-if="checking">{{ $t("checking") }}</span>
+    <div class="container setting-container">
+      <div class="setting-left">
+        <div id="settingsnbsppart"></div>
+        <b-btn variant="light" class="new on main-like settingbtn settingleftbtn hover-red" @click="goback">
+          <div class="back chromeheight"></div>
+        </b-btn>
+      </div>
+      <div class="setting-center">
+        <div id="settingsnbsppart"></div>
+        <div id="setting-main" style="-webkit-app-region: no-drag">
+          <div v-if="iselectron" class="settingfield main-like">
+            <b class="label">{{ $t("startonlogin") }}</b><br>
+            <div class="select">{{ $t("turnoff") }}<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>{{ $t("turnon") }}</div>
+          </div>
+          <div class="settingfield main-like">
+            <b class="label">语言/Language</b>
+            <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
+          </div>
+          <div v-if="iselectron" class="settingfield main-like">
+            <b class="label">{{ $t("update") }}</b><br>
+            <div>
+              <a class="tutorial-a" @click="check" v-if="!checking">{{ $t("checkforupdate") }}</a>
+              <span class="label" @click="check" v-if="checking">{{ $t("checking") }}</span>
+            </div>
+          </div>
+          <div class="settingfield  main-like">
+            <b class="label">{{ $t("defaulttime") }}</b>
+            <div class="input-btn">
+              <input type="tel" maxLength="4" required class="off settinginput" v-model="defaulttime" @keyup.enter="setdefaulttime"/>
+              <b-btn variant="light" class="new on submit settingbtn" @click="setdefaulttime"></b-btn>
+            </div>
+            <div class="warnfather warn settingwarn" v-if="timeNAN">
+              <div class="breathe-div"></div>
+              <div class="warn">{{ $t("enterinteger") }}</div>
+            </div>
           </div>
         </div>
-        <div class="settingfield">
-          <b class="label">{{ $t("defaulttime") }}</b>
-          <div class="input-btn">
-            <input type="tel" maxLength="4" required @keyup.enter.native="setdefaulttime" class="off settinginput" v-model="defaulttime"/>
-            <b-btn variant="light" class="new on submit settingbtn" @click="setdefaulttime"></b-btn>
-          </div>
-          <b-popover
-          target="playtime"
-          :show.sync="timeNAN"
-          triggers
-          placement="bottom"
-        ><div class="warnfather warn">{{ $t("enterinteger") }}</div></b-popover>
-        </div>
-        <b-btn variant="light" class="new on largebtn" @click="goback">{{ $t("back") }}</b-btn>
       </div>
     </div>
   </div>
@@ -85,6 +91,7 @@
     components: {
       loading,
       titlepart,
+      notify,
     },
     data() {
       return {
@@ -100,6 +107,7 @@
         checked: false,
         checkedtext: '',
         defaulttime: 5,
+        timeNAN: false,
       };
     },
     watch: {
@@ -111,8 +119,10 @@
     mounted: function() {
       this.checking = false;
       this.version = process.env.VUE_APP_VER;
+      this.storagesetjson('cannotify', false);
       this.i18nsetlang();
       this.setstartonloginselect();
+      this.getdefaulttime();
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
       }
@@ -161,13 +171,23 @@
       async setstartonloginselect() {
         const keys = await Storage.keys();
         if(keys.keys.indexOf('startonlogin') != -1) {
-          const retlang = await Storage.get({ key:'startonlogin' });
-          if(retlang.value != null) {
-            if (retlang.value == false || retlang.value == "false") this.switchstartonlogin = 'switch-off';
+          const ret = await Storage.get({ key:'startonlogin' });
+          if(ret.value != null) {
+            if (ret.value == false || ret.value == "false") this.switchstartonlogin = 'switch-off';
             else this.switchstartonlogin = 'switch-on';
           }
           else this.switchstartonlogin = 'switch-off', this.storagesetjson('startonlogin',false);
         } else this.switchstartonlogin = 'switch-off', this.storagesetjson('startonlogin',false);
+      },
+      async getdefaulttime() {
+        const keys = await Storage.keys();
+        if(keys.keys.indexOf('defaulttime') != -1) {
+          const ret = await Storage.get({ key:'defaulttime' });
+          if(ret.value != null) {
+            this.defaulttime = Number(JSON.parse(ret.value));
+          }
+          else this.defaulttime = 5, this.storagesetjson('defaulttime',5);
+        } else this.defaulttime = 5, this.storagesetjson('defaulttime',5);
       },
       i18nchinese() {
         this.lang = 'cn';
@@ -182,7 +202,7 @@
       startonlogin() {
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send("startonlogin");
-          notify.methods.send({
+          this.$refs.notify.send({
             title: this.$t("success"),
             id: 4,
             message: this.$t("on-startonlogin")
@@ -192,7 +212,7 @@
       notstartonlogin() {
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send("notstartonlogin");
-          notify.methods.send({
+          this.$refs.notify.send({
             title: this.$t("success"),
             id: 5,
             message: this.$t("off-startonlogin")
@@ -221,7 +241,7 @@
       },
       cn() {
         this.i18nchinese();
-        notify.methods.send({
+        this.$refs.notify.send({
           title: "成功",
           id: 6,
           message: "已经切换到中文。"
@@ -229,7 +249,7 @@
       },
       en() {
         this.i18nenglish();
-        notify.methods.send({
+        this.$refs.notify.send({
           title: "Success",
           id: 7,
           message: "Language is set to English."
@@ -251,8 +271,18 @@
         }
       },
       setdefaulttime() {
-        
-      }
+        if (/(^[1-9]\d*$)/.test(this.defaulttime)) {
+          this.timeNAN = false;
+          this.storagesetjson('defaulttime', this.defaulttime);
+          this.$refs.notify.send({
+            title: this.$t("success"),
+            id: 5,
+            message: this.$t("defaulttimesuccess")
+          });
+        } else {
+          this.timeNAN = true;
+        }
+      },
     }
   }
 </script>
