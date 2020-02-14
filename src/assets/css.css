@@ -9,9 +9,15 @@ body {
   overflow-y: hidden;
 }
 
-@media screen and (max-height: 580px) {
+@media screen and (max-height: 580px) and (min-height: 271px) {
   body {
     overflow-y: auto;
+  }
+}
+
+@media screen and (max-height: 271px) {
+  body {
+    overflow-y: hidden;
   }
 }
 

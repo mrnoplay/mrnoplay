@@ -13,7 +13,7 @@
     <div id="undergradient" class="linediv"></div>
     -->
     <div class="container setting-container">
-      <div class="setting-left">
+      <div class="setting-left" style="-webkit-app-region: no-drag">
         <div id="settingsnbsppart"></div>
         <b-btn variant="light" class="new on main-like settingbtn settingleftbtn hover-red" @click="goback">
           <div class="back chromeheight"></div>
