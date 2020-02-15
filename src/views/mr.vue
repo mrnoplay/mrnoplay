@@ -91,16 +91,16 @@ export default {
     }
   },
   mounted: function() {
+    if (process.env.VUE_APP_LINXF == "electron") {
+      this.iselectron = true;
+    }
+    _this = this;
+    this.isonios = this.isiOS(navigator.userAgent);
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
     this.getplaytime();
     this.storagesetjson('cannotify', false);
     this.tutorial();
-    if (process.env.VUE_APP_LINXF == "electron") {
-      this.iselectron = true;
-    }
-    this.isonios = this.isiOS(navigator.userAgent);
-    _this = this;
     this.loading = false;
     this.storagesetjson("concentrated", true);
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
