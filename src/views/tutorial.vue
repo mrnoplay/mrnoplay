@@ -18,11 +18,9 @@
         <div class="tutorialboard border">
             <div class="on-notbtn tutorial">
               <div v-if="page == 1">
-                <img src="@/assets/tutorial-game.png" id="gameicon"/>
-                <div id="wholemorning">{{ $t('tut.1.1') }}</div>
-                <div id="wholemorning">{{ $t('tut.1.2') }}</div>
-                <div id="wholemorning">{{ $t('tut.1.3') }}</div>
-                <div id="wholemorning">{{ $t('tut.1.4') }}<span id="wholemorning-mrnoplay">{{ $t('tut.1.5') }}</span></div>
+                <img src="@/assets/tutorial-game.png" id="gameicon-page1-page6"/>
+                <div class="pagetitle">{{ $t('tut.1.1') }}</div>
+                <div class="pagetext">{{ $t('tut.1.2') }}</div>
               </div>
               <div v-if="page == 2">
                 <img src="@/assets/tutorial-start-en.png" id="gameicon" v-if="lang == 'en'"/>
@@ -45,7 +43,7 @@
               </div>
               
               <div v-if="page == 6">
-                <img src="@/assets/tutorial-wintray.png" id="gameicon"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon"/>
+                <img src="@/assets/tutorial-wintray.png" id="gameicon-page1-page6"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon"/>
                 <div id="wholemorning">{{ $t('tut.6.1') }}<br>{{ $t('tut.6.2') }}<br>{{ $t('tut.6.3') }}<br>{{ $t('tut.6.4') }}</div>
                 <br>
                 <small v-if="!startonlogin && iselectron" class="new largebtn-notbtn transparent small red tutorial-a" @click="settings">{{ $t("tostartonlogin") }}<br>{{ $t("tostartonlogin-2") }}</small>

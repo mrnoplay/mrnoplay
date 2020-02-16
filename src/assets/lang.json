@@ -53,11 +53,8 @@
     "tostartonlogin-2": "有助于防止无计划的过度娱乐",
     "tut": {
       "1": {
-        "1": "你曾说就玩5分钟",
-        "2": "结果一上午没了",
-        "3": "你需要掌控时间",
-        "4": "你需要",
-        "5": "不玩家"
+        "1": "你需要不玩家",
+        "2": "你曾说就玩5分钟，结果一上午没了。你需要掌控时间，你需要不玩家。"
       },
       "2": {
         "1": "玩着玩着就会停不下来",
@@ -166,11 +163,8 @@
     "tostartonlogin-2": "This is Benificial on Reducing Out-of-plan Playing!",
     "tut": {
       "1": {
-        "1": "Wanna Play for 5min",
-        "2": "Result in Waste a Day",
-        "3": "You Need to Control Time",
-        "4": "You Need ",
-        "5": "Mr Noplay"
+        "1": "You Need This",
+        "2": "You Wanna Play for 5min, but Result in Waste a Day. You Need to Control Time, You Need Mr Noplay!"
       },
       "2": {
         "1": "Though Can't Stop Playing",
