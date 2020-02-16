@@ -30,7 +30,7 @@ export default {
         LocalNotifications.schedule({
           notifications: [
             {
-              title: this.cannotify,
+              title: title,
               body: message,
               id: id
             }

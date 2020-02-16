@@ -165,7 +165,7 @@ input[type="number"] {
   color: black;
   background-color: #efeeee;
   border: 15px rgba(255, 255, 255, 0.2);
-  box-shadow: 3px 3px 1px rgba(209, 205, 199, 0.5), -3px -3px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 1px rgba(209, 205, 199, 0.5), inset -3px -3px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 3px 3px 4px rgba(209, 205, 199, 0.5), -3px -3px 4px rgba(255, 255, 255, 0.5), inset 3px 3px 4px rgba(209, 205, 199, 0.5), inset -3px -3px 4px rgba(255, 255, 255, 0.5);
 }
 
 .off {
@@ -600,6 +600,14 @@ input[type="number"] {
 
 .settingleftbtn {
   margin-top: 0;
+}
+
+.settingleftbtn:active {
+  cursor: pointer;
+  color: black;
+  background-color: #efeeee;
+  border: 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 2px 2px 3px rgba(209, 205, 199, 0.9), -1px -1px 3px rgba(255, 255, 255, 0.5), inset 2px 2px 3px rgba(209, 205, 199, 0.9), inset -2px -2px 3px rgba(255, 255, 255, 0.5);
 }
 
 @media screen and (min-width: 321px) {
