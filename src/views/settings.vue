@@ -41,7 +41,7 @@
             <b class="label">{{ $t("defaulttime") }}</b>
             <div class="input-btn">
               <input type="tel" maxLength="4" required class="off settinginput" v-model="defaulttime" @keyup.enter="setdefaulttime"/>
-              <b-btn variant="light" class="new on submit settingbtn" @click="setdefaulttime"></b-btn>
+              <b-btn variant="light" class="new submit settingbtn on" @click="setdefaulttime"></b-btn>
             </div>
             <div class="warnfather warn settingwarn" v-if="timeNAN">
               <div class="breathe-div"></div>

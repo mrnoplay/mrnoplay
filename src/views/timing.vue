@@ -175,6 +175,7 @@
             }
             if(this.lefttime <= (this.playtime * 30) && this.halflock) {
               this.halflock = false;
+              this.storagesetjson('cannotify', true);
               this.$refs.notify.send({
                 title: this.$t("half"),
                 id: 10,

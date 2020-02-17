@@ -25,26 +25,25 @@
               <div v-if="page == 2">
                 <img src="@/assets/tutorial-start-en.png" id="gameicon" v-if="lang == 'en'"/>
                 <img src="@/assets/tutorial-start-cn.png" id="gameicon" v-if="lang == 'cn'"/>
-                <div id="wholemorning">{{ $t('tut.2.1') }}<br>{{ $t('tut.2.2') }}<br>{{ $t('tut.2.3') }}<br>{{ $t('tut.2.4') }}<br>{{ $t('tut.2.5') }}</div>
+                <div class="pagetitle">{{ $t('tut.2.1') }}</div>
+                <div class="pagetext">{{ $t('tut.2.2') }}</div>
               </div>
               <div v-if="page == 3">
                 <img src="@/assets/tutorial-stop-en.png" id="gameicon" v-if="lang == 'en'"/>
                 <img src="@/assets/tutorial-stop-cn.png" id="gameicon" v-if="lang == 'cn'"/>
-                <div id="wholemorning">{{ $t('tut.3.1') }}<br>{{ $t('tut.3.2') }}<br>{{ $t('tut.3.3') }}<br>{{ $t('tut.3.4') }}<br>{{ $t('tut.3.5') }}</div>
+                <div class="pagetitle">{{ $t('tut.3.1') }}</div>
+                <div class="pagetext">{{ $t('tut.3.2') }}<span class="red">{{ $t('tut.3.3') }}</span>{{ $t('tut.3.4') }}</div>
               </div>
               <div v-if="page == 4">
                 <img src="@/assets/tutorial-over-en.png" id="gameicon" v-if="lang == 'en'"/>
                 <img src="@/assets/tutorial-over-cn.png" id="gameicon" v-if="lang == 'cn'"/>
-                <div id="wholemorning">{{ $t('tut.4.1') }}<br>{{ $t('tut.4.2') }}<br>{{ $t('tut.4.3') }}<br>{{ $t('tut.4.4') }}<br>{{ $t('tut.4.5') }}</div>
+                <div class="pagetitle">{{ $t('tut.4.1') }}</div>
+                <div class="pagetext">{{ $t('tut.4.2') }}<span class="red">{{ $t('tut.4.3') }}</span>{{ $t('tut.4.4') }}</div>
               </div>
               <div v-if="page == 5">
-                <img src="@/assets/tutorial-shutdown.png" id="gameicon"/>
-                <div id="wholemorning">{{ $t('tut.5.1') }}<br>{{ $t('tut.5.2') }}<br>{{ $t('tut.5.3') }}</div>
-              </div>
-              
-              <div v-if="page == 6">
-                <img src="@/assets/tutorial-wintray.png" id="gameicon-page1-page6"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon"/>
-                <div id="wholemorning">{{ $t('tut.6.1') }}<br>{{ $t('tut.6.2') }}<br>{{ $t('tut.6.3') }}<br>{{ $t('tut.6.4') }}</div>
+                <img src="@/assets/tutorial-wintray.png" id="gameicon-page1-page6"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon-page1-page6"/>
+                <div class="pagetitle">{{ $t('tut.5.1') }}</div>
+                <div class="pagetext">{{ $t('tut.5.2') }}</div>
                 <br>
                 <small v-if="!startonlogin && iselectron" class="new largebtn-notbtn transparent small red tutorial-a" @click="settings">{{ $t("tostartonlogin") }}<br>{{ $t("tostartonlogin-2") }}</small>
               </div>
@@ -183,9 +182,9 @@
         this.$router.push('settings');
       },
       next() {
-        if (this.page < 5) {
+        if (this.page < 4) {
           this.page ++;
-        } else if (this.page == 5) {
+        } else if (this.page == 4) {
           this.page ++;
           this.nexttext = this.$t("over");
         } else {

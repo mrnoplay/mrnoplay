@@ -89,7 +89,13 @@ export default {
   },
   mounted: function() {
     this.version = process.env.VUE_APP_VER;
-    this.i18nsetlang();
+    this.i18nsetlang().then(() => {
+      this.$refs.notify.send({
+        title: this.$t("timeisup"),
+        id: 8,
+        message: this.$t("willpunish")
+      });
+    });
     this.storagesetjson('cannotify', true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
@@ -100,11 +106,6 @@ export default {
     this.timing = true;
     alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
     setTimeout(this.timeout, 180000);
-    this.$refs.notify.send({
-      title: this.$t("timeisup"),
-      id: 8,
-      message: this.$t("willpunish")
-    });
   },
   beforeDestroy: function() {},
   methods: {
@@ -163,10 +164,11 @@ export default {
     interval() {
       if (this.timing == true && this.$router.currentRoute.path == "/over") {
         this.punishstart = true;
-        this.$refs.notify.send({
-          title: this.$t("stop"),
+        this.$i18n.locale = _this.lang;
+        _this.$refs.notify.send({
+          title: _this.$t("stop"),
           id: 1,
-          message: this.$t("notifymessage."+this.rand(1,2)),
+          message: _this.$t("notifymessage."+_this.rand(1,2)),
         });
         alarm.play();
       } else {
@@ -178,12 +180,14 @@ export default {
     },
     shutdowninterval() {
       if (process.env.VUE_APP_LINXF == "electron") {
+        this.$i18n.locale = this.lang;
         this.$refs.notify.send({
           title: this.$t("willforce"),
           id: 9,
           message: this.$t("willforce"),
         });
         setTimeout(() => {
+          this.$i18n.locale = this.lang;
           this.$refs.notify.send({
             title: this.$t("willforce"),
             id: 9,
@@ -197,6 +201,7 @@ export default {
       setInterval(this.interval, 2000);
       setInterval(this.longinterval, 140000);
       setInterval(this.shutdowninterval, 420000);
+      this.$i18n.locale = this.lang;
       this.popup(this.$t("now3"), this.$t("10willforce"));
     },
     rand(min, max) {

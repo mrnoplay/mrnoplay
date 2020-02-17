@@ -54,39 +54,27 @@
     "tut": {
       "1": {
         "1": "你需要不玩家",
-        "2": "你曾说就玩5分钟，结果一上午没了。你需要掌控时间，你需要不玩家。"
+        "2": "你一定有这样的经历：你想着自己就玩5分钟，结果一上午没了。工作时效率再高，也难以抵挡连续玩太久对计划的拖延。你需要不玩家，进行合理的休息娱乐，然后在计划的时间内回到工作。"
       },
       "2": {
-        "1": "玩着玩着就会停不下来",
-        "2": "但最开始还是对时间有预算的",
-        "3": "设置好时间，点击开始按钮",
-        "4": "在旅途的最开始",
-        "5": "就给自己一个明确的时间限度"
+        "1": "立刻开始！",
+        "2": "玩着玩着就会停不下来，但最开始还是对时间有预算的，设置好时间，点击开始按钮，在旅途的最开始，就给自己一个明确的时间限度。"
       },
       "3": {
-        "1": "开始以后在电脑版",
-        "2": "点击'停止'就会自动关机",
-        "3": "防止时间不受控制",
-        "4": "当然，在15秒内",
-        "5": "允许点击“取消”改变计划"
+        "1": "开始计时之后",
+        "2": "开始以后在电脑版点击'停止'就会",
+        "3": "自动关机",
+        "4": "，以防止时间不受控制。当然，在15秒内，你可以点击“取消”改变计划。"
       },
       "4": {
-        "1": "预定的时间结束后",
-        "2": "进入超时阶段",
-        "3": "3分钟还未主动停止的",
-        "4": "将接受恼人声音",
-        "5": "和弹窗、通知等惩罚"
+        "1": "别超时！",
+        "2": "预定的时间结束后，进入超时阶段。超时3分钟还未主动停止的，将接受恼人声音、弹窗和通知等惩罚。10分钟还未结束的，",
+        "3": "将在提示以后强制关机",
+        "4": "。请合理安排使用时间哦！"
       },
       "5": {
-        "1": "10分钟还未结束的",
-        "2": "将在提示以后强制关机",
-        "3": "请合理安排使用时间哦"
-      },
-      "6": {
-        "1": "1. 支持中英双语言",
-        "2": "2. 支持开机自启",
-        "3": "3. 关闭窗口后，通过如上",
-        "4": "状态栏图标重新打开应用"
+        "1": "更多功能",
+        "2": "支持中英双语言，支持开机自启。关闭窗口后，通过如上图所示状态栏图标重新打开应用。还有更多功能等待你的发现！"
       }
     },
     "notifymessage": {
@@ -163,40 +151,28 @@
     "tostartonlogin-2": "This is Benificial on Reducing Out-of-plan Playing!",
     "tut": {
       "1": {
-        "1": "You Need This",
-        "2": "You Wanna Play for 5min, but Result in Waste a Day. You Need to Control Time, You Need Mr Noplay!"
+        "1": "Why Mr Noplay",
+        "2": "You must have experienced this: Thinking that I'll just play for a while, but end up wasting all day. What you need is not only productivity at work, but also the time limitation for rest and playing."
       },
       "2": {
-        "1": "Though Can't Stop Playing",
-        "2": "You Can Plan Time",
-        "3": "Set Time and Click Start",
-        "4": "Get Yourself a Limit",
-        "5": "On the Start of the Trip"
+        "1": "Start Now!",
+        "2": "You'll find it hard to stop after playing for a while, so you can follow our routine, to set a time limitation for yourself before you start."
       },
       "3": {
-        "1": "On PC, After Start",
-        "2": "Click 'Stop' will Shutdown",
-        "3": "So Time is in Control",
-        "4": "But in the First 15s",
-        "5": "You Can Click 'Cancel'"
+        "1": "When Timing",
+        "2": "When you click 'Stop' on computer, your computer will be",
+        "3": " shut down ",
+        "4": "to stop time from being uncontrollable. But you can cancel within 15s."
       },
       "4": {
-        "1": "After the Planned Time",
-        "2": "You Enter Overtime",
-        "3": "If don't Stop in 3min",
-        "4": "You'll be Annoyed",
-        "5": "By Sound, Popup etc."
+        "1": "No Overtime!",
+        "2": "After time stopped, it comes to overtime period. After 3 minutes, you'll be annoyed by scary sound, pop-ups and notifications. And after 10 minutes,",
+        "3": " you'll be notified and forced to shut down",
+        "4": ".Please plan your time reasonably."
       },
       "5": {
-        "1": "After 10min Overtime",
-        "2": "You Will be Forced to Shutdown",
-        "3": "Please Plan Time Carefully!"
-      },
-      "6": {
-        "1": "1. Chinese & English",
-        "2": "2. Start On Login",
-        "3": "3. Find App on Topbar",
-        "4": "If the App was Closed"
+        "1": "More...",
+        "2": "Support both Chinese and English. Support auto-launch. Support status bar icon. More functions are waiting for you to explore!"
       }
     },
     "notifymessage": {

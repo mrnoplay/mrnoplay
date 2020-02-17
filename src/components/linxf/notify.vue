@@ -15,28 +15,29 @@ export default {
       var title = obj.title;
       var message = obj.message;
       var id = obj.id;
-      this.canwenotify();
-      if (process.env.VUE_APP_LINXF == "electron") {
-        if (this.cannotify) {
-          var notification = new Notification(title, {
-            body: message
-          });
+      this.canwenotify().then(() => {
+        if (process.env.VUE_APP_LINXF == "electron") {
+          if (this.cannotify) {
+            var notification = new Notification(title, {
+              body: message
+            });
+          } else {
+            this.$parent.$breadstick.notify(title + ": " + message, {
+              position: "top-right"
+            });
+          }
         } else {
-          this.$parent.$breadstick.notify(title + ": " + message, {
-            position: "top-right"
+          LocalNotifications.schedule({
+            notifications: [
+              {
+                title: title,
+                body: message,
+                id: id
+              }
+            ]
           });
         }
-      } else {
-        LocalNotifications.schedule({
-          notifications: [
-            {
-              title: title,
-              body: message,
-              id: id
-            }
-          ]
-        });
-      }
+      });
     },
     async canwenotify() {
       const keys = await Storage.keys();
