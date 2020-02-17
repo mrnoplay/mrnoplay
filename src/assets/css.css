@@ -635,6 +635,7 @@ input[type="number"] {
 }
 
 .Breadstick__alert {
+  -webkit-app-region: no-drag;
   font-family: 'puhuiti'!important;
   font-size: 0.6em!important;
   margin-top: 1em!important;
