@@ -1,0 +1,10 @@
+{
+   "name": "Mr Noplay",
+   "askforautolaunch": "Do you want to start Mr Noplay on login?",
+   "yes": "Yes",
+   "no": "No",
+   "updatefail": "Update failed, please check your network settings.",
+   "updateok": "Can be updated.",
+   "noupdate": "You're up to date.",
+   "'dupdate": "Found an update. Would you like to download it?"
+}

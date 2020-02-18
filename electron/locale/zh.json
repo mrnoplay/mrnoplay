@@ -1,0 +1,10 @@
+{
+  "name": "Mr Noplay 不玩家",
+  "askforautolaunch": "开机自启可以防止未计划的过度娱乐时间。需要开启开机自启吗？",
+  "yes": "确定",
+  "no": "取消",
+  "updatefail": "更新失败，请检查网络设置。",
+  "updateok": "有更新可用。",
+  "noupdate": "没有更新，过一会再来哦！",
+  "'dupdate": "有更新可用。需要下载吗？"
+}

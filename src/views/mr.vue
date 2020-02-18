@@ -182,9 +182,6 @@ export default {
       if (/(^[1-9]\d*$)/.test(this.playtime)) {
         this.storagesetjson("playtime", Number(this.playtime)).then(() => {
           this.storagesetjson("concentrated", false);
-          if (process.env.VUE_APP_LINXF == "electron") {
-            ipc.send("normal-screen");
-          }
           this.$router.push("timing");
         });
       } else {

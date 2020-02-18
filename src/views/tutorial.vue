@@ -107,15 +107,15 @@
       this.version = process.env.VUE_APP_VER;
       this.storagesetjson('cannotify', false);
       this.i18nsetlang();
-      if(process.env.VUE_APP_LINXF == 'electron') {
-        this.iselectron = true;
-        ipc.send('full-screen');
-      }
       this.isonios = this.isiOS(navigator.userAgent);
       _this = this;
       this.loading = false;
       this.timing = true;
       this.page = 1;
+      if(process.env.VUE_APP_LINXF == 'electron') {
+        this.iselectron = true;
+        ipc.send('full-screen');
+      }
     },
     beforeDestroy: function() {
 
@@ -169,9 +169,15 @@
       },
       i18nchinese() {
         this.lang = 'cn';
+        if(this.iselectron) {
+          ipc.send('cn');
+        }
       },
       i18nenglish() {
         this.lang = 'en';
+        if(this.iselectron) {
+          ipc.send('en');
+        }
       },
       goback() {
         this.timing = false;

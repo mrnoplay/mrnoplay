@@ -83,6 +83,9 @@
       },
     },
     mounted: function() {
+      if (process.env.VUE_APP_LINXF == "electron") {
+        ipc.send("normal-screen");
+      }
       this.version = process.env.VUE_APP_VER;
       this.i18nsetlang();
       this.storagesetjson('cannotify', true);

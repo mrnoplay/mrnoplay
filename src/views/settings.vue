@@ -241,6 +241,9 @@
       },
       cn() {
         this.i18nchinese();
+        if(process.env.VUE_APP_LINXF == 'electron') {
+          ipc.send('cn');
+        }
         this.$refs.notify.send({
           title: "成功",
           id: 6,
@@ -249,6 +252,9 @@
       },
       en() {
         this.i18nenglish();
+        if(process.env.VUE_APP_LINXF == 'electron') {
+          ipc.send('en');
+        }
         this.$refs.notify.send({
           title: "Success",
           id: 7,

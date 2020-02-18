@@ -11,6 +11,9 @@ const {
 } = require('electron');
 const  AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
+const i18n = require('i18n');
+const Store = require('electron-store');
+const store = new Store();
 const {
   CapacitorSplashScreen
 } = require('@capacitor/electron');
@@ -88,8 +91,15 @@ async function createWindow() {
     mainWindow.setKiosk(true);
   }
 
+  i18n.configure({
+    locales:['en', 'zh'],
+    directory: __dirname + '/locale'
+  });
+  i18n.setLocale(store.get('lang', 'en'));
+
   mainWindow.on('ready-to-show', function () {
-    mainWindow.show() // 初始化后再显示
+    mainWindow.show(); // 初始化后再显示
+    mainWindow.focus();
   })  
 
   mainWindow.on('close', (event) => {
@@ -193,7 +203,7 @@ ipcMain.on('exit', () => {
 ipcMain.on('shutdown', (event, arg) => {
   if (process.platform === 'win32') {
     var options = {
-      name: 'Mr Noplay / 不玩家',
+      name: i18n.__('name'),
     };
     shutdown.shutdown();
     event.sender.send('timingdone', true);
@@ -247,9 +257,9 @@ ipcMain.on('website', (event,arg) => {
 
 ipcMain.on('askforautolaunch', (event, arg) => {
   dialog.showMessageBox({
-    message: '开机自启可以防止未计划的过度娱乐时间。需要开启开机自启吗？\nDo you want to start Mr Noplay on login?',
+    message: i18n.__('askforautolaunch'),
     type: 'question',
-    buttons: ['确定 Yes', '取消 No'],
+    buttons: [i18n.__('yes'), i18n.__('no')],
   },(response) => {
     if(response == 0) {
       mrlauncher.enable();
@@ -276,12 +286,12 @@ ipcMain.on('checkupdate', (event, arg) => {
     }
     if(signal == 1){
       dialog.showMessageBox({
-        message: '更新失败，请检查网络设置。\nUpdate failed, please check your network settings.'
+        message: i18n.__('updatefail')
       });
     }
     else if(signal == 2) {
       dialog.showMessageBox({
-        message: '有更新可用。\nCan be updated.'
+        message: i18n.__('updateok')
       });
       shell.openExternal('https://github.com/scris/mrnoplay/releases');
       if(mainWindow) {
@@ -289,7 +299,7 @@ ipcMain.on('checkupdate', (event, arg) => {
       }
     } else {
       dialog.showMessageBox({
-        message: '没有更新，过一会再来哦！\nYou\'re up to date.'
+        message: i18n.__('noupdate')
       });
     }
   });
@@ -314,9 +324,9 @@ function update_onstart() {
     }
     if(signal == 2) {
       dialog.showMessageBox({
-        message: '有更新可用。需要下载吗？\nFound an update. Would you like to download it?',
+        message: i18n.__("'dupdate"),
         type: 'question',
-        buttons: ['确定 Yes', '取消 No'],
+        buttons: [i18n.__('yes'), i18n.__('no')],
       },(response) => {
         if(response == 0) {
           shell.openExternal('https://github.com/scris/mrnoplay/releases');
@@ -328,3 +338,13 @@ function update_onstart() {
     }
   });
 }
+
+ipcMain.on('cn', () => {
+  i18n.setLocale('zh');
+  store.set('lang', 'zh');
+})
+
+ipcMain.on('en', () => {
+  i18n.setLocale('en');
+  store.set('lang', 'en');
+})
