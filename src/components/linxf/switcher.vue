@@ -18,6 +18,16 @@ export default {
       side: '',
     };
   },
+  watch: {
+    async default (val) {
+      this.side = val;
+      if(val == false) {
+        this.btnclass = "switch-off";
+      } else {
+        this.btnclass = 'switch-on';
+      }
+    },
+  },
   mounted: function() {
     this.side = this.default;
     //左 off false 右 on true

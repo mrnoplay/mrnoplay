@@ -167,8 +167,8 @@
           else this.lang = 'en', this.storagesetlang('en');
         } else this.lang = 'en', this.storagesetlang('en');
         this.$i18n.locale = this.lang;
-        if (this.lang == 'en') this.default_lang = false;
-        else this.default_lang = true;
+        if (this.lang == 'en') this.default_lang = true;
+        else this.default_lang = false;
       },
       async getdefualt_startonlogin() {
         const keys = await Storage.keys();

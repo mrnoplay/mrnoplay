@@ -8,7 +8,8 @@
     "e": "yarn run electron:start",
     "electron:mac": "electron-builder build --mac --x64",
     "m": "yarn run electron:mac",
-    "electron:win": "electron-builder build --win --x64"
+    "electron:win": "electron-builder build --win --x64",
+    "w": "yarn run electron:win"
   },
   "dependencies": {
     "@capacitor/electron": "^1.1.0",
@@ -19,6 +20,8 @@
     "electron-shutdown-command": "^0.0.8",
     "electron-store": "^5.1.0",
     "i18n": "^0.8.5",
+    "moment": "^2.24.0",
+    "node-cmd": "^3.0.0",
     "request": "^2.88.0"
   },
   "devDependencies": {

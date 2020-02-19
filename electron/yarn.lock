@@ -1276,6 +1276,11 @@ mkdirp@0.5.1, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.npm.taobao.org/moment/download/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha1-DQVdU/UFKqZTyfbraLtdEr9cK1s=
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fms%2Fdownload%2Fms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -1290,6 +1295,11 @@ mustache@*:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/mustache/download/mustache-4.0.0.tgz?cache=0&sync_timestamp=1579182105911&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmustache%2Fdownload%2Fmustache-4.0.0.tgz#7f02465dbb5b435859d154831c032acdfbbefb31"
   integrity sha1-fwJGXbtbQ1hZ0VSDHAMqzfu++zE=
+
+node-cmd@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/node-cmd/download/node-cmd-3.0.0.tgz#38fff70a4aaa4f659d203eb57862737018e24f6f"
+  integrity sha1-OP/3CkqqT2WdID61eGJzcBjiT28=
 
 normalize-package-data@^2.5.0:
   version "2.5.0"

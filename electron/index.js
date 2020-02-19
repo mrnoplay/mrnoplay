@@ -14,6 +14,8 @@ const isDevMode = require('electron-is-dev');
 const i18n = require('i18n');
 const Store = require('electron-store');
 const store = new Store();
+const cmd = require('node-cmd');
+var moment = require('moment');
 const {
   CapacitorSplashScreen
 } = require('@capacitor/electron');
@@ -89,7 +91,6 @@ async function createWindow() {
     splashScreen.init(false);
   } else {
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
-    mainWindow.setKiosk(true);
   }
 
   i18n.configure({
@@ -98,10 +99,44 @@ async function createWindow() {
   });
   i18n.setLocale(store.get('lang', 'en'));
 
-  mainWindow.on('ready-to-show', function () {
-    mainWindow.show(); // 初始化后再显示
-    mainWindow.focus();
-  })  
+  if(process.platform != 'win32') {
+    mainWindow.hide();
+    cmd.get(
+      'who -b',
+      function(err, data, stderr){
+        if (!err) {
+          var reg = /[A-Z]?[a-z]{2}\s[0-9]{1,}\s[0-9]{1,}:[0-9]{1,}/;
+          var datamatched = data.match(reg);
+          var startdate = moment(moment().year().toString() + " " + datamatched.toString());
+          var nowdate = moment();
+          var timepast = Number(nowdate - startdate);
+          if(timepast <= 90000 && timepast > 0) {
+            setTimeout(() => {
+              mainWindow.show(); 
+              mainWindow.focus();
+              mainWindow.setKiosk(true);
+            }, 10000);
+          } else {
+            mainWindow.on('ready-to-show', function () {
+              mainWindow.show(); // 初始化后再显示
+              mainWindow.focus();
+              mainWindow.setKiosk(true);
+            })  
+          }
+        } else {
+          mainWindow.on('ready-to-show', function () {
+            mainWindow.show(); // 初始化后再显示
+            mainWindow.focus();
+            mainWindow.setKiosk(true);
+          })  
+        }
+      }
+    );
+  } else {
+
+  }
+
+  // 获得开机时间 mac: who -b win: systeminfo /fo CSV 再处理
 
   mainWindow.on('close', (event) => {
     if (!canQuit) {
@@ -159,6 +194,7 @@ async function createWindow() {
       mainWindow.setKiosk(false);
       mainWindow.focus();
       mainWindow.setKiosk(true);
+      mainWindow.show();
     }
   })
 
