@@ -1,4 +1,4 @@
-<i18n src="@/assets/lang.json"></i18n>
+<i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
     <!--
@@ -103,7 +103,7 @@ export default {
     this.tutorial();
     this.loading = false;
     this.storagesetjson("concentrated", true);
-    alarm.src = require("@/assets/scarymusic/" + this.rand(1, 17) + ".mp3");
+    alarm.src = require("@/assets/music/scarymusic/" + this.rand(1, 17) + ".mp3");
     if (
       process.env.VUE_APP_LINXF != "android" &&
       process.env.VUE_APP_LINXF != "electron" &&

@@ -1,4 +1,4 @@
-<i18n src="@/assets/lang.json"></i18n>
+<i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
     <!--
@@ -44,7 +44,7 @@
   import titlepart from '@/components/titlepart'
   var alarm = new Audio();
   var _this = null;
-  alarm.src = require("@/assets/alarm.mp3");
+  alarm.src = require("@/assets/music/alarm.mp3");
   var ipc = null;
   if (process.env.VUE_APP_LINXF == "electron") {
     ipc = window.require("electron").ipcRenderer; //use window.require instead of require

@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import '@/assets/bootstrap.css'
+import '@/assets/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import './assets/css.css'
+import './assets/css/css.css'
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)

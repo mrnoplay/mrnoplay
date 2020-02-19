@@ -1,4 +1,4 @@
-<i18n src="@/assets/lang.json"></i18n>
+<i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
     <!--
@@ -18,30 +18,31 @@
         <div class="tutorialboard border">
             <div class="on-notbtn tutorial">
               <div v-if="page == 1">
-                <img src="@/assets/tutorial-game.png" id="gameicon-page1-page6"/>
+                <img src="@/assets/img/tutorial/tutorial-game.png" id="gameicon-page1-page6"/>
                 <div class="pagetitle">{{ $t('tut.1.1') }}</div>
                 <div class="pagetext">{{ $t('tut.1.2') }}</div>
               </div>
               <div v-if="page == 2">
-                <img src="@/assets/tutorial-start-en.png" id="gameicon" v-if="lang == 'en'"/>
-                <img src="@/assets/tutorial-start-cn.png" id="gameicon" v-if="lang == 'cn'"/>
+                <img src="@/assets/img/tutorial/tutorial-start-en.png" id="gameicon" v-if="lang == 'en'"/>
+                <img src="@/assets/img/tutorial/tutorial-start-cn.png" id="gameicon" v-if="lang == 'cn'"/>
                 <div class="pagetitle">{{ $t('tut.2.1') }}</div>
                 <div class="pagetext">{{ $t('tut.2.2') }}</div>
               </div>
               <div v-if="page == 3">
-                <img src="@/assets/tutorial-stop-en.png" id="gameicon" v-if="lang == 'en'"/>
-                <img src="@/assets/tutorial-stop-cn.png" id="gameicon" v-if="lang == 'cn'"/>
+                <img src="@/assets/img/tutorial/tutorial-stop-en.png" id="gameicon" v-if="lang == 'en'"/>
+                <img src="@/assets/img/tutorial/tutorial-stop-cn.png" id="gameicon" v-if="lang == 'cn'"/>
                 <div class="pagetitle">{{ $t('tut.3.1') }}</div>
                 <div class="pagetext">{{ $t('tut.3.2') }}<span class="red">{{ $t('tut.3.3') }}</span>{{ $t('tut.3.4') }}</div>
               </div>
               <div v-if="page == 4">
-                <img src="@/assets/tutorial-over-en.png" id="gameicon" v-if="lang == 'en'"/>
-                <img src="@/assets/tutorial-over-cn.png" id="gameicon" v-if="lang == 'cn'"/>
+                <img src="@/assets/img/tutorial/tutorial-over-en.png" id="gameicon" v-if="lang == 'en'"/>
+                <img src="@/assets/img/tutorial/tutorial-over-cn.png" id="gameicon" v-if="lang == 'cn'"/>
                 <div class="pagetitle">{{ $t('tut.4.1') }}</div>
                 <div class="pagetext">{{ $t('tut.4.2') }}<span class="red">{{ $t('tut.4.3') }}</span>{{ $t('tut.4.4') }}</div>
               </div>
               <div v-if="page == 5">
-                <img src="@/assets/tutorial-wintray.png" id="gameicon-page1-page6"/>&nbsp;&nbsp;<img src="@/assets/tutorial-mactray.png" id="gameicon-page1-page6"/>
+                <img src="@/assets/img/tutorial/tutorial-wintray.png" id="gameicon-page1-page6"/>&nbsp;&nbsp;
+                <img src="@/assets/img/tutorial/tutorial-mactray.png" id="gameicon-page1-page6"/>
                 <div class="pagetitle">{{ $t('tut.5.1') }}</div>
                 <div class="pagetext">{{ $t('tut.5.2') }}</div>
                 <br>
@@ -69,7 +70,7 @@
   import titlepart from '@/components/titlepart'
   var alarm = new Audio();
   var _this = null;
-  alarm.src = require("@/assets/alarm.mp3");
+  alarm.src = require("@/assets/music/alarm.mp3");
   var ipc = null;
   if (process.env.VUE_APP_LINXF == "electron") {
     ipc = window.require("electron").ipcRenderer; //use window.require instead of require

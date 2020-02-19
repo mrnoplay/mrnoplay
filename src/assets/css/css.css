@@ -1,7 +1,7 @@
 html {
   background-color: #efeeee;
   background-size: contain;
-  font-family: "puhuiti", "puhuiti-online", sans-serif;
+  font-family: "puhuiti", sans-serif;
 }
 
 body {
@@ -39,7 +39,7 @@ body {
 
 @media screen and (min-width: 321px) {
   html {
-    background-image: url('background.jpg');
+    background-image: url('../img/background.jpg');
   }
   #nbsppart, #timingnbsppart {
     padding-top: 20vh;
@@ -83,29 +83,17 @@ input[type="number"] {
 
 @font-face {
   font-family: "digital";
-  src: url("digital.woff") format("woff");
+  src: url("../font/digital.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "puhuiti";
-  src: url("puhuiti.woff2") format("woff");
+  src: url("../font/puhuiti.woff2") format("woff");
   font-weight: normal;
   font-style: normal;
 }
-
-@font-face {
-  font-family: 'puhuiti-online';
-  font-display: swap;
-  src: url('//at.alicdn.com/t/webfont_whvoskd3vmb.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/webfont_whvoskd3vmb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/webfont_whvoskd3vmb.woff2') format('woff2'),
-  url('//at.alicdn.com/t/webfont_whvoskd3vmb.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/webfont_whvoskd3vmb.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/webfont_whvoskd3vmb.svg#Alibaba-PuHuiTi-Regular') format('svg'); /* iOS 4.1- */
-}
-
 
 .container {
   display: flex;
@@ -135,7 +123,7 @@ input[type="number"] {
   margin-top: 0.5em;
   border-radius: 10px;
   font-size: 1em;
-  font-family: "puhuiti", "puhuiti-online", sans-serif;
+  font-family: "puhuiti", sans-serif;
 }
 
 .on-notbtn {
@@ -354,7 +342,7 @@ input[type="number"] {
 
 .switch-on {
   background-color: transparent;
-  background-image: url('on.png');
+  background-image: url('../img/on.png');
   width: 81px;
   height: 62px;
   cursor: pointer;
@@ -362,7 +350,7 @@ input[type="number"] {
 
 .switch-off {
   background-color: transparent;
-  background-image: url('off.png');
+  background-image: url('../img/off.png');
   width: 81px;
   height: 62px;
   cursor: pointer;
@@ -389,7 +377,7 @@ input[type="number"] {
   background-color: transparent;
   margin-top: 1em;
   margin-left: 0.2em;
-  background-image: url('about.svg');
+  background-image: url('../img/about.svg');
 }
 
 .back {
@@ -398,15 +386,15 @@ input[type="number"] {
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
-  background-image: url('back.svg');
+  background-image: url('../img/back.svg');
 }
 
 .back:hover, .settingleftbtn:hover .back {
-  background-image: url('back-white.svg');
+  background-image: url('../img/back-white.svg');
 }
 
 .back:active, .settingleftbtn:active .back {
-  background-image: url('back.svg');
+  background-image: url('../img/back.svg');
 }
 
 .submit {
@@ -417,15 +405,15 @@ input[type="number"] {
   background-color: transparent;
   margin-top: 1em;
   margin-left: 0.2em;
-  background-image: url('submit.svg');
+  background-image: url('../img/submit.svg');
 }
 
 .submit:hover {
-  background-image: url('submit-white.svg');
+  background-image: url('../img/submit-white.svg');
 }
 
 .submit:active {
-  background-image: url('submit.svg');
+  background-image: url('../img/submit.svg');
 }
 
 .settings {
@@ -436,7 +424,7 @@ input[type="number"] {
   background-color: transparent;
   margin-top: 1.02em;
   margin-left: 0.2em;
-  background-image: url('settings.svg');
+  background-image: url('../img/settings.svg');
 }
 
 .exit {
@@ -447,7 +435,7 @@ input[type="number"] {
   background-color: transparent;
   margin-top: 1.06em;
   margin-left: 0.2em;
-  background-image: url('exit.svg');
+  background-image: url('../img/exit.svg');
 }
 
 .breathe-div {
@@ -568,7 +556,7 @@ input[type="number"] {
   border-radius: 10px;
   font-size: 0.8em;
   width: 11em;
-  font-family: "puhuiti", "puhuiti-online", sans-serif;
+  font-family: "puhuiti", sans-serif;
 }
 
 .settingbtn {

@@ -1,4 +1,4 @@
-<i18n src="@/assets/lang.json"></i18n>
+<i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div class="select">
     {{ left }}
