@@ -63,7 +63,7 @@ export default {
     exit() {
       ipc.send("exit");
     },
-        async storagesetlang(val) {
+    async storagesetlang(val) {
       await Storage.set({
         key: "lang",
         value: val

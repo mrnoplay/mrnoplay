@@ -24,11 +24,11 @@
         <div id="setting-main" style="-webkit-app-region: no-drag">
           <div v-if="iselectron" class="settingfield main-like">
             <b class="label">{{ $t("startonlogin") }}</b><br>
-            <div class="select">{{ $t("turnoff") }}<b-btn variant="light" :class="switchstartonlogin" @click="selectstartonlogin"></b-btn>{{ $t("turnon") }}</div>
+            <switcher :left="$t('turnoff')" :right="$t('turnon')" :default="default_startonlogin" @toleft="notstartonlogin" @toright="startonlogin"></switcher>
           </div>
           <div class="settingfield main-like">
             <b class="label">语言/Language</b>
-            <div class="select">中文<b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English</div>
+            <switcher left="中文" right="English" :default="default_lang" @toleft="cn" @toright="en"></switcher>
           </div>
           <div v-if="iselectron" class="settingfield main-like">
             <b class="label">{{ $t("update") }}</b><br>
@@ -40,8 +40,8 @@
           <div class="settingfield  main-like">
             <b class="label">{{ $t("defaulttime") }}</b>
             <div class="input-btn">
-              <input type="tel" maxLength="4" required class="off settinginput" v-model="defaulttime" @keyup.enter="setdefaulttime"/>
-              <b-btn variant="light" class="new submit settingbtn on" @click="setdefaulttime"></b-btn>
+              <input type="tel" maxLength="4" required class="off settinginput" v-model="default_time" @keyup.enter="setdefault_time"/>
+              <b-btn variant="light" class="new submit settingbtn on" @click="setdefault_time"></b-btn>
             </div>
             <div class="warnfather warn settingwarn" v-if="timeNAN">
               <div class="breathe-div"></div>
@@ -64,6 +64,7 @@
   var _this = null;
   alarm.src = require("@/assets/alarm.mp3");
   import notify from "@/components/linxf/notify";
+  import switcher from "@/components/linxf/switcher";
   var ipc = null;
   if (process.env.VUE_APP_LINXF == "electron") {
     ipc = window.require("electron").ipcRenderer; //use window.require instead of require
@@ -92,6 +93,7 @@
       loading,
       titlepart,
       notify,
+      switcher,
     },
     data() {
       return {
@@ -101,12 +103,12 @@
         isonios: false,
         lang: 'en',
         version: '1.0.0',
-        switchstartonlogin: 'switch-off',
-        switchlang: 'switch-on',
         checking: false,
         checked: false,
         checkedtext: '',
-        defaulttime: 5,
+        default_lang: false,
+        default_startonlogin: false,
+        default_time: 5,
         timeNAN: false,
       };
     },
@@ -120,9 +122,9 @@
       this.checking = false;
       this.version = process.env.VUE_APP_VER;
       this.storagesetjson('cannotify', false);
-      this.i18nsetlang();
-      this.setstartonloginselect();
-      this.getdefaulttime();
+      this.getdefualt_lang();
+      this.getdefualt_startonlogin();
+      this.getdefault_time();
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
       }
@@ -157,7 +159,7 @@
           value: JSON.stringify(val)
         });
       },
-      async i18nsetlang() {
+      async getdefualt_lang() {
         const keys = await Storage.keys();
         if(keys.keys.indexOf('lang') != -1) {
           const retlang = await Storage.get({ key:'lang' });
@@ -165,41 +167,36 @@
           else this.lang = 'en', this.storagesetlang('en');
         } else this.lang = 'en', this.storagesetlang('en');
         this.$i18n.locale = this.lang;
-        if (this.lang == 'en') this.switchlang = 'switch-on';
-        else this.switchlang = 'switch-off';
+        if (this.lang == 'en') this.default_lang = false;
+        else this.default_lang = true;
       },
-      async setstartonloginselect() {
+      async getdefualt_startonlogin() {
         const keys = await Storage.keys();
         if(keys.keys.indexOf('startonlogin') != -1) {
           const ret = await Storage.get({ key:'startonlogin' });
           if(ret.value != null) {
-            if (ret.value == false || ret.value == "false") this.switchstartonlogin = 'switch-off';
-            else this.switchstartonlogin = 'switch-on';
+            if (ret.value == false || ret.value == "false") this.default_startonlogin = false;
+            else this.default_startonlogin = true;
           }
-          else this.switchstartonlogin = 'switch-off', this.storagesetjson('startonlogin',false);
-        } else this.switchstartonlogin = 'switch-off', this.storagesetjson('startonlogin',false);
+          else this.default_startonlogin = false, this.storagesetjson('startonlogin',false);
+        } else this.default_startonlogin = false, this.storagesetjson('startonlogin',false);
       },
-      async getdefaulttime() {
+      async getdefault_time() {
         const keys = await Storage.keys();
-        if(keys.keys.indexOf('defaulttime') != -1) {
-          const ret = await Storage.get({ key:'defaulttime' });
+        if(keys.keys.indexOf('default_time') != -1) {
+          const ret = await Storage.get({ key:'default_time' });
           if(ret.value != null) {
-            this.defaulttime = Number(JSON.parse(ret.value));
+            this.default_time = Number(JSON.parse(ret.value));
           }
-          else this.defaulttime = 5, this.storagesetjson('defaulttime',5);
-        } else this.defaulttime = 5, this.storagesetjson('defaulttime',5);
-      },
-      i18nchinese() {
-        this.lang = 'cn';
-      },
-      i18nenglish() {
-        this.lang = 'en';
+          else this.default_time = 5, this.storagesetjson('default_time',5);
+        } else this.default_time = 5, this.storagesetjson('default_time',5);
       },
       goback() {
         this.timing = false;
         this.$router.push('/');
       },
       startonlogin() {
+        this.storagesetjson('startonlogin',true);
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send("startonlogin");
           this.$refs.notify.send({
@@ -210,6 +207,7 @@
         }
       },
       notstartonlogin() {
+        this.storagesetjson('startonlogin',false);
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send("notstartonlogin");
           this.$refs.notify.send({
@@ -219,28 +217,8 @@
           });
         }
       },
-      selectstartonlogin() {
-        if(this.switchstartonlogin == 'switch-on') {
-          this.switchstartonlogin = 'switch-off';
-          this.storagesetjson('startonlogin',false);
-          this.notstartonlogin();
-        } else {
-          this.switchstartonlogin = 'switch-on';
-          this.storagesetjson('startonlogin',true);
-          this.startonlogin();
-        }
-      },
-      selectlang() {
-        if (this.lang == 'en') {
-          this.cn();
-          this.switchlang = 'switch-off';
-        } else {
-          this.en();
-          this.switchlang = 'switch-on';
-        }
-      },
       cn() {
-        this.i18nchinese();
+        this.lang = 'cn';
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send('cn');
         }
@@ -251,7 +229,7 @@
         });
       },
       en() {
-        this.i18nenglish();
+        this.lang = 'en';
         if(process.env.VUE_APP_LINXF == 'electron') {
           ipc.send('en');
         }
@@ -276,14 +254,14 @@
           });
         }
       },
-      setdefaulttime() {
-        if (/(^[1-9]\d*$)/.test(this.defaulttime)) {
+      setdefault_time() {
+        if (/(^[1-9]\d*$)/.test(this.default_time)) {
           this.timeNAN = false;
-          this.storagesetjson('defaulttime', this.defaulttime);
+          this.storagesetjson('default_time', this.default_time);
           this.$refs.notify.send({
             title: this.$t("success"),
             id: 5,
-            message: this.$t("defaulttimesuccess")
+            message: this.$t("default_timesuccess")
           });
         } else {
           this.timeNAN = true;

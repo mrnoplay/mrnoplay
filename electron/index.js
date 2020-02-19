@@ -21,6 +21,7 @@ const path = require('path');
 const shutdown = require('electron-shutdown-command'); //shutdown windows
 var applescript = require('applescript'); //use applescript to shutdown mac
 let canQuit = false;
+let canBlur = false;
 
 // Place holders for our windows so they don't get garbage collected.
 let mainWindow = null;
@@ -151,6 +152,27 @@ async function createWindow() {
     mainWindow.moveTop();
     mainWindow.center();
   })
+
+  mainWindow.on('blur', (event) => {
+    if(mainWindow.isKiosk() && !canBlur) {
+      mainWindow.hide();
+      mainWindow.setKiosk(false);
+      mainWindow.focus();
+      mainWindow.setKiosk(true);
+    }
+  })
+
+  mainWindow.on('focus', (event) => {
+    if(canBlur) {
+      canBlur = false;
+    }
+  })
+
+  mainWindow.on('show', (event) => {
+    if(canBlur) {
+      canBlur = false;
+    }
+  })
 }
 
 // This method will be called when Electron has finished
@@ -185,6 +207,7 @@ app.on('activate', function () {
 ipcMain.on('full-screen', function () {
   if (mainWindow) {
     mainWindow.show();
+    mainWindow.center();
     mainWindow.setKiosk(true);
   }
 });
@@ -242,6 +265,7 @@ app.on('will-quit', () => {
 })
 
 ipcMain.on('github', (event,arg) => {
+  canBlur = true;
   shell.openExternal('https://github.com/scris/mrnoplay/');
   if(mainWindow) {
     mainWindow.hide();
@@ -249,6 +273,7 @@ ipcMain.on('github', (event,arg) => {
 })
 
 ipcMain.on('website', (event,arg) => {
+  canBlur = true;
   shell.openExternal('https://mrnoplay.scris.top');
   if(mainWindow) {
     mainWindow.hide();
@@ -293,6 +318,7 @@ ipcMain.on('checkupdate', (event, arg) => {
       dialog.showMessageBox({
         message: i18n.__('updateok')
       });
+      canBlur = true;
       shell.openExternal('https://github.com/scris/mrnoplay/releases');
       if(mainWindow) {
         mainWindow.hide();
@@ -329,6 +355,7 @@ function update_onstart() {
         buttons: [i18n.__('yes'), i18n.__('no')],
       },(response) => {
         if(response == 0) {
+          canBlur = true;
           shell.openExternal('https://github.com/scris/mrnoplay/releases');
           if(mainWindow) {
             mainWindow.hide();
