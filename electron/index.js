@@ -133,7 +133,11 @@ async function createWindow() {
       }
     );
   } else {
-
+    mainWindow.on('ready-to-show', function () {
+      mainWindow.show(); // 初始化后再显示
+      mainWindow.focus();
+      mainWindow.setKiosk(true);
+    })  
   }
 
   // 获得开机时间 mac: who -b win: systeminfo /fo CSV 再处理
