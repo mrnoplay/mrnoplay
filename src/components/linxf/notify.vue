@@ -27,15 +27,33 @@ export default {
             });
           }
         } else {
-          LocalNotifications.schedule({
-            notifications: [
-              {
-                title: title,
-                body: message,
-                id: id
-              }
-            ]
-          });
+          if (process.env.VUE_APP_LINXF == 'web') {
+            if (window.Notification) {
+              LocalNotifications.schedule({
+                notifications: [
+                  {
+                    title: title,
+                    body: message,
+                    id: id
+                  }
+                ]
+              });
+            } else {
+              this.$parent.$breadstick.notify(title + ": " + message, {
+                position: "top-right"
+              });
+            }
+          } else {
+            LocalNotifications.schedule({
+              notifications: [
+                {
+                  title: title,
+                  body: message,
+                  id: id
+                }
+              ]
+            });
+          }
         }
       });
     },

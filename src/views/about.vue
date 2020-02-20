@@ -33,6 +33,9 @@
         <div class="authorinfo"><a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;<a class="tutorial-a" @click="website">{{ $t("website") }}</a></div>
       </div>
     </div>
+    <br>
+    <div class="authorinfo red" v-if="isweb">{{ $t("webversion.1") }}</div>
+    <div class="authorinfo red" v-if="isweb">{{ $t("webversion.2") }}</div>
   </div>
 </template>
 
@@ -61,6 +64,7 @@
         loading: true,
         iselectron: false,
         isonios: false,
+        isweb: false,
         lang: 'en',
         version: '1.0.0',
       };
@@ -77,6 +81,9 @@
       this.storagesetjson('cannotify', false);
       if(process.env.VUE_APP_LINXF == 'electron') {
         this.iselectron = true;
+      }
+      if(process.env.VUE_APP_LINXF == 'web' || process.env.NODE_ENV == 'development') {
+        this.isweb = true;
       }
       this.isonios = this.isiOS(navigator.userAgent);
       _this = this;

@@ -96,7 +96,11 @@
     "half": "时间已过半",
     "halftext": "请合理安排剩余时间！",
     "defaulttime": "默认时间 (分钟)",
-    "defaulttimesuccess": "默认时间设置成功！"
+    "defaulttimesuccess": "默认时间设置成功！",
+    "webversion": {
+      "1": "由于浏览器限制，网页版只包括少部分功能",
+      "2": "请去官网下载电脑版，同时支持 Win 和 Mac"
+    }
   },
   "en": {
     "submit": "OK",
@@ -194,6 +198,10 @@
     "half": "50% Time Left",
     "halftext": "Be careful about your time!",
     "defaulttime": "Default Time (min)",
-    "defaulttimesuccess": "The default time is set successfully."
+    "defaulttimesuccess": "The default time is set successfully.",
+    "webversion": {
+      "1": "Web version is limited due to the browser's limitation",
+      "2": "Go to the website and download win/mac version"
+    }
   }
 }
