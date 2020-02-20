@@ -112,15 +112,21 @@ async function createWindow() {
           var timepast = Number(nowdate - startdate);
           if(timepast <= 90000 && timepast > 0) {
             setTimeout(() => {
-              mainWindow.show(); 
-              mainWindow.focus();
+              if(!canBlur) {
+                mainWindow.show(); 
+                mainWindow.focus();        
+              }
               mainWindow.setKiosk(true);
+              update_onstart();
             }, 10000);
           } else {
             mainWindow.on('ready-to-show', function () {
-              mainWindow.show(); // 初始化后再显示
-              mainWindow.focus();
+              if(!canBlur) {
+                mainWindow.show(); // 初始化后再显示
+                mainWindow.focus();
+              }
               mainWindow.setKiosk(true);
+              update_onstart();
             })  
           }
         } else {
@@ -128,15 +134,19 @@ async function createWindow() {
             mainWindow.show(); // 初始化后再显示
             mainWindow.focus();
             mainWindow.setKiosk(true);
+            update_onstart();
           })  
         }
       }
     );
   } else {
     mainWindow.on('ready-to-show', function () {
-      mainWindow.show(); // 初始化后再显示
-      mainWindow.focus();
+      if(!canBlur) {
+        mainWindow.show(); // 初始化后再显示
+        mainWindow.focus();      
+      }
       mainWindow.setKiosk(true);
+      update_onstart();
     })  
   }
 
@@ -223,7 +233,6 @@ app.on('ready', () => {
   if (process.platform === 'win32') {
     app.setAppUserModelId("com.scrisstudio.mrnoplay");
   }
-  update_onstart();
 });
 
 // Quit when all windows are closed.
@@ -350,6 +359,7 @@ ipcMain.on('checkupdate', (event, arg) => {
       }
     }
     if(signal == 1){
+      canBlur = true;
       dialog.showMessageBox({
         message: i18n.__('updatefail')
       });
@@ -364,6 +374,7 @@ ipcMain.on('checkupdate', (event, arg) => {
         mainWindow.hide();
       }
     } else {
+      canBlur = true;
       dialog.showMessageBox({
         message: i18n.__('noupdate')
       });
@@ -389,18 +400,11 @@ function update_onstart() {
       }
     }
     if(signal == 2) {
+      canBlur = true;
       dialog.showMessageBox({
         message: i18n.__("'dupdate"),
-        type: 'question',
-        buttons: [i18n.__('yes'), i18n.__('no')],
-      },(response) => {
-        if(response == 0) {
-          canBlur = true;
-          shell.openExternal('https://github.com/scris/mrnoplay/releases');
-          if(mainWindow) {
-            mainWindow.hide();
-          }
-        }
+      }, () => {
+        canBlur = false;
       });
     }
   });

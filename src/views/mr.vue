@@ -155,6 +155,10 @@ export default {
         else (this.lang = "en"), this.storagesetlang("en");
       } else (_this.lang = "en"), this.storagesetlang("en");
       this.$i18n.locale = this.lang;
+      if(iselectron) {
+        if(this.lang == 'en') ipc.send('en');
+        else ipc.send('cn');
+      }
     },
     async getplaytime() {
       const keys = await Storage.keys();
