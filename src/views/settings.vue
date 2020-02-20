@@ -261,7 +261,7 @@
           this.$refs.notify.send({
             title: this.$t("success"),
             id: 5,
-            message: this.$t("default_timesuccess")
+            message: this.$t("defaulttimesuccess")
           });
         } else {
           this.timeNAN = true;

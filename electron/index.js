@@ -254,6 +254,7 @@ app.on('activate', function () {
 
 // Define any IPC or other custom functionality below here
 ipcMain.on('full-screen', function () {
+  canBlur = false;
   if (mainWindow) {
     mainWindow.show();
     mainWindow.center();
@@ -262,6 +263,7 @@ ipcMain.on('full-screen', function () {
 });
 
 ipcMain.on('normal-screen', function () {
+  canBlur = true;
   if (mainWindow) {
     mainWindow.setKiosk(false);
   }
