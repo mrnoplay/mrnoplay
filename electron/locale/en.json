@@ -6,5 +6,5 @@
    "updatefail": "Update failed, please check your network settings.",
    "updateok": "Can be updated.",
    "noupdate": "You're up to date.",
-   "'dupdate": "Found an update. Would you like to download it?"
+   "'dupdate": "Found an update. You can download it in Settings."
 }
