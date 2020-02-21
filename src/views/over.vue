@@ -78,7 +78,7 @@ export default {
       playtime: 0,
       displaytime: "0:00",
       lefttime: 0,
-      punishstart: false,
+      punishstart: false
     };
   },
   watch: {
@@ -88,6 +88,7 @@ export default {
     }
   },
   mounted: function() {
+    this.gettheme();
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang().then(() => {
       this.$refs.notify.send({
@@ -96,7 +97,7 @@ export default {
         message: this.$t("willpunish")
       });
     });
-    this.storagesetjson('cannotify', true);
+    this.storagesetjson("cannotify", true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
     }
@@ -104,7 +105,9 @@ export default {
     _this = this;
     this.loading = false;
     this.timing = true;
-    alarm.src = require("@/assets/music/scarymusic/" + this.rand(1, 17) + ".mp3");
+    alarm.src = require("@/assets/music/scarymusic/" +
+      this.rand(1, 17) +
+      ".mp3");
     setTimeout(this.timeout, 180000);
   },
   beforeDestroy: function() {},
@@ -168,7 +171,7 @@ export default {
         _this.$refs.notify.send({
           title: _this.$t("stop"),
           id: 1,
-          message: _this.$t("notifymessage."+_this.rand(1,2)),
+          message: _this.$t("notifymessage." + _this.rand(1, 2))
         });
         alarm.play();
       } else {
@@ -176,7 +179,7 @@ export default {
       }
     },
     longinterval() {
-      this.popup(this.$t("morethan3"),this.$t("10willforce"));
+      this.popup(this.$t("morethan3"), this.$t("10willforce"));
     },
     shutdowninterval() {
       if (process.env.VUE_APP_LINXF == "electron") {
@@ -184,14 +187,14 @@ export default {
         this.$refs.notify.send({
           title: this.$t("willforce"),
           id: 9,
-          message: this.$t("willforce"),
+          message: this.$t("willforce")
         });
         setTimeout(() => {
           this.$i18n.locale = this.lang;
           this.$refs.notify.send({
             title: this.$t("willforce"),
             id: 9,
-            message: this.$t("willforce"),
+            message: this.$t("willforce")
           });
           ipc.send("shutdown");
         }, 5000);
@@ -209,13 +212,36 @@ export default {
     },
     async popup(title, message) {
       if (process.env.VUE_APP_LINXF == "electron") {
-        ipc.send('focus');
+        ipc.send("focus");
         let alertRet = await Modals.alert({
           title: title,
-          message: message,
+          message: message
         });
       }
     },
+    async gettheme() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("theme") != -1) {
+        const ret = await Storage.get({ key: "theme" });
+        if (ret.value != null) this.settheme(JSON.parse(ret.value));
+        else
+          this.storagesetjson("theme", "colorful"), this.settheme("colorful");
+      } else
+        this.storagesetjson("theme", "colorful"), this.settheme("colorful");
+    },
+    settheme(name) {
+      var fileref = document.createElement("link");
+      fileref.setAttribute("rel", "stylesheet");
+      fileref.setAttribute("type", "text/css");
+      if (name == "reality") {
+        var linkpath = require(`@/assets/css/reality.theme.css`);
+        fileref.setAttribute("href", linkpath);
+      } else {
+        var linkpath = require(`@/assets/css/colorful.theme.css`);
+        fileref.setAttribute("href", linkpath);
+      }
+      document.getElementsByTagName("head")[0].appendChild(fileref);
+    }
   }
 };
 </script>
