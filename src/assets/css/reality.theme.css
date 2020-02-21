@@ -643,3 +643,11 @@ input[type="number"] {
   font-size: 0.6em;
   color: grey;
 }
+
+.smallerlabel {
+  font-size: 0.5em;
+}
+
+.smallerlabelfather {
+  height: 0.7em;
+}

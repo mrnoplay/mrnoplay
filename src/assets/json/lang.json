@@ -101,7 +101,13 @@
       "1": "由于浏览器限制，网页版只包括少部分功能",
       "2": "请去官网下载电脑版，同时支持 Win 和 Mac"
     },
-    "feedback": "反馈"
+    "feedback": "反馈",
+    "theme": "样式切换",
+    "theme-ok": "样式切换成功！",
+    "colorful": "清新",
+    "reality": "现实",
+    "theme-notice1": "在配置较低的电脑上，不推荐现实样式",
+    "theme-notice2": "否则可能造成卡顿，或运行速度减慢"
   },
   "en": {
     "submit": "OK",
@@ -204,6 +210,12 @@
       "1": "Web version is limited due to the browser's limitation",
       "2": "Go to the website and download win/mac version"
     },
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "theme": "Theme",
+    "theme-ok": "Theme changed successfully.",
+    "colorful": "Fresh",
+    "reality": "Real",
+    "theme-notice1": "We don't recommend you to use",
+    "theme-notice2": "Real theme on low-configured computers"
   }
 }

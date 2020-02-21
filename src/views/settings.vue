@@ -76,6 +76,9 @@
               @toleft="theme_colorful"
               @toright="theme_reality"
             ></switcher>
+            <div class="smallerlabelfather"><span class="label smallerlabel">{{ $t("theme-notice1") }}</span></div>
+            <div class="smallerlabelfather"><span class="label smallerlabel">{{ $t("theme-notice2") }}</span></div>
+            <div class="smallerlabelfather"></div>
           </div>
         </div>
       </div>
