@@ -30,7 +30,11 @@
           <div class="authorinfo">{{ $t("scrisproduct") }}</div>
         </div>
         <div class="authorinfo">{{ $t("version") }} {{ version }}</div>
-        <div class="authorinfo"><a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;<a class="tutorial-a" @click="website">{{ $t("website") }}</a></div>
+        <div class="authorinfo">
+          <a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;
+          <a class="tutorial-a" @click="website">{{ $t("website") }}</a>&nbsp;
+          <a class="tutorial-a" @click="feedback">{{ $t("feedback") }}</a>
+          </div>
       </div>
     </div>
     <br>
@@ -141,15 +145,24 @@
       github() {
         if(this.iselectron) {
           ipc.send('github');
-        } else if(process.env.VUE_APP_LINXF == 'web') {
+        } else {
           window.open("https://github.com/scris/mrnoplay/", "_blank"); 
         }
       },
       website() {
         if(this.iselectron) {
           ipc.send('website');
-        } else if(process.env.VUE_APP_LINXF == 'web') {
+        } else {
           window.open("https://mrnoplay.scris.top/", "_blank"); 
+        }
+      },
+      feedback() {
+        if(this.iselectron) {
+          if(this.lang == 'cn') ipc.send('feedback-cn');
+          else ipc.send('feedback-en')
+        } else {
+          if(this.lang == 'cn') window.open("https://support.qq.com/products/127085?", "_blank"); 
+          else window.open("mailto:tianze@scris.top");
         }
       }
     }

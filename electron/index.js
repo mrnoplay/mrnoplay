@@ -331,6 +331,22 @@ ipcMain.on('website', (event,arg) => {
   }
 })
 
+ipcMain.on('feedback-cn', (event,arg) => {
+  canBlur = true;
+  shell.openExternal('https://support.qq.com/products/127085?');
+  if(mainWindow) {
+    mainWindow.hide();
+  }
+})
+
+ipcMain.on('feedback-en', (event,arg) => {
+  canBlur = true;
+  shell.openExternal('mailto:tianze@scris.top');
+  if(mainWindow) {
+    mainWindow.hide();
+  }
+})
+
 ipcMain.on('askforautolaunch', (event, arg) => {
   dialog.showMessageBox({
     message: i18n.__('askforautolaunch'),

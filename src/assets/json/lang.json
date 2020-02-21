@@ -100,7 +100,8 @@
     "webversion": {
       "1": "由于浏览器限制，网页版只包括少部分功能",
       "2": "请去官网下载电脑版，同时支持 Win 和 Mac"
-    }
+    },
+    "feedback": "反馈"
   },
   "en": {
     "submit": "OK",
@@ -202,6 +203,7 @@
     "webversion": {
       "1": "Web version is limited due to the browser's limitation",
       "2": "Go to the website and download win/mac version"
-    }
+    },
+    "feedback": "Feedback"
   }
 }
