@@ -131,8 +131,10 @@ async function createWindow() {
           }
         } else {
           mainWindow.on('ready-to-show', function () {
-            mainWindow.show(); // 初始化后再显示
-            mainWindow.focus();
+            if(!canBlur) {
+              mainWindow.show(); // 初始化后再显示
+              mainWindow.focus();
+            }
             mainWindow.setKiosk(true);
             update_onstart();
           })  
@@ -213,13 +215,13 @@ async function createWindow() {
   })
 
   mainWindow.on('focus', (event) => {
-    if(canBlur) {
+    if(mainWindow.isKiosk() && canBlur) {
       canBlur = false;
     }
   })
 
   mainWindow.on('show', (event) => {
-    if(canBlur) {
+    if(mainWindow.isKiosk() && canBlur) {
       canBlur = false;
     }
   })
@@ -263,6 +265,10 @@ ipcMain.on('full-screen', function () {
 });
 
 ipcMain.on('normal-screen', function () {
+  canBlur = true;
+  if (mainWindow) {
+    mainWindow.setKiosk(false);
+  }
   canBlur = true;
   if (mainWindow) {
     mainWindow.setKiosk(false);
