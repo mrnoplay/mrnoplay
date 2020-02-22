@@ -1,0 +1,244 @@
+$black: #333;
+$white: #fdfdfd;
+$labelgrey: rgb(179, 179, 179);
+$inputgrey: rgb(230, 230, 230);
+$hovergrey: rgb(190, 184, 184);
+$activegrey: rgb(133, 128, 128);
+$buttongrey: rgb(33, 33, 33);
+$green: rgb(138, 200, 109);
+
+html {
+  background-color: white;
+  background-size: contain;
+  overflow: hidden;
+}
+
+body {
+  height: 100vh;
+  font-family: '-apple-system', 'San Francisco', BlinkMacSystemFont, 'Helvetica Neue', Helvetica, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  color: $black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: $white;
+}
+
+@media screen and (max-height: 580px) and (min-height: 271px) {
+  html {
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-height: 271px) {
+  html {
+    overflow-y: hidden;
+  }
+}
+
+@font-face {
+  font-family: "icon";
+  src: url("../font/fontello.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#nbsppart {
+  padding-top: 8vh;
+}
+
+#timingnbsppart {
+  padding-top: 2vh;
+}
+
+#tutorialnbsppart {
+  padding-top: 2vh;
+}
+
+#settingsnbsppart {
+  padding-top: 8vh;
+}
+
+input{  
+  background:none;  
+  outline:none;  
+  border:none;
+}
+
+input:focus{   
+  border:none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.setting-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  height: 100%;
+}
+
+.hr {
+  height: 1em;
+}
+
+*{
+  outline:none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+::-moz-focus-inner {
+  border-color: transparent;
+}
+
+.largebtn {
+  padding: 0.8em 6.28em;
+  margin: 1em 0;
+  cursor: pointer;
+  border-radius: 0.2em;
+}
+
+.largebtn-notbtn {
+  padding: 0.8em 6.28em;
+  margin: 1em 0;
+  border-radius: 0.2em;
+}
+
+.largebtn-innertext {
+  width: 4em;
+  font-weight: 700;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.digitaltop {
+  text-transform: uppercase;
+  color: $labelgrey;
+  font-weight: 700;
+  font-size: 0.7em;
+  letter-spacing: 0.03em;
+}
+
+.digitalfather {
+  background: $inputgrey;
+  border-radius: 0.2em;
+  padding: 0.3em;
+  margin-top: 0.2em;
+  width: 11em;
+}
+
+.digital {
+  font-weight: 500;
+  font-size: 1.2em;
+  width: 7.2em;
+}
+
+.digitalnote {
+  text-align: right;
+  box-sizing: border-box;
+  color: $labelgrey;
+}
+
+.startbtn {
+  background: $green;
+}
+
+.startbtn div {
+  color: $white;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 0.7em;
+  letter-spacing: 0.03em;
+  color: $labelgrey;
+  text-align: center;
+}
+
+.titlebtns {
+  text-align: center;
+  padding-top: 0.3em;
+}
+
+.titlebtns button {
+  background: transparent;
+  color: $buttongrey;
+  font-size: 1.2em;
+  padding: 0;
+  cursor: pointer;
+}
+
+.titlebtns button:hover {
+  color: $hovergrey;
+}
+
+.titlebtns button:active {
+  color: $activegrey;
+}
+
+.about::before {
+  font-family: 'icon';
+  content: '\e800';
+}
+
+.settings::before {
+  font-family: 'icon';
+  content: '\e803';
+}
+
+.exit::before {
+  font-family: 'icon';
+  content: '\e802';
+}
+
+.back {
+  width: 1.417em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url('../img/back.svg');
+}
+
+.back:hover, .settingleftbtn:hover .back {
+  background-image: url('../img/back-white.svg');
+}
+
+.back:active, .settingleftbtn:active .back {
+  background-image: url('../img/back.svg');
+}
+
+.submit {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1em;
+  margin-left: 0.2em;
+  background-image: url('../img/submit.svg');
+}
+
+.submit:hover {
+  background-image: url('../img/submit-white.svg');
+}
+
+.submit:active {
+  background-image: url('../img/submit.svg');
+}

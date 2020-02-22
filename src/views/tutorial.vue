@@ -314,10 +314,10 @@ export default {
       fileref.setAttribute("rel", "stylesheet");
       fileref.setAttribute("type", "text/css");
       if (name == "reality") {
-        var linkpath = require(`@/assets/css/reality.theme.css`);
+        var linkpath = require(`@/assets/css/reality.theme.scss`);
         fileref.setAttribute("href", linkpath);
       } else {
-        var linkpath = require(`@/assets/css/colorful.theme.css`);
+        var linkpath = require(`@/assets/css/colorful.theme.scss`);
         fileref.setAttribute("href", linkpath);
       }
       document.getElementsByTagName("head")[0].appendChild(fileref);
