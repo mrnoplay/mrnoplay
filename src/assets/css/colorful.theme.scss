@@ -1,14 +1,17 @@
 $black: #333;
 $white: #fdfdfd;
+$bgwhite: #fafafa;
 $labelgrey: rgb(179, 179, 179);
 $inputgrey: rgb(230, 230, 230);
 $hovergrey: rgb(190, 184, 184);
 $activegrey: rgb(133, 128, 128);
 $buttongrey: rgb(33, 33, 33);
 $green: rgb(138, 200, 109);
+$hovergreen: rgb(89, 161, 82);
+$activegreen: rgb(138, 219, 100);
 
 html {
-  background-color: white;
+  background: $bgwhite;
   background-size: contain;
   overflow: hidden;
 }
@@ -19,7 +22,15 @@ body {
   color: $black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $white;
+}
+
+@media screen and (min-width: 321px) {
+  #main {
+    background: $white;
+    padding: 3em 2em;
+    border-radius: 0.3em;
+    box-shadow: 0 0.2em 0.3em 0.02em rgba(65, 64, 63, 0.1);
+  }
 }
 
 @media screen and (max-height: 580px) and (min-height: 271px) {
@@ -42,7 +53,7 @@ body {
 }
 
 #nbsppart {
-  padding-top: 8vh;
+  padding-top: 16vh;
 }
 
 #timingnbsppart {
@@ -159,6 +170,14 @@ input[type="number"] {
   background: $green;
 }
 
+.startbtn:hover {
+  background: $hovergreen;
+}
+
+.startbtn:active {
+  background: $activegreen;
+}
+
 .startbtn div {
   color: $white;
 }
@@ -180,6 +199,7 @@ input[type="number"] {
   background: transparent;
   color: $buttongrey;
   font-size: 1.2em;
+  font-weight: 500;
   padding: 0;
   cursor: pointer;
 }
