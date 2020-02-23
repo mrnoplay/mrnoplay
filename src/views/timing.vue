@@ -17,7 +17,7 @@
         <div class="digitalboard border">
           <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">
             <div class="digitaltop">{{ $t("left") }}</div>
-            <div class="digitalfather">
+            <div class="digitalfather digitalfather-notinput">
               <span class="digital">{{ displaytime }}</span>
             </div>
           </div>
@@ -43,8 +43,8 @@
           >
             <div class="largebtn-innertext">{{ $t("cancel") }}</div>
           </b-btn><br>
-          <small v-if="iselectron" class="new largebtn transparent small">{{ $t("cancel15s") }}</small>
-          <small v-if="!iselectron" class="new largebtn transparent small">{{ $t("cancelweb") }}</small>
+          <small v-if="iselectron" class="new largebtn transparent small canceltext">{{ $t("cancel15s") }}</small>
+          <small v-if="!iselectron" class="new largebtn transparent small canceltext">{{ $t("cancelweb") }}</small>
         </div>
       </div>
     </div>

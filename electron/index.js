@@ -198,6 +198,7 @@ async function createWindow() {
     tray = new Tray(path.join(__dirname, 'tray.mac.Template.png'));
   }
   tray.on('click', () => {
+    mainWindow.hide();
     mainWindow.show();
     mainWindow.focus();
     mainWindow.moveTop();
@@ -224,6 +225,10 @@ async function createWindow() {
     if(mainWindow.isKiosk() && canBlur) {
       canBlur = false;
     }
+  })
+
+  globalShortcut.register('CommandOrControl+Shift+L', () => {
+    mainWindow.openDevTools();
   })
 }
 

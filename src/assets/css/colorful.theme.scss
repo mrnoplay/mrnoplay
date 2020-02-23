@@ -102,7 +102,7 @@ input[type="number"] {
 }
 
 .largebtn {
-  padding: 0.45rem 3.7rem;
+  padding: 0.45rem 3.68rem;
   margin: 0.5rem 0;
   cursor: pointer;
   border-radius: 0.2rem;
@@ -125,8 +125,8 @@ input[type="number"] {
 .digitaltop, .label, .small {
   text-transform: uppercase;
   color: $labelgrey;
-  font-weight: 700;
-  font-size: 0.7rem;
+  font-weight: 750;
+  font-size: 0.6rem;
   letter-spacing: 0.03rem;
   width: 11rem;
 }
@@ -152,7 +152,6 @@ input[type="number"] {
   border-radius: 0.2rem;
   padding: 0.3rem;
   margin-top: 0.2rem;
-  width: 11rem;
 }
 
 .digitalfather:hover {
@@ -161,6 +160,18 @@ input[type="number"] {
 
 .digitalfather:active {
   background: $inputgrey;
+}
+
+.digitalfather-notinput {
+  cursor: default;
+}
+
+.digitalfather-notinput:hover {
+  background: $lightgrey;
+}
+
+.digitalfather-notinput:active {
+  background: $lightgrey;
 }
 
 .digital {
@@ -307,6 +318,17 @@ input[type="number"] {
   padding-top: 0.05rem;
 }
 
+.canceltext {
+  display: inline-block;
+  padding: 0!important;
+  margin-top: 0;
+  width: 11rem;
+}
+
+.cancelbtn {
+  margin-top: 0;
+}
+
 @media screen and (min-width: 321px) {
   #main {
     background: $white;
@@ -331,5 +353,8 @@ input[type="number"] {
 @media screen and (min-width: 501px) {
   html {
     font-size: 24px;
+  }
+  .largebtn {
+    padding: 0.45rem 3.72rem;
   }
 }
