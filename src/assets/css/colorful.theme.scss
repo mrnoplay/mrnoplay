@@ -6,10 +6,14 @@ $inputgrey: rgb(230, 230, 230);
 $hovergrey: rgb(190, 184, 184);
 $activegrey: rgb(133, 128, 128);
 $buttongrey: rgb(33, 33, 33);
+$lightgrey: rgb(238, 238, 238);
+$lightergrey: rgb(247, 247, 247);
 $green: rgb(138, 200, 109);
-$hovergreen: rgb(89, 161, 82);
+$hovergreen: rgb(89, 175, 81);
 $activegreen: rgb(138, 219, 100);
-$red: rgb(207, 88, 88);
+$red: rgb(204, 87, 87);
+$hoverred: rgb(224, 64, 64);
+$activered: rgb(226, 143, 143);
 
 html {
   background: $bgwhite;
@@ -23,27 +27,6 @@ body {
   color: $black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media screen and (min-width: 321px) {
-  #main {
-    background: $white;
-    padding: 3em 2em;
-    border-radius: 0.3em;
-    box-shadow: 0 0.2em 0.3em 0.02em rgba(65, 64, 63, 0.1);
-  }
-}
-
-@media screen and (max-height: 580px) and (min-height: 271px) {
-  html {
-    overflow-y: auto;
-  }
-}
-
-@media screen and (max-height: 271px) {
-  html {
-    overflow-y: hidden;
-  }
 }
 
 @font-face {
@@ -105,7 +88,7 @@ input[type="number"] {
 }
 
 .hr {
-  height: 1em;
+  height: 1rem;
 }
 
 *{
@@ -119,46 +102,66 @@ input[type="number"] {
 }
 
 .largebtn {
-  padding: 0.8em 6.28em;
-  margin: 1em 0;
+  padding: 0.45rem 3.7rem;
+  margin: 0.5rem 0;
   cursor: pointer;
-  border-radius: 0.2em;
+  border-radius: 0.2rem;
 }
 
 .largebtn-notbtn {
-  padding: 0.8em 6.28em;
-  margin: 1em 0;
-  border-radius: 0.2em;
+  padding: 0.45rem 3.7rem;
+  margin: 0.5rem 0;
+  border-radius: 0.2rem;
 }
 
 .largebtn-innertext {
-  width: 4em;
+  width: 4rem;
   font-weight: 700;
-  font-size: 1em;
+  font-size:  0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.03rem;
 }
 
-.digitaltop {
+.digitaltop, .label {
   text-transform: uppercase;
   color: $labelgrey;
   font-weight: 700;
-  font-size: 0.7em;
-  letter-spacing: 0.03em;
+  font-size: 0.7rem;
+  letter-spacing: 0.03rem;
+  width: 11rem;
+}
+
+.smallerlabel {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: $hovergrey;
+}
+
+.smallerlabelfather {
+  height: 0.8rem;
 }
 
 .digitalfather {
+  background: $lightgrey;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  margin-top: 0.2rem;
+  width: 11rem;
+}
+
+.digitalfather:hover {
+  background: $lightergrey;
+}
+
+.digitalfather:active {
   background: $inputgrey;
-  border-radius: 0.2em;
-  padding: 0.3em;
-  margin-top: 0.2em;
-  width: 11em;
 }
 
 .digital {
   font-weight: 500;
-  font-size: 1.2em;
-  width: 7.2em;
+  font-size: 1.2rem;
+  width: 9rem;
 }
 
 .digitalnote {
@@ -183,27 +186,43 @@ input[type="number"] {
   color: $white;
 }
 
+.stopbtn {
+  background: $red;
+}
+
+.stopbtn:hover {
+  background: $hoverred;
+}
+
+.stopbtn:active {
+  background: $activered;
+}
+
+.stopbtn div {
+  color: $white;
+}
+
 .title {
   font-weight: 700;
-  font-size: 0.7em;
-  letter-spacing: 0.03em;
+  font-size: 0.7rem;
+  letter-spacing: 0.03rem;
   color: $labelgrey;
   text-align: center;
 }
 
 .titlebtns {
   text-align: center;
-  padding-top: 0.3em;
+  padding-top: 0.3rem;
 }
 
 .titlebtns button {
   background: transparent;
   color: $labelgrey;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: 500;
   padding: 0;
   cursor: pointer;
-  margin-right: 0.2em;
+  margin-right: 0.2rem;
 }
 
 .titlebtns button:hover {
@@ -220,7 +239,7 @@ input[type="number"] {
 }
 
 .about {
-  font-size: 1.1em!important;
+  font-size: 1.1rem!important;
 }
 
 .settings::before {
@@ -234,13 +253,13 @@ input[type="number"] {
 }
 
 .exit {
-  font-size: 1.25em!important;
-  margin-right: 0em!important;
+  font-size: 1.25rem!important;
+  margin-right: 0rem!important;
 }
 
 .back {
-  width: 1.417em;
-  height: 1em;
+  width: 1.417rem;
+  height: 1rem;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -256,13 +275,13 @@ input[type="number"] {
 }
 
 .submit {
-  width: 1.417em;
-  height: 1.417em;
+  width: 1.417rem;
+  height: 1.417rem;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
-  margin-top: 1em;
-  margin-left: 0.2em;
+  margin-top: 1rem;
+  margin-left: 0.2rem;
   background-image: url('../img/submit.svg');
 }
 
@@ -278,7 +297,34 @@ input[type="number"] {
   color: $red;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 0.8em;
-  letter-spacing: 0.03em;
-  padding-top: 0.05em;
+  font-size: 0.8rem;
+  letter-spacing: 0.03rem;
+  padding-top: 0.05rem;
+}
+
+@media screen and (min-width: 321px) {
+  #main {
+    background: $white;
+    padding: 3rem 2rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
+  }
+}
+
+@media screen and (max-height: 580px) and (min-height: 271px) {
+  html {
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-height: 271px) {
+  html {
+    overflow-y: hidden;
+  }
+}
+
+@media screen and (min-width: 501px) {
+  html {
+    font-size: 20px;
+  }
 }

@@ -28,7 +28,7 @@
         </div>
         <b-btn
           variant="light"
-          class="new on largebtn"
+          class="new on largebtn stopbtn"
           @click="stop"
           style="-webkit-app-region: no-drag"
         >
