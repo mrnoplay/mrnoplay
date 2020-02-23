@@ -5,7 +5,7 @@
     <div class="titlebtns" v-if="canabout">
       <b-btn variant="light" class="new about pointer" @click="about"></b-btn>
       <b-btn variant="light" class="new settings pointer" @click="settings"></b-btn>
-      <b-btn variant="light" class="new exit pointer" @click="exit" v-if="iselectron"></b-btn>
+      <b-btn variant="light" class="new exit pointer" @click="exit"></b-btn>
     </div>
   </div>
 </template>

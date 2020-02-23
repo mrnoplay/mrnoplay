@@ -9,6 +9,7 @@ $buttongrey: rgb(33, 33, 33);
 $green: rgb(138, 200, 109);
 $hovergreen: rgb(89, 161, 82);
 $activegreen: rgb(138, 219, 100);
+$red: rgb(207, 88, 88);
 
 html {
   background: $bgwhite;
@@ -80,11 +81,11 @@ input:focus{
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
  
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 .container {
@@ -197,15 +198,16 @@ input[type="number"] {
 
 .titlebtns button {
   background: transparent;
-  color: $buttongrey;
+  color: $labelgrey;
   font-size: 1.2em;
   font-weight: 500;
   padding: 0;
   cursor: pointer;
+  margin-right: 0.2em;
 }
 
 .titlebtns button:hover {
-  color: $hovergrey;
+  color: $buttongrey;
 }
 
 .titlebtns button:active {
@@ -214,17 +216,26 @@ input[type="number"] {
 
 .about::before {
   font-family: 'icon';
-  content: '\e800';
+  content: '\e801';
+}
+
+.about {
+  font-size: 1.1em!important;
 }
 
 .settings::before {
   font-family: 'icon';
-  content: '\e803';
+  content: '\e805';
 }
 
 .exit::before {
   font-family: 'icon';
-  content: '\e802';
+  content: '\e804';
+}
+
+.exit {
+  font-size: 1.25em!important;
+  margin-right: 0em!important;
 }
 
 .back {
@@ -261,4 +272,13 @@ input[type="number"] {
 
 .submit:active {
   background-image: url('../img/submit.svg');
+}
+
+.warn {
+  color: $red;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8em;
+  letter-spacing: 0.03em;
+  padding-top: 0.05em;
 }
