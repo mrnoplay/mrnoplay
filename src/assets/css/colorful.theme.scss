@@ -122,7 +122,7 @@ input[type="number"] {
   letter-spacing: 0.03rem;
 }
 
-.digitaltop, .label {
+.digitaltop, .label, .small {
   text-transform: uppercase;
   color: $labelgrey;
   font-weight: 700;
@@ -140,6 +140,11 @@ input[type="number"] {
 
 .smallerlabelfather {
   height: 0.8rem;
+}
+
+.small {
+  cursor: auto;
+  font-size: 0.5rem;
 }
 
 .digitalfather {
@@ -218,11 +223,11 @@ input[type="number"] {
 .titlebtns button {
   background: transparent;
   color: $labelgrey;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 500;
   padding: 0;
   cursor: pointer;
-  margin-right: 0.2rem;
+  margin-right: 0.24rem;
 }
 
 .titlebtns button:hover {
