@@ -17,7 +17,7 @@
         <div class="notifyboard border">
           <div class="juniornotifyboard on-notbtn">
             <div class="digitaltop notifytop">{{ $t("about") }}</div>
-            <div class="notifyfather" style="-webkit-app-region: no-drag">{{ $t("abouttext") }}</div>
+            <div class="notifyfather notifyfather-about" style="-webkit-app-region: no-drag">{{ $t("abouttext") }}</div>
           </div>
         </div>
         <b-btn variant="light" class="new on largebtn" @click="goback">
@@ -41,8 +41,8 @@
       </div>
     </div>
     <br />
-    <div class="authorinfo red" v-if="isweb">{{ $t("webversion.1") }}</div>
-    <div class="authorinfo red" v-if="isweb">{{ $t("webversion.2") }}</div>
+    <div class="authorinfo red weblimited" v-if="isweb">{{ $t("webversion.1") }}</div>
+    <div class="authorinfo red weblimited" v-if="isweb">{{ $t("webversion.2") }}</div>
   </div>
 </template>
 

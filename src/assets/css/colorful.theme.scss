@@ -2,6 +2,7 @@ $black: #333;
 $white: #fdfdfd;
 $bgwhite: #fafafa;
 $labelgrey: rgb(179, 179, 179);
+$darklabelgrey: rgb(122, 122, 122);
 $inputgrey: rgb(230, 230, 230);
 $hovergrey: rgb(190, 184, 184);
 $activegrey: rgb(133, 128, 128);
@@ -333,7 +334,7 @@ input[type="number"] {
 .warnnotinteger {
   margin-top: 0!important;
   text-align: left;
-}
+}   
 
 .warnnotintegerfather {
   margin-top: 0;
@@ -369,6 +370,10 @@ input[type="number"] {
   margin-top: 0.2rem;
 }
 
+.notifyfather-about {
+  width: 11.8rem;
+}
+
 .warn-over {
   text-align: left;
   margin-top: 0.2rem;
@@ -377,6 +382,41 @@ input[type="number"] {
 
 .warnfather-over {
   justify-content: left;
+}
+
+.authorinfo {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.4rem;
+  width: 10rem;
+  letter-spacing: 0.03rem;
+  margin-top: 0.1rem;
+  color: $hovergrey;
+}
+
+.weblimited {
+  width: 100vw;
+  text-align: center;
+  color: $activered;
+}
+
+.tutorial-a {
+  color: $darklabelgrey;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tutorial-a:hover {
+  color: $labelgrey;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tutorial-a:active {
+  color: $lightgrey;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 321px) {
