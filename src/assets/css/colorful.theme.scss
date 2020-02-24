@@ -112,6 +112,14 @@ input[type="number"] {
   background: $lightbuttongrey;
 }
 
+.largebtn:hover {
+  background: $lightergrey;
+}
+
+.largebtn:active {
+  background: $lightgrey;
+}
+
 .largebtn-notbtn {
   padding: 0.45rem 3.7rem;
   margin: 0.5rem 0;
@@ -294,6 +302,7 @@ input[type="number"] {
 }
 
 .settingleftbtn {
+  cursor: pointer;
   width: 1.6rem;
   height: 1.6rem;
   background: transparent;
@@ -318,6 +327,7 @@ input[type="number"] {
 }
 
 .submit {
+  cursor: pointer;
   width: 1.417rem;
   height: 1.417rem;
   background-size: contain;
@@ -482,6 +492,7 @@ input[type="number"] {
 }
 
 .switch-on {
+  cursor: pointer;
   margin-left: 0.3rem;
   padding-left: 0;
   margin-right: 0.3rem;
@@ -490,6 +501,7 @@ input[type="number"] {
   height: 1.4rem;
   background-color: $lightbuttongrey;
   .switchson {
+    cursor: pointer;
     margin-left: 1rem;
     border-radius: 0.1rem;
     width: 1rem;
@@ -499,6 +511,7 @@ input[type="number"] {
 }
 
 .switch-off {
+  cursor: pointer;
   margin-left: 0.3rem;
   padding-left: 0;
   margin-right: 0.3rem;
@@ -507,6 +520,7 @@ input[type="number"] {
   height: 1.4rem;
   background-color: $lightbuttongrey;
   .switchson {
+    cursor: pointer;
     margin-left: 0.2rem;
     border-radius: 0.1rem;
     width: 1rem;
