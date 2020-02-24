@@ -32,9 +32,9 @@
           </div>
         </div>
         <div class="centralnbsp"></div>
-        <div class="warnfather warn settingwarn" v-if="timeNAN">
+        <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeNAN">
           <div class="breathe-div"></div>
-          <div class="warn">{{ $t("enterinteger") }}</div>
+          <div class="warn warnnotinteger">{{ $t("enterinteger") }}</div>
         </div>
         <b-btn
           style="-webkit-app-region: no-drag"

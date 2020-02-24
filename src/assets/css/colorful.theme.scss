@@ -6,6 +6,7 @@ $inputgrey: rgb(230, 230, 230);
 $hovergrey: rgb(190, 184, 184);
 $activegrey: rgb(133, 128, 128);
 $buttongrey: rgb(33, 33, 33);
+$lightbuttongrey: rgb(240, 240, 240);
 $lightgrey: rgb(238, 238, 238);
 $lightergrey: rgb(247, 247, 247);
 $green: rgb(138, 200, 109);
@@ -106,6 +107,7 @@ input[type="number"] {
   margin: 0.5rem 0;
   cursor: pointer;
   border-radius: 0.2rem;
+  background: $lightbuttongrey;
 }
 
 .largebtn-notbtn {
@@ -309,24 +311,72 @@ input[type="number"] {
   background-image: url('../img/submit.svg');
 }
 
+.warnfather {
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .warn {
   color: $red;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.55rem;
+  width: 10rem;
   letter-spacing: 0.03rem;
   padding-top: 0.05rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.warnnotinteger {
+  margin-top: 0!important;
+  text-align: left;
+}
+
+.warnnotintegerfather {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .canceltext {
   display: inline-block;
   padding: 0!important;
+  font-size: 0.55rem;
   margin-top: 0;
   width: 11rem;
+  text-align: center;
 }
 
 .cancelbtn {
   margin-top: 0;
+}
+
+.canceltextfather {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notifyfather {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.55rem;
+  width: 10rem;
+  letter-spacing: 0.03rem;
+  margin-top: 0.2rem;
+}
+
+.warn-over {
+  text-align: left;
+  margin-top: 0.2rem;
+  width: 11.8rem;
+}
+
+.warnfather-over {
+  justify-content: left;
 }
 
 @media screen and (min-width: 321px) {

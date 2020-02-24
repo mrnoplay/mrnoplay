@@ -21,18 +21,18 @@
           </div>
         </div>
         <div class="warnfathers">
-          <div class="warnfather" v-if="iselectron">
+          <div class="warnfather warnfather-over" v-if="iselectron">
             <div class="breathe-div"></div>
-            <div class="warn">{{ $t("firstsavefiles") }}</div>
+            <div class="warn warn-over">{{ $t("firstsavefiles") }}</div>
           </div>
-          <b-alert v-model="punishstart" class="warnfather" style="z-index: 2000;" variant="danger">
+          <b-alert v-model="punishstart" class="warnfather warnfather-over" style="z-index: 2000;" variant="danger">
             <div class="breathe-div"></div>
-            <div class="warn">{{ $t("punishstart") }}</div>
+            <div class="warn warn-over">{{ $t("punishstart") }}</div>
           </b-alert>
         </div>
         <b-btn
           variant="light"
-          class="new on largebtn"
+          class="new on largebtn stopbtn"
           @click="cancel"
           style="-webkit-app-region: no-drag"
         >

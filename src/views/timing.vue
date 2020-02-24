@@ -34,7 +34,7 @@
         >
           <div class="largebtn-innertext">{{ $t("stop") }}</div>
         </b-btn>
-        <div v-if="cancancel">
+        <div v-if="cancancel" class="canceltextfather">
           <b-btn
             variant="light"
             class="new largebtn transparent cancelbtn"
@@ -43,8 +43,8 @@
           >
             <div class="largebtn-innertext">{{ $t("cancel") }}</div>
           </b-btn><br>
-          <small v-if="iselectron" class="new largebtn transparent small canceltext">{{ $t("cancel15s") }}</small>
-          <small v-if="!iselectron" class="new largebtn transparent small canceltext">{{ $t("cancelweb") }}</small>
+          <small v-if="iselectron" class="new largebtn-notbtn transparent small canceltext">{{ $t("cancel15s") }}</small>
+          <small v-if="!iselectron" class="new largebtn-notbtn transparent small canceltext">{{ $t("cancelweb") }}</small>
         </div>
       </div>
     </div>
