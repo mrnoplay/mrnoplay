@@ -2,7 +2,9 @@
 <template>
   <div class="select">
     {{ left }}
-    <b-btn variant="light" :class="btnclass" @click="choose"></b-btn>
+    <b-btn variant="light" :class="btnclass" @click="choose">
+      <div class="switchson"></div>
+    </b-btn>
     {{ right }}
   </div>
 </template>

@@ -16,6 +16,7 @@ $activegreen: rgb(138, 219, 100);
 $red: rgb(204, 87, 87);
 $hoverred: rgb(224, 64, 64);
 $activered: rgb(226, 143, 143);
+$seagreen: rgb(109, 200, 154);
 
 html {
   background: $bgwhite;
@@ -135,14 +136,14 @@ input[type="number"] {
 }
 
 .smallerlabel {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.05rem;
+  font-weight: 700;
+  font-size: 0.4rem;
   color: $hovergrey;
 }
 
 .smallerlabelfather {
-  height: 0.8rem;
+  height: 0.55rem;
+  transform: translate(0, -0.3rem);
 }
 
 .small {
@@ -276,8 +277,7 @@ input[type="number"] {
   margin-right: 0rem!important;
 }
 
-.back {
-  width: 1.417rem;
+.back, .settingleftbtn .back {
   height: 1rem;
   background-size: contain;
   background-repeat: no-repeat;
@@ -293,23 +293,50 @@ input[type="number"] {
   background-image: url('../img/back.svg');
 }
 
+.settingleftbtn {
+  width: 1.6rem;
+  height: 1.6rem;
+  background: transparent;
+  border-radius: 0.2rem;
+  margin-top: 0.4rem;
+  margin-right: 0.4rem;
+  background-color: $lightbuttongrey;
+}
+
+.chromeheight {
+  transform: translate(-0.05rem, 0.1rem);
+}
+
 .submit {
   width: 1.417rem;
   height: 1.417rem;
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: transparent;
-  margin-top: 1rem;
+  background-color: $lightbuttongrey;
+  margin-top: 0.2rem;
   margin-left: 0.2rem;
+  border-radius: 0.2rem;
   background-image: url('../img/submit.svg');
 }
 
-.submit:hover {
+.submit:hover, .settingleftbtn:hover {
   background-image: url('../img/submit-white.svg');
+  background-color: $black;
 }
 
-.submit:active {
+.submit:active, .settingleftbtn:active {
+  background-color: $inputgrey;
   background-image: url('../img/submit.svg');
+}
+
+.settinginput {
+  background: $lightgrey;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  margin-top: 0.2rem;
+  height: 0.817rem;
+  font-weight: 600;
+  font-size: 0.6rem;
 }
 
 .warnfather {
@@ -417,6 +444,54 @@ input[type="number"] {
   color: $lightgrey;
   text-decoration: none;
   cursor: pointer;
+}
+
+.select, .input-btn {
+	display: flex;
+	align-items: center;
+  flex-direction: row;
+  padding-top: 0.1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: $black;
+  font-weight: 750;
+  font-size: 0.6rem;
+  letter-spacing: 0.03rem;
+  width: 11rem;
+}
+
+.switch-on {
+  margin-left: 0.3rem;
+  padding-left: 0;
+  margin-right: 0.3rem;
+  border-radius: 0.2rem;
+  width: 2.3rem;
+  height: 1.4rem;
+  background-color: $lightbuttongrey;
+  .switchson {
+    margin-left: 1rem;
+    border-radius: 0.1rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: $activered;
+  }
+}
+
+.switch-off {
+  margin-left: 0.3rem;
+  padding-left: 0;
+  margin-right: 0.3rem;
+  border-radius: 0.2rem;
+  width: 2.3rem;
+  height: 1.4rem;
+  background-color: $lightbuttongrey;
+  .switchson {
+    margin-left: 0.2rem;
+    border-radius: 0.1rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: $seagreen;
+  }
 }
 
 @media screen and (min-width: 321px) {

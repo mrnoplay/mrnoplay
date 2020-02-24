@@ -16,7 +16,7 @@
       <div id="main" style="-webkit-app-region: no-drag">
         <div class="select">
           中文
-          <b-btn variant="light" :class="switchlang" @click="selectlang"></b-btn>English
+          <b-btn variant="light" :class="switchlang" @click="selectlang"><div class="switchson"></div></b-btn>English
         </div>
         <div class="tutorialboard border">
           <div class="on-notbtn tutorial">

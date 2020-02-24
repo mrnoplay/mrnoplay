@@ -645,9 +645,10 @@ input[type="number"] {
 }
 
 .smallerlabel {
-  font-size: 0.5em;
+  font-size: 0.45em;
 }
 
 .smallerlabelfather {
-  height: 0.7em;
+  height: 0.63rem;
+  transform: translate(0, -0.3rem);
 }
