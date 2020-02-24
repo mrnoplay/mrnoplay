@@ -299,8 +299,18 @@ input[type="number"] {
   background: transparent;
   border-radius: 0.2rem;
   margin-top: 0.4rem;
-  margin-right: 0.4rem;
+  margin-right: 0.8rem;
   background-color: $lightbuttongrey;
+}
+
+.settingleftbtn:hover {
+  color: $bgwhite;
+  background: $black;
+}
+
+.settingleftbtn:active {
+  color: $black;
+  background: $inputgrey;
 }
 
 .chromeheight {
@@ -319,14 +329,14 @@ input[type="number"] {
   background-image: url('../img/submit.svg');
 }
 
-.submit:hover, .settingleftbtn:hover {
+.submit:hover {
   background-image: url('../img/submit-white.svg');
-  background-color: $black;
+  background-color: $hovergreen;
 }
 
-.submit:active, .settingleftbtn:active {
-  background-color: $inputgrey;
-  background-image: url('../img/submit.svg');
+.submit:active {
+  background-image: url('../img/submit-white.svg');
+  background-color: $seagreen;
 }
 
 .settinginput {
@@ -337,6 +347,17 @@ input[type="number"] {
   height: 0.817rem;
   font-weight: 600;
   font-size: 0.6rem;
+}
+
+.settingfield {
+  padding-bottom: 0.9rem;
+}
+
+.check-a {
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 1000!important;
 }
 
 .warnfather {
