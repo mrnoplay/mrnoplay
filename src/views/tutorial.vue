@@ -74,7 +74,7 @@
               <div class="pagetitle">{{ $t('tut.5.1') }}</div>
               <div class="pagetext">{{ $t('tut.5.2') }}</div>
               <small
-                v-if="!(!startonlogin && iselectron)"
+                v-if="!startonlogin && iselectron"
                 class="new largebtn-notbtn transparent small red tutorial-a tostartonlogin"
                 @click="settings"
               >
