@@ -14,9 +14,15 @@ MPL v2.0
 - 简体中文
 - English
 
-### Screenshots
+### Screenshots (Fresh Theme)
 
-![Main](https://i.loli.net/2020/02/09/yX3S8l1gHPBLAJZ.jpg)
+![Main](https://i.loli.net/2020/02/25/wGmHATlncQbDqvU.png)
+![Settings](https://i.loli.net/2020/02/25/bGLPRctqOlEZe3y.png)
+![Timing](https://i.loli.net/2020/02/25/xbBrRSEH2PgGN4I.png)
+
+### Screenshots (Real Theme)
+
 ![Timing](https://i.loli.net/2020/02/09/XewHqoUimbFtPRO.jpg)
-![About](https://i.loli.net/2020/02/09/ByOMEofzVgkRiv3.jpg)
+
+
 
