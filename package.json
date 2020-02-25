@@ -10,7 +10,7 @@
     "electron-win": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run electron:win && cd ../",
     "electron-dev": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
     "capacitor-android": "vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
-    "web": "vue-cli-service build --mode web && rm -r docs && cp -r -f www/ docs",
+    "web": "vue-cli-service build --mode web && rm -r ../mrnoplay.web/ && cp -r -f www/ ../mrnoplay.web/",
     "d": "yarn run dev",
     "e": "yarn run electron-mac",
     "ew": "yarn run electron-win",
