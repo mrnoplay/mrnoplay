@@ -32,7 +32,7 @@
             style="-webkit-app-region: no-drag"
           >
             <div class="largebtn-innertext">{{ $t("cancel") }}</div>
-          </b-btn><br>
+          </b-btn>
           <small v-if="iselectron" class="new largebtn-notbtn transparent small canceltext">{{ $t("cancel15s") }}</small>
           <small v-if="!iselectron" class="new largebtn-notbtn transparent small canceltext">{{ $t("cancelweb") }}</small>
         </div>
