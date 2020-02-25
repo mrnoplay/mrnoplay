@@ -97,13 +97,13 @@
         <div>
           <b-btn
             variant="light"
-            class="new largebtn transparent cancelbtn"
+            class="new largebtn transparent cancelbtn canceltextfather"
             @click="goback"
             style="-webkit-app-region: no-drag"
           >
             <div class="largebtn-innertext">{{ $t('skip') }}</div>
           </b-btn>
-          <small class="new largebtn-notbtn transparent small">{{ $t("canopenlater") }}</small>
+          <small class="new largebtn-notbtn transparent small canceltext tutorialskiptext">{{ $t("canopenlater") }}</small>
         </div>
       </div>
     </div>

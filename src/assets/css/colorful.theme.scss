@@ -26,7 +26,7 @@ html {
 
 body {
   height: 100vh;
-  font-family: '-apple-system', 'San Francisco', BlinkMacSystemFont, 'Helvetica Neue', Helvetica, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family: '-apple-system', 'San Francisco', BlinkMacSystemFont, 'Helvetica Neue', Helvetica, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   color: $black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,7 +48,7 @@ body {
 }
 
 #tutorialnbsppart {
-  padding-top: 2vh;
+  padding-top: 8vh;
 }
 
 #settingsnbsppart {
@@ -367,7 +367,7 @@ input[type="number"] {
   letter-spacing: 0.05rem;
   text-transform: uppercase;
   font-size: 0.9rem;
-  font-weight: 1000!important;
+  font-weight: 900!important;
 }
 
 .warnfather {
@@ -529,6 +529,42 @@ input[type="number"] {
   }
 }
 
+#gameicon {
+  padding-top: 0.5rem;
+  height: 7rem;
+}
+
+#gameicon-page1-page6 {
+  padding-top: 0.5rem;
+  height: 3.6rem;
+}
+
+#gameiconfather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagetitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.pagetext {
+  padding-top: 0.3rem;
+  font-size: 0.5rem;
+  color: $labelgrey;
+  width: 11.5rem;
+}
+
+.tutorialskiptext {
+  font-size: 0.5rem;
+}
+
+.red {
+  color: $red;
+}
+
 @media screen and (min-width: 321px) {
   #main {
     background: $white;
@@ -557,4 +593,14 @@ input[type="number"] {
   .largebtn {
     padding: 0.45rem 3.72rem;
   }
+}
+
+.Breadstick__alert {
+  -webkit-app-region: no-drag;
+  font-size: 0.6rem!important;
+  margin-top: 0.6rem!important;
+  margin-right: 1rem!important;
+  opacity: 0.8;
+  background: $lightbuttongrey;
+  box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
 }
