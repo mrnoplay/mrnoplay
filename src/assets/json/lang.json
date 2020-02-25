@@ -49,8 +49,7 @@
     "skip": "跳过",
     "canopenlater": "以后可以在“关于”界面再次调出哦",
     "tutorial": "教程",
-    "tostartonlogin": "现在打开设置，打开开机自启",
-    "tostartonlogin-2": "有助于防止无计划的过度娱乐",
+    "tostartonlogin": "现在打开设置，然后打开开机自启。设置应用开机自启对于防止无计划的过度娱乐很有帮助",
     "tut": {
       "1": {
         "1": "你需要不玩家",
@@ -158,8 +157,7 @@
     "skip": "Skip",
     "canopenlater": "Tutorial can be opened from about page.",
     "tutorial": "Tutorial",
-    "tostartonlogin": "Open Settings and Set Start-On-Login Now",
-    "tostartonlogin-2": "This is Benificial on Reducing Out-of-plan Playing!",
+    "tostartonlogin": "Open Settings and Set Auto Launch Now, This is Beneficial on Reducing Out-of-plan Playing!",
     "tut": {
       "1": {
         "1": "Why Mr Noplay",

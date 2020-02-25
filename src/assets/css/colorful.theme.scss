@@ -565,6 +565,13 @@ input[type="number"] {
   color: $red;
 }
 
+.tostartonlogin {
+  display: inline-block;
+  width: 11rem;
+  font-size: 0.5rem;
+  padding: 0;
+}
+
 @media screen and (min-width: 321px) {
   #main {
     background: $white;
