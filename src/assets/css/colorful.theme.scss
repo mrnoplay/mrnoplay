@@ -44,7 +44,7 @@ body {
 }
 
 #timingnbsppart {
-  padding-top: 2vh;
+  padding-top: 16vh;
 }
 
 #tutorialnbsppart {
@@ -583,6 +583,12 @@ input[type="number"] {
 @media screen and (max-height: 271px) {
   html {
     overflow-y: hidden;
+  }
+  #tutorialnbsppart {
+    padding-top: 2vh;
+  }
+  #timingnbsppart {
+    padding-top: 2vh;
   }
 }
 

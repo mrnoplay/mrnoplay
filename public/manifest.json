@@ -10,6 +10,5 @@
   "start_url": "/",
   "background_color": "#fdfdfd",
   "display": "standalone",
-  "categories": ["productivity"],
-  "theme_color": "#0575e6"
+  "categories": ["productivity"]
 }
