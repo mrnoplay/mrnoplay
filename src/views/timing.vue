@@ -3,6 +3,7 @@
   <div>
     <div class="container">
       <div id="timingnbsppart"></div>
+      <div id="timingcancelnbsppart" v-if="!cancancel"></div>
       <div id="main">
         <div class="digitalboard border">
           <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">

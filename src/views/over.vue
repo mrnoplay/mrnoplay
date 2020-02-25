@@ -7,7 +7,7 @@
         <div class="notifyboard border">
           <div class="juniornotifyboard on-notbtn">
             <div class="digitaltop notifytop">{{ $t("notify") }}</div>
-            <div class="notifyfather">{{ $t("willpunish") }}</div>
+            <div class="notifyfather notifyfather-over">{{ $t("willpunish") }}</div>
           </div>
         </div>
         <div class="warnfathers">

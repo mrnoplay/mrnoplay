@@ -432,10 +432,16 @@ input[type="number"] {
   width: 11.8rem;
 }
 
+.notifyfather-over {
+  width: 11.6rem;
+  font-size: 0.7rem;
+}
+
 .warn-over {
   text-align: left;
   margin-top: 0.2rem;
-  width: 11.8rem;
+  width: 11.6rem;
+  font-size: 0.7rem;
 }
 
 .warnfather-over {
@@ -595,7 +601,10 @@ input[type="number"] {
     padding-top: 2vh;
   }
   #timingnbsppart {
-    padding-top: 2vh;
+    padding-top: 9vh;
+  }
+  #timingcancelnbsppart {
+    padding-top: 10vh;
   }
 }
 

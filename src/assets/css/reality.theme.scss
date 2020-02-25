@@ -37,6 +37,10 @@ body {
   padding-top: 8vh;
 }
 
+#timingcancelnbsppart {
+  padding-top: 6vh;
+}
+
 @media screen and (min-width: 321px) {
   html {
     background-image: url('../img/background.jpg');
@@ -46,6 +50,9 @@ body {
   }
   #tutorialnbsppart {
     padding-top: 4vh;
+  }
+  #timingcancelnbsppart {
+    padding-top: 0;
   }
   #main {
     padding: 2em 1.2em;
