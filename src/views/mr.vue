@@ -174,12 +174,12 @@ export default {
     },
     async getplaytime() {
       const keys = await Storage.keys();
-      if (keys.keys.indexOf("defaulttime") != -1) {
-        const ret = await Storage.get({ key: "defaulttime" });
+      if (keys.keys.indexOf("default_time") != -1) {
+        const ret = await Storage.get({ key: "default_time" });
         if (ret.value != null) {
           this.playtime = Number(JSON.parse(ret.value));
-        } else (this.playtime = 5), this.storagesetjson("defaulttime", 5);
-      } else (this.playtime = 5), this.storagesetjson("defaulttime", 5);
+        } else (this.playtime = 5), this.storagesetjson("default_time", 5);
+      } else (this.playtime = 5), this.storagesetjson("default_time", 5);
     },
     async tutorial() {
       const keys = await Storage.keys();
