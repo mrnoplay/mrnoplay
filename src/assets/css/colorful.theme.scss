@@ -164,6 +164,7 @@ input[type="number"] {
   border-radius: 0.2rem;
   padding: 0.3rem;
   margin-top: 0.2rem;
+  width: 11.007rem;
 }
 
 .digitalfather:hover {
@@ -189,10 +190,16 @@ input[type="number"] {
 .digital {
   font-weight: 500;
   font-size: 1.2rem;
-  width: 9rem;
+  width: 8.999rem;
+  display: inline-block;
+  padding-top: 0em!important;
+  padding-right: 0em!important;
+  padding-bottom: 0em!important;
+  padding-left: 0em!important;
 }
 
 .digitalnote {
+  width: 2rem;
   text-align: right;
   box-sizing: border-box;
   color: $labelgrey;
