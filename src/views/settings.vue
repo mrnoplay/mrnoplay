@@ -52,9 +52,9 @@
               />
               <b-btn variant="light" class="new submit settingbtn on" @click="setdefault_time"></b-btn>
             </div>
-            <div class="warnfather warn settingwarn" v-if="timeNAN">
+            <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeNAN">
               <div class="breathe-div"></div>
-              <div class="warn">{{ $t("enterinteger") }}</div>
+              <div class="warn warnnotinteger">{{ $t("enterinteger") }}</div>
             </div>
           </div>
           <div class="settingfield main-like">
