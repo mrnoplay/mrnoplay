@@ -17,7 +17,7 @@
         <div id="settingsnbsppart"></div>
         <div id="setting-main" style="-webkit-app-region: no-drag">
           <div v-if="iselectron" class="settingfield main-like">
-            <b class="label">{{ $t("startonlogin") }}</b>
+            <span class="label settingslabel">{{ $t("startonlogin") }}</span>
             <br />
             <switcher
               :left="$t('turnoff')"
@@ -28,11 +28,11 @@
             ></switcher>
           </div>
           <div class="settingfield main-like">
-            <b class="label">语言/Language</b>
+            <span class="label settingslabel">语言/Language</span>
             <switcher left="中文" right="English" :default="default_lang" @toleft="cn" @toright="en"></switcher>
           </div>
           <div v-if="iselectron" class="settingfield main-like">
-            <b class="label">{{ $t("update") }}</b>
+            <span class="label settingslabel">{{ $t("update") }}</span>
             <br />
             <div>
               <a class="tutorial-a check-a" @click="check" v-if="!checking">{{ $t("checkforupdate") }}</a>
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="settingfield main-like">
-            <b class="label">{{ $t("defaulttime") }}</b>
+            <span class="label settingslabel">{{ $t("defaulttime") }}</span>
             <div class="input-btn">
               <input
                 type="tel"
@@ -52,13 +52,13 @@
               />
               <b-btn variant="light" class="new submit settingbtn on" @click="setdefault_time"></b-btn>
             </div>
-            <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeNAN">
+            <div class="warnfather warn settingwarn" v-if="timeNAN">
               <div class="breathe-div"></div>
-              <div class="warn warnnotinteger">{{ $t("enterinteger") }}</div>
+              <div class="warn">{{ $t("enterinteger") }}</div>
             </div>
           </div>
           <div class="settingfield main-like">
-            <b class="label">{{ $t("theme") }}</b>
+            <span class="label settingslabel">{{ $t("theme") }}</span>
             <switcher
               :left="$t('colorful')"
               :right="$t('reality')"

@@ -90,7 +90,6 @@ export default {
     _this = this;
     this.loading = false;
     this.timing = true;
-    setTimeout(this.interval, 3000);
   },
   beforeDestroy: function() {},
   methods: {
