@@ -18,10 +18,8 @@ MPL v2.0
 
 ![Main](https://i.loli.net/2020/02/25/wGmHATlncQbDqvU.png)
 ![Settings](https://i.loli.net/2020/02/25/bGLPRctqOlEZe3y.png)
-![Timing](https://i.loli.net/2020/02/25/4M9YvmdJhqVCG32.png)
+![Timing](https://i.loli.net/2020/02/27/om1plQdOZ6Yi4PT.png)
 
 ### Screenshots (Real Theme)
 
 ![Timing](https://i.loli.net/2020/02/09/XewHqoUimbFtPRO.jpg)
-
-
