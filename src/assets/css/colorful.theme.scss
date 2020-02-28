@@ -585,6 +585,21 @@ input[type="number"] {
   padding: 0;
 }
 
+.notlockmode {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.notlockmode_latterdiv {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+::placeholder {
+  color: $activegrey;
+}
+
 @media screen and (min-width: 321px) {
   #main {
     background: $white;

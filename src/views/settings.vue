@@ -16,6 +16,9 @@
       <div class="setting-center">
         <div id="settingsnbsppart"></div>
         <div id="setting-main" style="-webkit-app-region: no-drag">
+          <!-- -------------- -->
+          <!-- Start On Login -->
+          <!-- -------------- -->
           <div v-if="iselectron" class="settingfield main-like">
             <span class="label settingslabel">{{ $t("startonlogin") }}</span>
             <br />
@@ -27,18 +30,31 @@
               @toright="startonlogin"
             ></switcher>
           </div>
+          <!-- -------- -->
+          <!-- Language -->
+          <!-- -------- -->
           <div class="settingfield main-like">
             <span class="label settingslabel">语言/Language</span>
             <switcher left="中文" right="English" :default="default_lang" @toleft="cn" @toright="en"></switcher>
           </div>
+          <!-- ------ -->
+          <!-- Update -->
+          <!-- ------ -->
           <div v-if="iselectron" class="settingfield main-like">
             <span class="label settingslabel">{{ $t("update") }}</span>
             <br />
             <div>
-              <a class="tutorial-a check-a" @click="check" v-if="!checking">{{ $t("checkforupdate") }}</a>
+              <a
+                class="tutorial-a check-a"
+                @click="check"
+                v-if="!checking"
+              >{{ $t("checkforupdate") }}</a>
               <span class="label" @click="check" v-if="checking">{{ $t("checking") }}</span>
             </div>
           </div>
+          <!-- ------------ -->
+          <!-- Default Time -->
+          <!-- ------------ -->
           <div class="settingfield main-like">
             <span class="label settingslabel">{{ $t("defaulttime") }}</span>
             <div class="input-btn">
@@ -57,6 +73,9 @@
               <div class="warn">{{ $t("enterinteger") }}</div>
             </div>
           </div>
+          <!-- ------------- -->
+          <!-- Theme Setting -->
+          <!-- ------------- -->
           <div class="settingfield main-like">
             <span class="label settingslabel">{{ $t("theme") }}</span>
             <switcher
@@ -66,9 +85,67 @@
               @toleft="theme_colorful"
               @toright="theme_reality"
             ></switcher>
-            <div class="smallerlabelfather"><span class="label smallerlabel">{{ $t("theme-notice1") }}</span></div>
-            <div class="smallerlabelfather"><span class="label smallerlabel">{{ $t("theme-notice2") }}</span></div>
+            <div class="smallerlabelfather">
+              <span class="label smallerlabel">{{ $t("theme-notice1") }}</span>
+            </div>
+            <div class="smallerlabelfather">
+              <span class="label smallerlabel">{{ $t("theme-notice2") }}</span>
+            </div>
             <div class="smallerlabelfather"></div>
+          </div>
+          <!-- --------- -->
+          <!-- Lock Mode -->
+          <!-- --------- -->
+          <div class="settingfield main-like">
+            <span class="label settingslabel" v-if="!default_lockmode">
+              {{ $t("lockmode") }}
+              <b>{{ $t("lockmode_off") }}</b>
+            </span>
+            <div class="input-btn notlockmode" v-if="!default_lockmode">
+              <input
+                type="password"
+                required
+                class="off settinginput"
+                v-model="default_lockmode_on"
+                @keyup.enter="setdefault_lockmode"
+                :placeholder="$t('enterpassword')"
+              />
+              <div class="notlockmode_latterdiv">
+                <input
+                  type="password"
+                  required
+                  class="off settinginput"
+                  v-model="default_lockmode_on_check"
+                  @keyup.enter="setdefault_lockmode_on"
+                  :placeholder="$t('enterpassword-reenter')"
+                />
+
+                <b-btn
+                  variant="light"
+                  class="new submit settingbtn on"
+                  @click="setdefault_lockmode_on"
+                  :placeholder="$t('enterpassword')"
+                ></b-btn>
+              </div>
+            </div>
+            <span class="label settingslabel" v-if="default_lockmode">
+              {{ $t("lockmode") }}
+              <b>{{ $t("lockmode_on") }}</b>
+            </span>
+            <div class="input-btn" v-if="default_lockmode">
+              <input
+                type="password"
+                required
+                class="off settinginput"
+                v-model="default_lockmode_off"
+                @keyup.enter="setdefault_lockmode_off"
+              />
+              <b-btn
+                variant="light"
+                class="new submit settingbtn on"
+                @click="setdefault_lockmode_off"
+              ></b-btn>
+            </div>
           </div>
         </div>
       </div>
@@ -88,6 +165,7 @@ alarm.src = require("@/assets/music/alarm.mp3");
 import notify from "@/components/linxf/notify";
 import switcher from "@/components/linxf/switcher";
 var ipc = null;
+var md5 = require("md5");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
   ipc.on("updatefailed", function(event, arg) {
@@ -128,10 +206,20 @@ export default {
       checking: false,
       checked: false,
       checkedtext: "",
+      // --------
+      // Defaults
+      // --------
       default_lang: false,
       default_startonlogin: false,
       default_theme: false,
       default_time: 5,
+      default_lockmode: false,
+      default_lockmode_on: "",
+      default_lockmode_on_check: "",
+      default_lockmode_off: "",
+      // ------------
+      // Defaults End
+      // ------------
       timeNAN: false
     };
   },
@@ -145,10 +233,11 @@ export default {
     this.checking = false;
     this.version = process.env.VUE_APP_VER;
     this.storagesetjson("cannotify", false);
-    this.getdefualt_lang();
-    this.getdefualt_startonlogin();
+    this.getdefault_lang();
+    this.getdefault_startonlogin();
     this.getdefault_time();
     this.getdefault_theme();
+    this.getdefault_lockmode();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
     }
@@ -187,13 +276,16 @@ export default {
         const ret = await Storage.get({ key: "theme" });
         if (ret.value != null) {
           this.settheme(JSON.parse(ret.value));
-          if(JSON.parse(ret.value) == 'colorful') this.default_theme = false;
+          if (JSON.parse(ret.value) == "colorful") this.default_theme = false;
           else this.default_theme = true;
-        }
-        else
-          this.storagesetjson("theme", "colorful"), this.settheme("colorful"), this.default_theme = false;
+        } else
+          this.storagesetjson("theme", "colorful"),
+            this.settheme("colorful"),
+            (this.default_theme = false);
       } else
-        this.storagesetjson("theme", "colorful"), this.settheme("colorful"), this.default_theme = false;
+        this.storagesetjson("theme", "colorful"),
+          this.settheme("colorful"),
+          (this.default_theme = false);
     },
     settheme(name) {
       var fileref = document.createElement("link");
@@ -208,7 +300,7 @@ export default {
       }
       document.getElementsByTagName("head")[0].appendChild(fileref);
     },
-    async getdefualt_lang() {
+    async getdefault_lang() {
       const keys = await Storage.keys();
       if (keys.keys.indexOf("lang") != -1) {
         const retlang = await Storage.get({ key: "lang" });
@@ -219,7 +311,7 @@ export default {
       if (this.lang == "en") this.default_lang = true;
       else this.default_lang = false;
     },
-    async getdefualt_startonlogin() {
+    async getdefault_startonlogin() {
       const keys = await Storage.keys();
       if (keys.keys.indexOf("startonlogin") != -1) {
         const ret = await Storage.get({ key: "startonlogin" });
@@ -242,6 +334,20 @@ export default {
           this.default_time = Number(JSON.parse(ret.value));
         } else (this.default_time = 5), this.storagesetjson("default_time", 5);
       } else (this.default_time = 5), this.storagesetjson("default_time", 5);
+    },
+    async getdefault_lockmode() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("lockmode") != -1) {
+        const ret = await Storage.get({ key: "lockmode" });
+        if (ret.value != null) {
+          if (ret.value == false || ret.value == "false")
+            this.default_lockmode = false;
+          else this.default_lockmode = true;
+        } else
+          (this.default_lockmode = false),
+            this.storagesetjson("lockmode", false);
+      } else
+        (this.default_lockmode = false), this.storagesetjson("lockmode", false);
     },
     goback() {
       this.timing = false;
@@ -269,8 +375,8 @@ export default {
         });
       }
     },
-    theme_colorful () {
-      this.storagesetjson("theme", 'colorful');
+    theme_colorful() {
+      this.storagesetjson("theme", "colorful");
       this.$refs.notify.send({
         title: this.$t("success"),
         id: 11,
@@ -278,8 +384,8 @@ export default {
       });
       window.location.reload();
     },
-    theme_reality () {
-      this.storagesetjson("theme", 'reality');
+    theme_reality() {
+      this.storagesetjson("theme", "reality");
       this.$refs.notify.send({
         title: this.$t("success"),
         id: 11,
@@ -330,12 +436,61 @@ export default {
         this.storagesetjson("default_time", this.default_time);
         this.$refs.notify.send({
           title: this.$t("success"),
-          id: 5,
+          id: 14,
           message: this.$t("defaulttimesuccess")
         });
       } else {
         this.timeNAN = true;
       }
+    },
+    setdefault_lockmode_on() {
+      if (this.default_lockmode_on_check == this.default_lockmode_on) {
+        this.storagesetjson("lockmode", true);
+        this.default_lockmode = true;
+        this.storagesetjson("lockmode_password", md5(this.default_lockmode_on));
+        this.$refs.notify.send({
+          title: this.$t("success"),
+          id: 13,
+          message: this.$t("lockmode_on_success")
+        });
+        this.default_lockmode_on = '';
+        this.default_lockmode_on_check = '';
+      } else {
+        this.$refs.notify.send({
+        title: this.$t("fail"),
+        id: 17,
+        message: this.$t("lockmode_on_fail")
+      });
+      }
+    },
+    async setdefault_lockmode_off() {
+      var original = "";
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("lockmode_password") != -1) {
+        const ret = await Storage.get({ key: "lockmode_password" });
+        if (ret.value != null) {
+          original = JSON.parse(ret.value);
+          if (original == md5(this.default_lockmode_off))
+            this._to_set_setdefault_lockmode_off();
+          else {
+            this.$refs.notify.send({
+        title: this.$t("fail"),
+        id: 16,
+        message: this.$t("lockmode_off_fail")
+      });
+          }
+        } else this._to_set_setdefault_lockmode_off();
+      } else this._to_set_setdefault_lockmode_off();
+    },
+    _to_set_setdefault_lockmode_off() {
+      this.default_lockmode_off = '';
+      this.default_lockmode = false;
+      this.storagesetjson("lockmode", false);
+      this.$refs.notify.send({
+        title: this.$t("success"),
+        id: 15,
+        message: this.$t("lockmode_off_success")
+      });
     }
   }
 };
