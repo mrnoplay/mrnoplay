@@ -19,7 +19,7 @@
           <!-- -------------- -->
           <!-- Start On Login -->
           <!-- -------------- -->
-          <div v-if="iselectron" class="settingfield main-like">
+          <div v-if="iselectron && !default_lockmode" class="settingfield main-like">
             <span class="label settingslabel">{{ $t("startonlogin") }}</span>
             <br />
             <switcher
@@ -33,14 +33,14 @@
           <!-- -------- -->
           <!-- Language -->
           <!-- -------- -->
-          <div class="settingfield main-like">
+          <div class="settingfield main-like" v-if="!default_lockmode">
             <span class="label settingslabel">语言/Language</span>
             <switcher left="中文" right="English" :default="default_lang" @toleft="cn" @toright="en"></switcher>
           </div>
           <!-- ------ -->
           <!-- Update -->
           <!-- ------ -->
-          <div v-if="iselectron" class="settingfield main-like">
+          <div v-if="iselectron && !default_lockmode" class="settingfield main-like">
             <span class="label settingslabel">{{ $t("update") }}</span>
             <br />
             <div>
@@ -55,7 +55,7 @@
           <!-- ------------ -->
           <!-- Default Time -->
           <!-- ------------ -->
-          <div class="settingfield main-like">
+          <div class="settingfield main-like" v-if="!default_lockmode">
             <span class="label settingslabel">{{ $t("defaulttime") }}</span>
             <div class="input-btn">
               <input
@@ -76,7 +76,7 @@
           <!-- ------------- -->
           <!-- Theme Setting -->
           <!-- ------------- -->
-          <div class="settingfield main-like">
+          <div class="settingfield main-like" v-if="!default_lockmode">
             <span class="label settingslabel">{{ $t("theme") }}</span>
             <switcher
               :left="$t('colorful')"
@@ -453,14 +453,17 @@ export default {
           id: 13,
           message: this.$t("lockmode_on_success")
         });
-        this.default_lockmode_on = '';
-        this.default_lockmode_on_check = '';
+        if(this.iselectron) {
+          ipc.send('turnlockon', md5(this.default_lockmode_on));
+        }
+        this.default_lockmode_on = "";
+        this.default_lockmode_on_check = "";
       } else {
         this.$refs.notify.send({
-        title: this.$t("fail"),
-        id: 17,
-        message: this.$t("lockmode_on_fail")
-      });
+          title: this.$t("fail"),
+          id: 17,
+          message: this.$t("lockmode_on_fail")
+        });
       }
     },
     async setdefault_lockmode_off() {
@@ -474,16 +477,16 @@ export default {
             this._to_set_setdefault_lockmode_off();
           else {
             this.$refs.notify.send({
-        title: this.$t("fail"),
-        id: 16,
-        message: this.$t("lockmode_off_fail")
-      });
+              title: this.$t("fail"),
+              id: 16,
+              message: this.$t("lockmode_off_fail")
+            });
           }
         } else this._to_set_setdefault_lockmode_off();
       } else this._to_set_setdefault_lockmode_off();
     },
     _to_set_setdefault_lockmode_off() {
-      this.default_lockmode_off = '';
+      this.default_lockmode_off = "";
       this.default_lockmode = false;
       this.storagesetjson("lockmode", false);
       this.$refs.notify.send({
@@ -491,6 +494,9 @@ export default {
         id: 15,
         message: this.$t("lockmode_off_success")
       });
+      if(this.iselectron) {
+        ipc.send('turnlockoff');
+      }
     }
   }
 };

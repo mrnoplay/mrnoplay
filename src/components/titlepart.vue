@@ -62,7 +62,7 @@ export default {
       this.$router.push("settings");
     },
     exit() {
-      ipc.send("exit");
+      this.$emit('exit');
     },
     async storagesetlang(val) {
       await Storage.set({

@@ -2,6 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import { ebtRenderer } from 'electron-baidu-tongji'
+if (process.env.VUE_APP_LINXF == "electron") {
+  var BAIDU_SITE_ID = '55c9cfe8204a9832b4cedf53b88d7683'
+  var ipcRenderer = window.require("electron").ipcRenderer;
+  ebtRenderer(ipcRenderer, BAIDU_SITE_ID, router)
+}
+
 import '@/assets/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

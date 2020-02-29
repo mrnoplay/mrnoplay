@@ -34,7 +34,7 @@
         >
           <div class="largebtn-innertext">{{ $t("start") }}</div>
         </b-btn>
-        <titlepart :canabout="true"></titlepart>
+        <titlepart :canabout="true" @exit="exit"></titlepart>
       </div>
     </div>
     <notify ref="notify"></notify>
@@ -206,6 +206,13 @@ export default {
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
+    },
+    exit() {
+      if(this.iselectron) {
+        // TODO
+        // if not lockmode, directly ipcsend
+        // if lockmode, check
+      }
     }
   }
 };

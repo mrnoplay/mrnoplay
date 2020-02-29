@@ -1,5 +1,5 @@
 const path = require('path')
-const UglifyPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 process.env.VUE_APP_VER = require('./package.json').version
 module.exports = {
@@ -22,16 +22,8 @@ module.exports = {
       config.mode = 'production'
       // 将每个依赖包打包成单独的js文件
       let optimization = {
-        minimizer: [new UglifyPlugin({
-          uglifyOptions: {
-            warnings: false,
-            compress: {
-              drop_console: true,
-              drop_debugger: false,
-              pure_funcs: ['console.log']
-            }
-          }
-        })],
+        minimize: true,
+        minimizer: [new TerserPlugin()],
       };
       let node = {
         __filename: true,
