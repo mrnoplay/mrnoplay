@@ -1,8 +1,11 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+      style="display:inline-block; width:0.5px; height:0.5px"
+    ></iframe>
     <div class="container">
       <div id="nbsppart"></div>
+      <div class="lockmode-enterpwd" v-if="lockmode_enterpwd"></div>
       <div id="main">
         <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
@@ -71,7 +74,11 @@ export default {
       iffetch: 0,
       playtime: 5,
       timeNAN: false,
-      version: ""
+      version: "",
+      lockmode: false,
+      lockmode_password: "",
+      lockmode_enterpwd: false,
+      tongjisrc: '',
     };
   },
   watch: {
@@ -84,17 +91,25 @@ export default {
     this.gettheme();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
+      if(process.platform == 'win32') this.tongjisrc = 'https://mrnoplay-tongji.now.sh/index-win.html';
+      else this.tongjisrc = 'https://mrnoplay-tongji.now.sh/index-mac.html';
+    } else {
+      this.tongjisrc = 'https://mrnoplay-tongji.now.sh/index-web.html';
     }
     _this = this;
     this.isonios = this.isiOS(navigator.userAgent);
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
     this.getplaytime();
-    this.storagesetjson('cannotify', false);
+    this.storagesetjson("cannotify", false);
     this.tutorial();
     this.loading = false;
     this.storagesetjson("concentrated", true);
-    alarm.src = require("@/assets/music/scarymusic/" + this.rand(1, 17) + ".mp3");
+    this.getlockmode();
+    this.getlockmode_pwd();
+    alarm.src = require("@/assets/music/scarymusic/" +
+      this.rand(1, 17) +
+      ".mp3");
     if (
       process.env.VUE_APP_LINXF != "android" &&
       process.env.VUE_APP_LINXF != "electron" &&
@@ -146,9 +161,9 @@ export default {
         else (this.lang = "en"), this.storagesetlang("en");
       } else (this.lang = "en"), this.storagesetlang("en");
       this.$i18n.locale = this.lang;
-      if(this.iselectron) {
-        if(this.lang == 'en') ipc.send('en');
-        else ipc.send('cn');
+      if (this.iselectron) {
+        if (this.lang == "en") ipc.send("en");
+        else ipc.send("cn");
       }
     },
     async gettheme() {
@@ -156,21 +171,43 @@ export default {
       if (keys.keys.indexOf("theme") != -1) {
         const ret = await Storage.get({ key: "theme" });
         if (ret.value != null) this.settheme(JSON.parse(ret.value));
-        else this.storagesetjson("theme", 'colorful'), this.settheme('colorful');
-      } else this.storagesetjson("theme", 'colorful'), this.settheme('colorful');
+        else
+          this.storagesetjson("theme", "colorful"), this.settheme("colorful");
+      } else
+        this.storagesetjson("theme", "colorful"), this.settheme("colorful");
+    },
+    async getlockmode() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("lockmode") != -1) {
+        const ret = await Storage.get({ key: "lockmode" });
+        if (ret.value != null) this.lockmode = JSON.parse(ret.value);
+        else this.storagesetjson("lockmode", false), (this.lockmode = false);
+      } else this.storagesetjson("lockmode", false), (this.lockmode = false);
+    },
+    async getlockmode_pwd() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf("lockmode_password") != -1) {
+        const ret = await Storage.get({ key: "lockmode_password" });
+        if (ret.value != null) this.lockmode_password = JSON.parse(ret.value);
+        else
+          this.storagesetjson("lockmode_password", ""),
+            (this.lockmode_password = "");
+      } else
+        this.storagesetjson("lockmode_password", ""),
+          (this.lockmode_password = "");
     },
     settheme(name) {
       var fileref = document.createElement("link");
       fileref.setAttribute("rel", "stylesheet");
       fileref.setAttribute("type", "text/css");
-      if (name == 'reality') {
+      if (name == "reality") {
         var linkpath = require(`@/assets/css/reality.theme.scss`);
         fileref.setAttribute("href", linkpath);
       } else {
         var linkpath = require(`@/assets/css/colorful.theme.scss`);
         fileref.setAttribute("href", linkpath);
       }
-      document.getElementsByTagName('head')[0].appendChild(fileref);
+      document.getElementsByTagName("head")[0].appendChild(fileref);
     },
     async getplaytime() {
       const keys = await Storage.keys();
@@ -208,10 +245,12 @@ export default {
       return min + Math.round((max - min) * Math.random());
     },
     exit() {
-      if(this.iselectron) {
-        // TODO
-        // if not lockmode, directly ipcsend
-        // if lockmode, check
+      if (this.iselectron) {
+        if (this.lockmode) {
+          this.lockmode_enterpwd = true;
+        } else {
+          ipc.send("exit");
+        }
       }
     }
   }

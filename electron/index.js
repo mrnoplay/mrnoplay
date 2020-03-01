@@ -10,7 +10,7 @@ const {
   dialog,
 } = require('electron');
 const { ebtMain } = require('electron-baidu-tongji');
-ebtMain(ipcMain)
+ebtMain(ipcMain);
 const AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
 const i18n = require('i18n');
@@ -107,7 +107,7 @@ async function createWindow() {
       'who -b',
       function(err, data, stderr){
         if (!err) {
-          var reg = /[A-Z]?[a-z]{2}\s[0-9]{1,}\s[0-9]{1,}:[0-9]{1,}/;
+          var reg = /[A-Z]?[a-z]{2}\s{1,}[0-9]{1,}\s[0-9]{1,}:[0-9]{1,}/;
           var datamatched = data.match(reg);
           var startdate = moment(moment().year().toString() + " " + datamatched.toString());
           var nowdate = moment();

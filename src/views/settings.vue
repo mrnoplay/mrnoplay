@@ -119,7 +119,6 @@
                   @keyup.enter="setdefault_lockmode_on"
                   :placeholder="$t('enterpassword-reenter')"
                 />
-
                 <b-btn
                   variant="light"
                   class="new submit settingbtn on"

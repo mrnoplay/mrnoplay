@@ -15,7 +15,12 @@
             <div class="breathe-div"></div>
             <div class="warn warn-over">{{ $t("firstsavefiles") }}</div>
           </div>
-          <b-alert v-model="punishstart" class="warnfather warnfather-over" style="z-index: 2000;" variant="danger">
+          <b-alert
+            v-model="punishstart"
+            class="warnfather warnfather-over"
+            style="z-index: 2000;"
+            variant="danger"
+          >
             <div class="breathe-div"></div>
             <div class="warn warn-over">{{ $t("punishstart") }}</div>
           </b-alert>

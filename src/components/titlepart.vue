@@ -14,24 +14,6 @@
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 import notify from "@/components/linxf/notify";
-var ipc = null;
-if (process.env.VUE_APP_LINXF == "electron") {
-  ipc = window.require("electron").ipcRenderer; //use window.require instead of require
-  ipc.on("closenotification", function(event, arg) {
-    notify.methods.send({
-      title: this.$t("unsupported"),
-      id: 2,
-      message: this.$t("properwaytoexit")
-    });
-  });
-  ipc.on("toomanyapps", function(event, arg) {
-    notify.methods.send({
-      title: this.$t("unsupported"),
-      id: 3,
-      message: this.$t("1apprunning")
-    });
-  });
-}
 export default {
   name: "titlepart",
   props: ["canabout"],
