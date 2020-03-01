@@ -1,6 +1,9 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+    <iframe
+      id="tongji"
+      :src="tongjisrc"
       style="display:inline-block; width:0.5px; height:0.5px"
     ></iframe>
     <div class="container">
