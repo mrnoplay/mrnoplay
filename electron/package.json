@@ -52,7 +52,7 @@
         "!advancedinstaller-cache",
         "!advancedinstaller-SetupFiles"
       ],
-      "artifactName": "${productName}.${version}.mac.${ext}"
+      "artifactName": "mrnoplay.${version}.mac.${ext}"
     },
     "win": {
       "target": [
@@ -63,8 +63,7 @@
         "**/*",
         "!advancedinstaller-cache",
         "!advancedinstaller-SetupFiles"
-      ],
-      "artifactName": "${productName}.${version}.win.${ext}"
+      ]
     }
   }
 }
