@@ -288,20 +288,24 @@ ipcMain.on('exit', () => {
   app.quit();
 });
 
-ipcMain.on('shutdown', (event, arg) => {
+function shutdowner() {
+  canBlur = true;
+  if (mainWindow) {
+    mainWindow.setKiosk(false);
+  }
   if (process.platform === 'win32') {
-    var options = {
-      name: i18n.__('name'),
-    };
     shutdown.shutdown();
-    event.sender.send('timingdone', true);
   } else {
-    event.sender.send('timingdone', true);
     var script = 'tell application "Finder" to shut down';
     applescript.execString(script, function (err) {});
     canQuit = true;
     app.quit();
   }
+}
+
+ipcMain.on('shutdown', (event, arg) => {
+  event.sender.send('timingdone', true);
+  shutdowner();
 })
 
 var mrlauncher = new AutoLaunch({

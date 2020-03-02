@@ -34,8 +34,14 @@
           >
             <div class="largebtn-innertext">{{ $t("cancel") }}</div>
           </b-btn>
-          <small v-if="iselectron" class="new largebtn-notbtn transparent small canceltext">{{ $t("cancel15s") }}</small>
-          <small v-if="!iselectron" class="new largebtn-notbtn transparent small canceltext">{{ $t("cancelweb") }}</small>
+          <small
+            v-if="iselectron"
+            class="new largebtn-notbtn transparent small canceltext"
+          >{{ $t("cancel15s") }}</small>
+          <small
+            v-if="!iselectron"
+            class="new largebtn-notbtn transparent small canceltext"
+          >{{ $t("cancelweb") }}</small>
         </div>
       </div>
     </div>
@@ -76,7 +82,8 @@ export default {
       displaytime: "0:00",
       lefttime: 0,
       cancancel: true,
-      halflock: true
+      halflock: true,
+      first_shutdown: false
     };
   },
   watch: {
@@ -136,12 +143,18 @@ export default {
     },
     async i18nsetlang() {
       const keys = await Storage.keys();
+      // --------
+      // Language
+      // --------
       if (keys.keys.indexOf("lang") != -1) {
         const retlang = await Storage.get({ key: "lang" });
         if (retlang.value != null) _this.lang = retlang.value;
         else (_this.lang = "en"), _this.storagesetlang("en");
       } else (_this.lang = "en"), _this.storagesetlang("en");
       _this.$i18n.locale = _this.lang;
+      // ---------
+      // Play Time
+      // ---------
       if (keys.keys.indexOf("playtime") != -1) {
         const rettime = await Storage.get({ key: "playtime" });
         if (rettime.value != null) _this.playtime = rettime.value;
@@ -149,6 +162,17 @@ export default {
         _this.lefttime = 60 * _this.playtime;
         _this.displaytime = _this.playtime.toString() + ":00";
       }
+      // ----------------
+      // First - Shutdown
+      // ----------------
+      if (keys.keys.indexOf("first-shutdown") != -1) {
+        const ret = await Storage.get({ key: "first-shutdown" });
+        if (ret.value != null) {
+          if (JSON.parse(ret.value) != "not-first") {
+            this.first_shutdown = true;
+          }
+        } else this.first_shutdown = true;
+      } else this.first_shutdown = true;
     },
     i18nchinese() {
       this.lang = "cn";
@@ -157,8 +181,24 @@ export default {
       this.lang = "en";
     },
     stop() {
-      this.cancel();
-      if (process.env.VUE_APP_LINXF == "electron") {
+      if (this.first_shutdown && this.iselectron) {
+        this.storagesetjson("first-shutdown", "not-first");
+        this.first_shutdown = false;
+        this.first_shutdown_confirm();
+      } else {
+        this.cancel();
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send("shutdown");
+        }
+      }
+    },
+    async first_shutdown_confirm() {
+      let confirmRet = await Modals.confirm({
+        title: this.$t('confirm-shutdown'),
+        message: this.$t('confirm-shutdown-text')
+      });
+      if(confirmRet.value) {
+        this.cancel();
         ipc.send("shutdown");
       }
     },
