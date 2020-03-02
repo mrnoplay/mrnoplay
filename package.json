@@ -47,5 +47,9 @@
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^2.3.5",
     "vue-template-compiler": "^2.6.10"
+  },
+  "manifest": {
+    "en": "Display Update Information, Lock Mode, Notice when Shutdown by Clicking 'Stop' for the first time.",
+    "zh": "显示更新内容，控制模式，第一次关机前提示"
   }
 }

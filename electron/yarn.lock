@@ -1010,6 +1010,11 @@ iconv-lite@^0.5.1:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
+if-async@^3.7.4:
+  version "3.7.4"
+  resolved "https://registry.npm.taobao.org/if-async/download/if-async-3.7.4.tgz#55868deb0093d3c67bf7166e745353fb9bcb21a2"
+  integrity sha1-VYaN6wCT08Z79xZudFNT+5vLIaI=
+
 import-lazy@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/import-lazy/download/import-lazy-2.1.0.tgz#05698e3d45c88e8d7e9d92cb0584e77f096f3e43"
@@ -1020,7 +1025,7 @@ imurmurhash@^0.1.4:
   resolved "https://registry.npm.taobao.org/imurmurhash/download/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
 
-inherits@^2.0.3, inherits@~2.0.3:
+inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.4"
   resolved "https://registry.npm.taobao.org/inherits/download/inherits-2.0.4.tgz?cache=0&sync_timestamp=1560975547815&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Finherits%2Fdownload%2Finherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=
@@ -1079,6 +1084,11 @@ is-yarn-global@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npm.taobao.org/is-yarn-global/download/is-yarn-global-0.3.0.tgz#d502d3382590ea3004893746754c89139973e232"
   integrity sha1-1QLTOCWQ6jAEiTdGdUyJE5lz4jI=
+
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npm.taobao.org/isarray/download/isarray-0.0.1.tgz?cache=0&sync_timestamp=1562592096220&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fisarray%2Fdownload%2Fisarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
 
 isarray@~1.0.0:
   version "1.0.0"
@@ -1549,6 +1559,16 @@ read-config-file@5.0.1:
     json5 "^2.1.1"
     lazy-val "^1.0.4"
 
+"readable-stream@>=1.0.33-1 <1.1.0-0":
+  version "1.0.34"
+  resolved "https://registry.npm.taobao.org/readable-stream/download/readable-stream-1.0.34.tgz?cache=0&sync_timestamp=1581622984924&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freadable-stream%2Fdownload%2Freadable-stream-1.0.34.tgz#125820e34bc842d2f2aaafafe4c2916ee32c157c"
+  integrity sha1-Elgg40vIQtLyqq+v5MKRbuMsFXw=
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "0.0.1"
+    string_decoder "~0.10.x"
+
 readable-stream@^2.2.2:
   version "2.3.6"
   resolved "https://registry.npm.taobao.org/readable-stream/download/readable-stream-2.3.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freadable-stream%2Fdownload%2Freadable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
@@ -1574,6 +1594,16 @@ readable-stream@^2.3.5:
     safe-buffer "~5.1.1"
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
+
+regedit@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npm.taobao.org/regedit/download/regedit-3.0.3.tgz#0c2188e15f670de7d5740c5cea9bbebe99497749"
+  integrity sha1-DCGI4V9nDefVdAxc6pu+vplJd0k=
+  dependencies:
+    debug "^4.1.0"
+    if-async "^3.7.4"
+    stream-slicer "0.0.6"
+    through2 "^0.6.3"
 
 registry-auth-token@^3.4.0:
   version "3.4.0"
@@ -1797,6 +1827,11 @@ stat-mode@^1.0.0:
   resolved "https://registry.npm.taobao.org/stat-mode/download/stat-mode-1.0.0.tgz#68b55cb61ea639ff57136f36b216a291800d1465"
   integrity sha1-aLVcth6mOf9XE282shaikYANFGU=
 
+stream-slicer@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.npm.taobao.org/stream-slicer/download/stream-slicer-0.0.6.tgz#f86b2ac5c2440b7a0a87b71f33665c0788046138"
+  integrity sha1-+GsqxcJEC3oKh7cfM2ZcB4gEYTg=
+
 string-width@^3.0.0:
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/string-width/download/string-width-3.1.0.tgz#22767be21b62af1081574306f69ac51b62203961"
@@ -1814,6 +1849,11 @@ string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0:
     emoji-regex "^8.0.0"
     is-fullwidth-code-point "^3.0.0"
     strip-ansi "^6.0.0"
+
+string_decoder@~0.10.x:
+  version "0.10.31"
+  resolved "https://registry.npm.taobao.org/string_decoder/download/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
+  integrity sha1-YuIDvEF2bGwoyfyEMB2rHFMQ+pQ=
 
 string_decoder@~1.1.1:
   version "1.1.1"
@@ -1883,6 +1923,14 @@ term-size@^2.1.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/term-size/download/term-size-2.2.0.tgz?cache=0&sync_timestamp=1580399969066&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fterm-size%2Fdownload%2Fterm-size-2.2.0.tgz#1f16adedfe9bdc18800e1776821734086fcc6753"
   integrity sha1-Hxat7f6b3BiADhd2ghc0CG/MZ1M=
+
+through2@^0.6.3:
+  version "0.6.5"
+  resolved "https://registry.npm.taobao.org/through2/download/through2-0.6.5.tgz#41ab9c67b29d57209071410e1d7a7a968cd3ad48"
+  integrity sha1-QaucZ7KdVyCQcUEOHXp6lozTrUg=
+  dependencies:
+    readable-stream ">=1.0.33-1 <1.1.0-0"
+    xtend ">=4.0.0 <4.1.0-0"
 
 to-readable-stream@^1.0.0:
   version "1.0.0"
@@ -2074,6 +2122,11 @@ xdg-basedir@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/xdg-basedir/download/xdg-basedir-4.0.0.tgz#4bc8d9984403696225ef83a1573cbbcb4e79db13"
   integrity sha1-S8jZmEQDaWIl74OhVzy7y0552xM=
+
+"xtend@>=4.0.0 <4.1.0-0":
+  version "4.0.2"
+  resolved "https://registry.npm.taobao.org/xtend/download/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
+  integrity sha1-u3J3n1+kZRhrH0OPZ0+jR/2121Q=
 
 y18n@^4.0.0:
   version "4.0.0"

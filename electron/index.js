@@ -17,6 +17,7 @@ const i18n = require('i18n');
 const Store = require('electron-store');
 const store = new Store();
 const cmd = require('node-cmd');
+const regedit = require('regedit');
 var moment = require('moment');
 const {
   CapacitorSplashScreen
@@ -415,6 +416,7 @@ ipcMain.on('checkupdate', (event, arg) => {
 
 function update_onstart() {
   var signal = 1;
+  var info = '';
   request('https://gitee.com/scris/mrnoplay-update/raw/master/package.json', function (error, response, body) {
     if (error || response.statusCode != 200) {
       signal = 1;
@@ -423,6 +425,8 @@ function update_onstart() {
         let data = JSON.parse(body);
         if (compareVersion(data.version, package.version) == 1) {
           signal = 2;
+          if(store.get('lang') == 'en') info = data.manifest.en;
+          else info = data.manifest.zh;
         } else {
           signal = 3;
         }
@@ -433,7 +437,7 @@ function update_onstart() {
     if(signal == 2) {
       canBlur = true;
       dialog.showMessageBox({
-        message: i18n.__("'dupdate"),
+        message: i18n.__("'dupdate") + info,
       }, () => {
         canBlur = false;
       });
