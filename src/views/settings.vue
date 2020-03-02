@@ -126,6 +126,12 @@
                   :placeholder="$t('enterpassword')"
                 ></b-btn>
               </div>
+              <div class="smallerlabelfather lockmodenoticefather">
+                <span class="label smallerlabel">{{ $t("lockmode-notice1") }}</span>
+              </div>
+              <div class="smallerlabelfather lockmodenoticefather" v-if="iselectron">
+                <span class="label smallerlabel">{{ $t("lockmode-notice2") }}</span>
+              </div>
             </div>
             <span class="label settingslabel" v-if="default_lockmode">
               {{ $t("lockmode") }}
@@ -138,6 +144,7 @@
                 class="off settinginput"
                 v-model="default_lockmode_off"
                 @keyup.enter="setdefault_lockmode_off"
+                :placeholder="$t('enterpassword')"
               />
               <b-btn
                 variant="light"
@@ -452,8 +459,8 @@ export default {
           id: 13,
           message: this.$t("lockmode_on_success")
         });
-        if(this.iselectron) {
-          ipc.send('turnlockon', md5(this.default_lockmode_on));
+        if (this.iselectron) {
+          ipc.send("turnlockon", md5(this.default_lockmode_on));
         }
         this.default_lockmode_on = "";
         this.default_lockmode_on_check = "";
@@ -493,8 +500,8 @@ export default {
         id: 15,
         message: this.$t("lockmode_off_success")
       });
-      if(this.iselectron) {
-        ipc.send('turnlockoff');
+      if (this.iselectron) {
+        ipc.send("turnlockoff");
       }
     }
   }

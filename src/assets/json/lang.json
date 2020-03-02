@@ -116,7 +116,11 @@
     "lockmode_on_fail": "两次输入不一致。",
     "lockmode_off_fail": "密码错误。",
     "enterpassword": "输入密码",
-    "enterpassword-reenter": "再次输入"
+    "enterpassword-reenter": "再次输入",
+    "entertoexit": "输入控制模式密码",
+    "lockmode-entertoexit": "若需退出，您需要",
+    "lockmode-notice1": "打开控制模式，将禁用设置",
+    "lockmode-notice2": "同时退出 Mr Noplay 必须输入密码"
   },
   "en": {
     "submit": "OK",
@@ -234,6 +238,10 @@
     "lockmode_on_fail": "Two input mismatches.",
     "lockmode_off_fail": "The password is wrong.",
     "enterpassword": "Enter Password",
-    "enterpassword-reenter": "Again"
+    "enterpassword-reenter": "Enter Again",
+    "entertoexit": "Enter Password",
+    "lockmode-entertoexit": "To Exit, Please:",
+    "lockmode-notice1": "Lock mode will forbid settings",
+    "lockmode-notice2": "And you must enter password to exit"
   }
 }

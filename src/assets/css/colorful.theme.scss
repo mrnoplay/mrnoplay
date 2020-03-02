@@ -596,6 +596,27 @@ input[type="number"] {
   align-items: flex-start;
 }
 
+.lockmode_enterpwd {
+  width: 100vw;
+  height: 100vh;
+  background-color: $bgwhite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lockmode_enterpwd-btn {
+  width: 11rem;
+}
+
+.warnlockmodefather {
+  transform: translateX(-0.46rem);
+}
+
+.lockmodenoticefather {
+  transform: translateY(0);
+}
+
 ::placeholder {
   color: $activegrey;
 }

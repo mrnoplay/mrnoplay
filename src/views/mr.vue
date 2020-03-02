@@ -1,14 +1,27 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
-    <iframe
-      id="tongji"
-      :src="tongjisrc"
-      style="display:inline-block; width:0.5px; height:0.5px"
-    ></iframe>
+    <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
     <div class="container">
       <div id="nbsppart"></div>
-      <div class="lockmode-enterpwd" v-if="lockmode_enterpwd"></div>
+      <div class="lockmode_enterpwd" v-if="lockmode_enterpwd">
+        <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
+        <div class="input-btn lockmode_enterpwd-btn">
+          <input
+            type="password"
+            required
+            class="off settinginput"
+            v-model="lockmode_enterpwd_enter"
+            @keyup.enter="lockmode_exit"
+            :placeholder="$t('entertoexit')"
+          />
+          <b-btn variant="light" class="new submit settingbtn on" @click="lockmode_exit"></b-btn>
+        </div>
+        <div class="warnnotintegerfather warnlockmodefather" v-if="lockmode_fail">
+          <div class="breathe-div"></div>
+          <div class="warn warnnotinteger">{{ $t("lockmode_off_fail") }}</div>
+        </div>
+      </div>
       <div id="main">
         <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
@@ -57,6 +70,7 @@ import titlepart from "@/components/titlepart";
 var alarm = new Audio();
 var _this = null;
 var ipc = null;
+var md5 = require("md5");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
 }
@@ -81,7 +95,9 @@ export default {
       lockmode: false,
       lockmode_password: "",
       lockmode_enterpwd: false,
-      tongjisrc: '',
+      lockmode_enterpwd_enter: "",
+      lockmode_fail: false,
+      tongjisrc: ""
     };
   },
   watch: {
@@ -94,10 +110,11 @@ export default {
     this.gettheme();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
-      if(process.platform == 'win32') this.tongjisrc = 'https://mrnoplay-tongji.now.sh/index-win.html';
-      else this.tongjisrc = 'https://mrnoplay-tongji.now.sh/index-mac.html';
+      if (process.platform == "win32")
+        this.tongjisrc = "https://mrnoplay-tongji.now.sh/index-win.html";
+      else this.tongjisrc = "https://mrnoplay-tongji.now.sh/index-mac.html";
     } else {
-      this.tongjisrc = 'https://mrnoplay-tongji.now.sh/index-web.html';
+      this.tongjisrc = "https://mrnoplay-tongji.now.sh/index-web.html";
     }
     _this = this;
     this.isonios = this.isiOS(navigator.userAgent);
@@ -253,6 +270,17 @@ export default {
           this.lockmode_enterpwd = true;
         } else {
           ipc.send("exit");
+        }
+      }
+    },
+    lockmode_exit() {
+      if (this.iselectron) {
+        if (this.lockmode_password == md5(this.lockmode_enterpwd_enter)) {
+          this.lockmode_fail = false;
+          this.lockmode_enterpwd = false;
+          ipc.send("exit");
+        } else {
+          this.lockmode_fail = true;
         }
       }
     }
