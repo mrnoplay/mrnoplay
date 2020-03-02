@@ -4,7 +4,7 @@
     <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
     <div class="container">
       <div id="nbsppart"></div>
-      <div class="lockmode_enterpwd" v-if="lockmode_enterpwd">
+      <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
         <div class="input-btn lockmode_enterpwd-btn">
           <input
