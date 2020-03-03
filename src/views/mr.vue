@@ -7,11 +7,7 @@
       <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
         <div class="input-btn lockmode_enterpwd-btn">
-          <b-btn
-          variant="light"
-          class="new submit-back settingbtn on"
-          @click="lockmode_goback"
-        ></b-btn>
+          <b-btn variant="light" class="new submit-back settingbtn on" @click="lockmode_goback"></b-btn>
           <input
             type="password"
             required
@@ -135,6 +131,15 @@ export default {
     alarm.src = require("@/assets/music/scarymusic/" +
       this.rand(1, 17) +
       ".mp3");
+    if (this.iselectron) {
+      ipc.on("update_onstart", (event, arg) => {
+        this.$refs.notify.send({
+          title: this.$t("foundupdate_title"),
+          id: 15,
+          message: this.$t("foundupdate") + arg,
+        });
+      });
+    }
     if (
       process.env.VUE_APP_LINXF != "android" &&
       process.env.VUE_APP_LINXF != "electron" &&

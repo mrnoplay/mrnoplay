@@ -122,7 +122,9 @@
     "lockmode-notice1": "打开控制模式，将禁用设置",
     "lockmode-notice2": "同时退出 Mr Noplay 必须输入密码",
     "confirm-shutdown": "防误触确认",
-    "confirm-shutdown-text": "请留意点击‘停止’后将关机。为了防止误触，我们发送了这条提醒，但只会提醒一次。"
+    "confirm-shutdown-text": "请留意点击‘停止’后将关机。为了防止误触，我们发送了这条提醒，但只会提醒一次。",
+    "foundupdate_title": "有更新",
+    "foundupdate": "请去设置界面下载。最近一次更新的更新内容："
   },
   "en": {
     "submit": "OK",
@@ -246,6 +248,8 @@
     "lockmode-notice1": "Lock mode will forbid settings",
     "lockmode-notice2": "And you must enter password to exit",
     "confirm-shutdown": "Please Confirm",
-    "confirm-shutdown-text": "After clicking on 'Stop', the computer will shutdown. In order to prevent mistake touches, we displayes this notice, but only once."
+    "confirm-shutdown-text": "After clicking on 'Stop', the computer will shutdown. In order to prevent mistake touches, we displayes this notice, but only once.",
+    "foundupdate_title": "Found an update",
+    "foundupdate": "You can download it in Settings. What's new in the latest update: "
   }
 }

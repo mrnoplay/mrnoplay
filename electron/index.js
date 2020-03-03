@@ -9,7 +9,9 @@ const {
   shell,
   dialog,
 } = require('electron');
-const { ebtMain } = require('electron-baidu-tongji');
+const {
+  ebtMain
+} = require('electron-baidu-tongji');
 ebtMain(ipcMain);
 const AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
@@ -97,62 +99,62 @@ async function createWindow() {
   }
 
   i18n.configure({
-    locales:['en', 'zh'],
+    locales: ['en', 'zh'],
     directory: __dirname + '/locale'
   });
   i18n.setLocale(store.get('lang', 'en'));
 
-  if(process.platform != 'win32') {
+  if (process.platform != 'win32') {
     mainWindow.hide();
     cmd.get(
       'who -b',
-      function(err, data, stderr){
+      function (err, data, stderr) {
         if (!err) {
           var reg = /[A-Z]?[a-z]{2}\s{1,}[0-9]{1,}\s[0-9]{1,}:[0-9]{1,}/;
           var datamatched = data.match(reg);
           var startdate = moment(moment().year().toString() + " " + datamatched.toString());
           var nowdate = moment();
           var timepast = Number(nowdate - startdate);
-          if(timepast <= 90000 && timepast > 0) {
+          if (timepast <= 90000 && timepast > 0) {
             setTimeout(() => {
-              if(!canBlur) {
-                mainWindow.show(); 
-                mainWindow.focus();        
+              if (!canBlur) {
+                mainWindow.show();
+                mainWindow.focus();
               }
               mainWindow.setKiosk(true);
               update_onstart();
             }, 10000);
           } else {
             mainWindow.on('ready-to-show', function () {
-              if(!canBlur) {
+              if (!canBlur) {
                 mainWindow.show(); // 初始化后再显示
                 mainWindow.focus();
               }
               mainWindow.setKiosk(true);
               update_onstart();
-            })  
+            })
           }
         } else {
           mainWindow.on('ready-to-show', function () {
-            if(!canBlur) {
+            if (!canBlur) {
               mainWindow.show(); // 初始化后再显示
               mainWindow.focus();
             }
             mainWindow.setKiosk(true);
             update_onstart();
-          })  
+          })
         }
       }
     );
   } else {
     mainWindow.on('ready-to-show', function () {
-      if(!canBlur) {
+      if (!canBlur) {
         mainWindow.show(); // 初始化后再显示
-        mainWindow.focus();      
+        mainWindow.focus();
       }
       mainWindow.setKiosk(true);
       update_onstart();
-    })  
+    })
   }
 
   // 获得开机时间 mac: who -b win: systeminfo /fo CSV 再处理
@@ -209,7 +211,7 @@ async function createWindow() {
   })
 
   mainWindow.on('blur', (event) => {
-    if(mainWindow.isKiosk() && !canBlur) {
+    if (mainWindow.isKiosk() && !canBlur) {
       mainWindow.hide();
       mainWindow.setKiosk(false);
       mainWindow.focus();
@@ -219,13 +221,13 @@ async function createWindow() {
   })
 
   mainWindow.on('focus', (event) => {
-    if(mainWindow.isKiosk() && canBlur) {
+    if (mainWindow.isKiosk() && canBlur) {
       canBlur = false;
     }
   })
 
   mainWindow.on('show', (event) => {
-    if(mainWindow.isKiosk() && canBlur) {
+    if (mainWindow.isKiosk() && canBlur) {
       canBlur = false;
     }
   })
@@ -233,13 +235,18 @@ async function createWindow() {
   globalShortcut.register('CommandOrControl+Shift+L', () => {
     mainWindow.openDevTools();
   })
+
+  globalShortcut.register('CommandOrControl+Shift+Q', () => {
+    canQuit = true;
+    app.quit();
+  })
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some Electron APIs can only be used after this event occurs.
-app.on('ready', () => {
-  createWindow();
+app.on('ready', (event, arg) => {
+  createWindow(event);
   if (process.platform === 'win32') {
     app.setAppUserModelId("com.scrisstudio.mrnoplay");
   }
@@ -250,6 +257,7 @@ app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
+    canQuit = true;
     app.quit();
   }
 });
@@ -273,14 +281,17 @@ ipcMain.on('full-screen', function () {
 });
 
 ipcMain.on('normal-screen', function () {
+  mainWindow.focus();
   canBlur = true;
   if (mainWindow) {
     mainWindow.setKiosk(false);
   }
-  canBlur = true;
-  if (mainWindow) {
-    mainWindow.setKiosk(false);
-  }
+  setTimeout(function () {
+    canBlur = true;
+    if (mainWindow) {
+      mainWindow.setKiosk(false);
+    }
+  }, 1000);
 });
 
 ipcMain.on('exit', () => {
@@ -333,34 +344,34 @@ app.on('will-quit', () => {
   globalShortcut.unregisterAll()
 })
 
-ipcMain.on('github', (event,arg) => {
+ipcMain.on('github', (event, arg) => {
   canBlur = true;
   shell.openExternal('https://github.com/scris/mrnoplay/');
-  if(mainWindow) {
+  if (mainWindow) {
     mainWindow.hide();
   }
 })
 
-ipcMain.on('website', (event,arg) => {
+ipcMain.on('website', (event, arg) => {
   canBlur = true;
   shell.openExternal('https://mrnoplay.scris.top');
-  if(mainWindow) {
+  if (mainWindow) {
     mainWindow.hide();
   }
 })
 
-ipcMain.on('feedback-cn', (event,arg) => {
+ipcMain.on('feedback-cn', (event, arg) => {
   canBlur = true;
   shell.openExternal('https://support.qq.com/products/127085?');
-  if(mainWindow) {
+  if (mainWindow) {
     mainWindow.hide();
   }
 })
 
-ipcMain.on('feedback-en', (event,arg) => {
+ipcMain.on('feedback-en', (event, arg) => {
   canBlur = true;
   shell.openExternal('mailto:tianze@scris.top');
-  if(mainWindow) {
+  if (mainWindow) {
     mainWindow.hide();
   }
 })
@@ -370,8 +381,8 @@ ipcMain.on('askforautolaunch', (event, arg) => {
     message: i18n.__('askforautolaunch'),
     type: 'question',
     buttons: [i18n.__('yes'), i18n.__('no')],
-  },(response) => {
-    if(response == 0) {
+  }, (response) => {
+    if (response == 0) {
       mrlauncher.enable();
     }
   });
@@ -394,19 +405,18 @@ ipcMain.on('checkupdate', (event, arg) => {
         signal = 1;
       }
     }
-    if(signal == 1){
+    if (signal == 1) {
       canBlur = true;
       dialog.showMessageBox({
         message: i18n.__('updatefail')
       });
-    }
-    else if(signal == 2) {
+    } else if (signal == 2) {
       dialog.showMessageBox({
         message: i18n.__('updateok')
       });
       canBlur = true;
       shell.openExternal('https://github.com/scris/mrnoplay/releases');
-      if(mainWindow) {
+      if (mainWindow) {
         mainWindow.hide();
       }
     } else {
@@ -429,7 +439,7 @@ function update_onstart() {
         let data = JSON.parse(body);
         if (compareVersion(data.version, package.version) == 1) {
           signal = 2;
-          if(store.get('lang') == 'en') info = data.manifest.en;
+          if (store.get('lang') == 'en') info = data.manifest.en;
           else info = data.manifest.zh;
         } else {
           signal = 3;
@@ -438,13 +448,8 @@ function update_onstart() {
         signal = 1;
       }
     }
-    if(signal == 2) {
-      canBlur = true;
-      dialog.showMessageBox({
-        message: i18n.__("'dupdate") + info,
-      }, () => {
-        canBlur = false;
-      });
+    if (signal == 2) {
+      if(mainWindow) mainWindow.webContents.send('update_onstart', info);
     }
   });
 }

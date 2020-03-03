@@ -5,8 +5,8 @@ html {
 }
 
 body {
-  height: 100vh;
-  overflow-y: hidden;
+  height: 98vh;
+  overflow-y: auto;
 }
 
 @media screen and (max-height: 580px) and (min-height: 271px) {
@@ -423,6 +423,25 @@ input[type="number"] {
   background-image: url('../img/submit.svg');
 }
 
+.submit-back {
+  width: 1.417em;
+  height: 1.417em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-top: 1em;
+  margin-right: 0.2em;
+  background-image: url('../img/back-smaller.svg');
+}
+
+.submit-back:hover {
+  background-image: url('../img/back-smaller-white.svg');
+}
+
+.submit-back:active {
+  background-image: url('../img/back-smaller.svg');
+}
+
 .settings {
   width: 1.417em;
   height: 1.417em;
@@ -635,6 +654,7 @@ input[type="number"] {
   font-size: 0.6em!important;
   margin-top: 1em!important;
   margin-right: 1em!important;
+  max-width: 10rem!important;
   opacity: 0.8;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) , rgba(228, 228, 228, 0.8))!important;
   border: 5px rgba(255, 255, 255, 0.2)!important;
@@ -676,4 +696,57 @@ input[type="number"] {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track-piece {
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  border-radius: 0px;
+  background-color: #F1F1F1;
+}
+
+::-webkit-scrollbar:hover {
+  background: #DCE1E4;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #C1C8CC;
+  border: solid 1px #B5BBBF;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6C7073;
+  border-color: #5F6366;
+}
+
+::-webkit-scrollbar-button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+  border: 1px solid #B5BBBF;
+  display: none;
+}
+
+::-webkit-scrollbar-button:hover {
+  border-color: #5F6366;
+}
+
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:decrement {
+  display: none;
+}
+
+::selection {
+  color: dimgrey;
+  background-color: gainsboro;
 }
