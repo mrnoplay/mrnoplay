@@ -7,10 +7,15 @@
       <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
         <div class="input-btn lockmode_enterpwd-btn">
+          <b-btn
+          variant="light"
+          class="new submit-back settingbtn on"
+          @click="lockmode_goback"
+        ></b-btn>
           <input
             type="password"
             required
-            class="off settinginput"
+            class="off settinginput lockmodeinput"
             v-model="lockmode_enterpwd_enter"
             @keyup.enter="lockmode_exit"
             :placeholder="$t('entertoexit')"
@@ -283,6 +288,9 @@ export default {
           this.lockmode_fail = true;
         }
       }
+    },
+    lockmode_goback() {
+      this.lockmode_enterpwd = false;
     }
   }
 };

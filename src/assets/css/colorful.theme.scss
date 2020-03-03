@@ -356,6 +356,29 @@ input[type="number"] {
   background-color: $seagreen;
 }
 
+.submit-back {
+  cursor: pointer;
+  width: 1.417rem;
+  height: 1.417rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: $lightbuttongrey;
+  margin-top: 0.2rem;
+  margin-right: 0.2rem;
+  border-radius: 0.2rem;
+  background-image: url('../img/back-smaller.svg');
+}
+
+.submit-back:hover {
+  background-image: url('../img/back-smaller-white.svg');
+  background-color: $hovergreen;
+}
+
+.submit-back:active {
+  background-image: url('../img/back-smaller-white.svg');
+  background-color: $seagreen;
+}
+
 .settinginput {
   background: $lightgrey;
   border-radius: 0.2rem;
@@ -606,7 +629,7 @@ input[type="number"] {
 }
 
 .lockmode_enterpwd-btn {
-  width: 11rem;
+  width: 12rem;
 }
 
 .warnlockmodefather {
