@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "author": "Tianze Ds Qiu (slaaker@126.com)",
   "description": "",
   "license": "MPL-2.0",
@@ -49,7 +49,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "manifest": {
-    "en": "Allow user to get out of the enter-password page, fix a bug that makes it sometimes unable to exit fullscreen.",
-    "zh": "允许用户退出控制模式输入密码界面，修复计时界面偶尔不能退出全屏的问题。"
+    "en": "Improve user experience.",
+    "zh": "提升了用户体验。"
   }
 }

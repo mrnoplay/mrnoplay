@@ -194,10 +194,10 @@ export default {
     },
     async first_shutdown_confirm() {
       let confirmRet = await Modals.confirm({
-        title: this.$t('confirm-shutdown'),
-        message: this.$t('confirm-shutdown-text')
+        title: this.$t("confirm-shutdown"),
+        message: this.$t("confirm-shutdown-text")
       });
-      if(confirmRet.value) {
+      if (confirmRet.value) {
         this.cancel();
         ipc.send("shutdown");
       }

@@ -194,7 +194,7 @@ async function createWindow() {
 
   mainWindow.setSkipTaskbar(true);
   if (process.platform == 'darwin') {
-    app.dock.hide();
+    //app.dock.hide();
   }
 
   if (process.platform == 'win32') {
@@ -281,17 +281,13 @@ ipcMain.on('full-screen', function () {
 });
 
 ipcMain.on('normal-screen', function () {
-  mainWindow.focus();
   canBlur = true;
   if (mainWindow) {
+    mainWindow.focus();
     mainWindow.setKiosk(false);
+    mainWindow.setFullScreen(false);
+    mainWindow.unmaximize();
   }
-  setTimeout(function () {
-    canBlur = true;
-    if (mainWindow) {
-      mainWindow.setKiosk(false);
-    }
-  }, 1000);
 });
 
 ipcMain.on('exit', () => {
