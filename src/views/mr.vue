@@ -23,7 +23,46 @@
           <div class="warn warnnotinteger">{{ $t("lockmode_off_fail") }}</div>
         </div>
       </div>
-      <div id="main">
+      <!------------>
+      <!-- Today --->
+      <!------------>
+      <div id="behind" style="-webkit-app-region: no-drag" @click="gotoday" v-if="!ontoday"></div>
+      <div id="main" v-if="ontoday">
+        <div class="digitalboard border" style="-webkit-app-region: no-drag">
+          <div class="juniordigitalboard on">
+            <div class="digitaltop">{{ $t("todayiwillplay") }}</div>
+            <div class="digitalfather">
+              <b-form-input
+                id="playtime"
+                class="digital"
+                v-model="playtime"
+                type="tel"
+                maxlength="4"
+                required
+                @keyup.enter.native="start"
+              ></b-form-input>
+              <span class="digital digitalnote">:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="centralnbsp"></div>
+        <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeNAN">
+          <div class="breathe-div"></div>
+          <div class="warn warnnotinteger">{{ $t("enterinteger") }}</div>
+        </div>
+        <b-btn
+          style="-webkit-app-region: no-drag"
+          variant="light"
+          class="new on largebtn startbtn"
+          @click="start"
+        >
+          <div class="largebtn-innertext">{{ $t("submit") }}</div>
+        </b-btn>
+      </div>
+      <!----------->
+      <!-- Main --->
+      <!----------->
+      <div id="main" v-if="!ontoday">
         <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
             <div class="digitaltop">{{ $t("iwillplay") }}</div>
@@ -56,6 +95,7 @@
         </b-btn>
         <titlepart :canabout="true" @exit="exit"></titlepart>
       </div>
+      <div id="behind-down" style="-webkit-app-region: no-drag" @click="gomain" v-if="ontoday"></div>
     </div>
     <notify ref="notify"></notify>
   </div>
@@ -98,7 +138,8 @@ export default {
       lockmode_enterpwd: false,
       lockmode_enterpwd_enter: "",
       lockmode_fail: false,
-      tongjisrc: ""
+      tongjisrc: "",
+      ontoday: false,
     };
   },
   watch: {
@@ -296,6 +337,12 @@ export default {
     },
     lockmode_goback() {
       this.lockmode_enterpwd = false;
+    },
+    gotoday() {
+      this.ontoday = true;
+    },
+    gomain() {
+      this.ontoday = false;
     }
   }
 };

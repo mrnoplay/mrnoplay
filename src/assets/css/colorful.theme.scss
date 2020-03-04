@@ -1,6 +1,7 @@
 $black: #333;
 $white: #fdfdfd;
 $bgwhite: #fafafa;
+$darkerwhite: #f7f7f7;
 $labelgrey: rgb(179, 179, 179);
 $darklabelgrey: rgb(122, 122, 122);
 $inputgrey: rgb(230, 230, 230);
@@ -656,10 +657,29 @@ input[type="number"] {
 
 @media screen and (min-width: 321px) {
   #main {
+    z-index: 101;
     background: $white;
     padding: 3rem 2rem;
     border-radius: 0.3rem;
-    box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
+    box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1), 0 -0.2rem 0.7rem 0.2rem rgba(65, 64, 63, 0.05);
+  }
+  #behind {
+    width: 14.5rem;
+    height: 3rem;
+    transform: translateY(2.4rem);
+    z-index: 100;
+    background: $darkerwhite;
+    border-radius: 0.3rem;
+    box-shadow: 0 -0.1rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
+  }
+  #behind-down {
+    width: 14.5rem;
+    height: 3rem;
+    transform: translateY(-2.4rem);
+    z-index: 100;
+    background: $darkerwhite;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.1rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
   }
 }
 

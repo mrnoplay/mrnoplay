@@ -236,10 +236,10 @@ async function createWindow() {
     mainWindow.openDevTools();
   })
 
-  globalShortcut.register('CommandOrControl+Shift+Q', () => {
+  /*globalShortcut.register('CommandOrControl+Shift+Q', () => {
     canQuit = true;
     app.quit();
-  })
+  })*/
 }
 
 // This method will be called when Electron has finished
