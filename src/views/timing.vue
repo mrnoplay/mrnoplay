@@ -60,6 +60,7 @@ var alarm = new Audio();
 var _this = null;
 alarm.src = require("@/assets/music/alarm.mp3");
 var ipc = null;
+var tryparse = require("tryparse");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
 }
@@ -83,7 +84,13 @@ export default {
       lefttime: 0,
       cancancel: true,
       halflock: true,
-      first_shutdown: false
+      first_shutdown: false,
+      st_rp: 10,
+      st_finished: 0,
+      lastcost_rp: 0,
+      lastcost_time: 0,
+      todaydate: new Date(),
+      todaydate_parsed: "todaytime002000",
     };
   },
   watch: {
@@ -97,6 +104,11 @@ export default {
     if (process.env.VUE_APP_LINXF == "electron") {
       ipc.send("normal-screen");
     }
+    this.todaydate_parsed =
+      "todaytime" +
+      this.todaydate.getDate() +
+      this.todaydate.getMonth() +
+      this.todaydate.getFullYear();
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
     this.storagesetjson("cannotify", true);
@@ -173,6 +185,36 @@ export default {
           }
         } else this.first_shutdown = true;
       } else this.first_shutdown = true;
+      // --------------
+      // Last - Cost RP
+      // --------------
+      const ret_r = await Storage.get({ key: "rp" });
+      if ((tryparse.int(JSON.parse(ret_r.value)) != null) || (tryparse.int(JSON.parse(ret_r.value)) == 0))
+        this.st_rp = tryparse.int(JSON.parse(ret_r.value));
+      else this.st_rp = 10;
+      const ret_l = await Storage.get({ key: "lastcost_rp" });
+      if ((tryparse.int(JSON.parse(ret_l.value)) != null) || (tryparse.int(JSON.parse(ret_l.value)) == 0))
+        this.lastcost_rp = tryparse.int(JSON.parse(ret_l.value));
+      else this.lastcost_rp = 0;
+      // ---------------
+      // Today Time Left
+      // ---------------
+      if (keys.keys.indexOf(this.todaydate_parsed) != -1) {
+        this.todayset = true;
+        const ret_ttl = await Storage.get({ key: this.todaydate_parsed });
+        this.todaytimeleft = JSON.parse(ret_ttl.value);
+      }
+      const ret_lt = await Storage.get({ key: "lastcost_time" });
+      if ((tryparse.int(JSON.parse(ret_lt.value)) != null) || (tryparse.int(JSON.parse(ret_lt.value)) == 0))
+        this.lastcost_time = tryparse.int(JSON.parse(ret_lt.value));
+      else this.lastcost_time = 0;
+      // -------------
+      // Finished Time
+      // -------------
+      const ret_f = await Storage.get({ key: "finished" });
+      if ((tryparse.int(JSON.parse(ret_f.value)) != null) || (tryparse.int(JSON.parse(ret_f.value)) == 0))
+        this.st_finished = JSON.parse(ret_f.value);
+      else this.st_finished = 0;
     },
     i18nchinese() {
       this.lang = "cn";
@@ -186,9 +228,11 @@ export default {
         this.first_shutdown = false;
         this.first_shutdown_confirm();
       } else {
-        this.cancel();
+        this.storagesetjson('finished', this.st_finished + 1);
         if (process.env.VUE_APP_LINXF == "electron") {
           ipc.send("shutdown");
+        } else {
+          this.$router.push("/");
         }
       }
     },
@@ -198,13 +242,16 @@ export default {
         message: this.$t("confirm-shutdown-text")
       });
       if (confirmRet.value) {
-        this.cancel();
+        this.storagesetjson('finished', this.st_finished + 1);
         ipc.send("shutdown");
       }
     },
     cancel() {
       this.timing = false;
       this.storagesetjson("concentrated", true);
+      this.storagesetjson('rp', this.st_rp + this.lastcost_rp);
+      this.storagesetjson(this.todaydate_parsed, this.todaytimeleft + this.lastcost_time);
+      this.storagesetjson('lastcost_rp', 0);
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("full-screen");
       }

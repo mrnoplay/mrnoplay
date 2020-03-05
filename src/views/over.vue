@@ -46,6 +46,7 @@ import { Plugins } from "@capacitor/core";
 const { Storage, Modals } = Plugins;
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
+var tryparse = require("tryparse");
 var alarm = new Audio();
 var _this = null;
 var ipc = null;
@@ -73,7 +74,8 @@ export default {
       playtime: 0,
       displaytime: "0:00",
       lefttime: 0,
-      punishstart: false
+      punishstart: false,
+      st_finished: 0,
     };
   },
   watch: {
@@ -85,6 +87,7 @@ export default {
   mounted: function() {
     this.gettheme();
     this.version = process.env.VUE_APP_VER;
+    _this = this;
     this.i18nsetlang().then(() => {
       this.$refs.notify.send({
         title: this.$t("timeisup"),
@@ -97,7 +100,6 @@ export default {
       this.iselectron = true;
     }
     this.isonios = this.isiOS(navigator.userAgent);
-    _this = this;
     this.loading = false;
     this.timing = true;
     alarm.src = require("@/assets/music/scarymusic/" +
@@ -136,6 +138,10 @@ export default {
         else (_this.lang = "en"), _this.storagesetlang("en");
       } else (_this.lang = "en"), _this.storagesetlang("en");
       _this.$i18n.locale = _this.lang;
+      const ret_f = await Storage.get({ key: "finished" });
+      if ((tryparse.int(JSON.parse(ret_f.value)) != null) || (tryparse.int(JSON.parse(ret_f.value)) == 0))
+        this.st_finished = JSON.parse(ret_f.value);
+      else this.st_finished = 0;
     },
     i18nchinese() {
       this.lang = "cn";
@@ -145,6 +151,7 @@ export default {
     },
     cancel() {
       this.storagesetjson("concentrated", true);
+      this.storagesetjson('finished', this.st_finished + 1);
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("full-screen");
         ipc.send("shutdown");
@@ -156,8 +163,8 @@ export default {
         this.timing = false;
         clearInterval(this.interval);
         clearInterval(this.shutdowninterval);
+        this.$router.push("/");
       }
-      this.$router.push("/");
     },
     interval() {
       if (this.timing == true && this.$router.currentRoute.path == "/over") {
@@ -191,6 +198,7 @@ export default {
             id: 9,
             message: this.$t("willforce")
           });
+          this.storagesetjson('finished', this.st_finished + 1);
           ipc.send("shutdown");
         }, 5000);
       }

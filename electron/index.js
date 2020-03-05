@@ -232,9 +232,9 @@ async function createWindow() {
     }
   })
 
-  globalShortcut.register('CommandOrControl+Shift+L', () => {
+  /*globalShortcut.register('CommandOrControl+Shift+L', () => {
     mainWindow.openDevTools();
-  })
+  })*/
 
   /*globalShortcut.register('CommandOrControl+Shift+Q', () => {
     canQuit = true;

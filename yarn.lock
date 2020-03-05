@@ -8041,6 +8041,11 @@ tryer@^1.0.1:
   resolved "https://registry.npm.taobao.org/tryer/download/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha1-8shUBoALmw90yfdGW4HqrSQSUvg=
 
+tryparse@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npm.taobao.org/tryparse/download/tryparse-0.0.2.tgz#bb3270b7202804d422a1e58c726d1f5e02dac491"
+  integrity sha1-uzJwtyAoBNQioeWMcm0fXgLaxJE=
+
 tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
@@ -8286,6 +8291,15 @@ uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.4.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
 
+v-tooltip@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/v-tooltip/download/v-tooltip-2.0.3.tgz#34fd64096656f032b1616567bf62f6165c57d529"
+  integrity sha1-NP1kCWZW8DKxYWVnv2L2FlxX1Sk=
+  dependencies:
+    lodash "^4.17.15"
+    popper.js "^1.16.0"
+    vue-resize "^0.4.5"
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.npm.taobao.org/validate-npm-package-license/download/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
@@ -8348,6 +8362,11 @@ vue-loading-overlay@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npm.taobao.org/vue-loading-overlay/download/vue-loading-overlay-3.2.0.tgz#7896f195e26a8d915219139a096367c9ad2c3c61"
   integrity sha1-eJbxleJqjZFSGROaCWNnya0sPGE=
+
+vue-resize@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.npm.taobao.org/vue-resize/download/vue-resize-0.4.5.tgz#4777a23042e3c05620d9cbda01c0b3cc5e32dcea"
+  integrity sha1-R3eiMELjwFYg2cvaAcCzzF4y3Oo=
 
 vue-router@^3.0.3:
   version "3.1.5"

@@ -125,7 +125,20 @@
     "confirm-shutdown": "防误触确认",
     "confirm-shutdown-text": "请留意点击‘停止’后将关机。为了防止误触，我们发送了这条提醒，但只会提醒一次。",
     "foundupdate_title": "有更新",
-    "foundupdate": "请去设置界面下载。最近一次更新的更新内容："
+    "foundupdate": "请去设置界面下载。最近一次更新的更新内容：",
+    "clicktoseetoday": "点击这里，查看“今日”视图和数据统计",
+    "clicktoseemain": "点击这里，回到主界面",
+    "st_finished": "完成次数",
+    "st_rpoint": "R点",
+    "st_help_finished": "新建任务，点击‘停止’结束的次数",
+    "st_help_rpoint": "完成任务时根据超时情况获得R点，故意退出等情况扣除R点，R点可以用于今日时间用完而有急事时兑换更多时间",
+    "time": "时间",
+    "today": "今日",
+    "toolong": "时间超过今日剩余",
+    "redeem_use": "用",
+    "redeem": "R点兑换",
+    "rpnotenough": "R点不足，无法兑换",
+    "minute": "分钟"
   },
   "en": {
     "submit": "OK",
@@ -252,6 +265,19 @@
     "confirm-shutdown": "Please Confirm",
     "confirm-shutdown-text": "After clicking on 'Stop', the computer will shutdown. In order to prevent mistake touches, we displayes this notice, but only once.",
     "foundupdate_title": "Found an update",
-    "foundupdate": "You can download it in Settings. What's new in the latest update: "
+    "foundupdate": "You can download it in Settings. What's new in the latest update:",
+    "clicktoseetoday": "Click and see Today View and Statistics",
+    "clicktoseemain": "Click and go back to Main View",
+    "st_finished": "Finished",
+    "st_rpoint": "R Point",
+    "st_help_finished": "Number of times the task was started and exited properly",
+    "st_help_rpoint": "Get R Point by completing task on time, and R Point can be used to redeem more time when running out of today's time.",
+    "time": "Time",
+    "today": "Today ",
+    "toolong": "Time exceeds limit",
+    "redeem_use": "Use ",
+    "redeem": " R Point",
+    "rpnotenough": "R Point is not enough.",
+    "minute": "min"
   }
 }

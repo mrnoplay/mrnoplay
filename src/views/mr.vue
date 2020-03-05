@@ -3,7 +3,6 @@
   <div>
     <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
     <div class="container">
-      <div id="nbsppart"></div>
       <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
         <div class="input-btn lockmode_enterpwd-btn">
@@ -26,16 +25,29 @@
       <!------------>
       <!-- Today --->
       <!------------>
-      <div id="behind" style="-webkit-app-region: no-drag" @click="gotoday" v-if="!ontoday"></div>
+      <div id="tutorialnbsppart" v-if="ontoday"></div>
+      <div id="behind-touch" style="-webkit-app-region: no-drag" @click="gotoday" v-if="!ontoday"></div>
+      <div
+        id="behind"
+        style="-webkit-app-region: no-drag"
+        @click="gotoday"
+        v-if="!ontoday"
+        v-tooltip="{
+        content: $t('clicktoseetoday'),
+        show: !haveread_today_tooltip,
+        trigger: 'manual',
+      }"
+      ></div>
       <div id="main" v-if="ontoday">
-        <div class="digitalboard border" style="-webkit-app-region: no-drag">
+        <div class="digitalboard border" style="-webkit-app-region: no-drag" v-if="!todayset">
           <div class="juniordigitalboard on">
             <div class="digitaltop">{{ $t("todayiwillplay") }}</div>
             <div class="digitalfather">
               <b-form-input
                 id="playtime"
                 class="digital"
-                v-model="playtime"
+                v-model="todaytime"
+                :placeholder="$t('time')"
                 type="tel"
                 maxlength="4"
                 required
@@ -45,19 +57,58 @@
             </div>
           </div>
         </div>
-        <div class="centralnbsp"></div>
-        <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeNAN">
+        <div class="digitalboard border" style="-webkit-app-region: no-drag" v-if="todayset">
+          <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">
+            <div class="digitaltop">{{ $t("today") }}{{ $t("left") }}</div>
+            <span class="bignumber">{{ todaytimeleft }}</span>
+            <span class="digital digitalnote minutenote">{{ $t('minute') }}</span>
+          </div>
+        </div>
+        <div class="centralnbsp" v-if="!todayset"></div>
+        <div class="warnfather warn settingwarn warnnotintegerfather" v-if="todaytime_isNAN">
           <div class="breathe-div"></div>
           <div class="warn warnnotinteger">{{ $t("enterinteger") }}</div>
         </div>
         <b-btn
           style="-webkit-app-region: no-drag"
           variant="light"
-          class="new on largebtn startbtn"
-          @click="start"
+          class="new on largebtn startbtn todaybtn"
+          @click="settoday"
+          v-if="!todayset"
         >
           <div class="largebtn-innertext">{{ $t("submit") }}</div>
         </b-btn>
+        <hr />
+        <div class="statisticsfather">
+          <div class="statistics">
+            <div class="st_left">
+              <div class="digitaltop st_digitaltop">
+                {{ $t("st_finished") }}
+                <span
+                  class="help"
+                  v-tooltip="{
+                    content: $t('st_help_finished'),
+                    placement: 'top-end',
+                  }"
+                ></span>
+              </div>
+              <div class="bignumber">{{ st_finished }}</div>
+            </div>
+            <div class="st_right">
+              <div class="digitaltop st_digitaltop">
+                {{ $t("st_rpoint") }}
+                <span
+                  class="help"
+                  v-tooltip="{
+                    content: $t('st_help_rpoint'),
+                    placement: 'top-start',
+                  }"
+                ></span>
+              </div>
+              <div class="bignumber">{{ st_rp }}</div>
+            </div>
+          </div>
+        </div>
       </div>
       <!----------->
       <!-- Main --->
@@ -85,6 +136,22 @@
           <div class="breathe-div"></div>
           <div class="warn warnnotinteger">{{ $t("enterinteger") }}</div>
         </div>
+        <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeTOOLONG">
+          <div class="breathe-div"></div>
+          <div>
+            <div class="warn warnnotinteger warnredeem">
+              {{ $t("toolong") }}
+              <span
+                @click="redeem"
+                class="redeem"
+              >{{ $t("redeem_use") }}{{ redeem_rp }}{{ $t("redeem") }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="warnfather warn settingwarn warnnotintegerfather" v-if="rpnotenough">
+          <div class="breathe-div"></div>
+          <div class="warn warnnotinteger">{{ $t("rpnotenough") }}</div>
+        </div>
         <b-btn
           style="-webkit-app-region: no-drag"
           variant="light"
@@ -95,7 +162,24 @@
         </b-btn>
         <titlepart :canabout="true" @exit="exit"></titlepart>
       </div>
-      <div id="behind-down" style="-webkit-app-region: no-drag" @click="gomain" v-if="ontoday"></div>
+      <div
+        id="behind-down"
+        style="-webkit-app-region: no-drag"
+        @click="gomain"
+        v-if="ontoday"
+        v-tooltip="{
+        content: $t('clicktoseemain'),
+        show: !haveread_main_tooltip,
+        trigger: 'manual',
+        placement: 'bottom'
+      }"
+      ></div>
+      <div
+        id="behind-down-touch"
+        style="-webkit-app-region: no-drag"
+        @click="gomain"
+        v-if="ontoday"
+      ></div>
     </div>
     <notify ref="notify"></notify>
   </div>
@@ -112,6 +196,7 @@ var alarm = new Audio();
 var _this = null;
 var ipc = null;
 var md5 = require("md5");
+var tryparse = require("tryparse");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
 }
@@ -132,6 +217,7 @@ export default {
       iffetch: 0,
       playtime: 5,
       timeNAN: false,
+      timeTOOLONG: false,
       version: "",
       lockmode: false,
       lockmode_password: "",
@@ -140,6 +226,18 @@ export default {
       lockmode_fail: false,
       tongjisrc: "",
       ontoday: false,
+      haveread_today_tooltip: true,
+      haveread_main_tooltip: true,
+      todayset: false,
+      todaytimeleft: 0,
+      todaytime: undefined,
+      todaytime_isNAN: false,
+      todaydate: new Date(),
+      todaydate_parsed: "todaytime002000",
+      st_rp: 10,
+      st_finished: 0,
+      rpnotenough: false,
+      redeem_rp: 0
     };
   },
   watch: {
@@ -159,6 +257,11 @@ export default {
       this.tongjisrc = "https://mrnoplay-tongji.now.sh/index-web.html";
     }
     _this = this;
+    this.todaydate_parsed =
+      "todaytime" +
+      this.todaydate.getDate() +
+      this.todaydate.getMonth() +
+      this.todaydate.getFullYear();
     this.isonios = this.isiOS(navigator.userAgent);
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
@@ -169,6 +272,9 @@ export default {
     this.storagesetjson("concentrated", true);
     this.getlockmode();
     this.getlockmode_pwd();
+    this.gettooltipdata();
+    this.gettodaydata();
+    this.getrp();
     alarm.src = require("@/assets/music/scarymusic/" +
       this.rand(1, 17) +
       ".mp3");
@@ -177,7 +283,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("foundupdate_title"),
           id: 15,
-          message: this.$t("foundupdate") + arg,
+          message: this.$t("foundupdate") + arg
         });
       });
     }
@@ -223,6 +329,32 @@ export default {
         key: key,
         value: JSON.stringify(val)
       });
+    },
+    async gettodaydata() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf(this.todaydate_parsed) != -1) {
+        this.todayset = true;
+        const ret_ttl = await Storage.get({ key: this.todaydate_parsed });
+        this.todaytimeleft = JSON.parse(ret_ttl.value);
+      } else {
+        this.todayset = false;
+      }
+    },
+    async gettooltipdata() {
+      const ret_t = await Storage.get({ key: "haveread_today_tooltip" });
+      this.haveread_today_tooltip = JSON.parse(ret_t.value);
+      const ret_m = await Storage.get({ key: "haveread_main_tooltip" });
+      this.haveread_main_tooltip = JSON.parse(ret_m.value);
+    },
+    async getrp() {
+      const ret_r = await Storage.get({ key: "rp" });
+      if ((tryparse.int(JSON.parse(ret_r.value)) != null) || (tryparse.int(JSON.parse(ret_r.value)) == 0))
+        this.st_rp = tryparse.int(JSON.parse(ret_r.value));
+      else this.st_rp = 10;
+      const ret_f = await Storage.get({ key: "finished" });
+      if ((tryparse.int(JSON.parse(ret_f.value)) != null) || (tryparse.int(JSON.parse(ret_f.value)) == 0))
+        this.st_finished = JSON.parse(ret_f.value);
+      else this.st_finished = 0;
     },
     async i18nsetlang() {
       const keys = await Storage.keys();
@@ -304,13 +436,33 @@ export default {
     },
     start() {
       if (/(^[1-9]\d*$)/.test(this.playtime)) {
-        this.storagesetjson("playtime", Number(this.playtime)).then(() => {
-          this.storagesetjson("concentrated", false);
-          this.$router.push("timing");
-        });
+        if (this.todayset) {
+          if (this.todaytimeleft >= this.playtime) {
+            this.todaytimeleft -= this.playtime;
+            this.storagesetjson(this.todaydate_parsed, this.todaytimeleft);
+            this.storagesetjson('lastcost_time', this.playtime);
+            this.start_func();
+          } else {
+            this.timeTOOLONG = true;
+            this.redeem_rp = Math.round(
+              (this.playtime - this.todaytimeleft) / 7
+            );
+            if(this.redeem_rp == 0) this.redeem_rp++;
+          }
+        } else {
+          this.start_func();
+        }
       } else {
         this.timeNAN = true;
       }
+    },
+    start_func() {
+      this.storagesetjson('lastcost_rp', this.redeem_rp);
+      this.timeTOOLONG = false;
+      this.storagesetjson("playtime", Number(this.playtime)).then(() => {
+        this.storagesetjson("concentrated", false);
+        this.$router.push("timing");
+      });
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
@@ -340,9 +492,35 @@ export default {
     },
     gotoday() {
       this.ontoday = true;
+      this.haveread_today_tooltip = true;
+      this.storagesetjson("haveread_today_tooltip", true);
     },
     gomain() {
       this.ontoday = false;
+      this.haveread_main_tooltip = true;
+      this.storagesetjson("haveread_main_tooltip", true);
+    },
+    settoday() {
+      if (/(^[1-9]\d*$)/.test(this.todaytime)) {
+        this.todayset = true;
+        this.todaytimeleft = this.todaytime;
+        this.todaytime_isNAN = false;
+        this.storagesetjson(this.todaydate_parsed, this.todaytime);
+      } else {
+        this.todaytime_isNAN = true;
+      }
+    },
+    redeem() {
+      if (this.st_rp >= this.redeem_rp) {
+        this.st_rp -= this.redeem_rp;
+        this.storagesetjson("rp", this.st_rp);
+        this.storagesetjson('lastcost_time', this.todaytimeleft);
+        this.storagesetjson(this.todaydate_parsed, 0);
+        this.rpnotenough = false;
+        this.start_func();
+      } else {
+        this.rpnotenough = true;
+      }
     }
   }
 };
