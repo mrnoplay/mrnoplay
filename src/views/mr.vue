@@ -234,10 +234,12 @@ export default {
       todaytime_isNAN: false,
       todaydate: new Date(),
       todaydate_parsed: "todaytime002000",
-      st_rp: 10,
+      st_rp: 20,
       st_finished: 0,
       rpnotenough: false,
-      redeem_rp: 0
+      redeem_rp: 0,
+      st_rp_illegal: 0,
+      exit_type: "initial"
     };
   },
   watch: {
@@ -249,6 +251,17 @@ export default {
   mounted: function() {
     this.gettheme();
     if (process.env.VUE_APP_LINXF == "electron") {
+      ipc.on("update_onstart", (event, arg) => {
+        this.$refs.notify.send({
+          title: this.$t("foundupdate_title"),
+          id: 15,
+          message: this.$t("foundupdate") + arg
+        });
+      });
+      ipc.on("crashback", () => {
+        this.exit_type = "crash";
+        this.storagesetjson("exit_type", "crash");
+      });
       this.iselectron = true;
       if (process.platform == "win32")
         this.tongjisrc = "https://mrnoplay-tongji.now.sh/index-win.html";
@@ -274,19 +287,22 @@ export default {
     this.getlockmode_pwd();
     this.gettooltipdata();
     this.gettodaydata();
-    this.getrp();
+    this.getrp().then(() => {
+      if (this.exit_type == "illegal" && this.iselectron) {
+        this.st_rp -= 10;
+        this.storagesetjson("rp", this.st_rp);
+        this.$refs.notify.send({
+          title: this.$t("illegal"),
+          id: 17,
+          message: this.$t("illegaltext")
+        });
+      }
+      this.exit_type = "illegal";
+      this.storagesetjson("exit_type", "illegal");
+    });
     alarm.src = require("@/assets/music/scarymusic/" +
       this.rand(1, 17) +
       ".mp3");
-    if (this.iselectron) {
-      ipc.on("update_onstart", (event, arg) => {
-        this.$refs.notify.send({
-          title: this.$t("foundupdate_title"),
-          id: 15,
-          message: this.$t("foundupdate") + arg
-        });
-      });
-    }
     if (
       process.env.VUE_APP_LINXF != "android" &&
       process.env.VUE_APP_LINXF != "electron" &&
@@ -333,9 +349,11 @@ export default {
     async gettodaydata() {
       const keys = await Storage.keys();
       if (keys.keys.indexOf(this.todaydate_parsed) != -1) {
-        this.todayset = true;
         const ret_ttl = await Storage.get({ key: this.todaydate_parsed });
-        this.todaytimeleft = JSON.parse(ret_ttl.value);
+        if (JSON.parse(ret_ttl.value) != null) {
+          this.todayset = true;
+          this.todaytimeleft = JSON.parse(ret_ttl.value);
+        }
       } else {
         this.todayset = false;
       }
@@ -348,13 +366,21 @@ export default {
     },
     async getrp() {
       const ret_r = await Storage.get({ key: "rp" });
-      if ((tryparse.int(JSON.parse(ret_r.value)) != null) || (tryparse.int(JSON.parse(ret_r.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_r.value)) != null ||
+        tryparse.int(JSON.parse(ret_r.value)) == 0
+      )
         this.st_rp = tryparse.int(JSON.parse(ret_r.value));
-      else this.st_rp = 10;
+      else this.st_rp = 20;
       const ret_f = await Storage.get({ key: "finished" });
-      if ((tryparse.int(JSON.parse(ret_f.value)) != null) || (tryparse.int(JSON.parse(ret_f.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_f.value)) != null ||
+        tryparse.int(JSON.parse(ret_f.value)) == 0
+      )
         this.st_finished = JSON.parse(ret_f.value);
       else this.st_finished = 0;
+      const ret_et = await Storage.get({ key: "exit_type" });
+      this.exit_type = JSON.parse(ret_et.value);
     },
     async i18nsetlang() {
       const keys = await Storage.keys();
@@ -440,14 +466,14 @@ export default {
           if (this.todaytimeleft >= this.playtime) {
             this.todaytimeleft -= this.playtime;
             this.storagesetjson(this.todaydate_parsed, this.todaytimeleft);
-            this.storagesetjson('lastcost_time', this.playtime);
+            this.storagesetjson("lastcost_time", this.playtime);
             this.start_func();
           } else {
             this.timeTOOLONG = true;
             this.redeem_rp = Math.round(
-              (this.playtime - this.todaytimeleft) / 7
+              (this.playtime - this.todaytimeleft) / 4
             );
-            if(this.redeem_rp == 0) this.redeem_rp++;
+            if (this.redeem_rp == 0) this.redeem_rp++;
           }
         } else {
           this.start_func();
@@ -457,7 +483,7 @@ export default {
       }
     },
     start_func() {
-      this.storagesetjson('lastcost_rp', this.redeem_rp);
+      this.storagesetjson("lastcost_rp", this.redeem_rp);
       this.timeTOOLONG = false;
       this.storagesetjson("playtime", Number(this.playtime)).then(() => {
         this.storagesetjson("concentrated", false);
@@ -472,6 +498,7 @@ export default {
         if (this.lockmode) {
           this.lockmode_enterpwd = true;
         } else {
+          this.storagesetjson("exit_type", "exit");
           ipc.send("exit");
         }
       }
@@ -479,6 +506,7 @@ export default {
     lockmode_exit() {
       if (this.iselectron) {
         if (this.lockmode_password == md5(this.lockmode_enterpwd_enter)) {
+          this.storagesetjson("exit_type", "exit");
           this.lockmode_fail = false;
           this.lockmode_enterpwd = false;
           ipc.send("exit");
@@ -514,13 +542,16 @@ export default {
       if (this.st_rp >= this.redeem_rp) {
         this.st_rp -= this.redeem_rp;
         this.storagesetjson("rp", this.st_rp);
-        this.storagesetjson('lastcost_time', this.todaytimeleft);
+        this.storagesetjson("lastcost_time", this.todaytimeleft);
         this.storagesetjson(this.todaydate_parsed, 0);
         this.rpnotenough = false;
         this.start_func();
       } else {
         this.rpnotenough = true;
       }
+    },
+    async clear_dangerous() {
+      await Storage.clear();
     }
   }
 };

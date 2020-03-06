@@ -20,6 +20,7 @@ const Store = require('electron-store');
 const store = new Store();
 const cmd = require('node-cmd');
 const regedit = require('regedit');
+const log = require('electron-log');
 var moment = require('moment');
 const {
   CapacitorSplashScreen
@@ -182,6 +183,7 @@ async function createWindow() {
   }
 
   mainWindow.webContents.on('crashed', (event) => {
+    log.warn('crash' + mainWindow.isDestroyed())
     if (mainWindow.isDestroyed()) {
       app.relaunch();
       app.exit(0);
@@ -240,6 +242,12 @@ async function createWindow() {
     canQuit = true;
     app.quit();
   })*/
+
+  log.transports.console.level = 'silly'; 
+  if (store.get('exit-type', 'exit') == 'illegal') {
+    mainWindow.webContents.send('illegal_exit');
+  }
+  store.set('exit-type', 'illegal');
 }
 
 // This method will be called when Electron has finished
@@ -291,11 +299,13 @@ ipcMain.on('normal-screen', function () {
 });
 
 ipcMain.on('exit', () => {
+  store.set('exit-type', 'exit');
   canQuit = true;
   app.quit();
 });
 
 function shutdowner() {
+  store.set('exit-type', 'shutdown');
   canBlur = true;
   if (mainWindow) {
     mainWindow.setKiosk(false);

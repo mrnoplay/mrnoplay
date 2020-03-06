@@ -131,6 +131,7 @@ export default {
     },
     goback() {
       this.timing = false;
+      this.storagesetjson("exit_type", "about");
       this.$router.push("/");
     },
     tutorial() {

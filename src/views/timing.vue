@@ -43,6 +43,14 @@
             class="new largebtn-notbtn transparent small canceltext"
           >{{ $t("cancelweb") }}</small>
         </div>
+        <div>
+          <small class="new largebtn-notbtn transparent small canceltext" v-if="controlrptext">
+            {{ $t('nowstop') }}{{ get_rp }}{{ $t('rp') }}
+          </small>
+          <small class="new largebtn-notbtn transparent small canceltext" v-if="!controlrptext">
+            {{ $t('nowexitillegally') }}{{ illegal_rp }}{{ $t('rp') }}
+          </small>
+        </div>
       </div>
     </div>
     <notify ref="notify"></notify>
@@ -85,12 +93,16 @@ export default {
       cancancel: true,
       halflock: true,
       first_shutdown: false,
-      st_rp: 10,
+      st_rp: 20,
       st_finished: 0,
       lastcost_rp: 0,
       lastcost_time: 0,
+      todayset: false,
       todaydate: new Date(),
       todaydate_parsed: "todaytime002000",
+      get_rp: 3,
+      illegal_rp: 10,
+      controlrptext: true,
     };
   },
   watch: {
@@ -114,6 +126,9 @@ export default {
     this.storagesetjson("cannotify", true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
+      setInterval(() => {
+        this.controlrptext = !this.controlrptext;
+      }, 5000);
     }
     this.isonios = this.isiOS(navigator.userAgent);
     _this = this;
@@ -189,30 +204,44 @@ export default {
       // Last - Cost RP
       // --------------
       const ret_r = await Storage.get({ key: "rp" });
-      if ((tryparse.int(JSON.parse(ret_r.value)) != null) || (tryparse.int(JSON.parse(ret_r.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_r.value)) != null ||
+        tryparse.int(JSON.parse(ret_r.value)) == 0
+      )
         this.st_rp = tryparse.int(JSON.parse(ret_r.value));
-      else this.st_rp = 10;
+      else this.st_rp = 20;
       const ret_l = await Storage.get({ key: "lastcost_rp" });
-      if ((tryparse.int(JSON.parse(ret_l.value)) != null) || (tryparse.int(JSON.parse(ret_l.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_l.value)) != null ||
+        tryparse.int(JSON.parse(ret_l.value)) == 0
+      )
         this.lastcost_rp = tryparse.int(JSON.parse(ret_l.value));
       else this.lastcost_rp = 0;
       // ---------------
       // Today Time Left
       // ---------------
       if (keys.keys.indexOf(this.todaydate_parsed) != -1) {
-        this.todayset = true;
         const ret_ttl = await Storage.get({ key: this.todaydate_parsed });
-        this.todaytimeleft = JSON.parse(ret_ttl.value);
+        if (JSON.parse(ret_ttl.value) != null) {
+          this.todayset = true;
+          this.todaytimeleft = JSON.parse(ret_ttl.value);
+        }
       }
       const ret_lt = await Storage.get({ key: "lastcost_time" });
-      if ((tryparse.int(JSON.parse(ret_lt.value)) != null) || (tryparse.int(JSON.parse(ret_lt.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_lt.value)) != null ||
+        tryparse.int(JSON.parse(ret_lt.value)) == 0
+      )
         this.lastcost_time = tryparse.int(JSON.parse(ret_lt.value));
       else this.lastcost_time = 0;
       // -------------
       // Finished Time
       // -------------
       const ret_f = await Storage.get({ key: "finished" });
-      if ((tryparse.int(JSON.parse(ret_f.value)) != null) || (tryparse.int(JSON.parse(ret_f.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_f.value)) != null ||
+        tryparse.int(JSON.parse(ret_f.value)) == 0
+      )
         this.st_finished = JSON.parse(ret_f.value);
       else this.st_finished = 0;
     },
@@ -228,7 +257,9 @@ export default {
         this.first_shutdown = false;
         this.first_shutdown_confirm();
       } else {
-        this.storagesetjson('finished', this.st_finished + 1);
+        this.storagesetjson("rp", this.st_rp + this.get_rp);
+        this.storagesetjson('exit_type', 'shutdown');
+        this.storagesetjson("finished", this.st_finished + 1);
         if (process.env.VUE_APP_LINXF == "electron") {
           ipc.send("shutdown");
         } else {
@@ -242,16 +273,24 @@ export default {
         message: this.$t("confirm-shutdown-text")
       });
       if (confirmRet.value) {
-        this.storagesetjson('finished', this.st_finished + 1);
+        this.storagesetjson("finished", this.st_finished + 1);
+        this.storagesetjson('exit_type', 'shutdown');
+        this.storagesetjson("rp", this.st_rp + this.get_rp);
         ipc.send("shutdown");
       }
     },
     cancel() {
       this.timing = false;
       this.storagesetjson("concentrated", true);
-      this.storagesetjson('rp', this.st_rp + this.lastcost_rp);
-      this.storagesetjson(this.todaydate_parsed, this.todaytimeleft + this.lastcost_time);
-      this.storagesetjson('lastcost_rp', 0);
+      this.storagesetjson('exit_type', 'cancel');
+      if (this.todayset) {
+        this.storagesetjson("rp", this.st_rp + this.lastcost_rp);
+        this.storagesetjson(
+          this.todaydate_parsed,
+          this.todaytimeleft + this.lastcost_time
+        );
+        this.storagesetjson("lastcost_rp", 0);
+      }
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("full-screen");
       }

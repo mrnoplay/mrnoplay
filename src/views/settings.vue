@@ -357,6 +357,7 @@ export default {
     },
     goback() {
       this.timing = false;
+      this.storagesetjson("exit_type", "settings");
       this.$router.push("/");
     },
     startonlogin() {

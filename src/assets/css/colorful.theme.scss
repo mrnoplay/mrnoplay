@@ -463,7 +463,7 @@ input[type="number"] {
   display: inline-block;
   padding: 0 !important;
   font-size: 0.55rem;
-  margin-top: 0;
+  margin-bottom: 0rem;
   width: 11rem;
   text-align: center;
 }
@@ -733,11 +733,11 @@ input[type="number"] {
   }
 
   #timingnbsppart {
-    padding-top: 9vh;
+    padding-top: 4vh;
   }
 
   #timingcancelnbsppart {
-    padding-top: 10vh;
+    padding-top: 15vh;
   }
 }
 
@@ -939,12 +939,14 @@ input[type="number"] {
 .st_left {
   width: 4.5rem;
   margin-right: 1rem;
-  overflow: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .st_right {
   width: 5.5rem;
-  overflow: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .bignumber {

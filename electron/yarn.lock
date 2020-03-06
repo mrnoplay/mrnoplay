@@ -667,6 +667,11 @@ electron-is-dev@^1.1.0:
   resolved "https://registry.npm.taobao.org/electron-is-dev/download/electron-is-dev-1.1.0.tgz#b15a2a600bdc48a51a857d460e05f15b19a2522c"
   integrity sha1-sVoqYAvcSKUahX1GDgXxWxmiUiw=
 
+electron-log@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.npm.taobao.org/electron-log/download/electron-log-4.0.7.tgz#39b010d2dbd7b1c43e6fa1ae8c6be2b536a215c1"
+  integrity sha1-ObAQ0tvXscQ+b6GujGvitTaiFcE=
+
 electron-publish@22.3.2:
   version "22.3.2"
   resolved "https://registry.npm.taobao.org/electron-publish/download/electron-publish-22.3.2.tgz#d2e60caf7a9643fe57e501c20acaf32c737b1c50"

@@ -33,6 +33,16 @@
         >
           <div class="largebtn-innertext">{{ $t("over") }}</div>
         </b-btn>
+        <div>
+          <small
+            class="new largebtn-notbtn transparent small canceltext"
+            v-if="controlrptext"
+          >{{ $t('nowstop') }}{{ get_rp }}{{ $t('rp') }}</small>
+          <small
+            class="new largebtn-notbtn transparent small canceltext"
+            v-if="!controlrptext"
+          >{{ $t('nowexitillegally') }}{{ illegal_rp }}{{ $t('rp') }}</small>
+        </div>
       </div>
     </div>
     <notify ref="notify"></notify>
@@ -76,6 +86,10 @@ export default {
       lefttime: 0,
       punishstart: false,
       st_finished: 0,
+      st_rp: 20,
+      get_rp: 1,
+      illegal_rp: 10,
+      controlrptext: true
     };
   },
   watch: {
@@ -98,6 +112,9 @@ export default {
     this.storagesetjson("cannotify", true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
+      setInterval(() => {
+        this.controlrptext = !this.controlrptext;
+      }, 5000);
     }
     this.isonios = this.isiOS(navigator.userAgent);
     this.loading = false;
@@ -132,16 +149,35 @@ export default {
     },
     async i18nsetlang() {
       const keys = await Storage.keys();
+      // --------
+      // Language
+      // --------
       if (keys.keys.indexOf("lang") != -1) {
         const retlang = await Storage.get({ key: "lang" });
         if (retlang.value != null) _this.lang = retlang.value;
         else (_this.lang = "en"), _this.storagesetlang("en");
       } else (_this.lang = "en"), _this.storagesetlang("en");
       _this.$i18n.locale = _this.lang;
+      // --------------
+      // Finished Times
+      // --------------
       const ret_f = await Storage.get({ key: "finished" });
-      if ((tryparse.int(JSON.parse(ret_f.value)) != null) || (tryparse.int(JSON.parse(ret_f.value)) == 0))
+      if (
+        tryparse.int(JSON.parse(ret_f.value)) != null ||
+        tryparse.int(JSON.parse(ret_f.value)) == 0
+      )
         this.st_finished = JSON.parse(ret_f.value);
       else this.st_finished = 0;
+      // -------
+      // R Point
+      // -------
+      const ret_r = await Storage.get({ key: "rp" });
+      if (
+        tryparse.int(JSON.parse(ret_r.value)) != null ||
+        tryparse.int(JSON.parse(ret_r.value)) == 0
+      )
+        this.st_rp = tryparse.int(JSON.parse(ret_r.value));
+      else this.st_rp = 20;
     },
     i18nchinese() {
       this.lang = "cn";
@@ -151,7 +187,9 @@ export default {
     },
     cancel() {
       this.storagesetjson("concentrated", true);
-      this.storagesetjson('finished', this.st_finished + 1);
+      this.storagesetjson("finished", this.st_finished + 1);
+      this.storagesetjson('exit_type', 'shutdown');
+      this.storagesetjson("rp", this.st_rp + this.get_rp);
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("full-screen");
         ipc.send("shutdown");
@@ -198,7 +236,7 @@ export default {
             id: 9,
             message: this.$t("willforce")
           });
-          this.storagesetjson('finished', this.st_finished + 1);
+          this.storagesetjson("finished", this.st_finished + 1);
           ipc.send("shutdown");
         }, 5000);
       }
