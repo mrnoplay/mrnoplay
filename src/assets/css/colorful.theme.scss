@@ -735,10 +735,6 @@ input[type="number"] {
   #timingnbsppart {
     padding-top: 4vh;
   }
-
-  #timingcancelnbsppart {
-    padding-top: 15vh;
-  }
 }
 
 @media screen and (min-width: 501px) {
@@ -993,4 +989,36 @@ hr {
 
 .minutenote {
   width: auto;
+}
+
+#pause {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: $bgwhite;
+}
+
+@supports (backdrop-filter: blur(5px)) {
+  #pause {
+    background: none;
+    -webkit-backdrop-filter: blur(8px); 
+    backdrop-filter: blur(8px); 
+  }
+}
+
+.resume {
+  display: inline-block;
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  background: $bgwhite;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/resume.svg');
+  border-radius: 0.4rem;
+  box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1), 0 -0.2rem 0.7rem 0.2rem rgba(65, 64, 63, 0.05);
 }

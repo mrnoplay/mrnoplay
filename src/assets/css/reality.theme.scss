@@ -750,3 +750,36 @@ input[type="number"] {
   color: dimgrey;
   background-color: gainsboro;
 }
+
+#pause {
+  position: absolute;
+  width: 100vw;
+  height: 132vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: whitesmoke;
+}
+
+@supports (backdrop-filter: blur(5px)) {
+  #pause {
+    background: none;
+    -webkit-backdrop-filter: blur(8px); 
+    backdrop-filter: blur(8px); 
+  }
+}
+
+.resume {
+  display: inline-block;
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  background: white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 0.4rem;
+  background-image: url('../img/resume.svg'), linear-gradient(to bottom, rgb(255, 255, 255) , rgb(228, 228, 228));
+  border: 5px rgba(255, 255, 255, 0.2);
+  box-shadow: 10px 10px 50px rgba(112, 110, 110, 0.7), -10px -10px 32px rgba(255, 255, 255, 1), inset 4px 4px 0px rgba(255, 255, 255, 0.6), inset 6px 6px 4px rgba(255, 255, 255, 0.4), inset -4px -4px 2px rgba(102, 99, 99, 0.3), inset -6px -6px 12px rgba(102, 99, 99, 0.2);
+}

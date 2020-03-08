@@ -4,6 +4,9 @@
     <div class="container">
       <div id="timingnbsppart"></div>
       <div id="timingcancelnbsppart" v-if="!cancancel"></div>
+      <div id="pause" v-if="ispausing">
+        <button class="resume" @click="resume"></button>
+      </div>
       <div id="main">
         <div class="digitalboard border">
           <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">
@@ -42,6 +45,16 @@
             v-if="!iselectron"
             class="new largebtn-notbtn transparent small canceltext"
           >{{ $t("cancelweb") }}</small>
+        </div>
+        <div v-if="!cancancel" class="canceltextfather">
+          <b-btn
+            variant="light"
+            class="new largebtn transparent cancelbtn"
+            @click="pause"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("pause") }}</div>
+          </b-btn>
         </div>
         <div>
           <small class="new largebtn-notbtn transparent small canceltext" v-if="controlrptext">
@@ -103,6 +116,7 @@ export default {
       get_rp: 3,
       illegal_rp: 10,
       controlrptext: true,
+      ispausing: false,
     };
   },
   watch: {
@@ -351,6 +365,20 @@ export default {
         fileref.setAttribute("href", linkpath);
       }
       document.getElementsByTagName("head")[0].appendChild(fileref);
+    },
+    pause() {
+      this.ispausing = true;
+      this.timing = false;
+      if (this.iselectron) {
+        ipc.send('full-screen');
+      }
+    },
+    resume() {
+      this.ispausing = false;
+      this.timing = true;
+      if (this.iselectron) {
+        ipc.send('normal-screen');
+      }
     }
   }
 };

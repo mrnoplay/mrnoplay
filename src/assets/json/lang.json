@@ -143,7 +143,8 @@
     "nowstop": "现在停止可以获得",
     "nowexitillegally": "非法退出会扣除",
     "illegal": "发现应用被非法退出",
-    "illegaltext": "为了惩罚，您将失去10R点。如果您认为是应用出现问题，请发送反馈"
+    "illegaltext": "为了惩罚，您将失去10R点。",
+    "pause": "暂停"
   },
   "en": {
     "submit": "OK",
@@ -288,6 +289,7 @@
     "nowstop": "Just Stop now and then you can get ",
     "nowexitillegally": "If you exit the app illegally, you will lose ",
     "illegal": "Found the app was closed illegally",
-    "illegaltext": "To punish it, you lose 10 R Point."
+    "illegaltext": "To punish it, you lose 10 R Point.",
+    "pause": "Pause"
   }
 }
