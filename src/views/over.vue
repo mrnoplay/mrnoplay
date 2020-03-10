@@ -2,8 +2,17 @@
 <template>
   <div>
     <div class="container">
-      <div id="nbsppart"></div>
-      <div id="main">
+      <div id="overnbsppart" v-if="!popuped"></div>
+      <div class="popup" v-if="popuped">
+        <div class="popupdecoration-left"></div>
+        <div>
+          <div class="popuptitle">{{ popuptitle }}</div>
+          <div class="popupdesc">{{ popupdesc }}</div>
+        </div>
+        <div class="popupdecoration-right"></div>
+      </div>
+      <div id="popupnbsppart" v-if="popuped"></div>
+      <div id="main" class="main-popup">
         <div class="notifyboard border">
           <div class="juniornotifyboard on-notbtn">
             <div class="digitaltop notifytop">{{ $t("notify") }}</div>
@@ -33,7 +42,7 @@
         >
           <div class="largebtn-innertext">{{ $t("over") }}</div>
         </b-btn>
-        <div>
+        <div class="rptext-over">
           <small
             class="new largebtn-notbtn transparent small canceltext"
             v-if="controlrptext"
@@ -60,6 +69,7 @@ var tryparse = require("tryparse");
 var alarm = new Audio();
 var _this = null;
 var ipc = null;
+var i = 0;
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
   ipc.on("timingdone", function(event, arg) {
@@ -89,7 +99,10 @@ export default {
       st_rp: 20,
       get_rp: 1,
       illegal_rp: 10,
-      controlrptext: true
+      controlrptext: true,
+      popuped: false,
+      popuptitle: "Title",
+      popupdesc: "Description"
     };
   },
   watch: {
@@ -109,6 +122,7 @@ export default {
         message: this.$t("willpunish")
       });
     });
+    this.iselectron = true;
     this.storagesetjson("cannotify", true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
@@ -122,7 +136,7 @@ export default {
     alarm.src = require("@/assets/music/scarymusic/" +
       this.rand(1, 17) +
       ".mp3");
-    setTimeout(this.timeout, 180000);
+    setTimeout(this.timeout, 180); //180000
   },
   beforeDestroy: function() {},
   methods: {
@@ -188,7 +202,7 @@ export default {
     cancel() {
       this.storagesetjson("concentrated", true);
       this.storagesetjson("finished", this.st_finished + 1);
-      this.storagesetjson('exit_type', 'shutdown');
+      this.storagesetjson("exit_type", "shutdown");
       this.storagesetjson("rp", this.st_rp + this.get_rp);
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("full-screen");
@@ -243,7 +257,7 @@ export default {
     },
     timeout() {
       setInterval(this.interval, 2000);
-      setInterval(this.longinterval, 140000);
+      setInterval(this.longinterval, 1400); //140000
       setInterval(this.shutdowninterval, 420000);
       this.$i18n.locale = this.lang;
       this.popup(this.$t("now3"), this.$t("10willforce"));
@@ -251,14 +265,31 @@ export default {
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
     },
-    async popup(title, message) {
+    popup(title, message, timeout = 100000) {
+      //135000
+      this.popuped = true;
+      this.popuptitle = title;
+      this.popupdesc = message;
+      setTimeout(() => {
+        this.popuped = false;
+      }, timeout);
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("focus");
-        let alertRet = await Modals.alert({
-          title: title,
-          message: message
-        });
+        /*let alertRet = await Promise.race([
+          Modals.alert({
+            title: title,
+            message: message
+          }),
+          popup_timeout(timeout),
+        ]);*/
       }
+    },
+    async popup_timeout(ms) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error(`timeout ${ms}ms`));
+        }, ms);
+      });
     },
     async gettheme() {
       const keys = await Storage.keys();

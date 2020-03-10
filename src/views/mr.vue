@@ -60,7 +60,7 @@
         <div class="digitalboard border" style="-webkit-app-region: no-drag" v-if="todayset">
           <div class="juniordigitalboard on-notbtn" style="-webkit-app-region: no-drag">
             <div class="digitaltop">{{ $t("today") }}{{ $t("left") }}</div>
-            <span class="bignumber">{{ todaytimeleft }}</span>
+            <span class="bignumber bignumber-digital">{{ todaytimeleft }}</span>
             <span class="digital digitalnote minutenote">{{ $t('minute') }}</span>
           </div>
         </div>
@@ -461,7 +461,7 @@ export default {
       this.lang = "en";
     },
     start() {
-      if (/(^[1-9]\d*$)/.test(this.playtime)) {
+      if (/(^[1-9]\d*$)/.test(this.playtime) || this.playtime == 0.1) {
         if (this.todayset) {
           if (this.todaytimeleft >= this.playtime) {
             this.todaytimeleft -= this.playtime;

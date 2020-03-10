@@ -153,6 +153,9 @@ export default {
     setTimeout(() => {
       this.cancancel = false;
     }, 15000);
+    if(this.ispausing && this.iselectron) {
+      ipc.send('full-screen');
+    }
   },
   beforeDestroy: function() {
     clearInterval(this.interval);

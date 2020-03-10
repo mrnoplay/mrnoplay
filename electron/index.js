@@ -210,6 +210,7 @@ async function createWindow() {
     mainWindow.focus();
     mainWindow.moveTop();
     mainWindow.center();
+    if(!canBlur) mainWindow.setKiosk(true);
   })
 
   mainWindow.on('blur', (event) => {
@@ -234,14 +235,16 @@ async function createWindow() {
     }
   })
 
-  /*globalShortcut.register('CommandOrControl+Shift+L', () => {
-    mainWindow.openDevTools();
-  })*/
 
-  /*globalShortcut.register('CommandOrControl+Shift+Q', () => {
-    canQuit = true;
-    app.quit();
-  })*/
+  if (isDevMode) {
+    globalShortcut.register('CommandOrControl+Shift+L', () => {
+      mainWindow.openDevTools();
+    })
+    globalShortcut.register('CommandOrControl+Shift+P', () => {
+      canQuit = true;
+      app.quit();
+    })
+  }
 
   log.transports.console.level = 'silly'; 
   if (store.get('exit-type', 'exit') == 'illegal') {

@@ -63,6 +63,10 @@ body {
   padding-top: 8vh;
 }
 
+#overnbsppart {
+  padding-top: 16vh;
+}
+
 input {
   background: none;
   outline: none;
@@ -501,7 +505,8 @@ input[type="number"] {
   text-align: left;
   margin-top: 0.2rem;
   width: 11.6rem;
-  font-size: 0.7rem;
+  font-size: 0.56rem;
+  
 }
 
 .warnfather-over {
@@ -677,6 +682,54 @@ input[type="number"] {
   color: $activegrey;
 }
 
+.popuptitle {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.popupdesc {
+  font-weight: 500;
+  font-size: 0.6rem;
+  color: $darklabelgrey;
+}
+
+.popup {
+  width: 14.4rem;
+  height: 2.6rem;
+  transform: translateY(-0.7rem);
+  z-index: 102;
+  background: $white;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.15rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
+  padding-top: 1rem;
+  padding-bottom: 0.6rem;
+  display: flex;
+  flex-direction: row;
+}
+
+#popupnbsppart {
+  padding-top: 0.8rem;
+}
+
+.popupdecoration-left {
+  width: 0.2rem;
+  height: 4.4rem;
+  margin-right: 1rem;
+  margin-left: 0.3rem;
+  background-color: $bgwhite;
+  transform: translateY(-0.8rem);
+}
+
+.popupdecoration-right {
+  width: 0.2rem;
+  height: 4.4rem;
+  margin-left: 1rem;
+  margin-right: 0.3rem;
+  background-color: $bgwhite;
+  transform: translateY(-0.8rem);
+}
+
 @media screen and (min-width: 321px) {
   #main {
     z-index: 101;
@@ -714,6 +767,25 @@ input[type="number"] {
     height: 3rem;
     transform: translateY(-4rem);
     z-index: 100;
+  }
+  .popup {
+    width: 14rem;
+    height: 3rem;
+    transform: translateY(2.4rem);
+    z-index: 102;
+    background: $white;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.15rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+  .popupdecoration-left {
+    height: 4.2rem;
+    transform: translateY(-0.6rem);
+  }
+  .popupdecoration-right {
+    height: 4.2rem;
+    transform: translateY(-0.6rem);
   }
 }
 
@@ -756,6 +828,7 @@ input[type="number"] {
   background: $lightbuttongrey;
   box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
   max-width: 10rem !important;
+  min-height: 1.2rem!important;
 }
 
 ::selection {

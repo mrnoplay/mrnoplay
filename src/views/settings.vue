@@ -96,7 +96,7 @@
           <!-- --------- -->
           <!-- Lock Mode -->
           <!-- --------- -->
-          <div class="settingfield main-like">
+          <div class="settingfield settingfield-lockmode main-like">
             <span class="label settingslabel" v-if="!default_lockmode">
               {{ $t("lockmode") }}
               <b>{{ $t("lockmode_off") }}</b>
