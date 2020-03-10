@@ -51,7 +51,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "manifest": {
-    "en": "Improve user experience.",
-    "zh": "提升了用户体验。"
+    "en": "Add Point system, Today view, and pause and resume.",
+    "zh": "加入积分系统、今日视图和暂停功能。"
   }
 }

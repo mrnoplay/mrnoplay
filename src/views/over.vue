@@ -3,7 +3,7 @@
   <div>
     <div class="container">
       <div id="overnbsppart" v-if="!popuped"></div>
-      <div class="popup" v-if="popuped">
+      <div class="popup" v-if="popuped" style="-webkit-app-region: no-drag">
         <div class="popupdecoration-left"></div>
         <div>
           <div class="popuptitle">{{ popuptitle }}</div>
@@ -136,7 +136,7 @@ export default {
     alarm.src = require("@/assets/music/scarymusic/" +
       this.rand(1, 17) +
       ".mp3");
-    setTimeout(this.timeout, 180); //180000
+    setTimeout(this.timeout, 180000); //180000
   },
   beforeDestroy: function() {},
   methods: {
@@ -257,7 +257,7 @@ export default {
     },
     timeout() {
       setInterval(this.interval, 2000);
-      setInterval(this.longinterval, 1400); //140000
+      setInterval(this.longinterval, 140000); //140000
       setInterval(this.shutdowninterval, 420000);
       this.$i18n.locale = this.lang;
       this.popup(this.$t("now3"), this.$t("10willforce"));

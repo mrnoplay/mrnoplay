@@ -85,6 +85,7 @@
               <div class="digitaltop st_digitaltop">
                 {{ $t("st_finished") }}
                 <span
+                  style="-webkit-app-region: no-drag"
                   class="help"
                   v-tooltip="{
                     content: $t('st_help_finished'),
@@ -98,6 +99,7 @@
               <div class="digitaltop st_digitaltop">
                 {{ $t("st_rpoint") }}
                 <span
+                  style="-webkit-app-region: no-drag"
                   class="help"
                   v-tooltip="{
                     content: $t('st_help_rpoint'),
