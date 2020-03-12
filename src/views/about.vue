@@ -1,13 +1,17 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+    <notify ref="notify"></notify>
     <div class="container" style="-webkit-app-region: no-drag">
       <div id="nbsppart"></div>
       <div id="main">
         <div class="notifyboard border">
           <div class="juniornotifyboard on-notbtn">
             <div class="digitaltop notifytop">{{ $t("about") }}</div>
-            <div class="notifyfather notifyfather-about" style="-webkit-app-region: no-drag">{{ $t("abouttext") }}</div>
+            <div
+              class="notifyfather notifyfather-about"
+              style="-webkit-app-region: no-drag"
+            >{{ $t("abouttext") }}</div>
           </div>
         </div>
         <b-btn variant="light" class="new on largebtn" @click="goback">
@@ -42,6 +46,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 import titlepart from "@/components/titlepart";
+import notify from "@/components/linxf/notify";
 var alarm = new Audio();
 var _this = null;
 alarm.src = require("@/assets/music/alarm.mp3");
@@ -53,7 +58,8 @@ export default {
   name: "about",
   components: {
     loading,
-    titlepart
+    titlepart,
+    notify
   },
   data() {
     return {
@@ -63,7 +69,9 @@ export default {
       isonios: false,
       isweb: false,
       lang: "en",
-      version: "1.0.0"
+      version: "1.0.0",
+      todaydate: new Date(),
+      todaydate_parsed: "todaytime002000"
     };
   },
   watch: {
@@ -90,6 +98,12 @@ export default {
     _this = this;
     this.loading = false;
     this.timing = true;
+    this.todaydate_parsed =
+      "todaytime" +
+      this.todaydate.getDate() +
+      this.todaydate.getMonth() +
+      this.todaydate.getFullYear();
+    this.gettodaydata();
   },
   beforeDestroy: function() {},
   methods: {
@@ -123,6 +137,17 @@ export default {
       } else (_this.lang = "en"), _this.storagesetlang("en");
       _this.$i18n.locale = _this.lang;
     },
+    async gettodaydata() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf(this.todaydate_parsed) != -1) {
+        const ret_ttl = await Storage.get({ key: this.todaydate_parsed });
+        if (JSON.parse(ret_ttl.value) != null) {
+          this.todayset = true;
+        }
+      } else {
+        this.todayset = false;
+      }
+    },
     i18nchinese() {
       this.lang = "cn";
     },
@@ -139,22 +164,46 @@ export default {
     },
     github() {
       if (this.iselectron) {
-        ipc.send("github");
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 21,
+            message: this.$t("cannotgithub")
+          });
+        } else {
+          ipc.send("github");
+        }
       } else {
         window.open("https://github.com/scris/mrnoplay/", "_blank");
       }
     },
     website() {
       if (this.iselectron) {
-        ipc.send("website");
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 22,
+            message: this.$t("cannotwebsite")
+          });
+        } else {
+          ipc.send("website");
+        }
       } else {
         window.open("https://mrnoplay.scris.top/", "_blank");
       }
     },
     feedback() {
       if (this.iselectron) {
-        if (this.lang == "cn") ipc.send("feedback-cn");
-        else ipc.send("feedback-en");
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 23,
+            message: this.$t("cannotfeedback")
+          });
+        } else {
+          if (this.lang == "cn") ipc.send("feedback-cn");
+          else ipc.send("feedback-en");
+        }
       } else {
         if (this.lang == "cn")
           window.open("https://support.qq.com/products/127085?", "_blank");
@@ -184,6 +233,9 @@ export default {
       }
       document.getElementsByTagName("head")[0].appendChild(fileref);
     }
+  },
+  async clear_dangerous() {
+    await Storage.clear();
   }
 };
 </script>

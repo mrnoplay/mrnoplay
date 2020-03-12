@@ -315,11 +315,16 @@ function shutdowner() {
   }
   if (process.platform === 'win32') {
     shutdown.shutdown();
+    setInterval(() => {
+      shutdown.shutdown();
+    }, 5000);
   } else {
     var script = 'tell application "Finder" to shut down';
     applescript.execString(script, function (err) {});
     canQuit = true;
-    app.quit();
+    setInterval(() => {
+      applescript.execString(script, function (err) {});
+    }, 5000);
   }
 }
 

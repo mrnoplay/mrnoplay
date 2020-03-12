@@ -251,6 +251,8 @@ export default {
             message: this.$t("willforce")
           });
           this.storagesetjson("finished", this.st_finished + 1);
+          this.storagesetjson("exit_type", "shutdown");
+          this.storagesetjson("rp", this.st_rp + this.get_rp);
           ipc.send("shutdown");
         }, 5000);
       }

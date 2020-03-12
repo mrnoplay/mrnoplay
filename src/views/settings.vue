@@ -226,7 +226,9 @@ export default {
       // ------------
       // Defaults End
       // ------------
-      timeNAN: false
+      timeNAN: false,
+      todaydate: new Date(),
+      todaydate_parsed: "todaytime002000"
     };
   },
   watch: {
@@ -238,12 +240,18 @@ export default {
   mounted: function() {
     this.checking = false;
     this.version = process.env.VUE_APP_VER;
+    this.todaydate_parsed =
+      "todaytime" +
+      this.todaydate.getDate() +
+      this.todaydate.getMonth() +
+      this.todaydate.getFullYear();
     this.storagesetjson("cannotify", false);
     this.getdefault_lang();
     this.getdefault_startonlogin();
     this.getdefault_time();
     this.getdefault_theme();
     this.getdefault_lockmode();
+    this.gettodaydata();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
     }
@@ -275,6 +283,17 @@ export default {
         key: key,
         value: JSON.stringify(val)
       });
+    },
+    async gettodaydata() {
+      const keys = await Storage.keys();
+      if (keys.keys.indexOf(this.todaydate_parsed) != -1) {
+        const ret_ttl = await Storage.get({ key: this.todaydate_parsed });
+        if (JSON.parse(ret_ttl.value) != null) {
+          this.todayset = true;
+        }
+      } else {
+        this.todayset = false;
+      }
     },
     async getdefault_theme() {
       const keys = await Storage.keys();
@@ -424,8 +443,16 @@ export default {
     },
     check() {
       if (process.env.VUE_APP_LINXF == "electron") {
-        ipc.send("checkupdate");
-        this.checking = true;
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t('cannotcheck'),
+            id: 20,
+            message: this.$t('cannotchecktext')
+          });
+        } else {
+          ipc.send("checkupdate");
+          this.checking = true;
+        }
       }
     },
     async popup(title, message) {

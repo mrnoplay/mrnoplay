@@ -17,13 +17,15 @@
     <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://mrnoplay.scris.top/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://mrnoplay.scris.top/"/>
+    <ROW Property="BannerBitmap" Value="banner" MultiBuildValue="DefaultBuild:mrnoplay.installer.win.banner.jpg_1" Type="1" MsiKey="BannerBitmap"/>
     <ROW Property="CTRLS" Value="2"/>
+    <ROW Property="DialogBitmap" Value="dialog" MultiBuildValue="DefaultBuild:mrnoplay.installer.win.dialog.jpg_1" Type="1" MsiKey="DialogBitmap"/>
     <ROW Property="MSIFASTINSTALL" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="Manufacturer" Value="Tianze Ds Qiu from Scris Studio."/>
     <ROW Property="ProductCode" Value="1033:{4C33A98D-2955-404C-96D1-56DC0E0F357C} 2052:{4C33A98D-2955-404C-96D1-56DC0E0F357C} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Mr Noplay 2"/>
-    <ROW Property="ProductVersion" Value="2.2.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="2.2.1" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{51744FDF-E5C6-4F05-9730-F5E1D2BB8FF8}"/>
@@ -45,6 +47,7 @@
     <ROW Directory="Assets" Directory_Parent="TARGETDIR" DefaultDir="Assets" IsPseudoRoot="1"/>
     <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="SystemFolder" Directory_Parent="TARGETDIR" DefaultDir="SYSTEM~1|SystemFolder" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="locales_Dir" Directory_Parent="APPDIR" DefaultDir="locales"/>
     <ROW Directory="resources_Dir" Directory_Parent="APPDIR" DefaultDir="RESOUR~1|resources"/>
@@ -172,6 +175,8 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
     <ROW Name="ExternalUICleaner.dll" SourcePath="&lt;AI_CUSTACTS&gt;ExternalUICleaner.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+    <ROW Name="mrnoplay.installer.win.banner.jpg_1" SourcePath="mrnoplay.installer.win.banner.jpg"/>
+    <ROW Name="mrnoplay.installer.win.dialog.jpg_1" SourcePath="mrnoplay.installer.win.dialog.jpg"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
     <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
@@ -222,6 +227,7 @@
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="SystemFoldermsiexec.exe" SourcePath="&lt;AI_RES&gt;uninstall.ico" Index="0"/>
     <ROW Name="favicon.exe" SourcePath="favicon.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
@@ -272,8 +278,9 @@
     <ROW Registry="VersionMinor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMinor" Value="#2" Component_="AI_CustomARPName"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="MrNoplay" Directory_="SHORTCUTDIR" Name="MRNOPL~1|Mr Noplay" Component_="MrNoplay.exe" Target="[#MrNoplay.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>
+    <ROW Shortcut="MrNoplay" Directory_="SHORTCUTDIR" Name="MRNOPL~1|Mr Noplay" Component_="MrNoplay.exe" Target="[#MrNoplay.exe]" Description="Open Mr Noplay. 打开 Mr Noplay。" Hotkey="0" IconIndex="0" ShowCmd="1"/>
     <ROW Shortcut="MrNoplay_1" Directory_="DesktopFolder" Name="MRNOPL~1|Mr Noplay" Component_="MrNoplay.exe" Target="[#MrNoplay.exe]" Hotkey="0" Icon_="favicon.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="Uninstaller" Directory_="SHORTCUTDIR" Name="UNINST~1|Uninstaller" Component_="chrome_100_percent.pak" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstall Mr Noplay. 卸载 Mr Noplay。" Hotkey="0" Icon_="SystemFoldermsiexec.exe" IconIndex="0" ShowCmd="1" WkDir="SystemFolder"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>

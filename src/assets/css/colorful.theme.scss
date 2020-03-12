@@ -1093,3 +1093,91 @@ hr {
   border-radius: 0.4rem;
   box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1), 0 -0.2rem 0.7rem 0.2rem rgba(65, 64, 63, 0.05);
 }
+
+.direct-shutdown {
+  position: fixed;
+  width: 2rem;
+  height: 2rem;
+  bottom: 0;
+  left: 0;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.shutdown {
+  display: inline-block;
+  padding: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: $white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/shutdown.svg');
+  border-radius: 0.2rem;
+  box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1), 0 -0.2rem 0.7rem 0.2rem rgba(65, 64, 63, 0.05);
+}
+
+.shutdown:hover {
+  padding: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: $black;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/shutdown-white.svg');
+}
+
+.shutdown:active {
+  width: 1.4rem;
+  height: 1.4rem;
+  background: $white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/shutdown.svg');
+}
+
+.go-shutdown {
+  position: fixed;
+  width: 2rem;
+  height: 2rem;
+  bottom: 0;
+  left: 2rem;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.check-shutdown {
+  display: inline-block;
+  padding: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: $white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/submit.svg');
+  border-radius: 0.2rem;
+  box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1), 0 -0.2rem 0.7rem 0.2rem rgba(65, 64, 63, 0.05);
+}
+
+.check-shutdown:hover {
+  padding: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: $black;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/submit-white.svg');
+}
+
+.check-shutdown:active {
+  width: 1.4rem;
+  height: 1.4rem;
+  background: $white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/submit.svg');
+}

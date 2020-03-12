@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "author": "Tianze Ds Qiu (slaaker@126.com)",
   "description": "",
   "license": "MPL-2.0",
@@ -51,7 +51,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "manifest": {
-    "en": "Add Point system, Today view, and pause and resume.",
-    "zh": "加入积分系统、今日视图和暂停功能。"
+    "en": "Enhancements after Today Time is set.",
+    "zh": "增强了今日模式。"
   }
 }

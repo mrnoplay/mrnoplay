@@ -22,6 +22,12 @@
           <div class="warn warnnotinteger">{{ $t("lockmode_off_fail") }}</div>
         </div>
       </div>
+      <div class="direct-shutdown" style="-webkit-app-region: no-drag" v-if="iselectron">
+        <button class="shutdown" @click="_shutdown"></button>
+      </div>
+      <div class="go-shutdown" style="-webkit-app-region: no-drag" v-if="goshutdown">
+        <button class="check-shutdown" @click="shutdown"></button>
+      </div>
       <!------------>
       <!-- Today --->
       <!------------>
@@ -241,7 +247,8 @@ export default {
       rpnotenough: false,
       redeem_rp: 0,
       st_rp_illegal: 0,
-      exit_type: "initial"
+      exit_type: "initial",
+      goshutdown: false,
     };
   },
   watch: {
@@ -251,6 +258,7 @@ export default {
     }
   },
   mounted: function() {
+    //this.clear_dangerous();
     this.gettheme();
     if (process.env.VUE_APP_LINXF == "electron") {
       ipc.on("update_onstart", (event, arg) => {
@@ -497,7 +505,13 @@ export default {
     },
     exit() {
       if (this.iselectron) {
-        if (this.lockmode) {
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotexit"),
+            id: 19,
+            message: this.$t("cannotexittext")
+          });
+        } else if (this.lockmode) {
           this.lockmode_enterpwd = true;
         } else {
           this.storagesetjson("exit_type", "exit");
@@ -550,6 +564,15 @@ export default {
         this.start_func();
       } else {
         this.rpnotenough = true;
+      }
+    },
+    _shutdown() {
+      this.goshutdown = !this.goshutdown;
+    },
+    shutdown() {
+      if(this.iselectron) {
+        this.storagesetjson("exit_type", "direct-shutdown");
+        ipc.send('shutdown');
       }
     },
     async clear_dangerous() {

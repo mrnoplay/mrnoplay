@@ -144,7 +144,15 @@
     "nowexitillegally": "非法退出会扣除",
     "illegal": "发现应用被非法退出",
     "illegaltext": "为了惩罚，您将失去10R点。",
-    "pause": "暂停"
+    "pause": "暂停",
+    "cannotexit": "不能退出",
+    "cannotexittext": "已经设置今日总时间，不允许退出 Mr Noplay",
+    "cannotcheck": "不能检测更新",
+    "cannotchecktext": "已经设置今日总时间，不允许检测更新",
+    "cannotrun": "不能执行此操作",
+    "cannotgithub": "已经设置今日总时间，不允许查看 Github 页面",
+    "cannotwebsite": "已经设置今日总时间，不允许查看网站",
+    "cannotfeedback": "因为已经设置今日总时间，目前不能进行反馈"
   },
   "en": {
     "submit": "OK",
@@ -290,6 +298,14 @@
     "nowexitillegally": "If you exit the app illegally, you will lose ",
     "illegal": "Found the app was closed illegally",
     "illegaltext": "To punish it, you lose 10 R Point.",
-    "pause": "Pause"
+    "pause": "Pause",
+    "cannotexit": "Forbidden",
+    "cannotexittext": "You can't exit Mr Noplay after Today Time is set.",
+    "cannotcheck": "Forbidden",
+    "cannotchecktext": "You can't check update after Today Time is set.",
+    "cannotrun": "Forbidden",
+    "cannotgithub": "You can't go to Github page after Today Time is set.",
+    "cannotwebsite": "You can't go to our website after Today Time is set.",
+    "cannotfeedback": "You can't go to feedback page after Today Time is set."
   }
 }
