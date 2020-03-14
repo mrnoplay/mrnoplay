@@ -178,7 +178,7 @@
     "enterinteger": "Enter a Positive Integer",
     "start": "Start",
     "left": "Time Left",
-    "firstsavefiles": "When clicking on 'stop', we'll shutdown. Save files first.",
+    "firstsavefiles": "When clicking 'stop', we'll shut down. Save files first.",
     "stop": "Stop",
     "cancel15s": "Can be canceled in 15s. Canceling doesn't shutdown.",
     "cancelweb": "Only win/mac version can shut the computer down.",
