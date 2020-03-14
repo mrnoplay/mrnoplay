@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="15.7" version="15.7" Modules="professional" RootPath="." Language="en" Id="{BD91DB91-AD16-4DA9-B171-BF93933958F1}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="15.7" version="15.7" PreviousModules="professional" Modules="enterprise" RootPath="." Language="en" Id="{BD91DB91-AD16-4DA9-B171-BF93933958F1}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
     <ROW Name="HiddenItems" Value="AppXDependenciesComponent;AppXAppDetailsComponent;FixupComponent;AppXVisualAssetsComponent;AppXCapabilitiesComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;AppXProductDetailsComponent"/>
   </COMPONENT>
@@ -89,6 +89,7 @@
     <ROW File="d3dcompiler_47.dll" Component_="d3dcompiler_47.dll" FileName="D3DCOM~1.DLL|d3dcompiler_47.dll" Attributes="0" SourcePath="dist\win-unpacked\d3dcompiler_47.dll" SelfReg="false" NextFile="ffmpeg.dll"/>
     <ROW File="da.pak" Component_="am.pak" FileName="da.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\da.pak" SelfReg="false" NextFile="de.pak"/>
     <ROW File="de.pak" Component_="am.pak" FileName="de.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\de.pak" SelfReg="false" NextFile="el.pak"/>
+    <ROW File="editreg.bat" Component_="chrome_100_percent.pak" FileName="editreg.bat" Attributes="0" SourcePath="editreg.bat" SelfReg="false"/>
     <ROW File="el.pak" Component_="am.pak" FileName="el.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\el.pak" SelfReg="false" NextFile="enGB.pak"/>
     <ROW File="enGB.pak" Component_="am.pak" FileName="en-GB.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\en-GB.pak" SelfReg="false" NextFile="enUS.pak"/>
     <ROW File="enUS.pak" Component_="am.pak" FileName="en-US.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\en-US.pak" SelfReg="false" NextFile="es419.pak"/>
@@ -140,7 +141,7 @@
     <ROW File="th.pak" Component_="am.pak" FileName="th.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\th.pak" SelfReg="false" NextFile="tr.pak"/>
     <ROW File="tr.pak" Component_="am.pak" FileName="tr.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\tr.pak" SelfReg="false" NextFile="uk.pak"/>
     <ROW File="uk.pak" Component_="am.pak" FileName="uk.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\uk.pak" SelfReg="false" NextFile="vi.pak"/>
-    <ROW File="v8_context_snapshot.bin" Component_="chrome_100_percent.pak" FileName="V8_CON~1.BIN|v8_context_snapshot.bin" Attributes="0" SourcePath="dist\win-unpacked\v8_context_snapshot.bin" SelfReg="false"/>
+    <ROW File="v8_context_snapshot.bin" Component_="chrome_100_percent.pak" FileName="V8_CON~1.BIN|v8_context_snapshot.bin" Attributes="0" SourcePath="dist\win-unpacked\v8_context_snapshot.bin" SelfReg="false" NextFile="editreg.bat"/>
     <ROW File="vi.pak" Component_="am.pak" FileName="vi.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\vi.pak" SelfReg="false" NextFile="zhCN.pak"/>
     <ROW File="zhCN.pak" Component_="am.pak" FileName="zh-CN.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\zh-CN.pak" SelfReg="false" NextFile="zhTW.pak"/>
     <ROW File="zhTW.pak" Component_="am.pak" FileName="zh-TW.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\zh-TW.pak" SelfReg="false" NextFile="natives_blob.bin"/>
@@ -149,7 +150,7 @@
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFileName="mrnoplay.{version}.win" Languages="en;zh" LangOpt="1" InstallationType="4" ExtUI="true" UseLargeSchema="true" UACExecutionLevel="1"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFileName="mrnoplay.{version}.win" Languages="en;zh" LangOpt="1" InstallationType="4" ExtUI="true" UseLargeSchema="true" UACExecutionLevel="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
@@ -160,7 +161,6 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
-    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
     <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
     <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
     <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
@@ -177,13 +177,12 @@
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="mrnoplay.installer.win.banner.jpg_1" SourcePath="mrnoplay.installer.win.banner.jpg"/>
     <ROW Name="mrnoplay.installer.win.dialog.jpg_1" SourcePath="mrnoplay.installer.win.dialog.jpg"/>
+    <ROW Name="viewer.exe" SourcePath="&lt;AI_CUSTACTS&gt;viewer.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
-    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
-    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
-    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="1"/>
     <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
-    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="201"/>
     <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
     <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
     <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
@@ -225,6 +224,7 @@
     <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[AppDataFolder]Mr Noplay"/>
     <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+    <ROW Action="viewer.exe" Type="1538" Source="viewer.exe" Target="/HideWindow &quot;[#editreg.bat]&quot;"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="SystemFoldermsiexec.exe" SourcePath="&lt;AI_RES&gt;uninstall.ico" Index="0"/>
@@ -239,6 +239,7 @@
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
     <ROW Action="AI_RemoveExternalUIStub" Condition="(REMOVE=&quot;ALL&quot;) AND ((VersionNT &gt; 500) OR((VersionNT = 500) AND (ServicePackLevel &gt;= 4)))" Sequence="1501"/>
     <ROW Action="AI_GetArpIconPath" Sequence="1401"/>
+    <ROW Action="viewer.exe" Condition="( NOT Installed ) AND ( (VersionNT = 601 AND MsiNTProductType = 1) OR (VersionNT64 = 601 AND MsiNTProductType = 1) )" Sequence="5935"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
