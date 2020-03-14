@@ -147,11 +147,12 @@
         <div class="warnfather warn settingwarn warnnotintegerfather" v-if="timeTOOLONG">
           <div class="breathe-div"></div>
           <div>
-            <div class="warn warnnotinteger warnredeem">
+            <div class="warn warnnotinteger warnredeem" style="-webkit-app-region: no-drag">
               {{ $t("toolong") }}
               <span
                 @click="redeem"
                 class="redeem"
+                style="-webkit-app-region: no-drag"
               >{{ $t("redeem_use") }}{{ redeem_rp }}{{ $t("redeem") }}</span>
             </div>
           </div>
