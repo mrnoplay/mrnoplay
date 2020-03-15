@@ -1,4 +1,3 @@
-
 ![Mrnoplay Repo Banner](https://i.loli.net/2020/01/17/MgyzH1qCa3QwVZ6.png)
 
 ### What is it
@@ -8,6 +7,9 @@ Give an end to no-end rests and play times.
 ### License
 
 MPL v2.0
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fscris%2Fmrnoplay.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fscris%2Fmrnoplay?ref=badge_large)
 
 ### Languages
 
@@ -19,6 +21,7 @@ MPL v2.0
 ![Main](https://i.loli.net/2020/02/25/wGmHATlncQbDqvU.png)
 ![Settings](https://i.loli.net/2020/02/25/bGLPRctqOlEZe3y.png)
 ![Timing](https://i.loli.net/2020/02/27/om1plQdOZ6Yi4PT.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fscris%2Fmrnoplay.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fscris%2Fmrnoplay?ref=badge_shield)
 
 ### Screenshots (Real Theme)
 
