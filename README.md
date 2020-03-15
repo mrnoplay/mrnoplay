@@ -9,6 +9,8 @@ Give an end to no-end rests and play times.
 
 MPL v2.0
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fscris%2Fmrnoplay.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fscris%2Fmrnoplay?ref=badge_large)
+
 ### Languages
 
 - 简体中文
