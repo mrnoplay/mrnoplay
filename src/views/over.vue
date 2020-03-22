@@ -244,15 +244,15 @@ export default {
           message: this.$t("willforce")
         });
         setTimeout(() => {
+          this.storagesetjson("finished", this.st_finished + 1);
+          this.storagesetjson("exit_type", "shutdown");
+          this.storagesetjson("rp", this.st_rp + this.get_rp);
           this.$i18n.locale = this.lang;
           this.$refs.notify.send({
             title: this.$t("willforce"),
             id: 9,
             message: this.$t("willforce")
           });
-          this.storagesetjson("finished", this.st_finished + 1);
-          this.storagesetjson("exit_type", "shutdown");
-          this.storagesetjson("rp", this.st_rp + this.get_rp);
           ipc.send("shutdown");
         }, 5000);
       }
