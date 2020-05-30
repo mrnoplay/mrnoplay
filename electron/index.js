@@ -30,6 +30,7 @@ const shutdown = require('electron-shutdown-command'); //shutdown windows
 var applescript = require('applescript'); //use applescript to shutdown mac
 let canQuit = false;
 let canBlur = false;
+let isMinimal = false;
 
 // Place holders for our windows so they don't get garbage collected.
 let mainWindow = null;
@@ -83,6 +84,8 @@ async function createWindow() {
     },
     frame: false,
     resizable: false,
+    maximizable: true,
+    minimizable: true,
   });
 
   if (isDevMode) {
@@ -204,14 +207,7 @@ async function createWindow() {
   } else {
     tray = new Tray(path.join(__dirname, 'tray.mac.Template.png'));
   }
-  tray.on('click', () => {
-    mainWindow.hide();
-    mainWindow.show();
-    mainWindow.focus();
-    mainWindow.moveTop();
-    mainWindow.center();
-    if(!canBlur) mainWindow.setKiosk(true);
-  })
+  setTray();
 
   mainWindow.on('blur', (event) => {
     if (mainWindow.isKiosk() && !canBlur) {
@@ -253,6 +249,96 @@ async function createWindow() {
   store.set('exit-type', 'illegal');
 }
 
+async function createWindowAgain() {
+  if (process.platform === 'darwin') {
+    const template = [];
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+  } else {
+    Menu.setApplicationMenu(null)
+  }
+
+
+  // Define our main window size
+  mainWindow = new BrowserWindow({
+    height: 270,
+    width: 270,
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
+    },
+    frame: false,
+    resizable: false,
+    maximizable: true,
+    minimizable: true,
+  });
+
+  if (isDevMode) {
+    // Set our above template to the Menu Object if we are in development mode, dont want users having the devtools.
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
+    // If we are developers we might as well open the devtools by default.
+    //mainWindow.webContents.openDevTools();
+  }
+
+  if (useSplashScreen) {
+    splashScreen = new CapacitorSplashScreen(mainWindow);
+    splashScreen.init(false);
+  } else {
+    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
+  }
+
+  mainWindow.on('close', (event) => {
+    if (!canQuit) {
+      event.preventDefault();
+      event.sender.send('closenotification', true);
+    } else {
+      mainWindow = null;
+    }
+  });
+
+  mainWindow.webContents.on('crashed', (event) => {
+    log.warn('crash' + mainWindow.isDestroyed())
+    if (mainWindow.isDestroyed()) {
+      app.relaunch();
+      app.exit(0);
+    } else {
+      mainWindow.destroy();
+      mainWindow.reload();
+    }
+    event.sender.send('crashback', true);
+  });
+
+  mainWindow.on('blur', (event) => {
+    if (mainWindow.isKiosk() && !canBlur) {
+      mainWindow.hide();
+      mainWindow.setKiosk(false);
+      mainWindow.focus();
+      mainWindow.setKiosk(true);
+      mainWindow.show();
+    }
+  })
+
+  mainWindow.on('focus', (event) => {
+    if (mainWindow.isKiosk() && canBlur) {
+      canBlur = false;
+    }
+  })
+
+  mainWindow.on('show', (event) => {
+    if (mainWindow.isKiosk() && canBlur) {
+      canBlur = false;
+    }
+  })
+
+  if(isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+  mainWindow.hide();
+  mainWindow.show();
+  mainWindow.focus();
+  mainWindow.moveTop();
+  mainWindow.center();
+  if(!canBlur) mainWindow.setKiosk(true);
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some Electron APIs can only be used after this event occurs.
@@ -279,6 +365,9 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
+  if(mainWindow.isDestroyed()) {
+    createWindowAgain();
+  }
 });
 
 // Define any IPC or other custom functionality below here
@@ -289,6 +378,7 @@ ipcMain.on('full-screen', function () {
     mainWindow.center();
     mainWindow.setKiosk(true);
   }
+  setTray();
 });
 
 ipcMain.on('normal-screen', function () {
@@ -299,12 +389,22 @@ ipcMain.on('normal-screen', function () {
     mainWindow.setFullScreen(false);
     mainWindow.unmaximize();
   }
+  setTrayNoExit();
 });
 
 ipcMain.on('exit', () => {
+  toexit();
+});
+
+function toexit() {
   store.set('exit-type', 'exit');
   canQuit = true;
   app.quit();
+}
+
+ipcMain.on('exit-preventdefault', () => {
+  canQuit = true;
+  mainWindow.destroy();
 });
 
 function shutdowner() {
@@ -471,9 +571,57 @@ function update_onstart() {
 ipcMain.on('cn', () => {
   i18n.setLocale('zh');
   store.set('lang', 'zh');
+  setTray();
 })
 
 ipcMain.on('en', () => {
   i18n.setLocale('en');
   store.set('lang', 'en');
+  setTray();
 })
+
+function setTray() {
+  const contextMenu = Menu.buildFromTemplate([
+    { 
+      label: i18n.__('open'), click:() => {
+        if(!mainWindow.isDestroyed()) {
+          if(isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+          mainWindow.hide();
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.moveTop();
+          mainWindow.center();
+          if(!canBlur) mainWindow.setKiosk(true);
+        } else {
+          createWindowAgain();
+        }
+      } 
+    }, { 
+      label: i18n.__('exit'), click:() => {
+      toexit();
+      } 
+    },
+  ]);
+  tray.setContextMenu(contextMenu);
+}
+
+function setTrayNoExit() {
+  const contextMenu = Menu.buildFromTemplate([
+    { 
+      label: i18n.__('open'), click:() => {
+        if(!mainWindow.isDestroyed()) {
+          if(isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+          mainWindow.hide();
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.moveTop();
+          mainWindow.center();
+          if(!canBlur) mainWindow.setKiosk(true);
+        } else {
+          createWindowAgain();
+        }
+      }
+    }
+  ]);
+  tray.setContextMenu(contextMenu);
+}

@@ -254,6 +254,7 @@ export default {
     this.gettodaydata();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
+      ipc.send("full-screen");
     }
     this.isonios = this.isiOS(navigator.userAgent);
     _this = this;

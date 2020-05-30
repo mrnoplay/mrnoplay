@@ -6,5 +6,7 @@
    "updatefail": "Update failed, please check your network settings.",
    "updateok": "Can be updated.",
    "noupdate": "You're up to date.",
-   "'dupdate": "Found an update. You can download it in Settings. What's new in the latest update: "
+   "'dupdate": "Found an update. You can download it in Settings. What's new in the latest update: ",
+   "open": "Open Mr Noplay",
+   "exit": "Quit"
 }

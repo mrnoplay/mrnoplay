@@ -1181,3 +1181,30 @@ hr {
   background-repeat: no-repeat;
   background-image: url('../img/submit.svg');
 }
+
+.upperright {
+  position: fixed;
+  right: 0.2rem;
+}
+
+.upperrightbtn {
+  background: none;
+  cursor: pointer;
+}
+
+.upperright-minimal {
+  position: fixed;
+  right: 1.8rem;
+}
+
+.close {
+  display: inline-block;
+  padding: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/close.svg');
+  margin-top: 0.1rem;
+  margin-right: 0.2rem;
+}

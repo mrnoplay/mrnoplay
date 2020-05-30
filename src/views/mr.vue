@@ -2,6 +2,7 @@
 <template>
   <div>
     <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
+    <b-btn variant="light" class="new close pointer upperright upperrightbtn" @click="exit" v-if="iselectron"></b-btn>
     <div class="container">
       <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
@@ -516,7 +517,7 @@ export default {
           this.lockmode_enterpwd = true;
         } else {
           this.storagesetjson("exit_type", "exit");
-          ipc.send("exit");
+          ipc.send("exit-preventdefault");
         }
       }
     },

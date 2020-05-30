@@ -1,0 +1,93 @@
+Date : 2020-05-30 16:02:07
+Directory : /Users/we/Documents/GitHub/mrnoplay
+Total : 48 files,  5895 codes, 110 comments, 474 blanks, all 6479 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Vue        |         10 |      2,591 |         50 |         19 |      2,660 |
+| SCSS       |          2 |      2,071 |          0 |        354 |      2,425 |
+| JavaScript |          7 |        685 |         47 |         78 |        810 |
+| JSON       |          8 |        479 |         11 |          4 |        494 |
+| HTML       |          1 |         36 |          1 |          3 |         40 |
+| Markdown   |          1 |         15 |          0 |         12 |         27 |
+| XML        |         15 |         15 |          0 |          0 |         15 |
+| YAML       |          1 |          1 |          0 |          1 |          2 |
+| Properties |          1 |          1 |          1 |          1 |          3 |
+| Batch      |          1 |          1 |          0 |          1 |          2 |
+| CSS        |          1 |          0 |          0 |          1 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                      | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                         |         48 |      5,895 |        110 |        474 |      6,479 |
+| electron                                                                  |          6 |        620 |         54 |         69 |        743 |
+| electron/locale                                                           |          2 |         24 |          0 |          0 |         24 |
+| public                                                                    |          3 |         51 |          1 |          3 |         55 |
+| src                                                                       |         31 |      5,078 |         51 |        384 |      5,513 |
+| src/assets                                                                |         19 |      2,397 |          0 |        355 |      2,752 |
+| src/assets/css                                                            |          3 |      2,071 |          0 |        355 |      2,426 |
+| src/assets/img                                                            |         15 |         15 |          0 |          0 |         15 |
+| src/assets/json                                                           |          1 |        311 |          0 |          0 |        311 |
+| src/components                                                            |          3 |        236 |          1 |          6 |        243 |
+| src/components/linxf                                                      |          2 |        142 |          1 |          4 |        147 |
+| src/views                                                                 |          6 |      2,350 |         49 |         12 |      2,411 |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                  | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/we/Documents/GitHub/mrnoplay/.gitattributes                        | Properties |          1 |          1 |          1 |          3 |
+| /Users/we/Documents/GitHub/mrnoplay/.yarnrc.yml                           | YAML       |          1 |          0 |          1 |          2 |
+| /Users/we/Documents/GitHub/mrnoplay/README.md                             | Markdown   |         15 |          0 |         12 |         27 |
+| /Users/we/Documents/GitHub/mrnoplay/babel.config.js                       | JavaScript |          5 |          0 |          1 |          6 |
+| /Users/we/Documents/GitHub/mrnoplay/capacitor.config.json                 | JSON       |          7 |          0 |          1 |          8 |
+| /Users/we/Documents/GitHub/mrnoplay/electron/capacitor.config.json        | JSON       |          7 |          0 |          1 |          8 |
+| /Users/we/Documents/GitHub/mrnoplay/electron/editreg.bat                  | Batch      |          1 |          0 |          1 |          2 |
+| /Users/we/Documents/GitHub/mrnoplay/electron/index.js                     | JavaScript |        529 |         43 |         66 |        638 |
+| /Users/we/Documents/GitHub/mrnoplay/electron/locale/en.json               | JSON       |         12 |          0 |          0 |         12 |
+| /Users/we/Documents/GitHub/mrnoplay/electron/locale/zh.json               | JSON       |         12 |          0 |          0 |         12 |
+| /Users/we/Documents/GitHub/mrnoplay/electron/package.json                 | JSON       |         59 |         11 |          1 |         71 |
+| /Users/we/Documents/GitHub/mrnoplay/package.json                          | JSON       |         57 |          0 |          1 |         58 |
+| /Users/we/Documents/GitHub/mrnoplay/postcss.config.js                     | JavaScript |          5 |          0 |          1 |          6 |
+| /Users/we/Documents/GitHub/mrnoplay/public/index.html                     | HTML       |         36 |          1 |          3 |         40 |
+| /Users/we/Documents/GitHub/mrnoplay/public/manifest.json                  | JSON       |         14 |          0 |          0 |         14 |
+| /Users/we/Documents/GitHub/mrnoplay/public/useelectron.js                 | JavaScript |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/App.vue                           | Vue        |          5 |          0 |          1 |          6 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/css/bootstrap.css          | CSS        |          0 |          0 |          1 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/css/colorful.theme.scss    | SCSS       |      1,044 |          0 |        178 |      1,222 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/css/reality.theme.scss     | SCSS       |      1,027 |          0 |        176 |      1,203 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/about.svg              | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/back-smaller-white.svg | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/back-smaller.svg       | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/back-white.svg         | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/back.svg               | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/close.svg              | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/exit.svg               | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/help.svg               | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/minimize.svg           | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/resume.svg             | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/settings.svg           | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/shutdown-white.svg     | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/shutdown.svg           | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/submit-white.svg       | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/img/submit.svg             | XML        |          1 |          0 |          0 |          1 |
+| /Users/we/Documents/GitHub/mrnoplay/src/assets/json/lang.json             | JSON       |        311 |          0 |          0 |        311 |
+| /Users/we/Documents/GitHub/mrnoplay/src/components/linxf/notify.vue       | Vue        |         79 |          0 |          2 |         81 |
+| /Users/we/Documents/GitHub/mrnoplay/src/components/linxf/switcher.vue     | Vue        |         63 |          1 |          2 |         66 |
+| /Users/we/Documents/GitHub/mrnoplay/src/components/titlepart.vue          | Vue        |         94 |          0 |          2 |         96 |
+| /Users/we/Documents/GitHub/mrnoplay/src/main.js                           | JavaScript |         47 |          1 |          8 |         56 |
+| /Users/we/Documents/GitHub/mrnoplay/src/router.js                         | JavaScript |         43 |          0 |          2 |         45 |
+| /Users/we/Documents/GitHub/mrnoplay/src/views/about.vue                   | Vue        |        240 |          0 |          2 |        242 |
+| /Users/we/Documents/GitHub/mrnoplay/src/views/mr.vue                      | Vue        |        596 |          5 |          2 |        603 |
+| /Users/we/Documents/GitHub/mrnoplay/src/views/over.vue                    | Vue        |        303 |         17 |          2 |        322 |
+| /Users/we/Documents/GitHub/mrnoplay/src/views/settings.vue                | Vue        |        528 |          9 |          2 |        539 |
+| /Users/we/Documents/GitHub/mrnoplay/src/views/timing.vue                  | Vue        |        369 |         18 |          2 |        389 |
+| /Users/we/Documents/GitHub/mrnoplay/src/views/tutorial.vue                | Vue        |        314 |          0 |          2 |        316 |
+| /Users/we/Documents/GitHub/mrnoplay/vue.config.js                         | JavaScript |         55 |          3 |          0 |         58 |
+| Total                                                                     |            |      5,895 |        110 |        474 |      6,479 |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
