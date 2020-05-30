@@ -25,7 +25,7 @@
     <ROW Property="ProductCode" Value="1033:{4C33A98D-2955-404C-96D1-56DC0E0F357C} 2052:{4C33A98D-2955-404C-96D1-56DC0E0F357C} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Mr Noplay 2"/>
-    <ROW Property="ProductVersion" Value="2.2.1" Type="32"/>
+    <ROW Property="ProductVersion" Value="2.3.0" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{51744FDF-E5C6-4F05-9730-F5E1D2BB8FF8}"/>

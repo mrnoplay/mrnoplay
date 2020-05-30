@@ -2,7 +2,7 @@
 <template>
   <div>
     <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
-    <b-btn variant="light" class="new close pointer upperright upperrightbtn" @click="exit" v-if="iselectron"></b-btn>
+    <b-btn variant="light" class="new close pointer upperright upperrightbtn" @click="exit" v-if="iselectron" style="-webkit-app-region: no-drag"></b-btn>
     <div class="container">
       <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
