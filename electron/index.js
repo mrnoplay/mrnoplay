@@ -123,6 +123,7 @@ async function createWindow() {
             setTimeout(() => {
               if (!canBlur) {
                 mainWindow.show();
+                mainWindow.center();
                 mainWindow.focus();
               }
               mainWindow.setKiosk(true);
@@ -132,6 +133,7 @@ async function createWindow() {
             mainWindow.on('ready-to-show', function () {
               if (!canBlur) {
                 mainWindow.show(); // 初始化后再显示
+                mainWindow.center();
                 mainWindow.focus();
               }
               mainWindow.setKiosk(true);
@@ -142,6 +144,7 @@ async function createWindow() {
           mainWindow.on('ready-to-show', function () {
             if (!canBlur) {
               mainWindow.show(); // 初始化后再显示
+              mainWindow.center();
               mainWindow.focus();
             }
             mainWindow.setKiosk(true);
@@ -154,6 +157,7 @@ async function createWindow() {
     mainWindow.on('ready-to-show', function () {
       if (!canBlur) {
         mainWindow.show(); // 初始化后再显示
+        mainWindow.center();
         mainWindow.focus();
       }
       mainWindow.setKiosk(true);
