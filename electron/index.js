@@ -378,6 +378,7 @@ app.on('activate', function () {
 ipcMain.on('full-screen', function () {
   canBlur = false;
   if (mainWindow) {
+    mainWindow.setAlwaysOnTop(false);
     mainWindow.show();
     mainWindow.center();
     mainWindow.setKiosk(true);
@@ -391,7 +392,21 @@ ipcMain.on('normal-screen', function () {
     mainWindow.focus();
     mainWindow.setKiosk(false);
     mainWindow.setFullScreen(false);
+    mainWindow.setAlwaysOnTop(false);
     mainWindow.unmaximize();
+  }
+  setTrayNoExit();
+});
+
+ipcMain.on('screen-ontop', function () {
+  canBlur = true;
+  if (mainWindow) {
+    mainWindow.focus();
+    mainWindow.setKiosk(false);
+    mainWindow.setFullScreen(false);
+    mainWindow.unmaximize();
+    mainWindow.setAlwaysOnTop(true);
+    mainWindow.setSize(320,100,true);
   }
   setTrayNoExit();
 });

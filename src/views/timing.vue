@@ -1,7 +1,7 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
-    <div class="container">
+    <div class="container" v-if="(!isontop && !ismoretime) || !iselectron">
       <div id="timingnbsppart"></div>
       <div id="timingcancelnbsppart" v-if="!cancancel"></div>
       <div id="pause" v-if="ispausing">
@@ -57,12 +57,107 @@
           </b-btn>
         </div>
         <div>
-          <small class="new largebtn-notbtn transparent small canceltext" v-if="controlrptext">
-            {{ $t('nowstop') }}{{ get_rp }}{{ $t('rp') }}
-          </small>
-          <small class="new largebtn-notbtn transparent small canceltext" v-if="!controlrptext">
-            {{ $t('nowexitillegally') }}{{ illegal_rp }}{{ $t('rp') }}
-          </small>
+          <small
+            class="new largebtn-notbtn transparent small canceltext"
+            v-if="controlrptext"
+          >{{ $t('nowstop') }}{{ get_rp }}{{ $t('rp') }}</small>
+          <small
+            class="new largebtn-notbtn transparent small canceltext"
+            v-if="!controlrptext"
+          >{{ $t('nowexitillegally') }}{{ illegal_rp }}{{ $t('rp') }}</small>
+        </div>
+      </div>
+    </div>
+    <div class="container" v-if="isontop && !ismoretime && iselectron" id="ontop">
+      <div id="main" class="main-ontop">
+        <div id="pause" v-if="ispausing">
+          <button class="resume" @click="resume"></button>
+        </div>
+        <div class="digitalboard border">
+          <div class="juniordigitalboard-ontop on-notbtn" style="-webkit-app-region: no-drag">
+            <div class="digitalfather-ontop digitalfather-notinput-ontop">
+              <span class="digital-ontop">{{ displaytime }}</span>
+            </div>
+          </div>
+        </div>
+        <div id="main-ontop-right">
+          <b-btn
+            variant="light"
+            class="new on largebtn-ontop stopbtn-ontop"
+            @click="stop"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("stop") }}</div>
+          </b-btn>
+          <b-btn
+            v-if="cancancel"
+            variant="light"
+            class="new largebtn-ontop transparent cancelbtn-ontop"
+            @click="cancel"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("cancel") }}</div>
+          </b-btn>
+          <b-btn
+            v-if="!cancancel"
+            variant="light"
+            class="new largebtn-ontop transparent cancelbtn-ontop"
+            @click="pause"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("pause") }}</div>
+          </b-btn>
+          <b-btn
+            variant="light"
+            class="new on largebtn-ontop stopbtn-ontop"
+            @click="moretime_goask"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("moretime") }}</div>
+          </b-btn>
+        </div>
+      </div>
+    </div>
+    <div class="container" v-if="isontop && ismoretime && iselectron" id="ontop">
+      <div id="main" class="main-ontop">
+        <div class="lockmode_enterpwd moretimepopup" style="-webkit-app-region: no-drag">
+          <span
+            class="label settingslabel lockmode_enterpwd-btn label-moretime"
+          >{{ $t("moretime-ask") }}</span>
+          <div class="input-btn lockmode_enterpwd-btn">
+            <b-btn variant="light" class="new submit-back settingbtn on" @click="moretime_goback"></b-btn>
+            <input
+              required
+              class="off settinginput lockmodeinput"
+              v-model="moretime"
+              @keyup.enter="moretime_gofor"
+            />
+            <b-btn variant="light" class="new submit settingbtn on" @click="moretime_gofor"></b-btn>
+          </div>
+          <div
+            class="warnfather warn settingwarn warnnotintegerfather warnmoretimefather warnmoretimefather-use-rpoint"
+            v-if="using_rp"
+          >
+            <div class="breathe-div"></div>
+            <div
+              class="warn warnnotinteger warnredeem warnmoretime"
+              style="-webkit-app-region: no-drag"
+            >
+              {{ $t("toolong-moretime") }}
+              <span
+                @click="redeem"
+                class="redeem"
+                style="-webkit-app-region: no-drag"
+              >{{ $t("redeem_use") }}{{ redeem_rp }}{{ $t("redeem") }}</span>
+            </div>
+          </div>
+          <div
+            class="warnfather warn settingwarn warnnotintegerfather warnmoretimefather"
+            v-if="lack_rp"
+          >
+            <div class="breathe-div"></div>
+            <div class="warn warnnotinteger warnmoretime">{{ $t("rpnotenough") }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -117,6 +212,13 @@ export default {
       illegal_rp: 10,
       controlrptext: true,
       ispausing: false,
+      isontop: false,
+      ismoretime: false,
+      moretime: 10,
+      using_rp: false,
+      lack_rp: false,
+      redeem_rp: 0,
+      ontoplock: true,
     };
   },
   watch: {
@@ -137,6 +239,7 @@ export default {
       this.todaydate.getFullYear();
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
+    this.getrp();
     this.storagesetjson("cannotify", true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
@@ -149,12 +252,14 @@ export default {
     this.loading = false;
     this.timing = true;
     this.halflock = true;
+    this.ontoplock = true;
+    this.isontop = false;
     setInterval(this.interval, 1000);
     setTimeout(() => {
       this.cancancel = false;
     }, 15000);
-    if(this.ispausing && this.iselectron) {
-      ipc.send('full-screen');
+    if (this.ispausing && this.iselectron) {
+      ipc.send("full-screen");
     }
   },
   beforeDestroy: function() {
@@ -262,6 +367,27 @@ export default {
         this.st_finished = JSON.parse(ret_f.value);
       else this.st_finished = 0;
     },
+    // -------
+    // R Point
+    // -------
+    async getrp() {
+      const ret_r = await Storage.get({ key: "rp" });
+      if (
+        tryparse.int(JSON.parse(ret_r.value)) != null ||
+        tryparse.int(JSON.parse(ret_r.value)) == 0
+      )
+        this.st_rp = tryparse.int(JSON.parse(ret_r.value));
+      else this.st_rp = 20;
+      const ret_f = await Storage.get({ key: "finished" });
+      if (
+        tryparse.int(JSON.parse(ret_f.value)) != null ||
+        tryparse.int(JSON.parse(ret_f.value)) == 0
+      )
+        this.st_finished = JSON.parse(ret_f.value);
+      else this.st_finished = 0;
+      const ret_et = await Storage.get({ key: "exit_type" });
+      this.exit_type = JSON.parse(ret_et.value);
+    },
     i18nchinese() {
       this.lang = "cn";
     },
@@ -275,7 +401,7 @@ export default {
         this.first_shutdown_confirm();
       } else {
         this.storagesetjson("rp", this.st_rp + this.get_rp);
-        this.storagesetjson('exit_type', 'shutdown');
+        this.storagesetjson("exit_type", "shutdown");
         this.storagesetjson("finished", this.st_finished + 1);
         if (process.env.VUE_APP_LINXF == "electron") {
           ipc.send("shutdown");
@@ -291,7 +417,7 @@ export default {
       });
       if (confirmRet.value) {
         this.storagesetjson("finished", this.st_finished + 1);
-        this.storagesetjson('exit_type', 'shutdown');
+        this.storagesetjson("exit_type", "shutdown");
         this.storagesetjson("rp", this.st_rp + this.get_rp);
         ipc.send("shutdown");
       }
@@ -299,7 +425,7 @@ export default {
     cancel() {
       this.timing = false;
       this.storagesetjson("concentrated", true);
-      this.storagesetjson('exit_type', 'cancel');
+      this.storagesetjson("exit_type", "cancel");
       if (this.todayset) {
         this.storagesetjson("rp", this.st_rp + this.lastcost_rp);
         this.storagesetjson(
@@ -334,6 +460,11 @@ export default {
             id: 10,
             message: this.$t("halftext")
           });
+        }
+        if (this.iselectron && this.lefttime <= 300 && this.ontoplock) {
+          ipc.send("screen-ontop");
+          this.ontoplock = false;
+          this.isontop = true;
         }
       }
     },
@@ -373,14 +504,40 @@ export default {
       this.ispausing = true;
       this.timing = false;
       if (this.iselectron) {
-        ipc.send('full-screen');
+        ipc.send("full-screen");
       }
     },
     resume() {
       this.ispausing = false;
       this.timing = true;
       if (this.iselectron) {
-        ipc.send('normal-screen');
+        ipc.send("normal-screen");
+      }
+    },
+    moretime_goask() {
+      this.ismoretime = true;
+    },
+    moretime_gofor() {
+      this.using_rp = true;
+      this.redeem_rp = Math.round(this.moretime / 3.3);
+      if (this.redeem_rp == 0) this.redeem_rp++;
+      if (isNaN(this.redeem_rp)) this.redeem_rp = 0;
+    },
+    moretime_goback() {
+      this.ismoretime = false;
+    },
+    redeem() {
+      if (this.st_rp >= this.redeem_rp) {
+        this.st_rp -= this.redeem_rp;
+        this.storagesetjson("rp", this.st_rp);
+        this.todaytimeleft -= this.moretime;
+        this.storagesetjson(this.todaydate_parsed, this.todaytimeleft);
+        this.storagesetjson("lastcost_time", this.moretime);
+        this.lack_rp = false;
+        this.ismoretime = false;
+        this.lefttime += this.moretime * 60;
+      } else {
+        this.lack_rp = true;
       }
     }
   }

@@ -135,6 +135,7 @@
     "time": "时间",
     "today": "今日",
     "toolong": "时间超过今日剩余",
+    "toolong-moretime": "为了获得时间，需要",
     "redeem_use": "用",
     "redeem": "R点兑换",
     "rpnotenough": "R点不足，无法兑换",
@@ -152,7 +153,9 @@
     "cannotrun": "不能执行此操作",
     "cannotgithub": "已经设置今日总时间，不允许查看 Github 页面",
     "cannotwebsite": "已经设置今日总时间，不允许查看网站",
-    "cannotfeedback": "因为已经设置今日总时间，目前不能进行反馈"
+    "cannotfeedback": "因为已经设置今日总时间，目前不能进行反馈",
+    "moretime": "更多",
+    "moretime-ask": "请输入您完成工作还需要多少时间"
   },
   "en": {
     "submit": "OK",
@@ -289,6 +292,7 @@
     "time": "Time",
     "today": "Today ",
     "toolong": "Time exceeds limit",
+    "toolong-moretime": "You need to",
     "redeem_use": "Use ",
     "redeem": " R Point",
     "rpnotenough": "R Point is not enough.",
@@ -306,6 +310,8 @@
     "cannotrun": "Forbidden",
     "cannotgithub": "You can't go to Github page after Today Time is set.",
     "cannotwebsite": "You can't go to our website after Today Time is set.",
-    "cannotfeedback": "You can't go to feedback page after Today Time is set."
+    "cannotfeedback": "You can't go to feedback page after Today Time is set.",
+    "moretime": "More",
+    "moretime-ask": "How long will you need"
   }
 }

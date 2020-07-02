@@ -146,6 +146,22 @@ input[type="number"] {
   letter-spacing: 0.03rem;
 }
 
+.largebtn-ontop {
+  width: 130px;
+  height: 40px;
+  padding-left: 30px;
+  cursor: pointer;
+  background: $lightergrey;
+}
+
+.largebtn-ontop:hover {
+  background: $lightbuttongrey;
+}
+
+.largebtn-ontop:active {
+  background: $lightgrey;
+}
+
 .digitaltop,
 .label,
 .small {
@@ -217,6 +233,31 @@ input[type="number"] {
   text-align: right;
   box-sizing: border-box;
   color: $labelgrey;
+}
+
+.digitalfather-ontop {
+  width: 190px;
+  height: 100px;
+  margin-top: 20px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.digital-ontop {
+  font-weight: 600;
+  font-size: 50px;
+  height: 50px;
+}
+
+#main-ontop-right { 
+  height: 100px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $lightergrey;
 }
 
 .startbtn {
@@ -787,6 +828,12 @@ input[type="number"] {
   }
 }
 
+.main-ontop {
+  display: flex;
+  flex-direction: row;
+  width: 320px;
+}
+
 @media screen and (max-height: 580px) and (min-height: 271px) {
   html {
     overflow-y: auto;
@@ -804,6 +851,12 @@ input[type="number"] {
 
   #timingnbsppart {
     padding-top: 4vh;
+  }
+}
+
+@media screen and (max-height: 320px) {
+  body {
+    margin: 0;
   }
 }
 
@@ -1207,4 +1260,24 @@ hr {
   background-image: url('../img/close.svg');
   margin-top: 0.1rem;
   margin-right: 0.2rem;
+}
+
+.moretimepopup {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.warnmoretimefather {
+  width: 12rem;
+}
+
+.warnmoretimefather-use-rpoint {
+  margin-top: 0.2rem;
+}
+
+.warnmoretime {
+  width: 12rem;
+  transform: translateX(0);
 }

@@ -1,7 +1,7 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
-    <div class="container">
+    <div class="container" v-if="this.use_old_interface || !this.iselectron">
       <div id="overnbsppart" v-if="!popuped"></div>
       <div class="popup" v-if="popuped" style="-webkit-app-region: no-drag">
         <div class="popupdecoration-left"></div>
@@ -54,6 +54,56 @@
         </div>
       </div>
     </div>
+    <div class="container" v-if="!this.use_old_interface && this.iselectron">
+      <div id="main" class="main-ontop">
+        <div id="pause" v-if="ispausing">
+          <button class="resume" @click="resume"></button>
+        </div>
+        <div class="digitalboard border">
+          <div class="juniordigitalboard-ontop on-notbtn" style="-webkit-app-region: no-drag">
+            <div class="digitalfather-ontop digitalfather-notinput-ontop">
+              <span class="digital-ontop">{{ displaytime }}</span>
+            </div> 
+          </div>
+        </div>
+        <div id="main-ontop-right">
+          <b-btn
+            variant="light"
+            class="new on largebtn-ontop stopbtn-ontop"
+            @click="stop"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("stop") }}</div>
+          </b-btn>
+          <b-btn
+            v-if="cancancel"
+            variant="light"
+            class="new largebtn-ontop transparent cancelbtn-ontop"
+            @click="cancel"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("cancel") }}</div>
+          </b-btn>
+          <b-btn
+            v-if="!cancancel"
+            variant="light"
+            class="new largebtn-ontop transparent cancelbtn-ontop"
+            @click="pause"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("pause") }}</div>
+          </b-btn>
+          <b-btn
+            variant="light"
+            class="new on largebtn-ontop stopbtn-ontop"
+            @click="moretime_goask"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("moretime") }}</div>
+          </b-btn>
+        </div>
+      </div>
+    </div>
     <notify ref="notify"></notify>
   </div>
 </template>
@@ -102,7 +152,8 @@ export default {
       controlrptext: true,
       popuped: false,
       popuptitle: "Title",
-      popupdesc: "Description"
+      popupdesc: "Description",
+      use_old_interface: true,
     };
   },
   watch: {
@@ -122,7 +173,6 @@ export default {
         message: this.$t("willpunish")
       });
     });
-    this.iselectron = true;
     this.storagesetjson("cannotify", true);
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
