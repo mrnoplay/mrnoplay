@@ -18,18 +18,18 @@
     "compare-version": "^0.1.2",
     "electron-baidu-tongji": "^1.0.2",
     "electron-is-dev": "^1.1.0",
+    "electron-log": "^4.0.7",
     "electron-shutdown-command": "^0.0.8",
     "electron-store": "^5.1.0",
     "i18n": "^0.8.5",
     "moment": "^2.24.0",
     "node-cmd": "^3.0.0",
     "regedit": "^3.0.3",
-    "request": "^2.88.0",
-    "electron-log": "^4.0.7"
+    "request": "^2.88.0"
   },
   "devDependencies": {
-    "electron": "7.1.11",
-    "electron-builder": "22.3.2"
+    "electron": "8.3.4",
+    "electron-builder": "22.7.0"
   },
   "keywords": [
     "capacitor",
