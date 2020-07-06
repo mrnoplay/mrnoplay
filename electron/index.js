@@ -385,6 +385,11 @@ ipcMain.on('full-screen', function () {
   }
   setTray();
 });
+ipcMain.on('full-screen-alwaysOnTop', function () {
+  if (mainWindow) {
+    mainWindow.setAlwaysOnTop(true);
+  }
+});
 
 ipcMain.on('normal-screen', function () {
   canBlur = true;
@@ -396,6 +401,11 @@ ipcMain.on('normal-screen', function () {
     mainWindow.unmaximize();
   }
   setTrayNoExit();
+});
+ipcMain.on('normal-screen-alwaysOnTop', function () {
+  if (mainWindow) {
+    mainWindow.setAlwaysOnTop(true);
+  }
 });
 
 ipcMain.on('screen-ontop', function () {

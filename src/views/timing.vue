@@ -462,9 +462,9 @@ export default {
           });
         }
         if (this.iselectron && this.lefttime <= 300 && this.ontoplock) {
-          ipc.send("screen-ontop");
           this.ontoplock = false;
           this.isontop = true;
+          ipc.send("screen-ontop");
         }
       }
     },
@@ -505,6 +505,7 @@ export default {
       this.timing = false;
       if (this.iselectron) {
         ipc.send("full-screen");
+        ipc.send("full-screen-alwaysOnTop");
       }
     },
     resume() {
@@ -512,6 +513,7 @@ export default {
       this.timing = true;
       if (this.iselectron) {
         ipc.send("normal-screen");
+        ipc.send("normal-screen-alwaysOnTop");
       }
     },
     moretime_goask() {
