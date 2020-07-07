@@ -217,6 +217,10 @@ input[type="number"] {
   background: $lightgrey;
 }
 
+.digitalfather-options:hover {
+  background: $bgwhite;
+}
+
 .digital {
   font-weight: 500;
   font-size: 1.2rem;
@@ -226,6 +230,11 @@ input[type="number"] {
   padding-right: 0em !important;
   padding-bottom: 0em !important;
   padding-left: 0em !important;
+}
+
+.digital-options {
+  width: 10.88rem;
+  font-size: 0.9rem;
 }
 
 .digitalnote {
@@ -447,6 +456,46 @@ input[type="number"] {
 .submit-back:active {
   background-image: url('../img/back-smaller-white.svg');
   background-color: $seagreen;
+}
+
+.moreoption {
+  cursor: pointer;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: $white;
+  border-radius: 0.2rem;
+  background-image: url('../img/moreoption.svg');
+  transform: translateY(-0.18rem);
+}
+
+.moreoption:hover {
+  background-image: url('../img/moreoption-black.svg');
+}
+
+.moreoption:active {
+  background-image: url('../img/moreoption.svg');
+}
+
+.moreoption-back {
+  cursor: pointer;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: $white;
+  border-radius: 0.2rem;
+  background-image: url('../img/moreoption-back.svg');
+  transform: translateY(-0.18rem);
+}
+
+.moreoption-back:hover {
+  background-image: url('../img/moreoption-back-black.svg');
+}
+
+.moreoption-back:active {
+  background-image: url('../img/moreoption-back.svg');
 }
 
 .settinginput {
@@ -1282,4 +1331,22 @@ hr {
 .warnmoretime {
   width: 12rem;
   transform: translateX(0);
+}
+
+.options {
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  background-color: $lightergrey;
+  width: 134.51%;
+  transform: translateX(-1.99rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: inset 0 -0.2rem 0.3rem -0.3rem rgba(65, 64, 63, 0.2), inset 0 0.2rem 0.3rem -0.3rem rgba(65, 64, 63, 0.2);
+  .select {
+    transform: translateX(-0.3rem);
+  }
 }

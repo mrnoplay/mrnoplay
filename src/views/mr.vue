@@ -2,7 +2,13 @@
 <template>
   <div>
     <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
-    <b-btn variant="light" class="new close pointer upperright upperrightbtn" @click="exit" v-if="iselectron" style="-webkit-app-region: no-drag"></b-btn>
+    <b-btn
+      variant="light"
+      class="new close pointer upperright upperrightbtn"
+      @click="exit"
+      v-if="iselectron"
+      style="-webkit-app-region: no-drag"
+    ></b-btn>
     <div class="container">
       <div class="lockmode_enterpwd" v-if="lockmode_enterpwd" style="-webkit-app-region: no-drag">
         <span class="label settingslabel lockmode_enterpwd-btn">{{ $t("lockmode-entertoexit") }}</span>
@@ -125,7 +131,28 @@
       <div id="main" v-if="!ontoday">
         <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
-            <div class="digitaltop">{{ $t("iwillplay") }}</div>
+            <div class="digitaltop">
+              {{ $t("iwillplay") }}
+              <b-btn variant="light" class="new moreoption pointer" @click="gooptions" v-if="!ismoreoption"></b-btn>
+              <b-btn variant="light" class="new moreoption-back pointer" @click="gooptions" v-if="ismoreoption"></b-btn>
+            </div>
+            <div class="options" v-if="ismoreoption">
+              <switcher
+                :left="$t('rest')"
+                :right="$t('work')"
+                :default="default_workmode"
+                @toleft="workmode_rest"
+                @toright="workmode_work"
+              ></switcher>
+              <div class="digitalfather digitalfather-options">
+                <b-form-input
+                  id="playtime"
+                  class="digital digital-options"
+                  :placeholder="$t('whattodo')"
+                  v-model="todo"
+                ></b-form-input>
+              </div>
+            </div>
             <div class="digitalfather">
               <b-form-input
                 id="playtime"
@@ -200,8 +227,9 @@ import loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { Plugins } from "@capacitor/core";
 import notify from "@/components/linxf/notify";
-const { Storage } = Plugins;
 import titlepart from "@/components/titlepart";
+import switcher from "@/components/linxf/switcher";
+const { Storage } = Plugins;
 var alarm = new Audio();
 var _this = null;
 var ipc = null;
@@ -215,7 +243,8 @@ export default {
   components: {
     loading,
     titlepart,
-    notify
+    notify,
+    switcher
   },
   data() {
     return {
@@ -251,6 +280,10 @@ export default {
       st_rp_illegal: 0,
       exit_type: "initial",
       goshutdown: false,
+      ismoreoption: false,
+      todo: "",
+      default_workmode: false,
+      workmode: false,
     };
   },
   watch: {
@@ -334,6 +367,7 @@ export default {
         });
       }
     }
+    this.storagesetjson("workmode", false);
   },
   beforeDestroy: function() {},
   methods: {
@@ -496,6 +530,7 @@ export default {
     },
     start_func() {
       this.storagesetjson("lastcost_rp", this.redeem_rp);
+      this.storagesetjson("whattodo", this.whattodo);
       this.timeTOOLONG = false;
       this.storagesetjson("playtime", Number(this.playtime)).then(() => {
         this.storagesetjson("concentrated", false);
@@ -572,14 +607,25 @@ export default {
       this.goshutdown = !this.goshutdown;
     },
     shutdown() {
-      if(this.iselectron) {
+      if (this.iselectron) {
         this.storagesetjson("exit_type", "direct-shutdown");
-        ipc.send('shutdown');
+        ipc.send("shutdown");
       }
     },
     async clear_dangerous() {
       await Storage.clear();
-    }
+    },
+    gooptions() {
+      this.ismoreoption = !this.ismoreoption;
+    },
+    workmode_work() {
+      this.workmode = true;
+      this.storagesetjson("workmode", true);
+    },
+    workmode_rest() {
+      this.workmode = false;
+      this.storagesetjson("workmode", false);
+    },
   }
 };
 </script>

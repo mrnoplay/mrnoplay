@@ -155,7 +155,11 @@
     "cannotwebsite": "已经设置今日总时间，不允许查看网站",
     "cannotfeedback": "因为已经设置今日总时间，目前不能进行反馈",
     "moretime": "更多",
-    "moretime-ask": "请输入您完成工作还需要多少时间"
+    "moretime-ask": "请输入您完成工作还需要多少时间",
+    "whattodo": "这段时间做什么",
+    "work": "电脑工作",
+    "rest": "休息/玩",
+    "onlyinworkmode": "此选项仅在电脑工作模式启用"
   },
   "en": {
     "submit": "OK",
@@ -312,6 +316,10 @@
     "cannotwebsite": "You can't go to our website after Today Time is set.",
     "cannotfeedback": "You can't go to feedback page after Today Time is set.",
     "moretime": "More",
-    "moretime-ask": "How long will you need"
+    "moretime-ask": "How long will you need",
+    "whattodo": "What to do",
+    "work": "Work",
+    "rest": "Rest/Play",
+    "onlyinworkmode": "You can only use this in Work mode"
   }
 }

@@ -112,6 +112,11 @@
             class="new on largebtn-ontop stopbtn-ontop"
             @click="moretime_goask"
             style="-webkit-app-region: no-drag"
+            :disabled="!workmode"
+            v-tooltip="{
+              content: $t('onlyinworkmode'), 
+              trigger:'hover' 
+            }"
           >
             <div class="largebtn-innertext">{{ $t("moretime") }}</div>
           </b-btn>
@@ -219,6 +224,7 @@ export default {
       lack_rp: false,
       redeem_rp: 0,
       ontoplock: true,
+      workmode: false
     };
   },
   watch: {
@@ -366,6 +372,15 @@ export default {
       )
         this.st_finished = JSON.parse(ret_f.value);
       else this.st_finished = 0;
+      // --------
+      // Workmode
+      // --------
+      if (keys.keys.indexOf("workmode") != -1) {
+        const retlang = await Storage.get({ key: "workmode" });
+        if (retlang.value != null) this.workmode = JSON.parse(retlang.value);
+        else this.workmode = false;
+      } else this.workmode = false;
+      console.log(!this.workmode);
     },
     // -------
     // R Point
