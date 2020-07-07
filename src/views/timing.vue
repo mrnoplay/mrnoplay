@@ -495,7 +495,7 @@ export default {
       this.timing = false;
       if (this.iselectron) {
         ipc.send("full-screen");
-        ipc.send("full-screen-alwaysOnTop");
+        if (this.isontop) ipc.send("full-screen-alwaysOnTop");
       }
     },
     resume() {
@@ -503,7 +503,7 @@ export default {
       this.timing = true;
       if (this.iselectron) {
         ipc.send("normal-screen");
-        ipc.send("normal-screen-alwaysOnTop");
+        if (this.isontop) ipc.send("normal-screen-alwaysOnTop");
         if (this.iselectron && this.lefttime <= 300 && !this.cancancel) {
           this.ontoplock = false;
           this.isontop = true;
