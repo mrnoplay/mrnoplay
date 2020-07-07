@@ -9,10 +9,6 @@ const {
   shell,
   dialog,
 } = require('electron');
-const {
-  ebtMain
-} = require('electron-baidu-tongji');
-ebtMain(ipcMain);
 const AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
 const i18n = require('i18n');

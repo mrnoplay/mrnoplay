@@ -379,7 +379,6 @@ export default {
         if (retlang.value != null) this.workmode = JSON.parse(retlang.value);
         else this.workmode = false;
       } else this.workmode = false;
-      console.log(!this.workmode);
     },
     // -------
     // R Point

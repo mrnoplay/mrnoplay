@@ -27,7 +27,6 @@
     "bootstrap-vue": "^2.0.0-rc.26",
     "breadstick": "^0.2.13",
     "core-js": "^2.6.5",
-    "electron-baidu-tongji": "^1.0.2",
     "leancloud-storage": "^3.10.0",
     "md5": "^2.2.1",
     "tryparse": "^0.0.2",
