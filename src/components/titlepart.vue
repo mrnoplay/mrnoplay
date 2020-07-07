@@ -29,7 +29,6 @@ export default {
     }
   },
   mounted: function() {
-    this.gettheme();
     this.i18nsetlang();
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
@@ -66,29 +65,6 @@ export default {
       } else (this.lang = "en"), this.storagesetlang("en");
       this.$i18n.locale = this.lang;
     },
-    async gettheme() {
-      const keys = await Storage.keys();
-      if (keys.keys.indexOf("theme") != -1) {
-        const ret = await Storage.get({ key: "theme" });
-        if (ret.value != null) this.settheme(JSON.parse(ret.value));
-        else
-          this.storagesetjson("theme", "colorful"), this.settheme("colorful");
-      } else
-        this.storagesetjson("theme", "colorful"), this.settheme("colorful");
-    },
-    settheme(name) {
-      var fileref = document.createElement("link");
-      fileref.setAttribute("rel", "stylesheet");
-      fileref.setAttribute("type", "text/css");
-      if (name == "reality") {
-        var linkpath = require(`@/assets/css/reality.theme.scss`);
-        fileref.setAttribute("href", linkpath);
-      } else {
-        var linkpath = require(`@/assets/css/colorful.theme.scss`);
-        fileref.setAttribute("href", linkpath);
-      }
-      document.getElementsByTagName("head")[0].appendChild(fileref);
-    }
   }
 };
 </script>

@@ -378,10 +378,10 @@ app.on('activate', function () {
 ipcMain.on('full-screen', function () {
   canBlur = false;
   if (mainWindow) {
-    mainWindow.setAlwaysOnTop(false);
     mainWindow.show();
     mainWindow.center();
     mainWindow.setKiosk(true);
+    mainWindow.setAlwaysOnTop(false);
   }
   setTray();
 });
@@ -396,10 +396,12 @@ ipcMain.on('normal-screen', function () {
   if (mainWindow) {
     mainWindow.focus();
     mainWindow.setKiosk(false);
-    mainWindow.setFullScreen(false);
     mainWindow.setAlwaysOnTop(false);
-    mainWindow.unmaximize();
-    mainWindow.setSize(270, 270, true);
+    if (process.platform === 'darwin') {
+      mainWindow.setSize(270, 270, true);
+    } else {
+      mainWindow.setSize(270, 270);
+    }
   }
   setTrayNoExit();
 });
@@ -414,10 +416,12 @@ ipcMain.on('screen-ontop', function () {
   if (mainWindow) {
     mainWindow.focus();
     mainWindow.setKiosk(false);
-    mainWindow.setFullScreen(false);
-    mainWindow.unmaximize();
     mainWindow.setAlwaysOnTop(true);
-    mainWindow.setSize(320, 100, true);
+    if (process.platform === 'darwin') {
+      mainWindow.setSize(320, 100, true);
+    } else {
+      mainWindow.setSize(320, 100);
+    }
   }
   setTrayNoExit();
 });

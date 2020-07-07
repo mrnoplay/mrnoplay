@@ -294,7 +294,6 @@ export default {
   },
   mounted: function() {
     //this.clear_dangerous();
-    this.gettheme();
     if (process.env.VUE_APP_LINXF == "electron") {
       ipc.on("update_onstart", (event, arg) => {
         this.$refs.notify.send({
@@ -441,16 +440,6 @@ export default {
         else ipc.send("cn");
       }
     },
-    async gettheme() {
-      const keys = await Storage.keys();
-      if (keys.keys.indexOf("theme") != -1) {
-        const ret = await Storage.get({ key: "theme" });
-        if (ret.value != null) this.settheme(JSON.parse(ret.value));
-        else
-          this.storagesetjson("theme", "colorful"), this.settheme("colorful");
-      } else
-        this.storagesetjson("theme", "colorful"), this.settheme("colorful");
-    },
     async getlockmode() {
       const keys = await Storage.keys();
       if (keys.keys.indexOf("lockmode") != -1) {
@@ -470,19 +459,6 @@ export default {
       } else
         this.storagesetjson("lockmode_password", ""),
           (this.lockmode_password = "");
-    },
-    settheme(name) {
-      var fileref = document.createElement("link");
-      fileref.setAttribute("rel", "stylesheet");
-      fileref.setAttribute("type", "text/css");
-      if (name == "reality") {
-        var linkpath = require(`@/assets/css/reality.theme.scss`);
-        fileref.setAttribute("href", linkpath);
-      } else {
-        var linkpath = require(`@/assets/css/colorful.theme.scss`);
-        fileref.setAttribute("href", linkpath);
-      }
-      document.getElementsByTagName("head")[0].appendChild(fileref);
     },
     async getplaytime() {
       const keys = await Storage.keys();

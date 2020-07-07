@@ -73,26 +73,6 @@
               <div class="warn">{{ $t("enterinteger") }}</div>
             </div>
           </div>
-          <!-- ------------- -->
-          <!-- Theme Setting -->
-          <!-- ------------- -->
-          <div class="settingfield main-like" v-if="!default_lockmode">
-            <span class="label settingslabel">{{ $t("theme") }}</span>
-            <switcher
-              :left="$t('colorful')"
-              :right="$t('reality')"
-              :default="default_theme"
-              @toleft="theme_colorful"
-              @toright="theme_reality"
-            ></switcher>
-            <div class="smallerlabelfather">
-              <span class="label smallerlabel">{{ $t("theme-notice1") }}</span>
-            </div>
-            <div class="smallerlabelfather">
-              <span class="label smallerlabel">{{ $t("theme-notice2") }}</span>
-            </div>
-            <div class="smallerlabelfather"></div>
-          </div>
           <!-- --------- -->
           <!-- Lock Mode -->
           <!-- --------- -->
@@ -217,7 +197,6 @@ export default {
       // --------
       default_lang: false,
       default_startonlogin: false,
-      default_theme: false,
       default_time: 5,
       default_lockmode: false,
       default_lockmode_on: "",
@@ -249,7 +228,6 @@ export default {
     this.getdefault_lang();
     this.getdefault_startonlogin();
     this.getdefault_time();
-    this.getdefault_theme();
     this.getdefault_lockmode();
     this.gettodaydata();
     if (process.env.VUE_APP_LINXF == "electron") {
@@ -295,36 +273,6 @@ export default {
       } else {
         this.todayset = false;
       }
-    },
-    async getdefault_theme() {
-      const keys = await Storage.keys();
-      if (keys.keys.indexOf("theme") != -1) {
-        const ret = await Storage.get({ key: "theme" });
-        if (ret.value != null) {
-          this.settheme(JSON.parse(ret.value));
-          if (JSON.parse(ret.value) == "colorful") this.default_theme = false;
-          else this.default_theme = true;
-        } else
-          this.storagesetjson("theme", "colorful"),
-            this.settheme("colorful"),
-            (this.default_theme = false);
-      } else
-        this.storagesetjson("theme", "colorful"),
-          this.settheme("colorful"),
-          (this.default_theme = false);
-    },
-    settheme(name) {
-      var fileref = document.createElement("link");
-      fileref.setAttribute("rel", "stylesheet");
-      fileref.setAttribute("type", "text/css");
-      if (name == "reality") {
-        var linkpath = require(`@/assets/css/reality.theme.scss`);
-        fileref.setAttribute("href", linkpath);
-      } else {
-        var linkpath = require(`@/assets/css/colorful.theme.scss`);
-        fileref.setAttribute("href", linkpath);
-      }
-      document.getElementsByTagName("head")[0].appendChild(fileref);
     },
     async getdefault_lang() {
       const keys = await Storage.keys();
@@ -401,24 +349,6 @@ export default {
           message: this.$t("off-startonlogin")
         });
       }
-    },
-    theme_colorful() {
-      this.storagesetjson("theme", "colorful");
-      this.$refs.notify.send({
-        title: this.$t("success"),
-        id: 11,
-        message: this.$t("theme-ok")
-      });
-      window.location.reload();
-    },
-    theme_reality() {
-      this.storagesetjson("theme", "reality");
-      this.$refs.notify.send({
-        title: this.$t("success"),
-        id: 11,
-        message: this.$t("theme-ok")
-      });
-      window.location.reload();
     },
     cn() {
       this.lang = "cn";
