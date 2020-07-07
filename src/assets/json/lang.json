@@ -159,7 +159,8 @@
     "whattodo": "这段时间做什么",
     "work": "电脑工作",
     "rest": "休息/玩",
-    "onlyinworkmode": "此选项仅在电脑工作模式启用"
+    "onlyinworkmode": "此选项仅在电脑工作模式启用",
+    "donate": "捐赠"
   },
   "en": {
     "submit": "OK",
@@ -315,11 +316,13 @@
     "cannotgithub": "You can't go to Github page after Today Time is set.",
     "cannotwebsite": "You can't go to our website after Today Time is set.",
     "cannotfeedback": "You can't go to feedback page after Today Time is set.",
+    "cannotpatreon": "Sorry but you can't go to patreon page after Today Time is set.",
     "moretime": "More",
     "moretime-ask": "How long will you need",
     "whattodo": "What to do",
     "work": "Work",
     "rest": "Rest/Play",
-    "onlyinworkmode": "You can only use this in Work mode"
+    "onlyinworkmode": "You can only use this in Work mode",
+    "donate": "Donate"
   }
 }

@@ -4,7 +4,7 @@
     <div class="container" v-if="(!isontop && !ismoretime) || !iselectron">
       <div id="timingnbsppart"></div>
       <div id="timingcancelnbsppart" v-if="!cancancel"></div>
-      <div id="pause" v-if="ispausing">
+      <div id="pause" v-if="ispausing" style="-webkit-app-region: no-drag">
         <button class="resume" @click="resume"></button>
       </div>
       <div id="main">
@@ -70,11 +70,11 @@
     </div>
     <div class="container" v-if="isontop && !ismoretime && iselectron" id="ontop">
       <div id="main" class="main-ontop">
-        <div id="pause" v-if="ispausing">
+        <div id="pause" v-if="ispausing" style="-webkit-app-region: no-drag">
           <button class="resume" @click="resume"></button>
         </div>
         <div class="digitalboard border">
-          <div class="juniordigitalboard-ontop on-notbtn" style="-webkit-app-region: no-drag">
+          <div class="juniordigitalboard-ontop on-notbtn">
             <div class="digitalfather-ontop digitalfather-notinput-ontop">
               <span class="digital-ontop">{{ displaytime }}</span>
             </div>

@@ -246,7 +246,7 @@ async function createWindow() {
     })
   }
 
-  log.transports.console.level = 'silly'; 
+  log.transports.console.level = 'silly';
   if (store.get('exit-type', 'exit') == 'illegal') {
     mainWindow.webContents.send('illegal_exit');
   }
@@ -334,13 +334,13 @@ async function createWindowAgain() {
     }
   })
 
-  if(isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+  if (isMinimal) isMinimal = false, mainWindow.setKiosk(true);
   mainWindow.hide();
   mainWindow.show();
   mainWindow.focus();
   mainWindow.moveTop();
   mainWindow.center();
-  if(!canBlur) mainWindow.setKiosk(true);
+  if (!canBlur) mainWindow.setKiosk(true);
 }
 
 // This method will be called when Electron has finished
@@ -369,7 +369,7 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
-  if(mainWindow.isDestroyed()) {
+  if (mainWindow.isDestroyed()) {
     createWindowAgain();
   }
 });
@@ -399,6 +399,7 @@ ipcMain.on('normal-screen', function () {
     mainWindow.setFullScreen(false);
     mainWindow.setAlwaysOnTop(false);
     mainWindow.unmaximize();
+    mainWindow.setSize(270, 270, true);
   }
   setTrayNoExit();
 });
@@ -416,7 +417,7 @@ ipcMain.on('screen-ontop', function () {
     mainWindow.setFullScreen(false);
     mainWindow.unmaximize();
     mainWindow.setAlwaysOnTop(true);
-    mainWindow.setSize(320,100,true);
+    mainWindow.setSize(320, 100, true);
   }
   setTrayNoExit();
 });
@@ -519,6 +520,14 @@ ipcMain.on('feedback-en', (event, arg) => {
   }
 })
 
+ipcMain.on('patreon', (event, arg) => {
+  canBlur = true;
+  shell.openExternal('https://www.patreon.com/bePatron?u=38415237');
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+})
+
 ipcMain.on('askforautolaunch', (event, arg) => {
   dialog.showMessageBox({
     message: i18n.__('askforautolaunch'),
@@ -592,7 +601,7 @@ function update_onstart() {
       }
     }
     if (signal == 2) {
-      if(mainWindow) mainWindow.webContents.send('update_onstart', info);
+      if (mainWindow) mainWindow.webContents.send('update_onstart', info);
     }
   });
 }
@@ -610,47 +619,46 @@ ipcMain.on('en', () => {
 })
 
 function setTray() {
-  const contextMenu = Menu.buildFromTemplate([
-    { 
-      label: i18n.__('open'), click:() => {
-        if(!mainWindow.isDestroyed()) {
-          if(isMinimal) isMinimal = false, mainWindow.setKiosk(true);
-          mainWindow.hide();
-          mainWindow.show();
-          mainWindow.focus();
-          mainWindow.moveTop();
-          mainWindow.center();
-          if(!canBlur) mainWindow.setKiosk(true);
-        } else {
-          createWindowAgain();
-        }
-      } 
-    }, { 
-      label: i18n.__('exit'), click:() => {
+  const contextMenu = Menu.buildFromTemplate([{
+    label: i18n.__('open'),
+    click: () => {
+      if (!mainWindow.isDestroyed()) {
+        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+        mainWindow.hide();
+        mainWindow.show();
+        mainWindow.focus();
+        mainWindow.moveTop();
+        mainWindow.center();
+        if (!canBlur) mainWindow.setKiosk(true);
+      } else {
+        createWindowAgain();
+      }
+    }
+  }, {
+    label: i18n.__('exit'),
+    click: () => {
       toexit();
-      } 
-    },
-  ]);
+    }
+  }, ]);
   tray.setContextMenu(contextMenu);
 }
 
 function setTrayNoExit() {
-  const contextMenu = Menu.buildFromTemplate([
-    { 
-      label: i18n.__('open'), click:() => {
-        if(!mainWindow.isDestroyed()) {
-          if(isMinimal) isMinimal = false, mainWindow.setKiosk(true);
-          mainWindow.hide();
-          mainWindow.show();
-          mainWindow.focus();
-          mainWindow.moveTop();
-          mainWindow.center();
-          if(!canBlur) mainWindow.setKiosk(true);
-        } else {
-          createWindowAgain();
-        }
+  const contextMenu = Menu.buildFromTemplate([{
+    label: i18n.__('open'),
+    click: () => {
+      if (!mainWindow.isDestroyed()) {
+        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+        mainWindow.hide();
+        mainWindow.show();
+        mainWindow.focus();
+        mainWindow.moveTop();
+        mainWindow.center();
+        if (!canBlur) mainWindow.setKiosk(true);
+      } else {
+        createWindowAgain();
       }
     }
-  ]);
+  }]);
   tray.setContextMenu(contextMenu);
 }

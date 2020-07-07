@@ -7,36 +7,23 @@
       <div id="main">
         <div class="notifyboard border">
           <div class="juniornotifyboard on-notbtn">
-            <div class="digitaltop notifytop">{{ $t("about") }}</div>
-            <div
-              class="notifyfather notifyfather-about"
-              style="-webkit-app-region: no-drag"
-            >{{ $t("abouttext") }}</div>
+            <div class="donatefather">
+              <b-btn class="new on patreonfather" @click="patreon">
+                <img src="@/assets/img/patreon.png" class="patreon" />
+              </b-btn>
+              <b-btn class="new on patreonfather" @click="wechat">
+                <img src="@/assets/img/viawechat.png" class="patreon" />
+              </b-btn>
+              <img src="@/assets/img/wechat.jpg" class="wechat" v-if="showwechat" />
+              <div class="authorinfo" v-if="showwechat">（请在留言写明捐赠者信息以便在 README 显示）</div>
+            </div>
           </div>
         </div>
         <b-btn variant="light" class="new on largebtn" @click="goback">
           <div class="largebtn-innertext">{{ $t("back") }}</div>
         </b-btn>
-        <br />
-        <div>
-          <div class="authorinfo">Copyright &copy; 2019-2020 {{ $t("tianze") }}.</div>
-          <div class="authorinfo">
-            <a class="tutorial-a" @click="github">Github</a> @scris
-          </div>
-          <div class="authorinfo">{{ $t("scrisproduct") }}</div>
-        </div>
-        <div class="authorinfo">{{ $t("version") }} {{ version }}</div>
-        <div class="authorinfo">
-          <a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;
-          <a class="tutorial-a" @click="website">{{ $t("website") }}</a>&nbsp;
-          <a class="tutorial-a" @click="feedback">{{ $t("feedback") }}</a>&nbsp;
-          <a class="tutorial-a" @click="donate">{{ $t("donate") }}</a>
-        </div>
       </div>
     </div>
-    <br />
-    <div class="authorinfo red weblimited" v-if="isweb">{{ $t("webversion.1") }}</div>
-    <div class="authorinfo red weblimited" v-if="isweb">{{ $t("webversion.2") }}</div>
   </div>
 </template>
 
@@ -55,7 +42,7 @@ if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
 }
 export default {
-  name: "about",
+  name: "donate",
   components: {
     loading,
     titlepart,
@@ -71,7 +58,8 @@ export default {
       lang: "en",
       version: "1.0.0",
       todaydate: new Date(),
-      todaydate_parsed: "todaytime002000"
+      todaydate_parsed: "todaytime002000",
+      showwechat: false
     };
   },
   watch: {
@@ -154,64 +142,27 @@ export default {
     i18nenglish() {
       this.lang = "en";
     },
+    patreon() {
+      if (this.iselectron) {
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 24,
+            message: this.$t("cannotpatreon")
+          });
+        } else {
+          ipc.send("patreon");
+        }
+      } else {
+        window.open("https://www.patreon.com/bePatron?u=38415237", "_blank");
+      }
+    },
+    wechat() {
+      this.showwechat = true;
+    },
     goback() {
       this.timing = false;
-      this.storagesetjson("exit_type", "about");
-      this.$router.push("/");
-    },
-    tutorial() {
-      this.$router.push("tutorial");
-    },
-    github() {
-      if (this.iselectron) {
-        if (this.todayset) {
-          this.$refs.notify.send({
-            title: this.$t("cannotrun"),
-            id: 21,
-            message: this.$t("cannotgithub")
-          });
-        } else {
-          ipc.send("github");
-        }
-      } else {
-        window.open("https://github.com/scris/mrnoplay/", "_blank");
-      }
-    },
-    website() {
-      if (this.iselectron) {
-        if (this.todayset) {
-          this.$refs.notify.send({
-            title: this.$t("cannotrun"),
-            id: 22,
-            message: this.$t("cannotwebsite")
-          });
-        } else {
-          ipc.send("website");
-        }
-      } else {
-        window.open("https://mrnoplay.scris.top/", "_blank");
-      }
-    },
-    feedback() {
-      if (this.iselectron) {
-        if (this.todayset) {
-          this.$refs.notify.send({
-            title: this.$t("cannotrun"),
-            id: 23,
-            message: this.$t("cannotfeedback")
-          });
-        } else {
-          if (this.lang == "cn") ipc.send("feedback-cn");
-          else ipc.send("feedback-en");
-        }
-      } else {
-        if (this.lang == "cn")
-          window.open("https://support.qq.com/products/127085?", "_blank");
-        else window.open("mailto:tianze@scris.top");
-      }
-    },
-    donate() {
-      this.$router.push("donate");
+      this.$router.push("/about");
     },
     async gettheme() {
       const keys = await Storage.keys();
@@ -236,9 +187,6 @@ export default {
       }
       document.getElementsByTagName("head")[0].appendChild(fileref);
     }
-  },
-  async clear_dangerous() {
-    await Storage.clear();
   }
 };
 </script>

@@ -467,7 +467,10 @@ input[type="number"] {
   background-color: $white;
   border-radius: 0.2rem;
   background-image: url('../img/moreoption.svg');
-  transform: translateY(-0.18rem);
+  transform: translateY(0.04rem);
+  @-moz-document url-prefix(){
+    transform: translateY(-0.18rem);
+  }
 }
 
 .moreoption:hover {
@@ -487,7 +490,10 @@ input[type="number"] {
   background-color: $white;
   border-radius: 0.2rem;
   background-image: url('../img/moreoption-back.svg');
-  transform: translateY(-0.18rem);
+  transform: translateY(0.04rem);
+  @-moz-document url-prefix(){
+    transform: translateY(-0.18rem);
+  }
 }
 
 .moreoption-back:hover {
@@ -1349,4 +1355,28 @@ hr {
   .select {
     transform: translateX(-0.3rem);
   }
+}
+
+.donatefather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wechat {
+  width: 11rem;
+}
+  
+.patreonfather {
+  margin-top: 0.2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.patreon {
+  cursor: pointer;
+  width: 6rem;
 }

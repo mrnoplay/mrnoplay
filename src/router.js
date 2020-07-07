@@ -6,6 +6,7 @@ import over from './views/over'
 import about from './views/about'
 import settings from './views/settings'
 import tutorial from './views/tutorial'
+import donate from './views/donate'
 Vue.use(Router);
 
 export default new Router({
@@ -39,6 +40,11 @@ export default new Router({
       path: '/tutorial',
       name: 'tutorial',
       component: tutorial,
+    },
+    {
+      path: '/donate',
+      name: 'donate',
+      component: donate,
     },
   ]
 })
