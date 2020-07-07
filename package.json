@@ -50,7 +50,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "manifest": {
-    "en": "Win7 works and mainpage shutdown button.",
-    "zh": "提升Win7体验，首页关机按钮，错误修复。"
+    "en": "Float Window and Allow Getting More Time",
+    "zh": "计时界面浮窗，工作模式允许用户增加时间"
   }
 }

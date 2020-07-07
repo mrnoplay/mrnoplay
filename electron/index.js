@@ -79,9 +79,7 @@ async function createWindow() {
       preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
     },
     frame: false,
-    resizable: false,
-    maximizable: true,
-    minimizable: true,
+    resizable: true,
   });
 
   if (isDevMode) {
@@ -247,6 +245,10 @@ async function createWindow() {
     mainWindow.webContents.send('illegal_exit');
   }
   store.set('exit-type', 'illegal');
+
+  mainWindow.on('will-resize', (event) => {
+    event.preventDefault();
+  });
 }
 
 async function createWindowAgain() {
@@ -268,9 +270,7 @@ async function createWindowAgain() {
       preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
     },
     frame: false,
-    resizable: false,
-    maximizable: true,
-    minimizable: true,
+    resizable: true,
   });
 
   if (isDevMode) {
@@ -337,6 +337,10 @@ async function createWindowAgain() {
   mainWindow.moveTop();
   mainWindow.center();
   if (!canBlur) mainWindow.setKiosk(true);
+
+  mainWindow.on('will-resize', (event) => {
+    event.preventDefault();
+  });
 }
 
 // This method will be called when Electron has finished
@@ -393,11 +397,10 @@ ipcMain.on('normal-screen', function () {
     mainWindow.focus();
     mainWindow.setKiosk(false);
     mainWindow.setAlwaysOnTop(false);
-    if (process.platform === 'darwin') {
-      mainWindow.setSize(270, 270, true);
-    } else {
-      mainWindow.setSize(270, 270);
-    }
+    mainWindow.setResizable(true);
+    mainWindow.setSize(270, 270, true);
+    mainWindow.setResizable(true);
+    mainWindow.resizable = true;
   }
   setTrayNoExit();
 });
@@ -413,11 +416,7 @@ ipcMain.on('screen-ontop', function () {
     mainWindow.focus();
     mainWindow.setKiosk(false);
     mainWindow.setAlwaysOnTop(true);
-    if (process.platform === 'darwin') {
-      mainWindow.setSize(320, 100, true);
-    } else {
-      mainWindow.setSize(320, 100);
-    }
+    mainWindow.setSize(320, 100, true);
   }
   setTrayNoExit();
 });
