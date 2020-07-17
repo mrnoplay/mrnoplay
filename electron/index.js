@@ -400,7 +400,6 @@ ipcMain.on('normal-screen', function () {
     mainWindow.setResizable(true);
     mainWindow.setSize(270, 270, true);
     mainWindow.setResizable(true);
-    mainWindow.resizable = true;
   }
   setTrayNoExit();
 });

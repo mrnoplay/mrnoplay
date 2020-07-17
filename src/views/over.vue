@@ -1,6 +1,33 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+    <!-- use new ui for electron -->
+    <div class="container" v-if="!this.use_old_interface && this.iselectron">
+      <iframe src="https://mrnoplay-related.scris.top/ads-yllix.html" class="adframe"></iframe>
+      <div id="over-whole">
+        <div id="over-left">
+          <div class="over-left-biggertext">{{ displaytime }}</div>
+          <div class="over-left-smallerlabel">{{ $t('timetillshutdown') }}</div>
+        </div>
+        <div id="over-center" class="over-center-smallerlabel">
+          <div v-if="overinfocount == 1">{{ $t('overinfo.1') }}</div>
+          <div v-if="overinfocount == 2">{{ $t('overinfo.2') }}</div>
+          <div v-if="overinfocount == 3">{{ $t('overinfo.3') }}</div>
+          <div v-if="overinfocount == 4">{{ $t('overinfo.4') }}</div>
+        </div>
+        <div id="over-right">
+          <b-btn
+            variant="light"
+            class="new on largebtn-ontop over-right-largebtn-ontop"
+            @click="cancel"
+            style="-webkit-app-region: no-drag"
+          >
+            <div class="largebtn-innertext">{{ $t("stop") }}</div>
+          </b-btn>
+        </div>
+      </div>
+    </div>
+    <!-- use old ui or for web -->
     <div class="container" v-if="this.use_old_interface || !this.iselectron">
       <div id="overnbsppart" v-if="!popuped"></div>
       <div class="popup" v-if="popuped" style="-webkit-app-region: no-drag">
@@ -54,56 +81,6 @@
         </div>
       </div>
     </div>
-    <div class="container" v-if="!this.use_old_interface && this.iselectron">
-      <div id="main" class="main-ontop">
-        <div id="pause" v-if="ispausing">
-          <button class="resume" @click="resume"></button>
-        </div>
-        <div class="digitalboard border">
-          <div class="juniordigitalboard-ontop on-notbtn" style="-webkit-app-region: no-drag">
-            <div class="digitalfather-ontop digitalfather-notinput-ontop">
-              <span class="digital-ontop">{{ displaytime }}</span>
-            </div> 
-          </div>
-        </div>
-        <div id="main-ontop-right">
-          <b-btn
-            variant="light"
-            class="new on largebtn-ontop stopbtn-ontop"
-            @click="stop"
-            style="-webkit-app-region: no-drag"
-          >
-            <div class="largebtn-innertext">{{ $t("stop") }}</div>
-          </b-btn>
-          <b-btn
-            v-if="cancancel"
-            variant="light"
-            class="new largebtn-ontop transparent cancelbtn-ontop"
-            @click="cancel"
-            style="-webkit-app-region: no-drag"
-          >
-            <div class="largebtn-innertext">{{ $t("cancel") }}</div>
-          </b-btn>
-          <b-btn
-            v-if="!cancancel"
-            variant="light"
-            class="new largebtn-ontop transparent cancelbtn-ontop"
-            @click="pause"
-            style="-webkit-app-region: no-drag"
-          >
-            <div class="largebtn-innertext">{{ $t("pause") }}</div>
-          </b-btn>
-          <b-btn
-            variant="light"
-            class="new on largebtn-ontop stopbtn-ontop"
-            @click="moretime_goask"
-            style="-webkit-app-region: no-drag"
-          >
-            <div class="largebtn-innertext">{{ $t("moretime") }}</div>
-          </b-btn>
-        </div>
-      </div>
-    </div>
     <notify ref="notify"></notify>
   </div>
 </template>
@@ -143,7 +120,7 @@ export default {
       timing: false,
       playtime: 0,
       displaytime: "0:00",
-      lefttime: 0,
+      lefttime: 600,
       punishstart: false,
       st_finished: 0,
       st_rp: 20,
@@ -153,7 +130,8 @@ export default {
       popuped: false,
       popuptitle: "Title",
       popupdesc: "Description",
-      use_old_interface: true,
+      use_old_interface: false,
+      overinfocount: 1
     };
   },
   watch: {
@@ -185,7 +163,9 @@ export default {
     alarm.src = require("@/assets/music/scarymusic/" +
       this.rand(1, 17) +
       ".mp3");
-    setTimeout(this.timeout, 180000); //180000
+    setInterval(this.infocountinterval, 3000);
+    setInterval(this.lefttimeinterval, 1000);
+    setTimeout(this.timeout, 100); //180000
   },
   beforeDestroy: function() {},
   methods: {
@@ -197,6 +177,9 @@ export default {
     },
     isiOS(userAgent) {
       return this.isiPad(userAgent) || this.isiPhone(userAgent);
+    },
+    tow(n) {
+      return n >= 0 && n < 10 ? "0" + n : "" + n;
     },
     async storagesetlang(val) {
       await Storage.set({
@@ -270,7 +253,7 @@ export default {
     interval() {
       if (this.timing == true && this.$router.currentRoute.path == "/over") {
         this.punishstart = true;
-        this.$i18n.locale = _this.lang;
+        _this.$i18n.locale = _this.lang;
         _this.$refs.notify.send({
           title: _this.$t("stop"),
           id: 1,
@@ -309,9 +292,8 @@ export default {
     timeout() {
       setInterval(this.interval, 2000);
       setInterval(this.longinterval, 140000); //140000
-      setInterval(this.shutdowninterval, 420000);
-      this.$i18n.locale = this.lang;
-      this.popup(this.$t("now3"), this.$t("10willforce"));
+      _this.$i18n.locale = _this.lang;
+      _this.popup(this.$t("now3"), _this.$t("10willforce"));
     },
     rand(min, max) {
       return min + Math.round((max - min) * Math.random());
@@ -342,6 +324,24 @@ export default {
         }, ms);
       });
     },
+    infocountinterval() {
+      if (this.overinfocount <= 3) this.overinfocount++;
+      else this.overinfocount = 1;
+    },
+    lefttimeinterval() {
+      if (this.$router.currentRoute.path == "/over") {
+        this.lefttime--;
+        this.displaytime =
+          ((this.lefttime - (this.lefttime % 60)) / 60).toString() +
+          ":" +
+          this.tow(this.lefttime % 60).toString();
+        if (this.lefttime <= 0) {
+          this.timing = false;
+          clearInterval(this.lefttimeinterval);
+          this.shutdowninterval();
+        }
+      }
+    }
   }
 };
 </script>

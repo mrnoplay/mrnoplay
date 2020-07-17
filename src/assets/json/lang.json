@@ -160,7 +160,14 @@
     "work": "电脑工作",
     "rest": "休息/玩",
     "onlyinworkmode": "此选项仅在电脑工作模式启用",
-    "donate": "捐赠"
+    "donate": "捐赠",
+    "timetillshutdown": "强制关机前剩余的时间",
+    "overinfo": {
+      "1": "我们只在超时时展示不使人产生困扰的广告。",
+      "2": "超时超过3分钟后，将有恼人声音、弹窗等惩罚。",
+      "3": "点击‘停止’按钮后将关机，请先保存所有文档。",
+      "4": "现在立刻停止！这样，你可以获得1个R点。"
+    }
   },
   "en": {
     "submit": "OK",
@@ -323,6 +330,13 @@
     "work": "Work",
     "rest": "Rest/Play",
     "onlyinworkmode": "You can only use this in Work mode",
-    "donate": "Donate"
+    "donate": "Donate",
+    "timetillshutdown": "Time Till Shutdown",
+    "overinfo": {
+      "1": "We display ads only during over-time.",
+      "2": "Annoying music'll be sent as punishment in 3 min",
+      "3": "Clicking on 'STOP' will shut the computer down.",
+      "4": "Stop right now and you'll be able to earn 1 R Point."
+    }
   }
 }

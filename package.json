@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Tianze Ds Qiu (slaaker@126.com)",
   "description": "",
   "license": "MPL-2.0",
@@ -51,6 +51,6 @@
   },
   "manifest": {
     "en": "Float Window and Allow Getting More Time",
-    "zh": "计时界面浮窗，工作模式允许用户增加时间"
+    "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
   }
 }

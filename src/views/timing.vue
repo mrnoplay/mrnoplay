@@ -474,7 +474,12 @@ export default {
             message: this.$t("halftext")
           });
         }
-        if (this.iselectron && this.lefttime <= 300 && this.ontoplock && !this.cancancel) {
+        if (
+          this.iselectron &&
+          this.lefttime <= 300 &&
+          this.ontoplock &&
+          !this.cancancel
+        ) {
           this.ontoplock = false;
           this.isontop = true;
           ipc.send("screen-ontop");

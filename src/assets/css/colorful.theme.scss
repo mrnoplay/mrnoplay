@@ -1380,3 +1380,75 @@ hr {
   cursor: pointer;
   width: 6rem;
 }
+
+.adframe {
+  width: 485px;
+  height: 60px;
+  overflow-y: hidden;
+  overflow-x: auto !important;
+}
+
+#over-whole {
+  height: 40px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#over-left {
+  width: 90px;
+  height: 40px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.over-left-biggertext {
+  font-size: 20px;
+  font-weight: 600;
+  width: 80px;
+}
+
+.over-left-smallerlabel {
+  font-weight: 700;
+  font-size: 7.5px;
+  color: $hovergrey;
+  transform: translateY(-2px);
+  width: 80px;
+}
+
+#over-center {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: left;
+  padding: 5.5px;
+}
+
+.over-center-smallerlabel {
+  font-weight: 700;
+  font-size: 9px;
+  color: $darklabelgrey;
+  text-align: center;
+}
+
+#over-right {
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.over-right-largebtn-ontop {
+  width: 100px;
+  height: 40px;
+  padding-left: 16px;
+  cursor: pointer;
+  background: $lightergrey;
+}
