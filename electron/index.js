@@ -400,6 +400,7 @@ ipcMain.on('normal-screen', function () {
     mainWindow.setResizable(true);
     mainWindow.setSize(270, 270, true);
     mainWindow.setResizable(true);
+    mainWindow.center();
   }
   setTrayNoExit();
 });
@@ -416,6 +417,7 @@ ipcMain.on('screen-ontop', function () {
     mainWindow.setKiosk(false);
     mainWindow.setAlwaysOnTop(true);
     mainWindow.setSize(320, 100, true);
+    mainWindow.center();
   }
   setTrayNoExit();
 });
