@@ -25,7 +25,7 @@
           </div>
           <div class="authorinfo">{{ $t("scrisproduct") }}</div>
         </div>
-        <div class="authorinfo">{{ $t("version") }} {{ version }}</div>
+        <div class="authorinfo">{{ $t("version") }} {{ version }} ({{ buildnumber }})</div>
         <div class="authorinfo">
           <a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;
           <a class="tutorial-a" @click="website">{{ $t("website") }}</a>&nbsp;
@@ -71,7 +71,8 @@ export default {
       lang: "en",
       version: "1.0.0",
       todaydate: new Date(),
-      todaydate_parsed: "todaytime002000"
+      todaydate_parsed: "todaytime002000",
+      buildnumber: "0",
     };
   },
   watch: {
@@ -82,6 +83,7 @@ export default {
   },
   mounted: function() {
     this.version = process.env.VUE_APP_VER;
+    this.buildnumber = process.env.VUE_APP_BUILD;
     this.i18nsetlang();
     this.storagesetjson("cannotify", false);
     if (process.env.VUE_APP_LINXF == "electron") {

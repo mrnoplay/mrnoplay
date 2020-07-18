@@ -1,7 +1,7 @@
 {
   "name": "mrnoplay",
   "version": "3.1.0",
-  "description": "",
+  "description": "Give an end to no-end rests and play times.",
   "main": "index.js",
   "scripts": {
     "electron:start": "electron ./",

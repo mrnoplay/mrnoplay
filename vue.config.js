@@ -1,7 +1,9 @@
 const path = require('path')
+const package = require('./package.json')
 const TerserPlugin = require('terser-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-process.env.VUE_APP_VER = require('./package.json').version
+process.env.VUE_APP_VER = package.version
+process.env.VUE_APP_BUILD = package.build.number
 module.exports = {
   publicPath: './',
   outputDir: 'www',

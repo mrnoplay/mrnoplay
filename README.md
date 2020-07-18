@@ -13,7 +13,7 @@ Hope you'll like it 😄
 
 For your Windows 7+ or macOS, [Go to the website to download](https://mrnoplay.scris.top/).
 
-Other ways: <a href="https://www.softpedia.com/get/Gaming-Related/Mr-Noplay.shtml">Softpedia</a>
+Other ways: <a href="https://www.softpedia.com/get/Gaming-Related/Mr-Noplay.shtml">Softpedia</a> <img src="https://i.loli.net/2020/07/18/MZ7pH5ys4QmwLbi.png" width="30" height="29" />
 
 Or you can try the [Web Version](https://webmrnoplay.scris.top/).
 

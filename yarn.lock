@@ -2732,6 +2732,14 @@ de-indent@^1.0.2:
   resolved "https://registry.npm.taobao.org/de-indent/download/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
 
+deasync@^0.1.20:
+  version "0.1.20"
+  resolved "https://registry.npm.taobao.org/deasync/download/deasync-0.1.20.tgz#546fd2660688a1eeed55edce2308c5cf7104f9da"
+  integrity sha1-VG/SZgaIoe7tVe3OIwjFz3EE+do=
+  dependencies:
+    bindings "^1.5.0"
+    node-addon-api "^1.7.1"
+
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
   resolved "https://registry.npm.taobao.org/debug/download/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -5428,6 +5436,19 @@ no-case@^2.2.0:
   integrity sha1-YLgTOWvjmz8SiKTB7V0efSi0ZKw=
   dependencies:
     lower-case "^1.1.1"
+
+node-addon-api@^1.7.1:
+  version "1.7.2"
+  resolved "https://registry.npm.taobao.org/node-addon-api/download/node-addon-api-1.7.2.tgz#3df30b95720b53c24e59948b49532b662444f54d"
+  integrity sha1-PfMLlXILU8JOWZSLSVMrZiRE9U0=
+
+node-build-number@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/node-build-number/download/node-build-number-1.0.2.tgz#eabcc6717dea8b61557f46c7158696c907aad8c2"
+  integrity sha1-6rzGcX3qi2FVf0bHFYaWyQeq2MI=
+  dependencies:
+    commander "^2.18.0"
+    deasync "^0.1.20"
 
 node-fetch@^2.6.0:
   version "2.6.0"

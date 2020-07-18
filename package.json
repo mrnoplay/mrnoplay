@@ -2,15 +2,15 @@
   "name": "mrnoplay",
   "version": "3.1.0",
   "author": "Tianze Ds Qiu (slaaker@126.com)",
-  "description": "",
+  "description": "Give an end to no-end rests and play times.",
   "license": "MPL-2.0",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "electron-mac": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run m && cd ../",
-    "electron-win": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run electron:win && cd ../",
-    "electron-dev": "vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
-    "capacitor-android": "vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
-    "web": "vue-cli-service build --mode web && cp -r -f www/ ../mrnoplay.web/",
+    "dev": "nbn && vue-cli-service serve",
+    "electron-mac": "nbn && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run m && cd ../",
+    "electron-win": "nbn && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run electron:win && cd ../",
+    "electron-dev": "nbn && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
+    "capacitor-android": "nbn && vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
+    "web": "nbn && vue-cli-service build --mode web && cp -r -f www/ ../mrnoplay.web/",
     "d": "yarn run dev",
     "e": "yarn run electron-mac",
     "ew": "yarn run electron-win",
@@ -29,6 +29,7 @@
     "core-js": "^2.6.5",
     "leancloud-storage": "^3.10.0",
     "md5": "^2.2.1",
+    "node-build-number": "^1.0.2",
     "tryparse": "^0.0.2",
     "v-tooltip": "^2.0.3",
     "vue": "^2.6.10",
@@ -52,5 +53,18 @@
   "manifest": {
     "en": "Float Window and Allow Getting More Time",
     "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
+  },
+  "build": {
+    "unique": "mrnoplay:v3.1.0-master[build:2]",
+    "number": 2,
+    "timestamp": "7/18/2020, 11:27:00 AM",
+    "git-branch": "master",
+    "git-user": "Tianze Ds Qiu <slaaker@126.com>",
+    "git-version": "2.20.1",
+    "node-version": "v10.16.0",
+    "user": "we",
+    "shell": "/bin/zsh",
+    "lang": "en_US.UTF-8",
+    "uname": "Darwin"
   }
 }
