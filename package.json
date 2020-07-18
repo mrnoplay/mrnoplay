@@ -55,9 +55,9 @@
     "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
   },
   "build": {
-    "unique": "mrnoplay:v3.1.0-master[build:2]",
-    "number": 2,
-    "timestamp": "7/18/2020, 11:27:00 AM",
+    "unique": "mrnoplay:v3.1.0-master[build:5]",
+    "number": 5,
+    "timestamp": "7/18/2020, 1:54:38 PM",
     "git-branch": "master",
     "git-user": "Tianze Ds Qiu <slaaker@126.com>",
     "git-version": "2.20.1",

@@ -8,6 +8,7 @@ const {
   Tray,
   shell,
   dialog,
+  Notification
 } = require('electron');
 const AutoLaunch = require('auto-launch');
 const isDevMode = require('electron-is-dev');
@@ -27,6 +28,7 @@ var applescript = require('applescript'); //use applescript to shutdown mac
 let canQuit = false;
 let canBlur = false;
 let isMinimal = false;
+let noWindow = false;
 
 // Place holders for our windows so they don't get garbage collected.
 let mainWindow = null;
@@ -60,6 +62,8 @@ const menuTemplateDev = [{
   }, ],
 }, ];
 
+/* CREATE */
+/* WINDOW */
 async function createWindow() {
   if (process.platform === 'darwin') {
     const template = [];
@@ -67,7 +71,6 @@ async function createWindow() {
   } else {
     Menu.setApplicationMenu(null)
   }
-
 
   // Define our main window size
   mainWindow = new BrowserWindow({
@@ -251,6 +254,9 @@ async function createWindow() {
   });
 }
 
+/* CREATE */
+/* WINDOW */
+/* AGAIN  */
 async function createWindowAgain() {
   if (process.platform === 'darwin') {
     const template = [];
@@ -435,7 +441,33 @@ function toexit() {
 ipcMain.on('exit-preventdefault', () => {
   canQuit = true;
   mainWindow.destroy();
+  noWindow = true;
+  setTimeout(notifyback, 180000);
+  setInterval(notifyback, 600000);
 });
+
+function notifyback() {
+  if (noWindow) {
+    if (Notification.isSupported()) {
+      var notify = new Notification({
+        title: i18n.__("notifybacktitle"),
+        body: i18n.__("notifyback"),
+        silent: false,
+        icon: path.join(__dirname, process.platform == "win32" ? 'tray.win.png' : 'notify.mac.png')
+      })
+      notify.show();
+      notify.removeAllListeners("click");
+      notify.once("click", () => {
+        if (!mainWindow || mainWindow.isDestroyed()) {
+          createWindowAgain();
+        } else {
+          mainWindow.show();
+          mainWindow.focus();
+        }
+      })
+    }
+  }
+}
 
 function shutdowner() {
   store.set('exit-type', 'shutdown');

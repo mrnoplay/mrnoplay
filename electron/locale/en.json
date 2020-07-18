@@ -8,5 +8,7 @@
    "noupdate": "You're up to date.",
    "'dupdate": "Found an update. You can download it in Settings. What's new in the latest update: ",
    "open": "Open Mr Noplay",
-   "exit": "Quit"
+   "exit": "Quit",
+   "notifybacktitle": "Mr Noplay is calling you",
+   "notifyback": "Don't get away! You haven't set Mr Noplay!"
 }

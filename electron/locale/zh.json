@@ -8,5 +8,7 @@
   "noupdate": "没有更新，过一会再来哦！",
   "'dupdate": "有更新可用。请去设置界面下载。最近一次更新的更新内容：",
   "open": "打开 Mr Noplay",
-  "exit": "退出应用"
+  "exit": "退出应用",
+  "notifybacktitle": "Mr Noplay 在呼唤你！",
+  "notifyback": "别走呀！你还没设置 Mr Noplay！"
 }
