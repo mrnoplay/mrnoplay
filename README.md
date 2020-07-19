@@ -1,5 +1,5 @@
 
-![Mrnoplay Repo Banner](https://images.gitee.com/uploads/images/2020/0713/104150_848f1d3a_1029534.png)
+![Mr Noplay Repo Banner](https://i.loli.net/2020/07/19/viJW7YmhRUwxdIF.png)
 
 ### What is it
 
