@@ -5,12 +5,12 @@
   "description": "Give an end to no-end rests and play times.",
   "license": "MPL-2.0",
   "scripts": {
-    "dev": "nbn && vue-cli-service serve",
-    "electron-mac": "nbn && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run m && cd ../",
-    "electron-win": "nbn && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run electron:win && cd ../",
-    "electron-dev": "nbn && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
-    "capacitor-android": "nbn && vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
-    "web": "nbn && vue-cli-service build --mode web && cp -r -f www/ ../mrnoplay.web/",
+    "dev": "nbns && vue-cli-service serve",
+    "electron-mac": "nbns && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run m && cd ../",
+    "electron-win": "nbns && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run electron:win && cd ../",
+    "electron-dev": "nbns && vue-cli-service build --mode electron && npx cap copy && cd electron && yarn run e && cd ../",
+    "capacitor-android": "nbns && vue-cli-service build --mode capacitor && npx cap copy && cd android && npx cap open android && cd ../",
+    "web": "nbns && vue-cli-service build --mode web && cp -r -f www/ ../mrnoplay.web/",
     "d": "yarn run dev",
     "e": "yarn run electron-mac",
     "ew": "yarn run electron-win",
@@ -29,7 +29,7 @@
     "core-js": "^2.6.5",
     "leancloud-storage": "^3.10.0",
     "md5": "^2.2.1",
-    "node-build-number": "^1.0.2",
+    "node-build-number-simplified": "2.0.1",
     "tryparse": "^0.0.2",
     "v-tooltip": "^2.0.3",
     "vue": "^2.6.10",
@@ -55,16 +55,7 @@
     "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
   },
   "build": {
-    "unique": "mrnoplay:v3.1.0-master[build:5]",
-    "number": 5,
-    "timestamp": "7/18/2020, 1:54:38 PM",
-    "git-branch": "master",
-    "git-user": "Tianze Ds Qiu <slaaker@126.com>",
-    "git-version": "2.20.1",
-    "node-version": "v10.16.0",
-    "user": "we",
-    "shell": "/bin/zsh",
-    "lang": "en_US.UTF-8",
-    "uname": "Darwin"
+    "number": 7,
+    "timestamp": "7/19/2020, 2:15:23 PM"
   }
 }
