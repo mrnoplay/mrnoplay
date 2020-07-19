@@ -694,3 +694,10 @@ function setTrayNoExit() {
   }]);
   tray.setContextMenu(contextMenu);
 }
+
+app.on('web-contents-created', (e, webContents) => {
+  webContents.on('new-window', (event, url) => {
+      event.preventDefault();
+      shell.openExternal(url);
+  });
+});

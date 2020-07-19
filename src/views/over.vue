@@ -156,7 +156,7 @@ export default {
       setInterval(() => {
         this.controlrptext = !this.controlrptext;
       }, 5000);
-    }
+    }this.iselectron = true;
     this.isonios = this.isiOS(navigator.userAgent);
     this.loading = false;
     this.timing = true;
@@ -165,7 +165,7 @@ export default {
       ".mp3");
     setInterval(this.infocountinterval, 3000);
     setInterval(this.lefttimeinterval, 1000);
-    setTimeout(this.timeout, 100); //180000
+    setTimeout(this.timeout, 180000);
   },
   beforeDestroy: function() {},
   methods: {
@@ -308,13 +308,6 @@ export default {
       }, timeout);
       if (process.env.VUE_APP_LINXF == "electron") {
         ipc.send("focus");
-        /*let alertRet = await Promise.race([
-          Modals.alert({
-            title: title,
-            message: message
-          }),
-          popup_timeout(timeout),
-        ]);*/
       }
     },
     async popup_timeout(ms) {
