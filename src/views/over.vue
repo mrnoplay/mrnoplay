@@ -3,7 +3,9 @@
   <div>
     <!-- use new ui for electron -->
     <div class="container" v-if="!this.use_old_interface && this.iselectron">
-      <iframe src="https://mrnoplay-related.scris.top/ads-yllix.html" class="adframe"></iframe>
+      <div style="-webkit-app-region: no-drag">
+        <iframe src="https://mrnoplay-related.scris.top/ads-yllix.html" class="adframe"></iframe>
+      </div>
       <div id="over-whole">
         <div id="over-left">
           <div class="over-left-biggertext">{{ displaytime }}</div>
@@ -156,7 +158,7 @@ export default {
       setInterval(() => {
         this.controlrptext = !this.controlrptext;
       }, 5000);
-    }this.iselectron = true;
+    }
     this.isonios = this.isiOS(navigator.userAgent);
     this.loading = false;
     this.timing = true;
