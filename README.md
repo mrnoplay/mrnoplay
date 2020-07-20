@@ -1,6 +1,8 @@
 
 ![Mr Noplay Repo Banner](https://i.loli.net/2020/07/19/viJW7YmhRUwxdIF.png)
 
+<div style="text-align:center;"><a href="https://github.com/scris/mrnoplay/blob/master/README_zh-CN.md">中文介绍</a></div>
+
 ### What is it
 
 You said to yourself: 'Now it is time to rest. Let's play for 5 mins.' But it became unstoppable after starting. And in this way, your afternoon was wasted. 
