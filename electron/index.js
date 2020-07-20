@@ -560,6 +560,14 @@ ipcMain.on('patreon', (event, arg) => {
   }
 })
 
+ipcMain.on('buymeacoffee', (event, arg) => {
+  canBlur = true;
+  shell.openExternal('https://www.buymeacoffee.com/tianzeds');
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+})
+
 ipcMain.on('askforautolaunch', (event, arg) => {
   dialog.showMessageBox({
     message: i18n.__('askforautolaunch'),

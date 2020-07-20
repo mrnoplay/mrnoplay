@@ -11,6 +11,9 @@
               <b-btn class="new on patreonfather" @click="patreon">
                 <img src="@/assets/img/patreon.png" class="patreon" />
               </b-btn>
+              <b-btn class="new on patreonfather" @click="buymeacoffee">
+                <img src="@/assets/img/buymeacoffee.png" class="patreon" />
+              </b-btn>
               <b-btn class="new on patreonfather" @click="wechat">
                 <img src="@/assets/img/viawechat.png" class="patreon" />
               </b-btn>
@@ -154,6 +157,21 @@ export default {
         }
       } else {
         window.open("https://www.patreon.com/bePatron?u=38415237", "_blank");
+      }
+    },
+    buymeacoffee() {
+      if (this.iselectron) {
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 24,
+            message: this.$t("cannotpatreon")
+          });
+        } else {
+          ipc.send("buymeacoffee");
+        }
+      } else {
+        window.open("https://www.buymeacoffee.com/tianzeds", "_blank");
       }
     },
     wechat() {
