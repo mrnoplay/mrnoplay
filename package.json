@@ -22,12 +22,11 @@
     "@capacitor/android": "^1.1.0",
     "@capacitor/cli": "^1.1.0",
     "@capacitor/core": "^1.1.0",
-    "animejs": "^3.1.0",
+    "animejs": "^3.2.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.26",
     "breadstick": "^0.2.13",
     "core-js": "^2.6.5",
-    "leancloud-storage": "^3.10.0",
     "md5": "^2.2.1",
     "node-build-number-simplified": "2.0.1",
     "tryparse": "^0.0.2",
@@ -55,7 +54,7 @@
     "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
   },
   "build": {
-    "number": 15,
-    "timestamp": "7/20/2020, 5:14:13 PM"
+    "number": 18,
+    "timestamp": "7/24/2020, 9:36:34 PM"
   }
 }
