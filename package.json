@@ -16,7 +16,8 @@
     "ew": "yarn run electron-win",
     "ed": "yarn run electron-dev",
     "c": "yarn run capacitor-android",
-    "w": "yarn run web"
+    "w": "yarn run web",
+    "nbns": "nbns"
   },
   "dependencies": {
     "@capacitor/android": "^1.1.0",
@@ -54,7 +55,7 @@
     "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
   },
   "build": {
-    "number": 18,
-    "timestamp": "7/24/2020, 9:36:34 PM"
+    "number": 21,
+    "timestamp": "7/27/2020, 7:55:11 PM"
   }
 }
