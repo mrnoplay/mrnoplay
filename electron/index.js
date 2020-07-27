@@ -29,6 +29,7 @@ let canQuit = false;
 let canBlur = false;
 let isMinimal = false;
 let noWindow = false;
+let isUnderKiosk = false;
 
 // Place holders for our windows so they don't get garbage collected.
 let mainWindow = null;
@@ -212,6 +213,7 @@ async function createWindow() {
 
   mainWindow.on('blur', (event) => {
     if (mainWindow.isKiosk() && !canBlur) {
+      isUnderKiosk = true;
       mainWindow.hide();
       mainWindow.setKiosk(false);
       mainWindow.focus();
@@ -231,7 +233,6 @@ async function createWindow() {
       canBlur = false;
     }
   })
-
 
   if (isDevMode) {
     globalShortcut.register('CommandOrControl+Shift+L', () => {
@@ -323,6 +324,7 @@ async function createWindowAgain() {
       mainWindow.focus();
       mainWindow.setKiosk(true);
       mainWindow.show();
+      isUnderKiosk = true;
     }
   })
 
@@ -338,13 +340,13 @@ async function createWindowAgain() {
     }
   })
 
-  if (isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+  if (isMinimal) isMinimal = false, mainWindow.setKiosk(true), isUnderKiosk = true;
   mainWindow.hide();
   mainWindow.show();
   mainWindow.focus();
   mainWindow.moveTop();
   mainWindow.center();
-  if (!canBlur) mainWindow.setKiosk(true);
+  if (!canBlur) mainWindow.setKiosk(true), isUnderKiosk = true;
 
   mainWindow.on('will-resize', (event) => {
     event.preventDefault();
@@ -389,6 +391,7 @@ ipcMain.on('full-screen', function () {
     mainWindow.show();
     mainWindow.center();
     mainWindow.setKiosk(true);
+    isUnderKiosk = true;
     mainWindow.setAlwaysOnTop(false);
   }
   setTray();
@@ -404,6 +407,9 @@ ipcMain.on('normal-screen', function () {
   if (mainWindow) {
     mainWindow.focus();
     mainWindow.setKiosk(false);
+    isUnderKiosk = false;
+    setTimeout(gofornormal, 1000);
+    setTimeout(gofornormal, 5000);
     mainWindow.setAlwaysOnTop(false);
     mainWindow.setResizable(true);
     mainWindow.setSize(270, 270, true);
@@ -418,11 +424,20 @@ ipcMain.on('normal-screen-alwaysOnTop', function () {
   }
 });
 
+function gofornormal() {
+  if (mainWindow) {
+    if (!isUnderKiosk) {
+      mainWindow.setKiosk(false);
+    }
+  }
+}
+
 ipcMain.on('screen-ontop', function () {
   canBlur = true;
   if (mainWindow) {
     mainWindow.focus();
     mainWindow.setKiosk(false);
+    isUnderKiosk = false;
     mainWindow.setAlwaysOnTop(true);
     mainWindow.setSize(320, 100, true);
     mainWindow.center();
@@ -476,6 +491,7 @@ function shutdowner() {
   canBlur = true;
   if (mainWindow) {
     mainWindow.setKiosk(false);
+    isUnderKiosk = false;
   }
   if (process.platform === 'win32') {
     shutdown.shutdown();
@@ -665,13 +681,13 @@ function setTray() {
     label: i18n.__('open'),
     click: () => {
       if (!mainWindow.isDestroyed()) {
-        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true), isUnderKiosk = true;
         mainWindow.hide();
         mainWindow.show();
         mainWindow.focus();
         mainWindow.moveTop();
         mainWindow.center();
-        if (!canBlur) mainWindow.setKiosk(true);
+        if (!canBlur) mainWindow.setKiosk(true), isUnderKiosk = true;
       } else {
         createWindowAgain();
       }
@@ -690,13 +706,13 @@ function setTrayNoExit() {
     label: i18n.__('open'),
     click: () => {
       if (!mainWindow.isDestroyed()) {
-        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true);
+        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true), isUnderKiosk = true;
         mainWindow.hide();
         mainWindow.show();
         mainWindow.focus();
         mainWindow.moveTop();
         mainWindow.center();
-        if (!canBlur) mainWindow.setKiosk(true);
+        if (!canBlur) mainWindow.setKiosk(true), isUnderKiosk = true;
       } else {
         createWindowAgain();
       }
