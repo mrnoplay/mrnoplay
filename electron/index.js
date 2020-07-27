@@ -39,9 +39,9 @@ let splashScreen = null;
 //Change this if you do not wish to have a splash screen
 let useSplashScreen = false;
 
-app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required') // 允许自动播放音频
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 
-powerSaveBlocker.start('prevent-app-suspension') //防止app被挂起，停止计时
+powerSaveBlocker.start('prevent-app-suspension')
 
 let tray = null;
 
@@ -113,7 +113,7 @@ async function createWindow() {
         if (!err) {
           var reg = /[A-Z]?[a-z]{2}\s{1,}[0-9]{1,}\s[0-9]{1,}:[0-9]{1,}/;
           var datamatched = data.match(reg);
-          var startdate = moment(moment().year().toString() + " " + datamatched.toString());
+          var startdate = moment(moment().year().toString() + " " + datamatched.toString(), "YYYY MMM D HH:mm");
           var nowdate = moment();
           var timepast = Number(nowdate - startdate);
           if (timepast <= 90000 && timepast > 0) {
@@ -129,7 +129,7 @@ async function createWindow() {
           } else {
             mainWindow.on('ready-to-show', function () {
               if (!canBlur) {
-                mainWindow.show(); // 初始化后再显示
+                mainWindow.show(); // Show after Initialization
                 mainWindow.center();
                 mainWindow.focus();
               }
@@ -140,7 +140,7 @@ async function createWindow() {
         } else {
           mainWindow.on('ready-to-show', function () {
             if (!canBlur) {
-              mainWindow.show(); // 初始化后再显示
+              mainWindow.show(); // Show after Initialization
               mainWindow.center();
               mainWindow.focus();
             }
@@ -153,7 +153,7 @@ async function createWindow() {
   } else {
     mainWindow.on('ready-to-show', function () {
       if (!canBlur) {
-        mainWindow.show(); // 初始化后再显示
+        mainWindow.show(); // Show after Initialization
         mainWindow.center();
         mainWindow.focus();
       }
@@ -162,7 +162,7 @@ async function createWindow() {
     })
   }
 
-  // 获得开机时间 mac: who -b win: systeminfo /fo CSV 再处理
+  // Get startup time: mac: who -b win: systeminfo /fo CSV
 
   mainWindow.on('close', (event) => {
     if (!canQuit) {
@@ -258,6 +258,8 @@ async function createWindow() {
 /* WINDOW */
 /* AGAIN  */
 async function createWindowAgain() {
+  noWindow = false;
+
   if (process.platform === 'darwin') {
     const template = [];
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
