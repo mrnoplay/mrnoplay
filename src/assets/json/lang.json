@@ -167,7 +167,8 @@
       "2": "超时超过3分钟后，将有恼人声音、弹窗等惩罚。",
       "3": "点击‘停止’按钮后将关机，请先保存所有文档。",
       "4": "现在立刻停止！这样，你可以获得1个R点。"
-    }
+    },
+    "kioskbug": "似乎没有正确退出全屏，这可能是因为本软件所使用框架的一个 bug 导致的，请点击取消，回到主界面点击右上角退出按钮，然后重新启动 Mr Noplay"
   },
   "en": {
     "submit": "OK",
@@ -337,6 +338,7 @@
       "2": "Annoying music'll be sent as punishment in 3 min",
       "3": "Clicking on 'STOP' will shut the computer down.",
       "4": "Stop right now and you'll be able to earn 1 R Point."
-    }
+    },
+    "kioskbug": "It seems that you didn't exit fullscreen mode, probably because of a bug from the framework used by Mr Noplay, you can click Cancel, then click the X Button on the top, then open mr noplay again."
   }
 }

@@ -66,6 +66,12 @@
             v-if="!controlrptext"
           >{{ $t('nowexitillegally') }}{{ illegal_rp }}{{ $t('rp') }}</small>
         </div>
+        <div>
+          <small
+            class="onlyonlarge new largebtn-notbtn transparent small canceltext"
+            v-if="iselectron"
+          >{{ $t('kioskbug') }}</small>
+        </div>
       </div>
     </div>
     <div class="container" v-if="isontop && !ismoretime && iselectron" id="ontop">
@@ -190,7 +196,7 @@ export default {
   components: {
     loading,
     titlepart,
-    notify
+    notify,
   },
   data() {
     return {
@@ -224,16 +230,16 @@ export default {
       lack_rp: false,
       redeem_rp: 0,
       ontoplock: true,
-      workmode: false
+      workmode: false,
     };
   },
   watch: {
     async lang(val) {
       this.storagesetlang(val);
       this.$i18n.locale = val;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     if (process.env.VUE_APP_LINXF == "electron") {
       ipc.send("normal-screen");
     }
@@ -267,7 +273,7 @@ export default {
       ipc.send("full-screen");
     }
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     clearInterval(this.interval);
   },
   methods: {
@@ -286,13 +292,13 @@ export default {
     async storagesetlang(val) {
       await Storage.set({
         key: "lang",
-        value: val
+        value: val,
       });
     },
     async storagesetjson(key, val) {
       await Storage.set({
         key: key,
-        value: JSON.stringify(val)
+        value: JSON.stringify(val),
       });
     },
     async i18nsetlang() {
@@ -426,7 +432,7 @@ export default {
     async first_shutdown_confirm() {
       let confirmRet = await Modals.confirm({
         title: this.$t("confirm-shutdown"),
-        message: this.$t("confirm-shutdown-text")
+        message: this.$t("confirm-shutdown-text"),
       });
       if (confirmRet.value) {
         this.storagesetjson("finished", this.st_finished + 1);
@@ -471,7 +477,7 @@ export default {
           this.$refs.notify.send({
             title: this.$t("half"),
             id: 10,
-            message: this.$t("halftext")
+            message: this.$t("halftext"),
           });
         }
         if (
@@ -491,7 +497,7 @@ export default {
         ipc.send("focus");
         let alertRet = await Modals.alert({
           title: title,
-          message: message
+          message: message,
         });
       }
     },
@@ -541,7 +547,7 @@ export default {
       } else {
         this.lack_rp = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
