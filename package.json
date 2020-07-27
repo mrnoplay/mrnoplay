@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "3.2.0",
+  "version": "3.1.1",
   "author": "Tianze Ds Qiu (slaaker@126.com)",
   "description": "Give an end to no-end rests and play times.",
   "license": "MPL-2.0",
@@ -55,7 +55,7 @@
     "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
   },
   "build": {
-    "number": 23,
-    "timestamp": "7/27/2020, 8:33:45 PM"
+    "number": 24,
+    "timestamp": "7/27/2020, 8:47:10 PM"
   }
 }
