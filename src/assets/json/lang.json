@@ -154,6 +154,9 @@
     "cannotgithub": "已经设置今日总时间，不允许查看 Github 页面",
     "cannotwebsite": "已经设置今日总时间，不允许查看网站",
     "cannotfeedback": "因为已经设置今日总时间，目前不能进行反馈",
+    "cannotdownload": "不能下载",
+    "cannotdownloadtext": "因为已经设置今日总时间，目前不能下载组件",
+    "cannotsetblacklisttext": "因为已经设置今日总时间，目前不能设置应用黑名单",
     "moretime": "更多",
     "moretime-ask": "请输入您完成工作还需要多少时间",
     "whattodo": "这段时间做什么",
@@ -168,7 +171,12 @@
       "3": "点击‘停止’按钮后将关机，请先保存所有文档。",
       "4": "现在立刻停止！这样，你可以获得1个R点。"
     },
-    "kioskbug": "似乎没有正确退出全屏，这可能是因为本软件所使用框架的一个 bug 导致的，请点击取消，回到主界面点击右上角退出按钮，然后重新启动 Mr Noplay"
+    "kioskbug": "似乎没有正确退出全屏，这可能是因为本软件所使用框架的一个 bug 导致的，请点击取消，回到主界面点击右上角退出按钮，然后重新启动 Mr Noplay",
+    "blacklist": "应用黑名单设置",
+    "blacklistdesc": "应用黑名单组件允许在工作模式计时时屏蔽选择的应用。此可选组件不默认安装，需额外下载安装。",
+    "blacklistdesc-installed": "应用黑名单组件在工作模式计时时屏蔽你选择的应用",
+    "notinstalled": "此组件未安装",
+    "installed": "点击进行设置"
   },
   "en": {
     "submit": "OK",
@@ -290,7 +298,7 @@
     "enterpassword-reenter": "Enter Again",
     "entertoexit": "Enter Password",
     "lockmode-entertoexit": "To Exit, Please:",
-    "lockmode-notice1": "Lock mode will forbid settings",
+    "lockmode-notice1": "Lock mode forbids settings.",
     "lockmode-notice2": "And you must enter password to exit",
     "confirm-shutdown": "Please Confirm",
     "confirm-shutdown-text": "After clicking on 'Stop', the computer will shutdown. In order to prevent mistake touches, we displayes this notice, but only once.",
@@ -325,6 +333,9 @@
     "cannotwebsite": "You can't go to our website after Today Time is set.",
     "cannotfeedback": "You can't go to feedback page after Today Time is set.",
     "cannotpatreon": "Sorry but you can't go to patreon page after Today Time is set.",
+    "cannotdownload": "Forbidden",
+    "cannotdownloadtext": "You can't download component after Today Time is set.",
+    "cannotsetblacklisttext": "You can't set blacklist after Today Time is set.",
     "moretime": "More",
     "moretime-ask": "How long will you need",
     "whattodo": "What to do",
@@ -339,6 +350,11 @@
       "3": "Clicking on 'STOP' will shut the computer down.",
       "4": "Stop right now and you'll be able to earn 1 R Point."
     },
-    "kioskbug": "It seems that you didn't exit fullscreen mode, probably because of a bug from the framework used by Mr Noplay, you can click Cancel, then click the X Button on the top, then open mr noplay again."
+    "kioskbug": "It seems that you didn't exit fullscreen mode, probably because of a bug from the framework used by Mr Noplay, you can click Cancel, then click the X Button on the top, then open mr noplay again.",
+    "blacklist": "App Blacklist",
+    "blacklistdesc": "The App Blacklist component can forbid apps from running when timing in work mode. But it is not installed now. You can download and install it.",
+    "blacklistdesc-installed": "The App Blacklist component can forbid apps from running when timing in work mode.",
+    "notinstalled": "Not Installed",
+    "installed": "Click to Set"
   }
 }

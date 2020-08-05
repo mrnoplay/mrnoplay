@@ -423,7 +423,9 @@ export default {
         this.storagesetjson("exit_type", "shutdown");
         this.storagesetjson("finished", this.st_finished + 1);
         if (process.env.VUE_APP_LINXF == "electron") {
-          ipc.send("shutdown");
+          this.storagesetjson("exit_type", "shutdown").then(() => {
+            ipc.send("shutdown");
+          });
         } else {
           this.$router.push("/");
         }

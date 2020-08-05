@@ -101,7 +101,7 @@ var ipc = null;
 var i = 0;
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
-  ipc.on("timingdone", function(event, arg) {
+  ipc.on("timingdone", function (event, arg) {
     this.timing = false;
   });
 }
@@ -110,7 +110,7 @@ export default {
   components: {
     loading,
     titlepart,
-    notify
+    notify,
   },
   data() {
     return {
@@ -133,23 +133,23 @@ export default {
       popuptitle: "Title",
       popupdesc: "Description",
       use_old_interface: false,
-      overinfocount: 1
+      overinfocount: 1,
     };
   },
   watch: {
     async lang(val) {
       this.storagesetlang(val);
       this.$i18n.locale = val;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.version = process.env.VUE_APP_VER;
     _this = this;
     this.i18nsetlang().then(() => {
       this.$refs.notify.send({
         title: this.$t("timeisup"),
         id: 8,
-        message: this.$t("willpunish")
+        message: this.$t("willpunish"),
       });
     });
     this.storagesetjson("cannotify", true);
@@ -169,7 +169,7 @@ export default {
     setInterval(this.lefttimeinterval, 1000);
     setTimeout(this.timeout, 180000);
   },
-  beforeDestroy: function() {},
+  beforeDestroy: function () {},
   methods: {
     isiPad(userAgent) {
       return userAgent.indexOf("iPad") > -1;
@@ -186,13 +186,13 @@ export default {
     async storagesetlang(val) {
       await Storage.set({
         key: "lang",
-        value: val
+        value: val,
       });
     },
     async storagesetjson(key, val) {
       await Storage.set({
         key: key,
-        value: JSON.stringify(val)
+        value: JSON.stringify(val),
       });
     },
     async i18nsetlang() {
@@ -236,21 +236,22 @@ export default {
     cancel() {
       this.storagesetjson("concentrated", true);
       this.storagesetjson("finished", this.st_finished + 1);
-      this.storagesetjson("exit_type", "shutdown");
       this.storagesetjson("rp", this.st_rp + this.get_rp);
-      if (process.env.VUE_APP_LINXF == "electron") {
-        ipc.send("full-screen");
-        ipc.send("shutdown");
-        this.timing = false;
-        clearInterval(this.interval);
-        clearInterval(this.longinterval);
-        clearInterval(this.shutdowninterval);
-      } else {
-        this.timing = false;
-        clearInterval(this.interval);
-        clearInterval(this.shutdowninterval);
-        this.$router.push("/");
-      }
+      this.storagesetjson("exit_type", "shutdown").then(() => {
+        if (process.env.VUE_APP_LINXF == "electron") {
+          ipc.send("full-screen");
+          ipc.send("shutdown");
+          this.timing = false;
+          clearInterval(this.interval);
+          clearInterval(this.longinterval);
+          clearInterval(this.shutdowninterval);
+        } else {
+          this.timing = false;
+          clearInterval(this.interval);
+          clearInterval(this.shutdowninterval);
+          this.$router.push("/");
+        }
+      });
     },
     interval() {
       if (this.timing == true && this.$router.currentRoute.path == "/over") {
@@ -259,7 +260,7 @@ export default {
         _this.$refs.notify.send({
           title: _this.$t("stop"),
           id: 1,
-          message: _this.$t("notifymessage." + _this.rand(1, 2))
+          message: _this.$t("notifymessage." + _this.rand(1, 2)),
         });
         alarm.play();
       } else {
@@ -275,19 +276,18 @@ export default {
         this.$refs.notify.send({
           title: this.$t("willforce"),
           id: 9,
-          message: this.$t("willforce")
+          message: this.$t("willforce"),
         });
         setTimeout(() => {
           this.storagesetjson("finished", this.st_finished + 1);
-          this.storagesetjson("exit_type", "shutdown");
           this.storagesetjson("rp", this.st_rp + this.get_rp);
           this.$i18n.locale = this.lang;
           this.$refs.notify.send({
             title: this.$t("willforce"),
             id: 9,
-            message: this.$t("willforce")
+            message: this.$t("willforce"),
           });
-          ipc.send("shutdown");
+          this.storagesetjson("exit_type", "shutdown").then(() => {ipc.send("shutdown");});
         }, 5000);
       }
     },
@@ -336,7 +336,7 @@ export default {
           this.shutdowninterval();
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>

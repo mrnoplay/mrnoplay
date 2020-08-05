@@ -133,6 +133,34 @@
               ></b-btn>
             </div>
           </div>
+          <!-- --------- -->
+          <!-- Blacklist -->
+          <!-- --------- -->
+          <div class="settingfield main-like" v-if="!default_lockmode && iselectron">
+            <span class="label settingslabel">{{ $t("blacklist") }}</span>
+            <div id="download-blacklist" v-if="!blacklist_installed">
+              <div class="smallerlabel settingssmallerlabel">{{ $t('blacklistdesc') }}</div>
+              <div class="select">
+                <b-btn
+                  variant="light"
+                  class="new on main-like settingbtn download"
+                  @click="install_blacklist"
+                ></b-btn>
+                <div class="notinstalllabel">{{ $t("notinstalled") }}</div>
+              </div>
+            </div>
+            <div id="set-blacklist" v-if="blacklist_installed && iselectron">
+              <div class="smallerlabel settingssmallerlabel">{{ $t('blacklistdesc-installed') }}</div>
+              <div class="select">
+                <b-btn
+                  variant="light"
+                  class="new on main-like settingbtn blacklist-settings"
+                  @click="set_blacklist"
+                ></b-btn>
+                <div class="notinstalllabel">{{ $t("installed") }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -154,19 +182,19 @@ var ipc = null;
 var md5 = require("md5");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
-  ipc.on("updatefailed", function(event, arg) {
+  ipc.on("updatefailed", function (event, arg) {
     this.checking = false;
     this.checked = true;
     this.checkedtext = "Failed";
     //this.popup(this.$t("updatefailed"), this.$t("updatefailedtext"));
   });
-  ipc.on("updateok", function(event, arg) {
+  ipc.on("updateok", function (event, arg) {
     this.checking = false;
     this.checked = true;
     this.checkedtext = "Found";
     //this.popup(this.$t("updateok"), this.$t("updateoktext"));
   });
-  ipc.on("updateno", function(event, arg) {
+  ipc.on("updateno", function (event, arg) {
     this.checking = false;
     this.checked = true;
     this.checkedtext = "No update";
@@ -179,7 +207,7 @@ export default {
     loading,
     titlepart,
     notify,
-    switcher
+    switcher,
   },
   data() {
     return {
@@ -207,16 +235,17 @@ export default {
       // ------------
       timeNAN: false,
       todaydate: new Date(),
-      todaydate_parsed: "todaytime002000"
+      todaydate_parsed: "todaytime002000",
+      blacklist_installed: false,
     };
   },
   watch: {
     async lang(val) {
       this.storagesetlang(val);
       this.$i18n.locale = val;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.checking = false;
     this.version = process.env.VUE_APP_VER;
     this.todaydate_parsed =
@@ -240,7 +269,7 @@ export default {
     this.timing = true;
     setTimeout(this.interval, 3000);
   },
-  beforeDestroy: function() {},
+  beforeDestroy: function () {},
   methods: {
     isiPad(userAgent) {
       return userAgent.indexOf("iPad") > -1;
@@ -254,13 +283,13 @@ export default {
     async storagesetlang(val) {
       await Storage.set({
         key: "lang",
-        value: val
+        value: val,
       });
     },
     async storagesetjson(key, val) {
       await Storage.set({
         key: key,
-        value: JSON.stringify(val)
+        value: JSON.stringify(val),
       });
     },
     async gettodaydata() {
@@ -335,7 +364,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("success"),
           id: 4,
-          message: this.$t("on-startonlogin")
+          message: this.$t("on-startonlogin"),
         });
       }
     },
@@ -346,7 +375,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("success"),
           id: 5,
-          message: this.$t("off-startonlogin")
+          message: this.$t("off-startonlogin"),
         });
       }
     },
@@ -358,7 +387,7 @@ export default {
       this.$refs.notify.send({
         title: "成功",
         id: 6,
-        message: "已经切换到中文。"
+        message: "已经切换到中文。",
       });
     },
     en() {
@@ -369,20 +398,50 @@ export default {
       this.$refs.notify.send({
         title: "Success",
         id: 7,
-        message: "Language is set to English."
+        message: "Language is set to English.",
       });
     },
     check() {
       if (process.env.VUE_APP_LINXF == "electron") {
         if (this.todayset) {
           this.$refs.notify.send({
-            title: this.$t('cannotcheck'),
+            title: this.$t("cannotcheck"),
             id: 20,
-            message: this.$t('cannotchecktext')
+            message: this.$t("cannotchecktext"),
           });
         } else {
           ipc.send("checkupdate");
           this.checking = true;
+        }
+      }
+    },
+    install_blacklist() {
+      if (process.env.VUE_APP_LINXF == "electron") {
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotinstall"),
+            id: 30,
+            message: this.$t("cannotinstalltext"),
+          });
+        } else {
+          if (this.lang == "cn") {
+            ipc.send("blacklist-download-cn");
+          } else {
+            ipc.send("blacklist-download-en");
+          }
+        }
+      }
+    },
+    set_blacklist() {
+      if (process.env.VUE_APP_LINXF == "electron") {
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 30,
+            message: this.$t("cannotsetblacklisttext"),
+          });
+        } else {
+          ipc.send("blacklist-set");
         }
       }
     },
@@ -391,7 +450,7 @@ export default {
         ipc.send("focus");
         let alertRet = await Modals.alert({
           title: title,
-          message: message
+          message: message,
         });
       }
     },
@@ -402,7 +461,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("success"),
           id: 14,
-          message: this.$t("defaulttimesuccess")
+          message: this.$t("defaulttimesuccess"),
         });
       } else {
         this.timeNAN = true;
@@ -416,7 +475,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("success"),
           id: 13,
-          message: this.$t("lockmode_on_success")
+          message: this.$t("lockmode_on_success"),
         });
         if (this.iselectron) {
           ipc.send("turnlockon", md5(this.default_lockmode_on));
@@ -427,7 +486,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("fail"),
           id: 17,
-          message: this.$t("lockmode_on_fail")
+          message: this.$t("lockmode_on_fail"),
         });
       }
     },
@@ -444,7 +503,7 @@ export default {
             this.$refs.notify.send({
               title: this.$t("fail"),
               id: 16,
-              message: this.$t("lockmode_off_fail")
+              message: this.$t("lockmode_off_fail"),
             });
           }
         } else this._to_set_setdefault_lockmode_off();
@@ -457,12 +516,12 @@ export default {
       this.$refs.notify.send({
         title: this.$t("success"),
         id: 15,
-        message: this.$t("lockmode_off_success")
+        message: this.$t("lockmode_off_success"),
       });
       if (this.iselectron) {
         ipc.send("turnlockoff");
       }
-    }
-  }
+    },
+  },
 };
 </script>

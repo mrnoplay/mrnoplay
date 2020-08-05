@@ -586,6 +586,34 @@ ipcMain.on('buymeacoffee', (event, arg) => {
   }
 })
 
+ipcMain.on('blacklist-download-cn', (event, arg) => {
+  canBlur = true;
+  if (process.platform === 'darwin') {
+    shell.openExternal('https://wwa.lanzous.com/im3C2f7vqgf');
+  } else {
+    shell.openExternal('https://wwa.lanzous.com/immszf84zah');
+  }
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+})
+
+ipcMain.on('blacklist-download-en', (event, arg) => {
+  canBlur = true;
+  shell.openExternal('https://github.com/mrnoplay/mrnoplay.blacklist-ui/releases');
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+})
+
+ipcMain.on('blacklist-set', (event, arg) => {
+  canBlur = true;
+  // open mbui
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+})
+
 ipcMain.on('askforautolaunch', (event, arg) => {
   dialog.showMessageBox({
     message: i18n.__('askforautolaunch'),

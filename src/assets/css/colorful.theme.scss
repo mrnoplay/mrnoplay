@@ -22,8 +22,8 @@ $seagreen: rgb(109, 200, 154);
 $ultralightseagreen: rgb(239, 247, 243);
 $ultradarkseagreen: rgb(121, 131, 126);
 $transparenterblack: rgba(51, 51, 51, 0.801);
-$blue: rgba(94, 158, 221, 0.897);
-$hoverblue: rgb(81, 111, 175);
+$blue: rgba(59, 142, 226, 0.897);
+$hoverblue: rgb(45, 110, 184);
 $activeblue: rgb(108, 148, 199);
 
 html {
@@ -177,11 +177,26 @@ input[type="number"] {
   font-weight: 700;
   font-size: 0.4rem;
   color: $hovergrey;
+  text-transform: none;
+  letter-spacing: 0rem;
 }
 
 .smallerlabelfather {
   height: 0.55rem;
   transform: translate(0, -0.3rem);
+}
+
+.settingssmallerlabel {
+  width: 9.5rem;
+  text-align: justify;
+}
+
+.notinstalllabel {
+  vertical-align: center;
+  transform: translateY(0.09rem);
+  margin-left: 0.4rem;
+  color: $labelgrey;
+  font-size: 0.51rem;
 }
 
 .small {
@@ -435,6 +450,28 @@ input[type="number"] {
   background-color: $seagreen;
 }
 
+.blacklist-settings {
+  cursor: pointer;
+  width: 1.417rem;
+  height: 1.417rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: $lightbuttongrey;
+  margin-top: 0.2rem;
+  border-radius: 0.2rem;
+  background-image: url('../img/blacklist-settings.svg');
+}
+
+.blacklist-settings:hover {
+  background-image: url('../img/blacklist-settings-white.svg');
+  background-color: $hovergreen;
+}
+
+.blacklist-settings:active {
+  background-image: url('../img/blacklist-settings-white.svg');
+  background-color: $seagreen;
+}
+
 .submit-back {
   cursor: pointer;
   width: 1.417rem;
@@ -502,6 +539,28 @@ input[type="number"] {
 
 .moreoption-back:active {
   background-image: url('../img/moreoption-back.svg');
+}
+
+.download {
+  cursor: pointer;
+  width: 1.417rem;
+  height: 1.417rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: $lightbuttongrey;
+  margin-top: 0.2rem;
+  border-radius: 0.2rem;
+  background-image: url('../img/download.svg');
+}
+
+.download:hover {
+  background-image: url('../img/download-white.svg');
+  background-color: $hoverblue;
+}
+
+.download:active {
+  background-image: url('../img/download-white.svg');
+  background-color: $blue;
 }
 
 .settinginput {
