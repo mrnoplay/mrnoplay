@@ -115,9 +115,6 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 import titlepart from "@/components/titlepart";
-var alarm = new Audio();
-var _this = null;
-alarm.src = require("@/assets/music/alarm.mp3");
 var ipc = null;
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require

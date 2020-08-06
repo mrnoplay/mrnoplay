@@ -95,7 +95,6 @@ const { Storage, Modals } = Plugins;
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 var tryparse = require("tryparse");
-var alarm = new Audio();
 var _this = null;
 var ipc = null;
 var i = 0;
@@ -162,9 +161,6 @@ export default {
     this.isonios = this.isiOS(navigator.userAgent);
     this.loading = false;
     this.timing = true;
-    alarm.src = require("@/assets/music/scarymusic/" +
-      this.rand(1, 17) +
-      ".mp3");
     setInterval(this.infocountinterval, 3000);
     setInterval(this.lefttimeinterval, 1000);
     setTimeout(this.timeout, 180000);
@@ -262,7 +258,6 @@ export default {
           id: 1,
           message: _this.$t("notifymessage." + _this.rand(1, 2)),
         });
-        alarm.play();
       } else {
         clearInterval(this.interval);
       }

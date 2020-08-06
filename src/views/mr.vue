@@ -230,7 +230,6 @@ import notify from "@/components/linxf/notify";
 import titlepart from "@/components/titlepart";
 import switcher from "@/components/linxf/switcher";
 const { Storage } = Plugins;
-var alarm = new Audio();
 var _this = null;
 var ipc = null;
 var md5 = require("md5");
@@ -344,9 +343,6 @@ export default {
       this.exit_type = "illegal";
       this.storagesetjson("exit_type", "illegal");
     });
-    alarm.src = require("@/assets/music/scarymusic/" +
-      this.rand(1, 17) +
-      ".mp3");
     if (
       process.env.VUE_APP_LINXF != "android" &&
       process.env.VUE_APP_LINXF != "electron" &&

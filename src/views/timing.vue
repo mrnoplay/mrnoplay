@@ -183,9 +183,6 @@ import { Plugins } from "@capacitor/core";
 const { Storage, Modals } = Plugins;
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
-var alarm = new Audio();
-var _this = null;
-alarm.src = require("@/assets/music/alarm.mp3");
 var ipc = null;
 var tryparse = require("tryparse");
 if (process.env.VUE_APP_LINXF == "electron") {
