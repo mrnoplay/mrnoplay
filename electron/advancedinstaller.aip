@@ -22,10 +22,10 @@
     <ROW Property="DialogBitmap" Value="dialog" MultiBuildValue="DefaultBuild:mrnoplay.installer.win.dialog.jpg_1" Type="1" MsiKey="DialogBitmap"/>
     <ROW Property="MSIFASTINSTALL" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="Manufacturer" Value="Tianze Ds Qiu from Scris Studio."/>
-    <ROW Property="ProductCode" Value="1033:{4C33A98D-2955-404C-96D1-56DC0E0F357C} 2052:{4C33A98D-2955-404C-96D1-56DC0E0F357C} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{952F58DF-D364-4B8D-9E24-F99E33E81D1B} 2052:{952F58DF-D364-4B8D-9E24-F99E33E81D1B} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Mr Noplay 3"/>
-    <ROW Property="ProductVersion" Value="3.1.1" Type="32"/>
+    <ROW Property="ProductVersion" Value="3.1.2" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{51744FDF-E5C6-4F05-9730-F5E1D2BB8FF8}"/>
@@ -75,7 +75,7 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="LICENSE.electron.txt" Component_="editreg.bat" FileName="LICENS~1.TXT|LICENSE.electron.txt" Attributes="0" SourcePath="dist\win-unpacked\LICENSE.electron.txt" SelfReg="false" NextFile="enigma.evb"/>
+    <ROW File="LICENSE.electron.txt" Component_="editreg.bat" FileName="LICENS~1.TXT|LICENSE.electron.txt" Attributes="0" SourcePath="dist\win-unpacked\LICENSE.electron.txt" SelfReg="false" NextFile="libEGL.dll_1"/>
     <ROW File="LICENSES.chromium.html" Component_="editreg.bat" FileName="LICENS~1.HTM|LICENSES.chromium.html" Attributes="0" SourcePath="dist\win-unpacked\LICENSES.chromium.html" SelfReg="false" NextFile="resources.pak"/>
     <ROW File="MrNoplay.exe" Component_="MrNoplay.exe" FileName="MRNOPL~1.EXE|Mr Noplay.exe" Attributes="0" SourcePath="dist\win-unpacked\Mr Noplay.exe" SelfReg="false" NextFile="editreg.bat" DigSign="true"/>
     <ROW File="am.pak" Component_="ar.pak" FileName="am.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\am.pak" SelfReg="false" NextFile="ml.pak"/>
@@ -94,7 +94,6 @@
     <ROW File="el.pak" Component_="ar.pak" FileName="el.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\el.pak" SelfReg="false" NextFile="sv.pak"/>
     <ROW File="enGB.pak" Component_="ar.pak" FileName="en-GB.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\en-GB.pak" SelfReg="false" NextFile="pl.pak"/>
     <ROW File="enUS.pak" Component_="ar.pak" FileName="en-US.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\en-US.pak" SelfReg="false" NextFile="lt.pak"/>
-    <ROW File="enigma.evb" Component_="editreg.bat" FileName="enigma.evb" Attributes="0" SourcePath="dist\win-unpacked\enigma.evb" SelfReg="false" NextFile="libEGL.dll_1"/>
     <ROW File="es.pak" Component_="ar.pak" FileName="es.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\es.pak" SelfReg="false" NextFile="ko.pak"/>
     <ROW File="es419.pak" Component_="ar.pak" FileName="es-419.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\es-419.pak" SelfReg="false" NextFile="fr.pak"/>
     <ROW File="et.pak" Component_="ar.pak" FileName="et.pak" Attributes="0" SourcePath="dist\win-unpacked\locales\et.pak" SelfReg="false" NextFile="cs.pak"/>

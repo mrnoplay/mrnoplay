@@ -30,7 +30,8 @@
           <a class="tutorial-a" @click="tutorial">{{ $t("tutorial") }}</a>&nbsp;
           <a class="tutorial-a" @click="website">{{ $t("website") }}</a>&nbsp;
           <a class="tutorial-a" @click="feedback">{{ $t("feedback") }}</a>&nbsp;
-          <a class="tutorial-a" @click="donate">{{ $t("donate") }}</a>
+          <a class="tutorial-a" @click="donate">{{ $t("donate") }}</a>&nbsp;
+          <a class="tutorial-a" @click="roadmap">{{ $t("roadmap") }}</a>
         </div>
       </div>
     </div>
@@ -191,6 +192,21 @@ export default {
         }
       } else {
         window.open("https://mrnoplay.scris.top/", "_blank");
+      }
+    },
+    roadmap() {
+      if (this.iselectron) {
+        if (this.todayset) {
+          this.$refs.notify.send({
+            title: this.$t("cannotrun"),
+            id: 31,
+            message: this.$t("cannotwebsite")
+          });
+        } else {
+          ipc.send("roadmap");
+        }
+      } else {
+        window.open("https://roadmap-for-mrnoplay.now.sh/", "_blank");
       }
     },
     feedback() {

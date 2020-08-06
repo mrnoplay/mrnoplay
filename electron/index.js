@@ -494,7 +494,10 @@ function shutdowner() {
     isUnderKiosk = false;
   }
   if (process.platform === 'win32') {
-    shutdown.shutdown();
+    canQuit = true;
+    setInterval(() => {
+      shutdown.shutdown();
+    }, 2000);
     setInterval(() => {
       shutdown.shutdown();
     }, 5000);
@@ -601,6 +604,14 @@ ipcMain.on('blacklist-download-cn', (event, arg) => {
 ipcMain.on('blacklist-download-en', (event, arg) => {
   canBlur = true;
   shell.openExternal('https://github.com/mrnoplay/mrnoplay.blacklist-ui/releases');
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+})
+
+ipcMain.on('roadmap', (event, arg) => {
+  canBlur = true;
+  shell.openExternal('https://roadmap-for-mrnoplay.now.sh/');
   if (mainWindow) {
     mainWindow.hide();
   }
@@ -751,7 +762,7 @@ function setTrayNoExit() {
 
 app.on('web-contents-created', (e, webContents) => {
   webContents.on('new-window', (event, url) => {
-      event.preventDefault();
-      shell.openExternal(url);
+    event.preventDefault();
+    shell.openExternal(url);
   });
 });

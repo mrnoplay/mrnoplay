@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "author": "Tianze Ds Qiu (slaaker@126.com)",
   "description": "Give an end to no-end rests and play times.",
   "license": "MPL-2.0",
@@ -51,11 +51,11 @@
     "vue-template-compiler": "^2.6.10"
   },
   "manifest": {
-    "en": "Float Window and Allow Getting More Time",
-    "zh": "完成了计时界面浮窗，工作模式允许用户增加时间"
+    "en": "Bug Fixes",
+    "zh": "错误修复"
   },
   "build": {
-    "number": 27,
-    "timestamp": "8/5/2020, 5:45:48 PM"
+    "number": 29,
+    "timestamp": "8/6/2020, 5:44:20 PM"
   }
 }

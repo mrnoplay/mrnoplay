@@ -136,7 +136,7 @@
           <!-- --------- -->
           <!-- Blacklist -->
           <!-- --------- -->
-          <div class="settingfield main-like" v-if="!default_lockmode && iselectron">
+          <div class="settingfield main-like" v-if="!default_lockmode && iselectron && false">
             <span class="label settingslabel">{{ $t("blacklist") }}</span>
             <div id="download-blacklist" v-if="!blacklist_installed">
               <div class="smallerlabel settingssmallerlabel">{{ $t('blacklistdesc') }}</div>
@@ -149,7 +149,7 @@
                 <div class="notinstalllabel">{{ $t("notinstalled") }}</div>
               </div>
             </div>
-            <div id="set-blacklist" v-if="blacklist_installed && iselectron">
+            <div id="set-blacklist" v-if="blacklist_installed">
               <div class="smallerlabel settingssmallerlabel">{{ $t('blacklistdesc-installed') }}</div>
               <div class="select">
                 <b-btn

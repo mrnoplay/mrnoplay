@@ -436,12 +436,6 @@ export default {
         title: this.$t("confirm-shutdown"),
         message: this.$t("confirm-shutdown-text"),
       });
-      if (confirmRet.value) {
-        this.storagesetjson("finished", this.st_finished + 1);
-        this.storagesetjson("exit_type", "shutdown");
-        this.storagesetjson("rp", this.st_rp + this.get_rp);
-        ipc.send("shutdown");
-      }
     },
     cancel() {
       this.timing = false;
