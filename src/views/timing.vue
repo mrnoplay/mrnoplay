@@ -1,6 +1,9 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+    <div id="pause" v-if="shuttingdown" style="-webkit-app-region: no-drag">
+      {{ $t("shuttingdown") }}
+    </div>
     <div class="container" v-if="(!isontop && !ismoretime) || !iselectron">
       <div id="timingnbsppart"></div>
       <div id="timingcancelnbsppart" v-if="!cancancel"></div>
@@ -184,6 +187,7 @@ const { Storage, Modals } = Plugins;
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 var ipc = null;
+var _this = null;
 var tryparse = require("tryparse");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
@@ -228,6 +232,7 @@ export default {
       redeem_rp: 0,
       ontoplock: true,
       workmode: false,
+      shuttingdown: false,
     };
   },
   watch: {
@@ -421,6 +426,7 @@ export default {
         this.storagesetjson("finished", this.st_finished + 1);
         if (process.env.VUE_APP_LINXF == "electron") {
           this.storagesetjson("exit_type", "shutdown").then(() => {
+            this.shuttingdown = true;
             ipc.send("shutdown");
           });
         } else {

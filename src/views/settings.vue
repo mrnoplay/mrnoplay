@@ -176,6 +176,7 @@ import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 import switcher from "@/components/linxf/switcher";
 var ipc = null;
+var _this = null;
 var md5 = require("md5");
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require

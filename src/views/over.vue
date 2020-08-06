@@ -1,6 +1,7 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+    <div id="pause" v-if="shuttingdown" style="-webkit-app-region: no-drag">{{ $t("shuttingdown") }}</div>
     <!-- use new ui for electron -->
     <div class="container" v-if="!this.use_old_interface && this.iselectron">
       <div style="-webkit-app-region: no-drag">
@@ -133,6 +134,7 @@ export default {
       popupdesc: "Description",
       use_old_interface: false,
       overinfocount: 1,
+      shuttingdown: false,
     };
   },
   watch: {
@@ -235,6 +237,7 @@ export default {
       this.storagesetjson("rp", this.st_rp + this.get_rp);
       this.storagesetjson("exit_type", "shutdown").then(() => {
         if (process.env.VUE_APP_LINXF == "electron") {
+          this.shuttingdown = true;
           ipc.send("full-screen");
           ipc.send("shutdown");
           this.timing = false;
@@ -282,7 +285,10 @@ export default {
             id: 9,
             message: this.$t("willforce"),
           });
-          this.storagesetjson("exit_type", "shutdown").then(() => {ipc.send("shutdown");});
+          this.storagesetjson("exit_type", "shutdown").then(() => {
+            this.shuttingdown = true;
+            ipc.send("shutdown");
+          });
         }, 5000);
       }
     },

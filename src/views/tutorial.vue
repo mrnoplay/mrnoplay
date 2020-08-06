@@ -116,6 +116,7 @@ import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 import titlepart from "@/components/titlepart";
 var ipc = null;
+var _this = null;
 if (process.env.VUE_APP_LINXF == "electron") {
   ipc = window.require("electron").ipcRenderer; //use window.require instead of require
 }

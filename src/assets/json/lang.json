@@ -177,7 +177,8 @@
     "blacklistdesc-installed": "应用黑名单组件在工作模式计时时屏蔽你选择的应用",
     "notinstalled": "此组件未安装",
     "installed": "点击进行设置",
-    "roadmap": "开发计划"
+    "roadmap": "开发计划",
+    "shuttingdown": "正在关机 …"
   },
   "en": {
     "submit": "OK",
@@ -357,6 +358,7 @@
     "blacklistdesc-installed": "The App Blacklist component can forbid apps from running when timing in work mode.",
     "notinstalled": "Not Installed",
     "installed": "Click to Set",
-    "roadmap": "Roadmap"
+    "roadmap": "Roadmap",
+    "shuttingdown": "Shutting down ..."
   }
 }
