@@ -489,7 +489,7 @@ export default {
       this.lang = "en";
     },
     start() {
-      if (/(^[1-9]\d*$)/.test(this.playtime) || this.playtime == 0.45) {
+      if (/(^[1-9]\d*$)/.test(this.playtime) || this.playtime == 0.05) {
         if (this.todayset) {
           if (this.todaytimeleft >= this.playtime) {
             this.todaytimeleft -= this.playtime;

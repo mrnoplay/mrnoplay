@@ -135,7 +135,6 @@ export default {
       use_old_interface: false,
       overinfocount: 1,
       shuttingdown: false,
-      maximumtime: 10,
     };
   },
   watch: {
@@ -161,6 +160,7 @@ export default {
         this.controlrptext = !this.controlrptext;
       }, 5000);
     }
+    this.iselectron = true;
     this.isonios = this.isiOS(navigator.userAgent);
     this.loading = false;
     this.timing = true;
@@ -232,10 +232,9 @@ export default {
       if (
         tryparse.int(JSON.parse(ret_m.value)) != null ||
         tryparse.int(JSON.parse(ret_m.value)) == 0
-      )
-        this.maximutime = JSON.parse(ret_m.value);
-      else this.maximumtime = 10;
-      this.lefttime = this.maximumtime * 60;
+      ) {
+        this.lefttime = tryparse.int(JSON.parse(ret_m.value)) * 60;
+      }
     },
     i18nchinese() {
       this.lang = "cn";
