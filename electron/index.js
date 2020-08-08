@@ -211,6 +211,12 @@ async function createWindow() {
   }
   setTray();
 
+  if (process.platform == 'win32') {
+    tray.on('click', () => {
+      trayOpen();
+    })
+  }
+
   mainWindow.on('blur', (event) => {
     if (mainWindow.isKiosk() && !canBlur) {
       isUnderKiosk = true;
@@ -619,18 +625,18 @@ ipcMain.on('roadmap', (event, arg) => {
 
 ipcMain.on('blacklist-run', (event, arg) => {
   if (process.platform === 'darwin') {
-    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args '+ store.get('langReadable', 'en') +' _COMMAND on');
+    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args ' + store.get('langReadable', 'en') + ' _COMMAND on');
   } else {
-    cmd.run('"C:\\Program Files (x86)\\Mr Noplay Blacklist\\mrnoplay-blacklist-ui.exe" '+ store.get('langReadable', 'en') +' _COMMAND on')
+    cmd.run('"C:\\Program Files (x86)\\Mr Noplay Blacklist\\mrnoplay-blacklist-ui.exe" ' + store.get('langReadable', 'en') + ' _COMMAND on')
   }
 })
 
 ipcMain.on('blacklist-set', (event, arg) => {
   canBlur = true;
   if (process.platform === 'darwin') {
-    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args '+ store.get('langReadable', 'en') +' _COMMAND off');
+    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args ' + store.get('langReadable', 'en') + ' _COMMAND off');
   } else {
-    cmd.run('"C:\\Program Files (x86)\\Mr Noplay Blacklist\\mrnoplay-blacklist-ui.exe" '+ store.get('langReadable', 'en') +' _COMMAND off')
+    cmd.run('"C:\\Program Files (x86)\\Mr Noplay Blacklist\\mrnoplay-blacklist-ui.exe" ' + store.get('langReadable', 'en') + ' _COMMAND off')
   }
   if (mainWindow) {
     mainWindow.hide();
@@ -729,21 +735,25 @@ ipcMain.on('en', () => {
   setTray();
 })
 
+function trayOpen() {
+  if (!mainWindow.isDestroyed()) {
+    if (isMinimal) isMinimal = false, mainWindow.setKiosk(true), isUnderKiosk = true;
+    mainWindow.hide();
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.moveTop();
+    mainWindow.center();
+    if (!canBlur) mainWindow.setKiosk(true), isUnderKiosk = true;
+  } else {
+    createWindowAgain();
+  }
+}
+
 function setTray() {
   const contextMenu = Menu.buildFromTemplate([{
     label: i18n.__('open'),
     click: () => {
-      if (!mainWindow.isDestroyed()) {
-        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true), isUnderKiosk = true;
-        mainWindow.hide();
-        mainWindow.show();
-        mainWindow.focus();
-        mainWindow.moveTop();
-        mainWindow.center();
-        if (!canBlur) mainWindow.setKiosk(true), isUnderKiosk = true;
-      } else {
-        createWindowAgain();
-      }
+      trayOpen();
     }
   }, {
     label: i18n.__('exit'),
@@ -758,17 +768,7 @@ function setTrayNoExit() {
   const contextMenu = Menu.buildFromTemplate([{
     label: i18n.__('open'),
     click: () => {
-      if (!mainWindow.isDestroyed()) {
-        if (isMinimal) isMinimal = false, mainWindow.setKiosk(true), isUnderKiosk = true;
-        mainWindow.hide();
-        mainWindow.show();
-        mainWindow.focus();
-        mainWindow.moveTop();
-        mainWindow.center();
-        if (!canBlur) mainWindow.setKiosk(true), isUnderKiosk = true;
-      } else {
-        createWindowAgain();
-      }
+      trayOpen();
     }
   }]);
   tray.setContextMenu(contextMenu);
