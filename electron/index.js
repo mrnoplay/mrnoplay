@@ -619,18 +619,18 @@ ipcMain.on('roadmap', (event, arg) => {
 
 ipcMain.on('blacklist-run', (event, arg) => {
   if (process.platform === 'darwin') {
-    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args cn _COMMAND on');
+    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args '+ store.get('langReadable', 'en') +' _COMMAND on');
   } else {
-
+    cmd.run('"C:\\Program Files (x86)\\Mr Noplay Blacklist\\mrnoplay-blacklist-ui.exe" '+ store.get('langReadable', 'en') +' _COMMAND on')
   }
 })
 
 ipcMain.on('blacklist-set', (event, arg) => {
   canBlur = true;
   if (process.platform === 'darwin') {
-    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args cn _COMMAND off');
+    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args '+ store.get('langReadable', 'en') +' _COMMAND off');
   } else {
-
+    cmd.run('"C:\\Program Files (x86)\\Mr Noplay Blacklist\\mrnoplay-blacklist-ui.exe" '+ store.get('langReadable', 'en') +' _COMMAND off')
   }
   if (mainWindow) {
     mainWindow.hide();
@@ -718,12 +718,14 @@ function update_onstart() {
 ipcMain.on('cn', () => {
   i18n.setLocale('zh');
   store.set('lang', 'zh');
+  store.set('langReadable', 'cn');
   setTray();
 })
 
 ipcMain.on('en', () => {
   i18n.setLocale('en');
   store.set('lang', 'en');
+  store.set('langReadable', 'en');
   setTray();
 })
 

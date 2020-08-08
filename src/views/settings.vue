@@ -292,7 +292,7 @@ export default {
       }
       // Windows
       else {
-        if (fs.existsSync("C:\\Program Files\\Mr Noplay Blacklist")) {
+        if (fs.existsSync("C:\\Program Files (x86)\\Mr Noplay Blacklist")) {
           this.blacklist_installed = true;
         }
       }
