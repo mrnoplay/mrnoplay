@@ -72,6 +72,27 @@
               <div class="breathe-div"></div>
               <div class="warn">{{ $t("enterinteger") }}</div>
             </div>
+          </div>          
+          <!-- ----------------- -->
+          <!-- Maximun Over Time -->
+          <!-- ----------------- -->
+          <div class="settingfield main-like" v-if="!default_lockmode">
+            <span class="label settingslabel">{{ $t("maximumovertime") }}</span>
+            <div class="input-btn">
+              <input
+                type="tel"
+                maxlength="2"
+                required
+                class="off settinginput"
+                v-model="default_maximumOverTime"
+                @keyup.enter="setdefault_maximumOverTime"
+              />
+              <b-btn variant="light" class="new submit settingbtn on" @click="setdefault_maximumOverTime"></b-btn>
+            </div>
+            <div class="warnfather warn settingwarn" v-if="maximumOverTimeNAN">
+              <div class="breathe-div"></div>
+              <div class="warn">{{ $t("enterinteger") }}</div>
+            </div>
           </div>
           <!-- --------- -->
           <!-- Lock Mode -->
@@ -136,7 +157,7 @@
           <!-- --------- -->
           <!-- Blacklist -->
           <!-- --------- -->
-          <div class="settingfield main-like" v-if="!default_lockmode && iselectron && false">
+          <div class="settingfield main-like" v-if="!default_lockmode && iselectron">
             <span class="label settingslabel">{{ $t("blacklist") }}</span>
             <div id="download-blacklist" v-if="!blacklist_installed">
               <div class="smallerlabel settingssmallerlabel">{{ $t('blacklistdesc') }}</div>
@@ -176,27 +197,28 @@ import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 import switcher from "@/components/linxf/switcher";
 var ipc = null;
+var remote = null;
+var fs = null;
 var _this = null;
 var md5 = require("md5");
 if (process.env.VUE_APP_LINXF == "electron") {
-  ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  ipc = window.require("electron").ipcRenderer;
+  remote = window.require("electron").remote;
+  fs = remote.require("fs");
   ipc.on("updatefailed", function (event, arg) {
     this.checking = false;
     this.checked = true;
     this.checkedtext = "Failed";
-    //this.popup(this.$t("updatefailed"), this.$t("updatefailedtext"));
   });
   ipc.on("updateok", function (event, arg) {
     this.checking = false;
     this.checked = true;
     this.checkedtext = "Found";
-    //this.popup(this.$t("updateok"), this.$t("updateoktext"));
   });
   ipc.on("updateno", function (event, arg) {
     this.checking = false;
     this.checked = true;
     this.checkedtext = "No update";
-    //this.popup(this.$t("updatefailed"), this.$t("noupdatetext"));
   });
 }
 export default {
@@ -224,6 +246,7 @@ export default {
       default_lang: false,
       default_startonlogin: false,
       default_time: 5,
+      default_maximumOverTime: 10,
       default_lockmode: false,
       default_lockmode_on: "",
       default_lockmode_on_check: "",
@@ -235,6 +258,7 @@ export default {
       todaydate: new Date(),
       todaydate_parsed: "todaytime002000",
       blacklist_installed: false,
+      maximumOverTimeNAN: false,
     };
   },
   watch: {
@@ -260,6 +284,18 @@ export default {
     if (process.env.VUE_APP_LINXF == "electron") {
       this.iselectron = true;
       ipc.send("full-screen");
+      // macOS
+      if (/macintosh|mac os x/i.test(navigator.userAgent)) {
+        if (fs.existsSync("/Applications/Mr Noplay Tools")) {
+          this.blacklist_installed = true;
+        }
+      }
+      // Windows
+      else {
+        if (fs.existsSync("C:\\Program Files\\Mr Noplay Blacklist")) {
+          this.blacklist_installed = true;
+        }
+      }
     }
     this.isonios = this.isiOS(navigator.userAgent);
     _this = this;
@@ -329,12 +365,20 @@ export default {
     },
     async getdefault_time() {
       const keys = await Storage.keys();
+      // Default Time
       if (keys.keys.indexOf("default_time") != -1) {
         const ret = await Storage.get({ key: "default_time" });
         if (ret.value != null) {
           this.default_time = Number(JSON.parse(ret.value));
         } else (this.default_time = 5), this.storagesetjson("default_time", 5);
       } else (this.default_time = 5), this.storagesetjson("default_time", 5);
+      // Maximum Over-Time 
+      if (keys.keys.indexOf("default_maximumOverTime") != -1) {
+        const ret = await Storage.get({ key: "default_maximumOverTime" });
+        if (ret.value != null) {
+          this.default_maximumOverTime = Number(JSON.parse(ret.value));
+        } else (this.default_maximumOverTime = 10), this.storagesetjson("default_maximumOverTime", 10);
+      } else (this.default_maximumOverTime = 10), this.storagesetjson("default_maximumOverTime", 10);
     },
     async getdefault_lockmode() {
       const keys = await Storage.keys();
@@ -463,6 +507,19 @@ export default {
         });
       } else {
         this.timeNAN = true;
+      }
+    },
+    setdefault_maximumOverTime() {
+      if (/(^[1-9]\d*$)/.test(this.default_maximumOverTime)) {
+        this.maximumOverTimeNAN = false;
+        this.storagesetjson("default_maximumOverTime", this.default_maximumOverTime);
+        this.$refs.notify.send({
+          title: this.$t("success"),
+          id: 33,
+          message: this.$t("maximumovertimesuccess"),
+        });
+      } else {
+        this.maximumOverTimeNAN = true;
       }
     },
     setdefault_lockmode_on() {

@@ -1,9 +1,7 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
-    <div id="pause" v-if="shuttingdown" style="-webkit-app-region: no-drag">
-      {{ $t("shuttingdown") }}
-    </div>
+    <div id="pause" v-if="shuttingdown" style="-webkit-app-region: no-drag">{{ $t("shuttingdown") }}</div>
     <div class="container" v-if="(!isontop && !ismoretime) || !iselectron">
       <div id="timingnbsppart"></div>
       <div id="timingcancelnbsppart" v-if="!cancancel"></div>
@@ -187,10 +185,14 @@ const { Storage, Modals } = Plugins;
 import titlepart from "@/components/titlepart";
 import notify from "@/components/linxf/notify";
 var ipc = null;
+var remote = null;
+var fs = null;
 var _this = null;
 var tryparse = require("tryparse");
 if (process.env.VUE_APP_LINXF == "electron") {
-  ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  ipc = window.require("electron").ipcRenderer;
+  remote = window.require("electron").remote;
+  fs = remote.require("fs");
 }
 export default {
   name: "timing",
@@ -270,6 +272,22 @@ export default {
     setInterval(this.interval, 1000);
     setTimeout(() => {
       this.cancancel = false;
+      if (this.iselectron) {
+        if (this.workmode) {
+          // macOS
+          if (/macintosh|mac os x/i.test(navigator.userAgent)) {
+            if (fs.existsSync("/Applications/Mr Noplay Tools")) {
+              ipc.send("blacklist-run");
+            }
+          }
+          // Windows
+          else {
+            if (fs.existsSync("C:\\Program Files\\Mr Noplay Blacklist")) {
+              ipc.send("blacklist-run");
+            }
+          }
+        }
+      }
     }, 15000);
     if (this.ispausing && this.iselectron) {
       ipc.send("full-screen");

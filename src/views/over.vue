@@ -135,6 +135,7 @@ export default {
       use_old_interface: false,
       overinfocount: 1,
       shuttingdown: false,
+      maximumtime: 10,
     };
   },
   watch: {
@@ -224,6 +225,17 @@ export default {
       )
         this.st_rp = tryparse.int(JSON.parse(ret_r.value));
       else this.st_rp = 20;
+      // -----------------
+      // Maximum Over Time
+      // -----------------
+      const ret_m = await Storage.get({ key: "default_maximumOverTime" });
+      if (
+        tryparse.int(JSON.parse(ret_m.value)) != null ||
+        tryparse.int(JSON.parse(ret_m.value)) == 0
+      )
+        this.maximutime = JSON.parse(ret_m.value);
+      else this.maximumtime = 10;
+      this.lefttime = this.maximumtime * 60;
     },
     i18nchinese() {
       this.lang = "cn";

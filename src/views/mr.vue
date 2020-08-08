@@ -133,8 +133,18 @@
           <div class="juniordigitalboard on">
             <div class="digitaltop">
               {{ $t("iwillplay") }}
-              <b-btn variant="light" class="new moreoption pointer" @click="gooptions" v-if="!ismoreoption"></b-btn>
-              <b-btn variant="light" class="new moreoption-back pointer" @click="gooptions" v-if="ismoreoption"></b-btn>
+              <b-btn
+                variant="light"
+                class="new moreoption pointer"
+                @click="gooptions"
+                v-if="!ismoreoption"
+              ></b-btn>
+              <b-btn
+                variant="light"
+                class="new moreoption-back pointer"
+                @click="gooptions"
+                v-if="ismoreoption"
+              ></b-btn>
             </div>
             <div class="options" v-if="ismoreoption">
               <switcher
@@ -235,7 +245,7 @@ var ipc = null;
 var md5 = require("md5");
 var tryparse = require("tryparse");
 if (process.env.VUE_APP_LINXF == "electron") {
-  ipc = window.require("electron").ipcRenderer; //use window.require instead of require
+  ipc = window.require("electron").ipcRenderer;
 }
 export default {
   name: "mr",
@@ -243,7 +253,7 @@ export default {
     loading,
     titlepart,
     notify,
-    switcher
+    switcher,
   },
   data() {
     return {
@@ -289,16 +299,16 @@ export default {
     async lang(val) {
       this.storagesetlang(val);
       this.$i18n.locale = val;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     //this.clear_dangerous();
     if (process.env.VUE_APP_LINXF == "electron") {
       ipc.on("update_onstart", (event, arg) => {
         this.$refs.notify.send({
           title: this.$t("foundupdate_title"),
           id: 15,
-          message: this.$t("foundupdate") + arg
+          message: this.$t("foundupdate") + arg,
         });
       });
       ipc.on("crashback", () => {
@@ -337,7 +347,7 @@ export default {
         this.$refs.notify.send({
           title: this.$t("illegal"),
           id: 17,
-          message: this.$t("illegaltext")
+          message: this.$t("illegaltext"),
         });
       }
       this.exit_type = "illegal";
@@ -353,7 +363,7 @@ export default {
       } else if (Notification.permission === "denied") {
         //denied
       } else {
-        Notification.requestPermission().then(function(permission) {
+        Notification.requestPermission().then(function (permission) {
           if (permission === "granted") {
             //granted
           } else if (permission === "denied") {
@@ -364,7 +374,7 @@ export default {
     }
     this.storagesetjson("workmode", false);
   },
-  beforeDestroy: function() {},
+  beforeDestroy: function () {},
   methods: {
     isiPad(userAgent) {
       return userAgent.indexOf("iPad") > -1;
@@ -378,13 +388,13 @@ export default {
     async storagesetlang(val) {
       await Storage.set({
         key: "lang",
-        value: val
+        value: val,
       });
     },
     async storagesetjson(key, val) {
       await Storage.set({
         key: key,
-        value: JSON.stringify(val)
+        value: JSON.stringify(val),
       });
     },
     async gettodaydata() {
@@ -518,7 +528,7 @@ export default {
           this.$refs.notify.send({
             title: this.$t("cannotexit"),
             id: 19,
-            message: this.$t("cannotexittext")
+            message: this.$t("cannotexittext"),
           });
         } else if (this.lockmode) {
           this.lockmode_enterpwd = true;
@@ -598,6 +608,6 @@ export default {
       this.workmode = false;
       this.storagesetjson("workmode", false);
     },
-  }
+  },
 };
 </script>

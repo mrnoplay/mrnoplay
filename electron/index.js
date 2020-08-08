@@ -617,9 +617,21 @@ ipcMain.on('roadmap', (event, arg) => {
   }
 })
 
+ipcMain.on('blacklist-run', (event, arg) => {
+  if (process.platform === 'darwin') {
+    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args cn _COMMAND on');
+  } else {
+
+  }
+})
+
 ipcMain.on('blacklist-set', (event, arg) => {
   canBlur = true;
-  // open mbui
+  if (process.platform === 'darwin') {
+    cmd.run('open "/Applications/Mr Noplay Tools/Mr Noplay Blacklist.app" --args cn _COMMAND off');
+  } else {
+
+  }
   if (mainWindow) {
     mainWindow.hide();
   }
