@@ -22,7 +22,7 @@
     <ROW Property="DialogBitmap" Value="dialog" MultiBuildValue="DefaultBuild:mrnoplay.installer.win.dialog.jpg_1" Type="1" MsiKey="DialogBitmap"/>
     <ROW Property="MSIFASTINSTALL" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="Manufacturer" Value="Tianze Ds Qiu from Scris Studio."/>
-    <ROW Property="ProductCode" Value="1033:{5057D5E8-C335-4867-AA5F-FAA38D2B1776} 2052:{5057D5E8-C335-4867-AA5F-FAA38D2B1776} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{7B3D9975-EA37-4956-9B99-F021F6E00F15} 2052:{7B3D9975-EA37-4956-9B99-F021F6E00F15} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Mr Noplay 4"/>
     <ROW Property="ProductVersion" Value="4.0.0" Type="32"/>
