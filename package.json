@@ -23,10 +23,9 @@
     "@capacitor/android": "^1.1.0",
     "@capacitor/cli": "^1.1.0",
     "@capacitor/core": "^1.1.0",
-    "animejs": "^3.2.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.26",
-    "breadstick": "^0.2.13",
+    "bridge-vue-notification": "^1.1.2",
     "core-js": "^2.6.5",
     "md5": "^2.2.1",
     "node-build-number-simplified": "2.0.1",
@@ -55,7 +54,7 @@
     "zh": "错误修复，并去除了超时界面声音"
   },
   "build": {
-    "number": 45,
-    "timestamp": "8/8/2020, 5:14:26 PM"
+    "number": 54,
+    "timestamp": "8/10/2020, 7:58:41 PM"
   }
 }

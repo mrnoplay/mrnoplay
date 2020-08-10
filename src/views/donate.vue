@@ -47,7 +47,7 @@ export default {
   components: {
     loading,
     titlepart,
-    notify
+    notify,
   },
   data() {
     return {
@@ -60,21 +60,22 @@ export default {
       version: "1.0.0",
       todaydate: new Date(),
       todaydate_parsed: "todaytime002000",
-      showwechat: false
+      showwechat: false,
     };
   },
   watch: {
     async lang(val) {
       this.storagesetlang(val);
       this.$i18n.locale = val;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.version = process.env.VUE_APP_VER;
     this.i18nsetlang();
     this.storagesetjson("cannotify", false);
     if (process.env.VUE_APP_LINXF == "electron") {
-      this.iselectron = true;
+      this.iselectro;
+      n = true;
     }
     if (
       process.env.VUE_APP_LINXF == "web" ||
@@ -93,7 +94,7 @@ export default {
       this.todaydate.getFullYear();
     this.gettodaydata();
   },
-  beforeDestroy: function() {},
+  beforeDestroy: function () {},
   methods: {
     isiPad(userAgent) {
       return userAgent.indexOf("iPad") > -1;
@@ -107,13 +108,13 @@ export default {
     async storagesetlang(val) {
       await Storage.set({
         key: "lang",
-        value: val
+        value: val,
       });
     },
     async storagesetjson(key, val) {
       await Storage.set({
         key: key,
-        value: JSON.stringify(val)
+        value: JSON.stringify(val),
       });
     },
     async i18nsetlang() {
@@ -148,7 +149,7 @@ export default {
           this.$refs.notify.send({
             title: this.$t("cannotrun"),
             id: 24,
-            message: this.$t("cannotpatreon")
+            message: this.$t("cannotpatreon"),
           });
         } else {
           ipc.send("patreon");
@@ -163,7 +164,7 @@ export default {
           this.$refs.notify.send({
             title: this.$t("cannotrun"),
             id: 24,
-            message: this.$t("cannotpatreon")
+            message: this.$t("cannotpatreon"),
           });
         } else {
           ipc.send("buymeacoffee");
@@ -179,6 +180,6 @@ export default {
       this.timing = false;
       this.$router.push("/about");
     },
-  }
+  },
 };
 </script>

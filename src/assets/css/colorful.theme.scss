@@ -1001,7 +1001,6 @@ input[type="number"] {
   background: $lightbuttongrey;
   box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.1);
   max-width: 10rem !important;
-  min-height: 1.2rem!important;
 }
 
 ::selection {
@@ -1518,4 +1517,23 @@ hr {
   padding-left: 16px;
   cursor: pointer;
   background: $lightergrey;
+}
+
+.bridgenotify {
+  -webkit-app-region: no-drag;
+  font-size: 0.6rem;
+  margin-top: 0.6rem;
+  margin-right: 1rem;
+  opacity: 0.99;
+  background: $lightbuttongrey;
+  box-shadow: 0 0.2rem 0.3rem 0.02rem rgba(65, 64, 63, 0.4);
+  max-width: 10rem;
+  z-index: 102;
+}
+
+.bridgenotifyfather div div span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

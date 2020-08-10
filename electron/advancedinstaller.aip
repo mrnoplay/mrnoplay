@@ -22,10 +22,10 @@
     <ROW Property="DialogBitmap" Value="dialog" MultiBuildValue="DefaultBuild:mrnoplay.installer.win.dialog.jpg_1" Type="1" MsiKey="DialogBitmap"/>
     <ROW Property="MSIFASTINSTALL" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="Manufacturer" Value="Tianze Ds Qiu from Scris Studio."/>
-    <ROW Property="ProductCode" Value="1033:{F1846426-3AE2-4FAA-BAFF-89D5301A94C4} 2052:{F1846426-3AE2-4FAA-BAFF-89D5301A94C4} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{5057D5E8-C335-4867-AA5F-FAA38D2B1776} 2052:{5057D5E8-C335-4867-AA5F-FAA38D2B1776} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="Mr Noplay 3"/>
-    <ROW Property="ProductVersion" Value="3.1.2" Type="32"/>
+    <ROW Property="ProductName" Value="Mr Noplay 4"/>
+    <ROW Property="ProductVersion" Value="4.0.0" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{51744FDF-E5C6-4F05-9730-F5E1D2BB8FF8}"/>
@@ -54,7 +54,7 @@
     <ROW Directory="swiftshader_Dir" Directory_Parent="APPDIR" DefaultDir="SWIFTS~1|swiftshader"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_CustomARPName" ComponentId="{B1FB7454-BB42-464F-8294-FF68F6DBB97A}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_CustomARPName" ComponentId="{518665C6-F2B2-4914-A161-5659751CF206}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="Assets" ComponentId="{18DBEC24-425E-4994-A602-228B4B6B5E34}" Directory_="Assets" Attributes="0"/>
     <ROW Component="MrNoplay.exe" ComponentId="{3C3E4F69-F22C-48BD-A765-73A7434F0762}" Directory_="APPDIR" Attributes="0" KeyPath="MrNoplay.exe"/>
     <ROW Component="ProductInformation" ComponentId="{92D4AF07-D149-46A8-BC18-F4A03A85F0F9}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>

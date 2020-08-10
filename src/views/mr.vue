@@ -1,6 +1,7 @@
 <i18n src="@/assets/json/lang.json"></i18n>
 <template>
   <div>
+    <notify ref="notify"></notify>
     <iframe id="tongji" :src="tongjisrc" style="display:inline-block; width:0.5px; height:0.5px"></iframe>
     <b-btn
       variant="light"
@@ -228,7 +229,6 @@
         v-if="ontoday"
       ></div>
     </div>
-    <notify ref="notify"></notify>
   </div>
 </template>
 

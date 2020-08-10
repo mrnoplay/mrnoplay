@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <div class="bridgenotifyfather">
+    <bridge-notify />
+  </div>
+</template>
 
 <script>
 import { Plugins, Storage } from "@capacitor/core";
@@ -7,7 +11,7 @@ export default {
   name: "notify",
   data() {
     return {
-      cannotify: false
+      cannotify: false,
     };
   },
   methods: {
@@ -19,28 +23,42 @@ export default {
         if (process.env.VUE_APP_LINXF == "electron") {
           if (this.cannotify) {
             var notification = new Notification(title, {
-              body: message
+              body: message,
             });
           } else {
-            this.$parent.$breadstick.notify(title + ": " + message, {
-              position: "top-right"
+            this.$notify({
+              message: title + ": " + message,
+              duration: 3000,
+              position: "center",
+              animate: {
+                x: 0,
+                y: 100,
+              },
+              type: "normal bridgenotify",
             });
           }
         } else {
-          if (process.env.VUE_APP_LINXF == 'web') {
+          if (process.env.VUE_APP_LINXF == "web") {
             if (window.Notification) {
               LocalNotifications.schedule({
                 notifications: [
                   {
                     title: title,
                     body: message,
-                    id: id
-                  }
-                ]
+                    id: id,
+                  },
+                ],
               });
             } else {
-              this.$parent.$breadstick.notify(title + ": " + message, {
-                position: "top-right"
+              this.$notify({
+                message: title + ": " + message,
+                duration: 3000,
+                position: "center",
+                animate: {
+                  x: 0,
+                  y: 100,
+                },
+                type: "normal bridgenotify",
               });
             }
           } else {
@@ -49,9 +67,9 @@ export default {
                 {
                   title: title,
                   body: message,
-                  id: id
-                }
-              ]
+                  id: id,
+                },
+              ],
             });
           }
         }
@@ -74,7 +92,7 @@ export default {
       } else {
         this.cannotify = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>

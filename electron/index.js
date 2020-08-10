@@ -385,8 +385,10 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
-  if (mainWindow.isDestroyed()) {
+  else if (mainWindow.isDestroyed()) {
     createWindowAgain();
+  } else {
+    mainWindow.show();
   }
 });
 
