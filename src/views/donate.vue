@@ -74,8 +74,7 @@ export default {
     this.i18nsetlang();
     this.storagesetjson("cannotify", false);
     if (process.env.VUE_APP_LINXF == "electron") {
-      this.iselectro;
-      n = true;
+      this.iselectron = true;
     }
     if (
       process.env.VUE_APP_LINXF == "web" ||
