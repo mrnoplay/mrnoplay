@@ -202,7 +202,7 @@
     "mrnoplay": "Mr Noplay 不玩家",
     "unsupported": "The app can have only 1 instance running.",
     "properwaytoexit": "You must close the app by buttons inside the app.",
-    "iwillplay": "I'll Play/Rest/Work for",
+    "iwillplay": "I'll use",
     "todayiwillplay": "Today in total, I'll Use",
     "enterinteger": "Enter a Positive Integer",
     "start": "Start",
@@ -365,6 +365,6 @@
     "installed": "Click to Set",
     "roadmap": "Roadmap",
     "shuttingdown": "Shutting down ...",
-    "setoptions": "Choose Mode"
+    "setoptions": "Mode"
   }
 }
