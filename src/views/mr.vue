@@ -133,19 +133,20 @@
         <div class="digitalboard border" style="-webkit-app-region: no-drag">
           <div class="juniordigitalboard on">
             <div class="digitaltop">
-              {{ $t("iwillplay") }}
-              <b-btn
-                variant="light"
-                class="new moreoption pointer"
-                @click="gooptions"
-                v-if="!ismoreoption"
-              ></b-btn>
-              <b-btn
-                variant="light"
-                class="new moreoption-back pointer"
-                @click="gooptions"
-                v-if="ismoreoption"
-              ></b-btn>
+              {{ $t("iwillplay") }}&nbsp;
+              <dic class="optionsfather" @click="gooptions">
+                <b-btn
+                  variant="light"
+                  class="new moreoption pointer"
+                  v-if="!ismoreoption"
+                ></b-btn>
+                <b-btn
+                  variant="light"
+                  class="new moreoption-back pointer"
+                  v-if="ismoreoption"
+                ></b-btn>
+                {{ $t('setoptions') }}
+              </dic>
             </div>
             <div class="options" v-if="ismoreoption">
               <switcher

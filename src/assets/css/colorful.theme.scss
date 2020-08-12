@@ -3,6 +3,7 @@ $white: #fdfdfd;
 $bgwhite: #fafafa;
 $darkerwhite: #f7f7f7;
 $labelgrey: rgb(179, 179, 179);
+$lightlabelgrey: rgb(209, 209, 209);
 $darklabelgrey: rgb(122, 122, 122);
 $inputgrey: rgb(230, 230, 230);
 $hovergrey: rgb(190, 184, 184);
@@ -496,13 +497,14 @@ input[type="number"] {
 }
 
 .moreoption {
+  padding: 0;
   cursor: pointer;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: $white;
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
   background-image: url('../img/moreoption.svg');
   transform: translateY(0.04rem);
   @-moz-document url-prefix(){
@@ -519,13 +521,14 @@ input[type="number"] {
 }
 
 .moreoption-back {
+  padding: 0;
   cursor: pointer;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: $white;
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
   background-image: url('../img/moreoption-back.svg');
   transform: translateY(0.04rem);
   @-moz-document url-prefix(){
@@ -539,6 +542,26 @@ input[type="number"] {
 
 .moreoption-back:active {
   background-image: url('../img/moreoption-back.svg');
+}
+
+.optionsfather {
+  background-color: $lightlabelgrey;
+  color: $white;
+  font-size: 0.5rem;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+  padding-left: 0.15rem;
+  padding-right: 0.15rem;
+  border-radius: 0.15rem;
+  cursor: pointer;
+}
+
+.optionsfather:hover {
+  background-color: $darklabelgrey;
+}
+
+.optionsfather:active {
+  background-color: $labelgrey;
 }
 
 .download {

@@ -180,7 +180,8 @@
     "notinstalled": "此组件未安装",
     "installed": "点击进行设置",
     "roadmap": "开发计划",
-    "shuttingdown": "正在关机 …"
+    "shuttingdown": "正在关机 …",
+    "setoptions": "选择模式"
   },
   "en": {
     "submit": "OK",
@@ -363,6 +364,7 @@
     "notinstalled": "Not Installed",
     "installed": "Click to Set",
     "roadmap": "Roadmap",
-    "shuttingdown": "Shutting down ..."
+    "shuttingdown": "Shutting down ...",
+    "setoptions": "Choose Mode"
   }
 }
