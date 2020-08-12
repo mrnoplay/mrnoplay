@@ -1,6 +1,6 @@
 {
   "name": "mrnoplay",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Give an end to no-end rests and play times.",
   "main": "index.js",
   "scripts": {
