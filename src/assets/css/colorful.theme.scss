@@ -5,7 +5,10 @@ $darkerwhite: #f7f7f7;
 $labelgrey: rgb(179, 179, 179);
 $lightlabelgrey: rgb(209, 209, 209);
 $darklabelgrey: rgb(122, 122, 122);
+$moreoptiontextgrey: rgb(150, 150, 150);
 $inputgrey: rgb(230, 230, 230);
+$darkinputgrey: rgb(220, 220, 220);
+$moreoptionbggrey: rgba(220, 220, 220, 0.6);
 $hovergrey: rgb(190, 184, 184);
 $activegrey: rgb(133, 128, 128);
 $buttongrey: rgb(33, 33, 33);
@@ -545,19 +548,22 @@ input[type="number"] {
 }
 
 .optionsfather {
-  background-color: $lightlabelgrey;
-  color: $white;
+  background-color: $moreoptionbggrey;
+  color: $moreoptiontextgrey;
   font-size: 0.5rem;
   padding-top: 0.15rem;
   padding-bottom: 0.15rem;
   padding-left: 0.15rem;
   padding-right: 0.15rem;
   border-radius: 0.15rem;
+  display: inline-block;
+  transform: translateY(-0.05rem);
   cursor: pointer;
 }
 
 .optionsfather:hover {
   background-color: $darklabelgrey;
+  color: $white;
 }
 
 .optionsfather:active {

@@ -135,7 +135,7 @@
             <div class="digitaltop">
               {{ $t("iwillplay") }}&nbsp;
               <dic class="optionsfather" @click="gooptions">
-                <b-btn
+                <!--<b-btn
                   variant="light"
                   class="new moreoption pointer"
                   v-if="!ismoreoption"
@@ -144,7 +144,7 @@
                   variant="light"
                   class="new moreoption-back pointer"
                   v-if="ismoreoption"
-                ></b-btn>
+                ></b-btn>-->
                 {{ $t('setoptions') }}
               </dic>
             </div>
