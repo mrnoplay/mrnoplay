@@ -725,10 +725,10 @@ electron-store@^5.1.0:
     conf "^6.2.0"
     type-fest "^0.7.1"
 
-electron@8.3.4:
-  version "8.3.4"
-  resolved "https://registry.npm.taobao.org/electron/download/electron-8.3.4.tgz?cache=0&sync_timestamp=1593740968482&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron%2Fdownload%2Felectron-8.3.4.tgz#d9c5441f34462a022480f3ebe2cf39ea5dd37b96"
-  integrity sha1-2cVEHzRGKgIkgPPr4s856l3Te5Y=
+electron@8.5.2:
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-8.5.2.tgz#7b0246c6676a39df0e5e384b11cfe854fe5917f0"
+  integrity sha512-VU+zZnmCzxoZ5UfBg2UGVm+nyxlNlQOQkotMLfk7FCtnkIOhX+sosl618OCxUWjOvPc+Mpg5MEkEmxPU5ziW4Q==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
